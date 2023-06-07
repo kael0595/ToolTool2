@@ -1,0 +1,34 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <div class="my-3 border-bottom">
+        <div>
+            <h4>관리자 회원가입</h4>
+        </div>
+    </div>
+    <form th:action="@{/admin/signup}" th:object="${adminCreateForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="mb-3">
+            <label for="username" class="form-label">관리자ID</label>
+            <input type="text" th:field="*{username}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password1" class="form-label">비밀번호</label>
+            <input type="password" th:field="*{password1}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password2" class="form-label">비밀번호 확인</label>
+            <input type="password" th:field="*{password2}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" th:field="*{email}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="admin_code" class="form-label">관리자 인증번호</label>
+            <input type="admin_code" th:field="*{admin_code}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">회원가입</button>
+        <button type="submit" class="btn btn-primary">취소</button>
+    </form>
+</div>
+</html>
