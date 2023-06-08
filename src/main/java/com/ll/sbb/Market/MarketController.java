@@ -22,8 +22,8 @@ public class MarketController {
 
     @GetMapping("/list")
     public String list(Model model) {
-        List<Market> productList = this.marketService.getList();
-        model.addAttribute("MarketList", marketService);
+        List<Market> marketList = this.marketService.getList();
+        model.addAttribute("marketList", marketList);
         return "market_list";
     }
 
@@ -108,7 +108,6 @@ public class MarketController {
         Market market = this.marketService.getMarket(id);
         model.addAttribute("market", market);
         return "market_detail";
-
     }
 
     @GetMapping("/create")

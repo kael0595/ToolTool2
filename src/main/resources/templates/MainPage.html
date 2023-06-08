@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="http://localhost:8080/Notice/list">
                         <span>Notice</span>
                     </a>
                 </li>
@@ -108,9 +108,9 @@
 <div class="rm_content review_content">
     <!--1차이미지-->
     <ul>
-        <li>
+        <li th:each="article, stat : ${articleList}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
-                <a href="#">
+                <a th:href="@{|/article/detail/${article.id}|}">
                     <img
                             src="https://i.postimg.cc/m23RYKm6/product-box1.png"
                             class="rm_content_main_img review_main_img review_main_img_1"
@@ -118,57 +118,15 @@
                 </a>
                 <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                 <div class="text_box .text_box_1">
-                    <span>리뷰수 <span>0</span></span>
+                                        <span th:if="${#lists.size(article.answerList) > 0}"
+                                              th:text="${#lists.size(article.answerList)}">
+                                        </span>
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">
-                    <span>제목</span>
+                    <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
                 </div>
                 <div class="text_box_tag text_box_tag_1">
-                    <span>#</span>
-                </div>
-            </nav>
-        </li>
-        <!--2차이미지-->
-        <li>
-            <nav class="rm_content_img review_content_img review_content_2">
-                <a href="#">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img review_main_img review_main_img_2"
-                    />
-                </a>
-                <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
-                <div class="text_box text_box_2">
-                    <span>리뷰수 <span>0</span></span>
-                    <span>관심수 <span>0</span></span>
-                </div>
-                <div class="text_box_name text_box_name_2">
-                    <span>제목</span>
-                </div>
-                <div class="text_box_tag text_box_tag_2">
-                    <span>#</span>
-                </div>
-            </nav>
-        </li>
-        <!--3차이미지-->
-        <li>
-            <nav class="rm_content_img review_content_img review_content_3">
-                <a href="#">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img review_main_img review_main_img_3"
-                    />
-                </a>
-                <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
-                <div class="text_box .text_box_3">
-                    <span>리뷰수 <span>0</span></span>
-                    <span>관심수 <span>0</span></span>
-                </div>
-                <div class="text_box_name text_box_name_3">
-                    <span>제목</span>
-                </div>
-                <div class="text_box_tag text_box_tag_3">
                     <span>#</span>
                 </div>
             </nav>
@@ -182,67 +140,25 @@
 <div class="rm_content market_content">
     <!--1차이미지-->
     <ul>
-        <li>
-            <nav class="rm_content_img market_content_img market_content_1">
+        <li th:each="market, stat : ${marketList}" th:if="${stat.index < 3}">
+            <nav class="rm_content_img review_content_img review_content_1">
                 <a href="#">
                     <img
                             src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img market_main_img market_main_img_1"
+                            class="rm_content_main_img review_main_img review_main_img_1"
                     />
                 </a>
                 <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                 <div class="text_box .text_box_1">
-                    <span>리뷰수 <span>0</span></span>
+<!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
+<!--                                              th:text="${#lists.size(market.answerList)}">-->
+<!--                                        </span>-->
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">
-                    <span>제목</span>
+                    <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>
                 </div>
                 <div class="text_box_tag text_box_tag_1">
-                    <span>#</span>
-                </div>
-            </nav>
-        </li>
-        <!--2차이미지-->
-        <li>
-            <nav class="rm_content_img market_content_img market_content_2">
-                <a href="#">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img market_main_img market_main_img_2"
-                    />
-                </a>
-                <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
-                <div class="text_box text_box_2">
-                    <span>리뷰수 <span>0</span></span>
-                    <span>관심수 <span>0</span></span>
-                </div>
-                <div class="text_box_name text_box_name_2">
-                    <span>제목</span>
-                </div>
-                <div class="text_box_tag text_box_tag_2">
-                    <span>#</span>
-                </div>
-            </nav>
-        </li>
-        <!--3차이미지-->
-        <li>
-            <nav class="rm_content_img market_content_img market_content_3">
-                <a href="#">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img market_main_img market_main_img_3"
-                    />
-                </a>
-                <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
-                <div class="text_box .text_box_3">
-                    <span>리뷰수 <span>0</span></span>
-                    <span>관심수 <span>0</span></span>
-                </div>
-                <div class="text_box_name text_box_name_3">
-                    <span>제목</span>
-                </div>
-                <div class="text_box_tag text_box_tag_3">
                     <span>#</span>
                 </div>
             </nav>
