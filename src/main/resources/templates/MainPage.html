@@ -43,14 +43,14 @@
         </div>
         <div class="signLine">
             <div class="signIn">
-                <a href="http://localhost:8080/login">
+                <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
                         <img src="img/sign in.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp">
-                <a href="http://localhost:8080/signup">
+                <a href="http://localhost:8080/user/signup">
                     <button type="button" class="signUp_button">
                         <img src="img/sing up.png" class="signUp_img"/>
                     </button>
@@ -118,10 +118,11 @@
                 </a>
                 <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                 <div class="text_box .text_box_1">
-                                        <span th:if="${#lists.size(article.answerList) > 0}"
-                                              th:text="${#lists.size(article.answerList)}">
-                                        </span>
-                    <span>관심수 <span>0</span></span>
+                    <span>답글수 <span th:if="${#lists.size(article.answerList) > 0}"
+                                    th:text="${#lists.size(article.answerList)}">
+                                        </span></span>
+                    <span>추천수 <span th:if="${#lists.size(article.voter) > 0}"
+                                    th:text="${#lists.size(article.voter)}"></span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">
                     <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
@@ -150,9 +151,9 @@
                 </a>
                 <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                 <div class="text_box .text_box_1">
-<!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
-<!--                                              th:text="${#lists.size(market.answerList)}">-->
-<!--                                        </span>-->
+                    <!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
+                    <!--                                              th:text="${#lists.size(market.answerList)}">-->
+                    <!--                                        </span>-->
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">

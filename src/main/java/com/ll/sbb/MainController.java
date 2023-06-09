@@ -31,4 +31,7 @@ public class MainController {
         model.addAttribute("articleList", articleList);
         return "MainPage";
     }
+
+
+
 }

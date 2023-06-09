@@ -31,9 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class ArticleController {
 
     private final ArticleService articleService;
-
-    private final ArticleRepository articleRepository;
-
     private final UserService userService;
 
     @GetMapping("/list")
@@ -127,6 +124,12 @@ public class ArticleController {
         return "article_list";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/create")
+    public String articleCreate(ArticleForm articleForm) {
+        return "article_form";
+    }
+
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String articleCreate(@Valid ArticleForm articleForm, BindingResult bindingResult) {
@@ -139,7 +142,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String questionModify(ArticleForm articleForm, @PathVariable("id") Integer id, Principal principal) {
+    public String articleModify(ArticleForm articleForm, @PathVariable("id") Integer id, Principal principal) {
         Article article = this.articleService.getArticle(id);
         if (!article.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
@@ -151,8 +154,8 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
-    public String questionModify(@Valid ArticleForm articleForm, BindingResult bindingResult,
-                                 Principal principal, @PathVariable("id") Integer id) {
+    public String articleModify(@Valid ArticleForm articleForm, BindingResult bindingResult,
+                                Principal principal, @PathVariable("id") Integer id) {
         if (bindingResult.hasErrors()) {
             return "article_form";
         }
@@ -166,7 +169,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
-    public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
+    public String articleDelete(Principal principal, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         if (!article.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
@@ -177,7 +180,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/vote/{id}")
-    public String questionVote(Principal principal, @PathVariable("id") Integer id) {
+    public String articleVote(Principal principal, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.articleService.vote(article, siteUser);

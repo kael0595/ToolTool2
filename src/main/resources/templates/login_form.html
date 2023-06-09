@@ -1,20 +1,99 @@
-<html layout:decorate="~{layout}">
-<div layout:fragment="content" class="container my-3">
-  <form th:action="@{/user/login}" method="post">
-    <div th:if="${param.error}">
-      <div class="alert alert-danger">
-        사용자ID 또는 비밀번호를 확인해 주세요.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" name="username" id="username" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">비밀번호</label>
-      <input type="password" name="password" id="password" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">로그인</button>
-  </form>
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>툴툴</title>
+    <link rel="stylesheet" href="/login.css"/>
+</head>
+<body>
+<!--top-bar라인-->
+<div class="top__bar">
+    <nav class="top__bar_menu">
+        <div class="logo_box">
+            <ul>
+                <li>
+                    <a href="http://localhost:8080/MainPage">
+                        <button type="button" class="logo_button">
+                            <img src="img/230605_툴툴_로고 복사 1.png"/>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main_menu">
+            <ul class="main_menu_ul">
+                <li>
+                    <a href="http://localhost:8080/article/list">
+                        <span>Review</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/Market/list">
+                        <span>Market</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/Notice/list">
+                        <span>Notice</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="signLine">
+            <div class="signIn">
+                <a href="http://localhost:8080/login">
+                    <button type="button" class="signIn_button">
+                        <img src="img/sign in.png" class="signIn_img"/>
+                    </button>
+                </a>
+            </div>
+            <div class="signUp">
+                <a href="http://localhost:8080/signup">
+                    <button type="button" class="signUp_button">
+                        <img src="img/sing up.png" class="signUp_img"/>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
 </div>
+<div layout:fragment="content" class="container my-3">
+    <form th:action="@{/user/login}" method="post">
+        <div><h1 class="signin">Sign In</h1>
+            <h3 class="signment">가입하신 아이디와 비밀번호를 입력해주세요. </h3>
+            <h3 class="signment"> 비밀번호는 대소문자를 구분합니다</h3>
+        </div>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                사용자ID 또는 비밀번호를 확인해 주세요.
+            </div>
+        </div>
+        <div class="mb-3">
+
+            <input type="text" name="username" id="username" class="form-control" placeholder="아이디">
+        </div>
+        <div class="mb-3">
+
+            <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
+        </div>
+        <button type="submit" class="btn btn-primary">SIGN -IN</button>
+    </form>
+    <form th:action="@{/user/login}" class="signupform">
+        <div><h1 class="signin">Sign Up</h1>
+            <h3 class="signment">아직 회원이 아니신가요? </h3>
+            <h3 class="signment"> 회원가입 하시면 더 많은 기능을 사용할 수 있습니다.</h3>
+            <a th:href="@{/user/signup}">
+                <button type="button" class="btn-primary">SIGN-UP</button>
+            </a>
+        </div>
+        <h3 class="signment">아이디 혹은 비밀번호를 잊으셨나요> </h3>
+        <h3 class="signment"></h3>
+        <a href="">
+            <button type="button" class="btn-primary">ID/PASSWORD</button>
+        </a>
+    </form>
+</div>
+</body>
 </html>
