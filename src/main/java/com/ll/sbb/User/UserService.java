@@ -33,4 +33,14 @@ public class UserService {
             throw new DataNotFoundException("siteuser not found");
         }
     }
+
+
+    public boolean authenticateUser(String username, String password) {
+        Optional<SiteUser> siteUserOptional = userRepository.findByusername(username);
+        if (siteUserOptional.isPresent()) {
+            SiteUser siteUser = siteUserOptional.get();
+            return passwordEncoder.matches(password, siteUser.getPassword());
+        }
+        return false;
+    }
 }

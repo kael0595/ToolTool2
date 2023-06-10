@@ -1,6 +1,7 @@
 package com.ll.sbb.User;
 
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -56,6 +58,25 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login_form";
+    }
+
+    @PostMapping("/login")
+    public String processLogin(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
+        // 로그인 로직 처리
+        if (userService.authenticateUser(username, password)) {
+            session.setAttribute("loggedIn", true);
+            return "redirect:/";
+        } else {
+            return "login_form";
+        }
+    }
+
+
+    @GetMapping("/logout")
+    public String processLogout(HttpSession session) {
+        // 로그아웃 로직 처리
+        session.removeAttribute("loggedIn");
+        return "redirect:/";
     }
 
 }

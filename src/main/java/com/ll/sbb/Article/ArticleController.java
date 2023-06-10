@@ -34,9 +34,13 @@ public class ArticleController {
     private final UserService userService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Article> paging = this.articleService.getList(page, kw);
+        List<Article> articles = this.articleService.getAll();
+        int articleCount = articles.size();
+        model.addAttribute("articles", articles);
+        model.addAttribute("articleCount", articleCount);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "article_list";

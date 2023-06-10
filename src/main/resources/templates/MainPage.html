@@ -42,15 +42,22 @@
             </ul>
         </div>
         <div class="signLine">
-            <div class="signIn">
-                <a href="http://localhost:8080/user/login">
+            <div class="signIn" th:if="${isAuthenticated}">
+                <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
-                        <img src="img/sign in.png" class="signIn_img"/>
+                        <img src="img/signOut.png" class="signIn_img"/>
+                    </button>
+                </a>
+            </div>
+            <div class="signIn" th:unless="${isAuthenticated}">
+                <a href="http://localhost:8080/user/login" role="button">
+                    <button type="button" class="signIn_button">
+                        <img src="img/signIn.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp">
-                <a href="http://localhost:8080/user/signup_manual">
+                <a href="user/signup_manual">
                     <button type="button" class="signUp_button">
                         <img src="img/sing up.png" class="signUp_img"/>
                     </button>
@@ -170,7 +177,7 @@
     <div class="footer-content">
         <p>&copy; 2023 Your Website. All rights reserved.</p>
         <nav>
-            <a href="#">Home</a>
+            <a href="http://localhost:8080/mypage">Home</a>
             <a href="#">About</a>
             <a href="#">Contact</a>
         </nav>
@@ -192,6 +199,10 @@
           $(this).attr("src", newSrc);
         });
       });
+
+
+
+
 
 </script>
 </html>

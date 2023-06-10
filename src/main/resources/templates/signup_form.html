@@ -1,70 +1,158 @@
-<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<div layout:fragment="content" class="container my-3">
-    <div class="my-3 border-bottom">
-        <div>
-            <h4>Tool Tool Join</h4>
-        </div>
-        <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/signup_form.css">
+    <title>ToolTool_join</title>
+</head>
 
-            <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-            <div class="mb-3">
-                <label for="username" class="form-label">사용자ID</label>
-                <input type="text" th:field="*{username}" class="form-control">
+<body>
+<!-- 상단 네비바 -->
+<div class="top__bar">
+    <nav class="top__bar_menu">
+        <div class="logo_box">
+            <ul>
+                <li>
+                    <a href="http://localhost:8080/">
+                        <button type="button" class="logo_button">
+                            <img src="국기수업_중프[툴툴]/디자인/툴툴1.png"/>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main_menu">
+            <ul class="main_menu_ul">
+                <li>
+                    <a href="http://localhost:8080/article/list">
+                        <span class="review">Review</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/Market/list">
+                        <span class="market">Market</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/Notice/list">
+                        <span class="notice">Notice</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="signLine">
+            <div class="signIn">
+                <a href="http://localhost:8080/user/login">
+                    <button type="button" class="signIn_button">
+                        <img src="img/sign in.png" class="signIn_img"/>
+                    </button>
+                </a>
             </div>
-            <div class="mb-3">
-                <label for="password1" class="form-label">비밀번호</label>
-                <input type="password" th:field="*{password1}" class="form-control">
+            <div class="signUp">
+                <a href="http://localhost:8080/user/signup">
+                    <button type="button" class="signUp_button">
+                        <img src="img/sing up.png" class="signUp_img"/>
+                    </button>
+                </a>
             </div>
-            <div class="mb-3">
-                <label for="password2" class="form-label">비밀번호 확인</label>
-                <input type="password" th:field="*{password2}" class="form-control">
+        </div>
+    </nav>
+</div>
+<!-- 상단 네비바 끝 -->
+
+
+<!-- 배너라인 -->
+<div class="banner__bar">
+    <a href="#">
+        <img src="" alt="배너"/>
+    </a>
+</div>
+<!-- 배너라인 끝 -->
+
+<div class="container">
+    <section id="formHolder">
+
+        <section class="row">
+
+            <!-- Brand Box -->
+            <div class="col-sm-6 brand">
+                <a href="#" class="logo"><span>.</span></a>
+
+                <div class="heading">
+                    <h2>ToolTool</h2>
+                    <p>캠핑 장비가 없어 툴툴대는 당신을 위한</p>
+                    <b>캠핑 장비 리뷰, 추천 서비스</b>
+                </div>
+
+                <div class="success-msg">
+                    <p>회원가입이 성공적으로 이루어졌습니다!</p>
+                    <a href="#" class="profile">Your Profile</a>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">이메일</label>
-                <input type="email" th:field="*{email}" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="nickname" class="form-label">닉네임</label>
-                <input type="text" th:field="*{nickname}" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">회원가입</button>
-            <button type="submit" class="btn btn-primary">가입취소</button>
-        </form>
+        </section>
+
+
+        <!-- Signup Form -->
+
+        <div class="signup form-peice">
+            <form class="signup-form" action="#" method="post">
+                <hr>
+                <div class="form-group">
+                    <label for="name">아이디</label>
+                    <input type="text" name="username" id="name" class="name">
+                    <span class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" name="password" id="password" class="pass">
+                    <span class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordCon">비밀번호 확인</label>
+                    <input type="password" name="passwordCon" id="passwordCon" class="passConfirm">
+                    <span class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail </label>
+                    <input type="email" name="emailAdress" id="email" class="email">
+                    <span class="error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="nick">닉네임<small></small></label>
+                    <input type="text" name="nickname" id="nickname">
+                </div>
+
+<!--                <div class="CTA">-->
+                <!--                    <input type="submit" value="Signup Now" id="submit">-->
+                <!--                    <a href="#" class="switch">로그인하기</a>-->
+                <!--                </div>-->
+                <div class="CTA">
+                    <input type="submit" value="Signup Now" id="submit">
+                    <a href="http://localhost:8080/user/login" class="switch">로그인하기</a>
+                </div>
+            </form>
+        </div>
+</div>
+</div>
+<!-- End Signup Form -->
+<!-- footer -->
+<div class="footer">
+    <div class="footer-content">
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
     </div>
 </div>
-</html>
+<!-- End footer -->
 
-<!--<html layout:decorate="~{layout}">-->
-<!--<div layout:fragment="content" class="container my-3">-->
-<!--    <div class="my-3 border-bottom">-->
-<!--        <div>-->
-<!--            <h4>회원가입</h4>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">-->
-<!--        <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="username" class="form-label">사용자ID</label>-->
-<!--            <input type="text" th:field="*{username}" class="form-control">-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="password1" class="form-label">비밀번호</label>-->
-<!--            <input type="password" th:field="*{password1}" class="form-control">-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="password2" class="form-label">비밀번호 확인</label>-->
-<!--            <input type="password" th:field="*{password2}" class="form-control">-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="email" class="form-label">이메일</label>-->
-<!--            <input type="email" th:field="*{email}" class="form-control">-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="nickname" class="form-label">닉네임</label>-->
-<!--            <input type="text" th:field="*{nickname}" class="form-control">-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary">회원가입</button>-->
-<!--        <button type="submit" class="btn btn-primary">취소</button>-->
-<!--    </form>-->
-<!--</div>-->
-<!--</html>-->
+</body>
+</html>

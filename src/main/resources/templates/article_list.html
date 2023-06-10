@@ -43,17 +43,24 @@
             </ul>
         </div>
         <div class="signLine">
-            <div class="signIn">
-                <a href="http://localhost:8080/user/login">
+            <div class="signIn" th:if="${isAuthenticated}">
+                <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
-                        <img src="img/My툴.png" class="signIn_img"/>
+                        <img src="/img/signOut.png" class="signIn_img"/>
+                    </button>
+                </a>
+            </div>
+            <div class="signIn" th:unless="${isAuthenticated}">
+                <a href="http://localhost:8080/user/login" role="button">
+                    <button type="button" class="signIn_button">
+                        <img src="/img/signIn.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp">
-                <a href="http://localhost:8080/user/signup_manual">
+                <a href="user/signup_manual">
                     <button type="button" class="signUp_button">
-                        <img src="img/로그아웃.png" class="signUp_img"/>
+                        <img src="/img/sing up.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
@@ -62,7 +69,7 @@
 </div>
 <div class="sorting">
     <div class="total_count">
-        <span>총 <span>0</span></span>
+        <p>총 <span th:text="${articleCount}"></span>건</p>
     </div>
     <div class="sorting_menu">
         <ul>
@@ -225,17 +232,36 @@
                 </li>
             </ul>
         </div>
-        <div class="pagination">
-            <a href="#" class="previous">이전</a>
-            <span class="page-numbers"></span>
-            <a href="#" class="next">다음</a>
+        <div class="pagination-1">
+            <div class="pagination">
+                <ul class="page-list">
+                    <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=1|}">
+                            <span>이전</span>
+                        </a>
+                    </li>
+                    <li th:each="page: ${#numbers.sequence(1, paging.totalPages)}"
+                        th:if="${page >= paging.number-3 and page <= paging.number+3}"
+                        th:classappend="${page == paging.number+1} ? 'active'"
+                        class="page-item">
+                        <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+                    <li th:classappend="${!paging.hasNext} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="${paging.hasNext} ? @{|?page=${paging.number+1}|} : @{|?page=${paging.totalPages}|}">
+                            <span>다음</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 <!--footer-->
 <footer>
     <div class="footer-content">
-        <p>&copy; 툴툴 Welcome</p>
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
         <nav>
             <a href="#">Home</a>
             <a href="#">About</a>
@@ -244,5 +270,160 @@
     </div>
 </footer>
 </body>
+<script>
+      $(document).ready(function () {
+        $(".heart").click(function () {
+          var currentSrc = $(this).attr("src");
+          var newSrc = "";
 
+          if (currentSrc === "https://i.postimg.cc/9FFnrSqh/image.png") {
+            newSrc = "https://i.postimg.cc/43GKgpk2/1.png";
+          } else {
+            newSrc = "https://i.postimg.cc/9FFnrSqh/image.png";
+          }
+          $(this).attr("src", newSrc);
+        });
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+      $(document).ready(function () {
+  $(".accordion-header").click(function () {
+    $(this).toggleClass("active");
+    $(this).next(".accordion-content").slideToggle();
+  });
+  // 검색 버튼 클릭 이벤트 처리
+  $("#searchButton").click(function () {
+    var searchText = $("#searchBox").val().toLowerCase();
+    $(".accordion").hide();
+
+    $(".accordion").each(function () {
+      var headerText = $(this).find(".accordion-header").text().toLowerCase();
+      var nestedHeaderText = $(this)
+        .find(".nested-accordion .accordion-header")
+        .text()
+        .toLowerCase();
+
+      if (
+        headerText.includes(searchText) ||
+        nestedHeaderText.includes(searchText)
+      ) {
+        $(this).show();
+        $(this).find(".nested-accordion").show();
+      }
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script>
+      var itemsPerPage = 9;
+    var $items = $('.item');
+    var totalPages = Math.ceil($items.length / itemsPerPage);
+    var currentPage = 1;
+
+    function showPage(page) {
+      var startIndex = (page - 1) * itemsPerPage;
+      var endIndex = startIndex + itemsPerPage;
+
+      $items.hide();
+      $items.slice(startIndex, endIndex).show();
+
+      var pageNumbers = '';
+      for (var i = 1; i <= totalPages; i++) {
+        if (i === page) {
+          pageNumbers += '<a href="#" class="page-number active">' + i + '</a>';
+        } else {
+          pageNumbers += '<a href="#" class="page-number">' + i + '</a>';
+        }
+      }
+      $('.page-numbers').html(pageNumbers);
+    }
+
+    function navigateToPreviousPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    }
+
+    function navigateToNextPage() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    }
+
+    $('.previous').on('click', function(e) {
+      e.preventDefault();
+      navigateToPreviousPage();
+    });
+
+    $('.next').on('click', function(e) {
+      e.preventDefault();
+      navigateToNextPage();
+    });
+
+    $(document).on('click', '.page-number', function(e) {
+      e.preventDefault();
+      var page = parseInt($(this).text());
+      showPage(page);
+    });
+
+    showPage(currentPage);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </html>
