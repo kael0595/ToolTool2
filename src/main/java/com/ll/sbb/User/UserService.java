@@ -21,7 +21,6 @@ public class UserService {
         user.setEmail(email);
         user.setNickname(nickname);
         user.setPassword(passwordEncoder.encode(password));
-        user.setPassword(password);
         this.userRepository.save(user);
         return user;
     }

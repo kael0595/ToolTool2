@@ -4,6 +4,8 @@ package com.ll.sbb.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("/signup_manual")
+    private String signup_manual() {
+        return "signup_manual";
+    }
 
     @GetMapping("/signup")
     private String signup(UserCreateForm userCreateForm) {
@@ -43,7 +50,7 @@ public class UserController {
             bindingResult.reject("signupFailed", e.getMessage());
             return "signup_form";
         }
-        return "redirect:/article/list";
+        return "redirect:/user/signup";
     }
 
     @GetMapping("/login")
