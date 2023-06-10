@@ -43,10 +43,6 @@ public class MainController {
         return "MainPage";
     }
 
-    @GetMapping("/mypage")
-    private String mypage() {
-        return "mypage-mybookmarklist";
-    }
 
 
 }

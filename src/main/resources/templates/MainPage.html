@@ -41,28 +41,26 @@
                 </li>
             </ul>
         </div>
-        <div class="signLine">
-            <div class="signIn" th:if="${isAuthenticated}">
-                <a href="http://localhost:8080/user/logout">
-                    <button type="button" class="signIn_button">
-                        <img src="img/signOut.png" class="signIn_img"/>
-                    </button>
-                </a>
-            </div>
-            <div class="signIn" th:unless="${isAuthenticated}">
-                <a href="http://localhost:8080/user/login" role="button">
-                    <button type="button" class="signIn_button">
-                        <img src="img/signIn.png" class="signIn_img"/>
-                    </button>
-                </a>
-            </div>
-            <div class="signUp">
-                <a href="user/signup_manual">
-                    <button type="button" class="signUp_button">
-                        <img src="img/sing up.png" class="signUp_img"/>
-                    </button>
-                </a>
-            </div>
+        <div class="signIn" th:if="${session.loggedIn != null and session.loggedIn}">
+            <a href="http://localhost:8080/user/logout">
+                <button type="button" class="signIn_button">
+                    <img src="/img/로그아웃.png" class="signIn_img"/>
+                </button>
+            </a>
+        </div>
+        <div class="signIn" th:unless="${session.loggedIn != null and session.loggedIn}">
+            <a href="http://localhost:8080/user/login">
+                <button type="button" class="signIn_button">
+                    <img src="/img/sign in.png" class="signIn_img"/>
+                </button>
+            </a>
+        </div>
+        <div class="signUp">
+            <a href="user/signup_menual">
+                <button type="button" class="signUp_button">
+                    <img src="/img/sing up.png" class="signUp_img"/>
+                </button>
+            </a>
         </div>
     </nav>
 </div>
@@ -199,6 +197,12 @@
           $(this).attr("src", newSrc);
         });
       });
+
+
+
+
+
+
 
 
 

@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="signUp">
-                <a href="http://localhost:8080/user/signup_manual">
+                <a href="http://localhost:8080/user/signup_menual">
                     <button type="button" class="signUp_button">
                         <img src="img/sing up.png" class="signUp_img"/>
                     </button>
@@ -85,13 +85,13 @@
         <div class="mb-3">
             <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
         </div>
-        <button type="submit" class="btn btn-primary">SIGN -IN</button>
+            <button type="submit" class="btn btn-primary">SIGN -IN</button>
     </form>
     <form th:action="@{/user/login}" class="signupform">
         <div><h1 class="signin">Sign Up</h1>
             <h3 class="signment">아직 회원이 아니신가요? </h3>
             <h3 class="signment"> 회원가입 하시면 더 많은 기능을 사용할 수 있습니다.</h3>
-            <a th:href="@{/user/signup}">
+            <a href="http://localhost:8080/user/signup_menual">
                 <button type="button" class="btn-primary">SIGN-UP</button>
             </a>
         </div>

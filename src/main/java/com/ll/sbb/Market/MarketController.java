@@ -5,6 +5,7 @@ import com.ll.sbb.Article.Article;
 import com.ll.sbb.Category.subCategory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,9 +22,15 @@ public class MarketController {
     private final MarketService marketService;
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<Market> marketList = this.marketService.getList();
-        model.addAttribute("marketList", marketList);
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw) {
+        Page<Market> paging = this.marketService.getList(page, kw);
+        List<Market> markets = this.marketService.getAll();
+        int marketCount = markets.size();
+        model.addAttribute("markets", markets);
+        model.addAttribute("articleCount", marketCount);
+        model.addAttribute("paging", paging);
+        model.addAttribute("kw", kw);
         return "market_list";
     }
 

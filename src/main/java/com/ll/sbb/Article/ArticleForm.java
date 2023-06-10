@@ -16,6 +16,7 @@ public class ArticleForm {
     @NotEmpty(message="내용은 필수항목입니다.")
     private String content;
 
-    @NotEmpty(message = "구입가격은 필수항목입니다.(숫자만 입력 해주세요.)")
     private Integer price;
+
+    private int starScore;
 }

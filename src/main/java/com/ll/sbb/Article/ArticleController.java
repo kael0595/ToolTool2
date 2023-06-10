@@ -140,7 +140,7 @@ public class ArticleController {
         if (bindingResult.hasErrors()) {
             return "article_form";
         }
-        this.articleService.create(articleForm.getSubject(), articleForm.getContent(), articleForm.getPrice());
+        this.articleService.create(articleForm.getSubject(), articleForm.getContent(), articleForm.getPrice(), articleForm.getStarScore());
         return "redirect:/article/list"; // 질문 저장후 질문목록으로 이동
     }
 

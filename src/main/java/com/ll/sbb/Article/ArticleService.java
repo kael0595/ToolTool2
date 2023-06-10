@@ -67,18 +67,18 @@ public class ArticleService {
         }
     }
 
-
-    public void create(String subject, String content, SiteUser user, Integer price) {
+    public void create(String subject, String content, Integer price, SiteUser user, Integer starScore) {
         Article q = new Article();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         q.setAuthor(user);
         q.setPrice(price);
+        q.setStarScore(starScore);
         this.articleRepository.save(q);
     }
 
-    public void create(String subject, String content, Integer price) {
+    public void create(String subject, String content, Integer price, int starScore) {
         Article q = new Article();
         q.setSubject(subject);
         q.setContent(content);

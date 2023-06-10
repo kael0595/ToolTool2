@@ -1,0 +1,352 @@
+@font-face {
+  font-family: "NanumBarunGothic";
+  font-style: normal;
+  font-weight: 700;
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
+      format("woff"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
+      format("truetype");
+}
+div,
+nav {
+  box-sizing: border-box;
+}
+span,
+p {
+  font-family: "NanumBarunGothic", sans-serif;
+  color: #6d6c6c;
+}
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*my_page*/
+.my_page {
+  width: 1440px;
+  height: 400px;
+  background-color: #a5a773;
+  margin: 0 auto;
+}
+.my_page span,
+.my_page p {
+  color: black;
+  font-weight: bold;
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  font-style: normal;
+  font-weight: 700;
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
+      format("woff"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
+      format("truetype");
+}
+div,
+nav {
+  box-sizing: border-box;
+}
+span,
+p,
+h1,
+h2,
+h3 {
+  font-family: "NanumBarunGothic", sans-serif;
+  color: #6d6c6c;
+}
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/*my_page*/
+.my_page {
+  width: 1440px;
+  height: 400px;
+  background-color: #a5a773;
+  margin: 0 auto;
+}
+/*top_bar*/
+.my_page > .my_page_top_bar {
+  width: 1440px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+.my_page > .my_page_top_bar > .top_bar_logo > a > .logo_img {
+  width: 300px;
+  height: 70px;
+}
+.my_page > .my_page_top_bar > .logout_box > a > img {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}
+/*second_box*/
+.my_page > .my_page_second_bar {
+  width: 1440px;
+  height: 330px;
+  padding: 30px;
+}
+/*profile_img*/
+.my_page_second_bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile_img {
+  position: relative;
+}
+
+.profile_img > .profile_img_1 {
+  width: 250px; /* 프로필 사진의 크기를 조정 */
+  height: 250px;
+  border-radius: 50%; /* 사진을 동그랗게 보이도록 설정 */
+}
+
+.change-icon {
+  position: absolute;
+  border-radius: 30%;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.change-icon {
+  width: 30px;
+  height: 30px;
+}
+.change-icon > .icon-img {
+  width: 20px; /* 변경 아이콘의 크기를 조정 */
+  height: 20px;
+}
+/*profile_nickname*/
+.my_page_second_bar > .profile_nickname {
+  margin-left: 50px;
+  padding: 10px;
+}
+.profile_nickname > .nickname {
+  display: flex;
+}
+.profile_nickname > .nickname .nick {
+  font-size: 50px;
+  margin-right: 20px;
+}
+.profile_nickname > .level span,
+.profile_nickname > .undetermined span {
+  font-size: 20px;
+}
+/*profile_mark*/
+.profile_mark {
+  display: flex;
+  margin: 100px;
+  height: 100%;
+  align-content: center;
+}
+.profile_mark > .mark_Recommendation {
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+}
+.profile_mark > .mark_total_review {
+  display: flex;
+  align-items: center;
+}
+.profile_mark li {
+  margin: 10px;
+}
+/*flex_box*/
+.flex_box {
+  width: 1440px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+/*menu_box*/
+.flex_box > .menu_box .my_page {
+  font-size: 50px;
+  color: blue;
+  background-color: transparent;
+}
+.flex_box > .menu_box {
+  flex-grow: 1;
+}
+
+.menu_box li {
+  margin-bottom: 30px;
+}
+.menu_box li span {
+  font-size: 20px;
+  color: black;
+}
+/*content_box*/
+.content_box {
+  flex-grow: 4;
+  text-align: center;
+}
+.content_box > .page .title {
+  text-align: start;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.content_box > .page .underline {
+  flex-grow: 4;
+  border: 1px dotted;
+  margin-bottom: 20px;
+}
+
+.content_box > .menu_information .form_group {
+  margin-bottom: 20px;
+  display: flex;
+}
+.content_box .underline {
+  border: 1px dotted;
+  margin-bottom: 20px;
+}
+label {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 40%;
+  padding: 10px;
+  border: none;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px; /* 가운데 간격 설정 */
+}
+
+button:last-child {
+  margin-right: 0; /* 마지막 버튼의 오른쪽 간격 제거 */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.page {
+  display: none;
+}
+.page-1 {
+  display: block;
+}
+table {
+  width: 1000px;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+.number,
+.date {
+  width: 100px;
+}
+.content {
+  font-size: 16px;
+  width: 700px;
+}
+
+/*footer*/
+footer {
+  background-color: #555;
+  padding: 20px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.footer-content nav a {
+  margin-right: 10px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-content nav a:hover {
+  text-decoration: underline;
+}

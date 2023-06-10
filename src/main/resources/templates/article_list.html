@@ -17,7 +17,7 @@
                 <li>
                     <a href="http://localhost:8080/">
                         <button type="button" class="logo_button">
-                            <img src="img/230605_툴툴_로고 복사 1.png"/>
+                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
                         </button>
                     </a>
                 </li>
@@ -46,21 +46,21 @@
             <div class="signIn" th:if="${isAuthenticated}">
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
-                        <img src="/img/signOut.png" class="signIn_img"/>
+                        <img src="/img/sign up.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
             <div class="signIn" th:unless="${isAuthenticated}">
                 <a href="http://localhost:8080/user/login" role="button">
                     <button type="button" class="signIn_button">
-                        <img src="/img/signIn.png" class="signIn_img"/>
+                        <img src="/img/sign in.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp">
-                <a href="user/signup_manual">
+                <a href="http://localhost:8080/user/signup_menual">
                     <button type="button" class="signUp_button">
-                        <img src="/img/sing up.png" class="signUp_img"/>
+                        <img src="/img/sign up.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
@@ -106,7 +106,7 @@
         <!--write_box-->
         <div class="write_box">
             <button type="button">
-                <a href="#">
+                <a href="http://localhost:8080/article/create">
                     <img src="https://i.postimg.cc/13HmB7VP/Vector.png"/>
                     <span>글쓰기</span>
                 </a>
@@ -286,23 +286,6 @@
       });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 <script>
       $(document).ready(function () {
@@ -332,23 +315,6 @@
     });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
@@ -407,22 +373,6 @@
     });
 
     showPage(currentPage);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

@@ -21,9 +21,9 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/signup_manual")
+    @GetMapping("/signup_menual")
     private String signup_manual() {
-        return "signup_manual";
+        return "signup_menual";
     }
 
     @GetMapping("/signup")
@@ -52,7 +52,7 @@ public class UserController {
             bindingResult.reject("signupFailed", e.getMessage());
             return "signup_form";
         }
-        return "redirect:/user/signup";
+        return "redirect:/";
     }
 
     @GetMapping("/login")

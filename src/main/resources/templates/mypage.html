@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="mypage.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      //사진변경 쿼리
+      $(document).ready(function () {
+        $(".change-icon").click(function () {
+          // "file" 타입의 input 요소 생성
+          var inputFile = $('<input type="file">');
+
+          // input 요소에 클릭 이벤트 트리거
+          inputFile.trigger("click");
+
+          // 파일 선택 시
+          inputFile.change(function () {
+            var file = this.files[0];
+
+            if (file) {
+              var reader = new FileReader();
+
+              // 파일을 데이터 URL로 읽기
+              reader.readAsDataURL(file);
+
+              // 파일 로드가 완료되었을 때
+              reader.onload = function (e) {
+                // 선택한 파일로 프로필 이미지 업데이트
+                $(".profile_img_1").attr("src", e.target.result);
+              };
+            }
+          });
+        });
+      });
+
+
+
+
+
+
+
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".menu_box a").click(function (e) {
+          e.preventDefault();
+          var pageId = $(this).data("page");
+          $(".page").hide();
+          $("#" + pageId).show();
+        });
+      });
+
+
+
+
+
+
+
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".menu_box a").click(function (e) {
+          e.preventDefault();
+          var pageId = $(this).data("page");
+          $(".page").hide();
+          $("#" + pageId).show();
+        });
+
+        $("#change-password-btn").click(function () {
+          if (!$("#current-password").is(":disabled")) {
+            $("#current-password").prop("disabled", true);
+            $("#save-password-btn").prop("disabled", true);
+          } else {
+            $("#current-password").prop("disabled", false);
+            $(this).prop("disabled", true);
+            $("#save-password-btn").prop("disabled", false);
+          }
+        });
+
+        $("#change-nickname-btn").click(function () {
+          $("#nickname").removeAttr("disabled");
+          $(this).attr("disabled", true);
+          $("#save-nickname-btn").removeAttr("disabled");
+        });
+
+        $("#change-email-btn").click(function () {
+          $("#email").removeAttr("disabled");
+          $(this).attr("disabled", true);
+          $("#save-email-btn").removeAttr("disabled");
+        });
+
+        $("#save-password-btn").click(function () {
+          $("#current-password").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-password-btn").removeAttr("disabled");
+        });
+
+        $("#save-nickname-btn").click(function () {
+          $("#nickname").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-nickname-btn").removeAttr("disabled");
+        });
+
+        $("#save-email-btn").click(function () {
+          $("#email").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-email-btn").removeAttr("disabled");
+        });
+        $("#current-password").prop("disabled", true);
+        $("#save-password-btn").prop("disabled", true);
+      });
+
+
+
+
+
+
+
+    </script>
+    <title>My툴</title>
+</head>
+<body>
+<div class="my_page">
+    <!--topbar-->
+    <div class="my_page_top_bar">
+        <div class="top_bar_logo">
+            <a href="#">
+                <img
+                        src="https://i.postimg.cc/MTH9jYG0/mypage.png"
+                        class="logo_img"
+                />
+            </a>
+        </div>
+        <div class="logout_box">
+            <a href="#">
+                <img
+                        src="https://i.postimg.cc/bNsGjgP1/image.png"
+                        class="임시박스"
+                />
+            </a>
+            <a href="#">
+                <img
+                        src="https://i.postimg.cc/bNsGjgP1/image.png"
+                        class="logout_img"
+                />
+            </a>
+        </div>
+    </div>
+    <!--secondbar-->
+    <div class="my_page_second_bar">
+        <div class="profile_img">
+            <img
+                    src="https://i.postimg.cc/m23RYKm6/product-box1.png"
+                    class="profile_img_1"
+            />
+            <button class="change-icon">
+                <img
+                        src="https://i.postimg.cc/13HmB7VP/Vector.png"
+                        class="icon-img"
+                />
+            </button>
+        </div>
+        <div class="profile_nickname">
+            <div class="nickname">
+                <ul>
+                    <li>
+                        <span class="nick">닉네임</span>
+                        <span>가입일</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="level">
+                <ul>
+                    <li>
+                        <p>레벨</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="undetermined">
+                <ul>
+                    <li>
+                        <p>임시글</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="profile_mark">
+            <div class="mark_Recommendation">
+                <ul>
+                    <li>
+                        <img src="https://i.postimg.cc/43GKgpk2/1.png"/>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>내가 받은 추천수</span>
+                        </a>
+                    </li>
+                    <li>
+                        <span>추천 받은 숫자</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="mark_total_review">
+                <ul>
+                    <li>
+                        <img src="https://i.postimg.cc/43GKgpk2/1.png"/>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span>총 게시글</span>
+                        </a>
+                    </li>
+                    <li>
+                        <span>총 게시글 숫자</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--flex_box-->
+    <div class="flex_box">
+        <!--menu_box-->
+        <div class="menu_box">
+            <ul>
+                <li>
+                    <span class="my_page">MY ToolTool</span>
+                </li>
+                <li>
+                    <a href="#" data-page="menu1">
+                        <span>내 정보</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="menu2">
+                        <span>내가 쓴 리뷰</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="menu3">
+                        <span>내가 쓴 판매글</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="menu4">
+                        <span>내가 쓴 댓글 게시글</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="menu5">
+                        <span>찜 목록</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--content_box-->
+        <div class="content_box">
+            <div id="menu1" class="page page-1 menu_information">
+                <div class="title">내 정보</div>
+                <div class="underline"></div>
+                <form>
+                    <div class="form_group">
+                        <label for="username">아이디</label>
+                        <input type="text" id="username" value="" disabled/>
+                    </div>
+                    <div class="underline"></div>
+                    <div class="form_group">
+                        <label for="current-password">현재 비밀번호</label>
+                        <input type="password" id="current-password" value="132131"/>
+                        <button type="button" id="change-password-btn">
+                            비밀번호 변경
+                        </button>
+                        <button type="button" id="save-password-btn" disabled>
+                            완료
+                        </button>
+                    </div>
+                    <div class="underline"></div>
+                    <div class="form_group">
+                        <label for="nickname">닉네임</label>
+                        <input type="text" id="nickname" value="John" disabled/>
+                        <button type="button" id="change-nickname-btn">
+                            닉네임 변경
+                        </button>
+                        <button type="button" id="save-nickname-btn" disabled>
+                            완료
+                        </button>
+                    </div>
+                    <div class="underline"></div>
+                    <div class="form_group">
+                        <label for="email">이메일</label>
+                        <input
+                                type="email"
+                                id="email"
+                                value="johndoe@example.com"
+                                disabled
+                        />
+                        <button type="button" id="change-email-btn">이메일 변경</button>
+                        <button type="button" id="save-email-btn" disabled>완료</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="menu2" class="page menu_review">
+                <div class="title">내가 쓴 리뷰</div>
+                <div class="underline"></div>
+                <table>
+                    <tr>
+                        <th class="number">게시글 번호</th>
+                        <th>제목</th>
+                        <th class="date">작성일</th>
+                    </tr>
+                    <tr th:each="article, stat : ${paging}" th:if="${stat.index < 10}">
+                        <td class="number" th:text="${article.id}"></td>
+                        <td class="content"><a th:href="@{|/article/detail/${article.id}|}"
+                                               th:text="${article.subject}"></a></td>
+                        <td class="date" th:text="${article.createDate}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="menu3" class="page menu_sale">
+                <div class="title">내가 쓴 판매글</div>
+                <div class="underline"></div>
+                <table>
+                    <tr>
+                        <th class="number">게시글 번호</th>
+                        <th>제목</th>
+                        <th class="date">작성일</th>
+                    </tr>
+                    <tr th:each="market, stat : ${paging}" th:if="${stat.index < 10}">
+                        <td class="number" th:text="${market.id}"></td>
+                        <td class="content"><a th:href="@{|/market/detail/${market.id}|}"
+                                               th:text="${market.subject}"></a></td>
+                        <td class="date" th:text="${market.createDate}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="menu4" class="page menu_comment">
+                <div class="title">내가 쓴 댓글 게시글</div>
+                <div class="underline"></div>
+                <table>
+                    <tr>
+                        <th class="number">게시글 번호</th>
+                        <th>제목</th>
+                        <th class="date">작성일</th>
+                    </tr>
+                    <tr>
+                        <td class="number">1</td>
+                        <td class="content"><a href="#">여름 휴가 계획</a></td>
+                        <td class="date">2023-06-01</td>
+                    </tr>
+                    <tr>
+                        <td class="number">2</td>
+                        <td class="content"><a href="#">카페 이벤트</a></td>
+                        <td class="date">2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td class="number">3</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">4</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">5</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">6</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">7</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">8</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">9</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">10</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="menu5" class="page menu_pick">
+                <div class="title">찜 목록</div>
+                <div class="underline"></div>
+                <table>
+                    <tr>
+                        <th class="number">게시글 번호</th>
+                        <th>제목</th>
+                        <th class="date">작성일</th>
+                    </tr>
+                    <tr>
+                        <td class="number">1</td>
+                        <td class="content"><a href="#">여름 휴가 계획</a></td>
+                        <td class="date">2023-06-01</td>
+                    </tr>
+                    <tr>
+                        <td class="number">2</td>
+                        <td class="content"><a href="#">카페 이벤트</a></td>
+                        <td class="date">2023-06-02</td>
+                    </tr>
+                    <tr>
+                        <td class="number">3</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">4</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">5</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">6</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">7</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">8</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">9</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                    <tr>
+                        <td class="number">10</td>
+                        <td class="content"><a href="#">맛있는 케이크</a></td>
+                        <td class="date">2023-06-03</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 툴툴 Welcome</p>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

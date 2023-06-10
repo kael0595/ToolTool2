@@ -51,7 +51,7 @@
                 </a>
             </div>
             <div class="signUp">
-                <a href="http://localhost:8080/user/signup">
+                <a href="http://localhost:8080/user/signup_menual">
                     <button type="button" class="signUp_button">
                         <img src="img/sing up.png" class="signUp_img"/>
                     </button>
@@ -61,15 +61,6 @@
     </nav>
 </div>
 <!-- 상단 네비바 끝 -->
-
-
-<!-- 배너라인 -->
-<div class="banner__bar">
-    <a href="#">
-        <img src="" alt="배너"/>
-    </a>
-</div>
-<!-- 배너라인 끝 -->
 
 <div class="container">
     <section id="formHolder">
@@ -97,38 +88,40 @@
         <!-- Signup Form -->
 
         <div class="signup form-peice">
-            <form class="signup-form" action="#" method="post">
+            <form class="signup-form" th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+                <div th:replace="~{form_errors :: formErrorsFragment}"></div>
                 <hr>
                 <div class="form-group">
                     <label for="name">아이디</label>
-                    <input type="text" name="username" id="name" class="name">
+                    <input type="text" name="username" th:field="*{username}" id="name" class="name">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" name="password" id="password" class="pass">
+                    <input type="password" name="password" th:field="*{password1}" id="password" class="pass">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="passwordCon">비밀번호 확인</label>
-                    <input type="password" name="passwordCon" id="passwordCon" class="passConfirm">
+                    <input type="password" name="passwordCon" th:field="*{password2}" id="passwordCon"
+                           class="passConfirm">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail </label>
-                    <input type="email" name="emailAdress" id="email" class="email">
+                    <input type="email" name="emailAdress" th:field="*{email}" id="email" class="email">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="nick">닉네임<small></small></label>
-                    <input type="text" name="nickname" id="nickname">
+                    <input type="text" name="nickname" th:field="*{nickname}" id="nickname">
                 </div>
 
-<!--                <div class="CTA">-->
+                <!--                <div class="CTA">-->
                 <!--                    <input type="submit" value="Signup Now" id="submit">-->
                 <!--                    <a href="#" class="switch">로그인하기</a>-->
                 <!--                </div>-->

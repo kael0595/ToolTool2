@@ -126,12 +126,16 @@
         </div>
     </form>
 </div>
+
 <script>
     $(document).ready(function() {
       $('.allcheck').click(function() {
         var checked = $('.allcheck').is(':checked');
-        if (checked)
-          $('input:checkbox').prop('checked', true);
+       if (checked) {
+      $('input:checkbox').prop('checked', true);
+    } else {
+      $('input:checkbox').prop('checked', false);
+    }
       });
 
       $('.btn-primary').click(function(e) {
@@ -142,6 +146,7 @@
       });
     });
 
+
 </script>
 <script>
   $(document).ready(function() {
@@ -151,9 +156,9 @@
         $('input:checkbox').prop('checked', true);
     });
   });
+
+
 </script>
-
-
 </body>
 </html>
 
