@@ -9,14 +9,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ArticleForm {
-    @NotEmpty(message="제목은 필수항목입니다.")
-    @Size(max=200)
+    @NotEmpty(message = "제목은 필수항목입니다.")
+    @Size(max = 200)
     private String subject;
 
-    @NotEmpty(message="내용은 필수항목입니다.")
+    @NotEmpty(message = "내용은 필수항목입니다.")
     private String content;
 
     private Integer price;
 
     private int starScore;
+
+    private String type;
+
+    private String season;
 }

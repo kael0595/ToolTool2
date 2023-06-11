@@ -46,8 +46,9 @@ public class Article {
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Category> mainCategory;
 
+    @Size(max = 20)
     private String type;
-
+    @Size(max = 20)
     private String season;
 
     @ManyToOne(fetch = FetchType.LAZY)

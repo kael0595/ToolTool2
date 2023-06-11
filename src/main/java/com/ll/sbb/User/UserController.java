@@ -62,7 +62,6 @@ public class UserController {
 
     @PostMapping("/login")
     public String processLogin(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
-        // 로그인 로직 처리
         if (userService.authenticateUser(username, password)) {
             session.setAttribute("loggedIn", true);
             return "redirect:/";

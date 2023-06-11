@@ -345,3 +345,12 @@ footer {
 .footer-content nav a:hover {
   text-decoration: underline;
 }
+
+.season{
+  display:inline-block;
+}
+
+.season2{
+  display:inline-block;
+  margin-left:20px;
+}

@@ -43,24 +43,33 @@
             </ul>
         </div>
         <div class="signLine">
-            <div class="signIn" th:if="${isAuthenticated}">
+            <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
-                        <img src="/img/sign up.png" class="signIn_img"/>
+                        <img src="https://i.postimg.cc/sDydgSfq/logout.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
-            <div class="signIn" th:unless="${isAuthenticated}">
-                <a href="http://localhost:8080/user/login" role="button">
+
+            <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+                <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <img src="/img/sign in.png" class="signIn_img"/>
+                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
-            <div class="signUp">
-                <a href="http://localhost:8080/user/signup_menual">
+
+            <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+                <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
-                        <img src="/img/sign up.png" class="signUp_img"/>
+                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
+                    </button>
+                </a>
+            </div>
+            <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+                <a href="user/signup_menual">
+                    <button type="button" class="signUp_button">
+                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
@@ -286,6 +295,7 @@
       });
 
 
+
 </script>
 <script>
       $(document).ready(function () {
@@ -315,6 +325,7 @@
     });
   });
 });
+
 
 
 </script>
@@ -373,6 +384,7 @@
     });
 
     showPage(currentPage);
+
 
 
 </script>

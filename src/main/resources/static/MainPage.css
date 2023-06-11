@@ -164,10 +164,7 @@ a {
   background-size: cover;
   cursor: pointer;
 }
-.rm_content .heart:hover {
-  /*변경해야함*/
-  background: #ff5a79;
-}
+
 /*text_box*/
 .text_box {
   display: flex;
