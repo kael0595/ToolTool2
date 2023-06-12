@@ -7,6 +7,7 @@
     <title>툴툴</title>
     <link rel="stylesheet" href="/MainPage.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <!--top-bar라인-->
@@ -47,6 +48,7 @@
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
                         <img src="https://i.postimg.cc/sDydgSfq/logout.png" class="signIn_img"/>
+                        <span>로그아웃</span>
                     </button>
                 </a>
             </div>
@@ -54,7 +56,8 @@
             <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
+                        <i class="fa-solid fa-house"></i>
+                        <span>로그인</span>
                     </button>
                 </a>
             </div>
@@ -63,6 +66,7 @@
                 <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
                         <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
+                        <span>마이페이지</span>
                     </button>
                 </a>
             </div>
@@ -70,6 +74,7 @@
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
                         <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
+                        <span>회원가입</span>
                     </button>
                 </a>
             </div>
@@ -79,7 +84,8 @@
 <!--banner라인-->
 <div class="banner__bar">
     <a href="#">
-        <img src="" alt="배너"/>
+        <img src="https://img.29cm.co.kr/next-brand/2022/10/20/c18eab7f7c9946b8af16d1f352dc0158_20221020194850.jpg"
+             alt="배너"/>
     </a>
 </div>
 <!--categori라인-->
@@ -193,7 +199,9 @@
         </nav>
     </div>
 </footer>
+
 </body>
+
 
 <script>
       $(document).ready(function () {
@@ -212,15 +220,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
 </script>
+
 
 </html>

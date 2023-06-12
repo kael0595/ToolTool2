@@ -1,53 +1,4 @@
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
-}
-div,
-nav {
-  box-sizing: border-box;
-}
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
-}
-button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-body,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
-/*my_page*/
-.my_page {
-  width: 1440px;
-  height: 400px;
-  background-color: #a5a773;
-  margin: 0 auto;
-}
-.my_page span,
-.my_page p {
-  color: black;
-  font-weight: bold;
-}
 @font-face {
   font-family: "NanumBarunGothic";
   font-style: normal;
@@ -70,7 +21,7 @@ h1,
 h2,
 h3 {
   font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
+  color: #73703f;
 }
 button {
   border: 0;
@@ -89,28 +40,75 @@ a {
   text-decoration: none;
 }
 /*my_page*/
-.my_page {
+.detail_top__bar {
   width: 1440px;
-  height: 400px;
-  background-color: #a5a773;
+  height: 100px;
   margin: 0 auto;
 }
-/*top_bar*/
-.my_page > .my_page_top_bar {
-  width: 1440px;
-  height: 70px;
+.detail_top__bar > .detail_top__bar_menu {
+  width: 1320px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
-  padding-right: 20px;
+  align-items: center;
 }
-.my_page > .my_page_top_bar > .top_bar_logo > a > .logo_img {
+.detail_top__bar > .detail_top__bar_menu > .logo_box {
+  flex-grow: 1;
+}
+.detail_top__bar > .detail_top__bar_menu > div > ul > li > a > button > img {
   width: 300px;
-  height: 70px;
+  height: 74px;
 }
-.my_page > .my_page_top_bar > .logout_box > a > img {
-  width: 50px;
+.detail_top__bar > .detail_top__bar_menu > .main_menu {
+  display: flex;
+  flex-grow: 4;
+}
+.detail_top__bar > .detail_top__bar_menu > .main_menu > .main_menu_ul {
+  display: flex;
+}
+
+.detail_top__bar
+  > .detail_top__bar_menu
+  > .main_menu
+  > .main_menu_ul
+  > li:hover
+  > a
+  > span {
+  color: #ff6c00;
+}
+.detail_top__bar
+  > .detail_top__bar_menu
+  > .main_menu
+  > .main_menu_ul
+  > li
+  > a
+  > span {
+  font-size: 30px;
+  line-height: 32px;
+  margin: 20px;
+}
+.detail_top__bar > .detail_top__bar_menu > .signLine {
+  flex-grow: 2;
+  height: 74px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.detail_top__bar > .detail_top__bar_menu > .signLine > div {
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+.detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > img {
+  width: 46px;
   height: 50px;
-  padding: 10px;
+  margin-bottom : 5px;
+}
+
+.detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > span {
+display : block;
+font-size : 20px;
 }
 /*second_box*/
 .my_page > .my_page_second_bar {
@@ -135,8 +133,8 @@ a {
 }
 
 .profile_img > .profile_img_1 {
-  width: 250px; /* 프로필 사진의 크기를 조정 */
-  height: 250px;
+  width: 210px; /* 프로필 사진의 크기를 조정 */
+  height: 210px;
   border-radius: 50%; /* 사진을 동그랗게 보이도록 설정 */
 }
 
@@ -144,20 +142,20 @@ a {
   position: absolute;
   border-radius: 30%;
   bottom: 0;
-  left: 50%;
+  left: 85%;
   transform: translate(-50%, -50%);
-  background-color: orange;
+  background-color: #73703f;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .change-icon {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
 }
 .change-icon > .icon-img {
-  width: 20px; /* 변경 아이콘의 크기를 조정 */
-  height: 20px;
+  width: 30px; /* 변경 아이콘의 크기를 조정 */
+  height: 30px;
 }
 /*profile_nickname*/
 .my_page_second_bar > .profile_nickname {
@@ -204,7 +202,7 @@ a {
 /*menu_box*/
 .flex_box > .menu_box .my_page {
   font-size: 50px;
-  color: blue;
+  color: #73703f;
   background-color: transparent;
 }
 .flex_box > .menu_box {
@@ -260,9 +258,9 @@ input[type="email"] {
   border: none;
 }
 
-button {
+.content_box button {
   padding: 8px 12px;
-  background-color: #4caf50;
+  background-color: #ff6c00;
   color: white;
   border: none;
   border-radius: 4px;
@@ -270,15 +268,15 @@ button {
   margin-right: 10px; /* 가운데 간격 설정 */
 }
 
-button:last-child {
+.content_box button:last-child {
   margin-right: 0; /* 마지막 버튼의 오른쪽 간격 제거 */
 }
 
-button:hover {
+.content_box button:hover {
   background-color: #45a049;
 }
 
-button:disabled {
+.content_box button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
@@ -302,7 +300,8 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #73703f;
+  color: #fff;
 }
 
 a {

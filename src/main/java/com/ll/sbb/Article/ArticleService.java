@@ -52,7 +52,7 @@ public class ArticleService {
     public Page<Article> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
         Specification<Article> spec = search(kw);
         return this.articleRepository.findAll(spec, pageable);
     }

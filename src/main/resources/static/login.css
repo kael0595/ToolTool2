@@ -17,7 +17,7 @@ nav {
 span,
 p {
   font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
+  color: #73703f;
 }
 button {
   border: 0;
@@ -79,6 +79,12 @@ a {
 .top__bar > .top__bar_menu > .signLine > div > a > button > img {
   width: 46px;
   height: 55px;
+  margin-bottom : 5px;
+}
+
+.top__bar > .top__bar_menu > .signLine > div > a > button > span {
+display : block;
+font-size : 20px;
 }
 
 /*banner라인*/

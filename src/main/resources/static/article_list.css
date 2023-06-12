@@ -17,7 +17,7 @@ nav {
 span,
 p {
   font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
+  color: #73703f;
 }
 button {
   border: 0;
@@ -39,7 +39,6 @@ a {
 .detail_top__bar {
   width: 1440px;
   height: 100px;
-  background-color: #a5a773;
   margin: 0 auto;
 }
 .detail_top__bar > .detail_top__bar_menu {
@@ -64,6 +63,7 @@ a {
 .detail_top__bar > .detail_top__bar_menu > .main_menu > .main_menu_ul {
   display: flex;
 }
+
 .detail_top__bar
   > .detail_top__bar_menu
   > .main_menu
@@ -71,7 +71,7 @@ a {
   > li:hover
   > a
   > span {
-  color: #fff;
+  color: #ff6c00;
 }
 .detail_top__bar
   > .detail_top__bar_menu
@@ -94,19 +94,26 @@ a {
 .detail_top__bar > .detail_top__bar_menu > .signLine > div {
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 10px;
+
 }
 .detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > img {
   width: 46px;
   height: 50px;
+  margin-bottom : 5px;
+}
+
+.detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > span {
+display : block;
+font-size : 20px;
 }
 /*sorting*/
 .sorting {
   width: 950px;
   display: flex;
-  margin-left: auto;
-  margin-right: 40px;
+  align-items: center;
   margin-top: 80px;
+  margin-left: auto;
+  margin-right: 50px;
 }
 .sorting > .total_count {
   margin-left: 15px;
@@ -118,7 +125,6 @@ a {
 .sorting_menu {
   margin-left: 450px;
 }
-
 .sorting_menu > ul {
   display: flex;
 }
@@ -185,7 +191,7 @@ a {
   height: 100%;
   border: 0;
   border-radius: 5px;
-  background-color: skyblue;
+  background-color: #ff6c00;
   outline: none;
 }
 /*dotted 라인*/
@@ -203,8 +209,9 @@ a {
   margin-top: 10px;
 }
 .flex_box > .categori_accordion > .accordion .accordion-header {
-  background-color: #f1f1f1;
+  background-color: #73703f;
   padding: 10px;
+  color:#fff;
   margin-bottom: 10px;
   margin-top: 10px;
   cursor: pointer;
@@ -221,6 +228,7 @@ input[type="checkbox"] {
   vertical-align: middle;
   transition: border-color 0.3s;
   position: relative;
+  color: #ff6c00;
 }
 
 input[type="checkbox"]:checked {
@@ -283,19 +291,14 @@ input[type="checkbox"]:checked::before {
 .review_board_page > .review_board_page_3 .review_board_main_img {
   width: 250px;
   height: 220px;
-}
-.review_board_page > .review_board_page_1 .review_board_main_img_2,
-.review_board_page > .review_board_page_2 .review_board_main_img_2,
-.review_board_page > .review_board_page_3 .review_board_main_img_2 {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin: 10px 0;
 }
 .review_board_page > .review_board_page_1 .heart,
 .review_board_page > .review_board_page_2 .heart,
 .review_board_page > .review_board_page_3 .heart {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 20px;
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
@@ -321,16 +324,15 @@ input[type="checkbox"]:checked::before {
   margin-top: 10px;
   color: #a5a773;
 }
-.review_board_page > .review_board_page_1 .review_board_text_box_name,
-.review_board_page > .review_board_page_2 .review_board_text_box_name,
-.review_board_page > .review_board_page_3 .review_board_text_box_name {
+.review_board_page > .review_board_page_1 .text_box_name,
+.review_board_page > .review_board_page_2 .text_box_name,
+.review_board_page > .review_board_page_3 .text_box_name {
   margin-top: 10px;
-  margin-left : 10px;
-}
-.review_board_page > .review_board_page_1 .review_board_text_box_name > span,
-.review_board_page > .review_board_page_2 .review_board_text_box_name > span,
-.review_board_page > .review_board_page_3 .review_board_text_box_name > span {
   margin-left: 10px;
+}
+.review_board_page > .review_board_page_1 .text_box_name > span,
+.review_board_page > .review_board_page_2 .text_box_name > span,
+.review_board_page > .review_board_page_3 .text_box_name > span {
   font-weight: bold;
   font-size: 16px;
   color: black;
@@ -347,7 +349,7 @@ input[type="checkbox"]:checked::before {
   margin-left: 10px;
   font-weight: bold;
   font-size: 16px;
-  color: black;
+  color: #ff6c00;
 }
 .review_board_page > .review_board_page_1 .review_board_text_box_2 > span,
 .review_board_page > .review_board_page_1 .review_board_text_box_name_2 > span,

@@ -17,7 +17,7 @@ nav {
 span,
 p {
   font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
+  color: #73703f;
 }
 button {
   border: 0;
@@ -58,7 +58,7 @@ a {
   display: flex;
 }
 .top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li:hover > a > span {
-  color: #a5a773;
+  color: #ff6c00;
 }
 .top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li > a > span {
   font-size: 30px;
@@ -79,17 +79,25 @@ a {
 .top__bar > .top__bar_menu > .signLine > div > a > button > img {
   width: 46px;
   height: 55px;
+  margin-bottom : 5px;
 }
 
+.top__bar > .top__bar_menu > .signLine > div > a > button > span {
+display : block;
+font-size : 20px;
+}
 /*banner라인*/
 .banner__bar {
   width: 1440px;
   height: 288px;
-  background-color: #a5a773;
   margin: 0 auto;
   margin-top: 20px;
 }
-
+.banner__bar > a > img {
+  height : 100%;
+  width : 100%;
+  object-fit:cover;
+}
 /*categori라인*/
 .main_categori {
   width: 1200px;
@@ -173,10 +181,10 @@ a {
   font-size: 20px;
   margin-left: 10px;
   margin-top: 10px;
-  color: #a5a773;
 }
 .text_box_name {
   margin-top: 10px;
+  margin-left: 10px;
 }
 .text_box_name > span {
   margin-left: 10px;
@@ -191,7 +199,7 @@ a {
   margin-left: 10px;
   font-weight: bold;
   font-size: 16px;
-  color: black;
+  color: #ff6c00;
 }
 .text_box_2 > span,
 .text_box_name_2 > span,
