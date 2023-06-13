@@ -4,22 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
+@Entity
 @Setter
-public class AdminCreateForm {
+@Getter
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String username;
 
-    private String password1;
+    private String password;
 
-    private String password2;
+    private String email;
 
+    private int admin = 1;
+// 1:일반관리자 2:슈퍼관리자
 }

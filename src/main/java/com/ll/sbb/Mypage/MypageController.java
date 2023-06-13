@@ -28,7 +28,11 @@ public class MypageController {
                           @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Article> paging = this.articleService.getList(page, kw);
         List<Article> articles = this.articleService.getAll();
+        List<Market> markets = this.marketService.getAll();
         int articleCount = articles.size();
+        int marketCount = markets.size();
+        model.addAttribute("markets", markets);
+        model.addAttribute("marketCount", marketCount);
         model.addAttribute("articles", articles);
         model.addAttribute("articleCount", articleCount);
         model.addAttribute("paging", paging);

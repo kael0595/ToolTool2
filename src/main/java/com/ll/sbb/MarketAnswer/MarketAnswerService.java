@@ -10,7 +10,6 @@ public class MarketAnswerService {
 
     private final MarketAnswerRepository marketAnswerRepository;
 
-
     public void create(Market market, String content) {
         MarketAnswer m = new MarketAnswer();
         m.setContent(content);

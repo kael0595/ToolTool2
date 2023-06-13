@@ -4,14 +4,130 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/article_list.css"/>
-    <title>ListlPage</title>
+    <link rel="stylesheet" href="MarketPage.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".heart").click(function () {
+          var currentSrc = $(this).attr("src");
+          var newSrc = "";
+
+          if (currentSrc === "https://i.postimg.cc/9FFnrSqh/image.png") {
+            newSrc = "https://i.postimg.cc/43GKgpk2/1.png";
+          } else {
+            newSrc = "https://i.postimg.cc/9FFnrSqh/image.png";
+          }
+          $(this).attr("src", newSrc);
+        });
+      });
+
+
+
+
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".accordion-header").click(function () {
+          $(this).toggleClass("active");
+          $(this).next(".accordion-content").slideToggle();
+        });
+        // 검색 버튼 클릭 이벤트 처리
+        $("#searchButton").click(function () {
+          var searchText = $("#searchBox").val().toLowerCase();
+          $(".accordion").hide();
+
+          $(".accordion").each(function () {
+            var headerText = $(this)
+              .find(".accordion-header")
+              .text()
+              .toLowerCase();
+            var nestedHeaderText = $(this)
+              .find(".nested-accordion .accordion-header")
+              .text()
+              .toLowerCase();
+
+            if (
+              headerText.includes(searchText) ||
+              nestedHeaderText.includes(searchText)
+            ) {
+              $(this).show();
+              $(this).find(".nested-accordion").show();
+            }
+          });
+        });
+      });
+
+
+
+
+    </script>
+    <script>
+      var itemsPerPage = 9;
+      var $items = $(".item");
+      var totalPages = Math.ceil($items.length / itemsPerPage);
+      var currentPage = 1;
+
+      function showPage(page) {
+        var startIndex = (page - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+
+        $items.hide();
+        $items.slice(startIndex, endIndex).show();
+
+        var pageNumbers = "";
+        for (var i = 1; i <= totalPages; i++) {
+          if (i === page) {
+            pageNumbers +=
+              '<a href="#" class="page-number active">' + i + "</a>";
+          } else {
+            pageNumbers += '<a href="#" class="page-number">' + i + "</a>";
+          }
+        }
+        $(".page-numbers").html(pageNumbers);
+      }
+
+      function navigateToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      }
+
+      function navigateToNextPage() {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      }
+
+      $(".previous").on("click", function (e) {
+        e.preventDefault();
+        navigateToPreviousPage();
+      });
+
+      $(".next").on("click", function (e) {
+        e.preventDefault();
+        navigateToNextPage();
+      });
+
+      $(document).on("click", ".page-number", function (e) {
+        e.preventDefault();
+        var page = parseInt($(this).text());
+        showPage(page);
+      });
+
+      showPage(currentPage);
+
+
+
+
+    </script>
+    <title>MarketPage</title>
 </head>
 <body>
 <!--detail-topbar-->
-<div class="detail_top__bar">
-    <nav class="detail_top__bar_menu">
+<div class="market_top__bar">
+    <nav class="market_top__bar_menu">
         <div class="logo_box">
             <ul>
                 <li>
@@ -82,7 +198,7 @@
 </div>
 <div class="sorting">
     <div class="total_count">
-        <p>총 <span th:text="${articleCount}"></span>건</p>
+        <span>총 <span>0</span></span>
     </div>
     <div class="sorting_menu">
         <ul>
@@ -114,13 +230,12 @@
         </ul>
     </div>
 </div>
-
 <div class="flex_box">
     <div class="categori_accordion">
         <!--write_box-->
         <div class="write_box">
             <button type="button">
-                <a href="http://localhost:8080/article/create">
+                <a href="#">
                     <img src="https://i.postimg.cc/13HmB7VP/Vector.png"/>
                     <span>글쓰기</span>
                 </a>
@@ -129,9 +244,9 @@
         <!--search_box-->
         <div class="search_box">
             <a href="#">
-                <input type="text" placeholder="검색" id="searchBox">
+                <input type="text" placeholder="검색" id="searchBox"/>
                 <button type="button" class="search_button">
-                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
+                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png"/>
                 </button>
             </a>
         </div>
@@ -147,19 +262,19 @@
                         <div class="accordion-content">
                             <ul class="accordion">
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-1">
+                                    <input type="checkbox" id="choice-1-1-1"/>
                                     <label for="choice-1-1-1">~15만원</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-2">
+                                    <input type="checkbox" id="choice-1-1-2"/>
                                     <label for="choice-1-1-2">15만원 ~ 30만원</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-3">
+                                    <input type="checkbox" id="choice-1-1-3"/>
                                     <label for="choice-1-1-3">30만원 ~ 50만원</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-4">
+                                    <input type="checkbox" id="choice-1-1-4"/>
                                     <label for="choice-1-1-4">그 외</label>
                                 </li>
                             </ul>
@@ -170,15 +285,15 @@
                         <div class="accordion-content">
                             <ul class="accordion">
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-1">
+                                    <input type="checkbox" id="choice-1-2-1"/>
                                     <label for="choice-1-2-1">사계</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-2">
+                                    <input type="checkbox" id="choice-1-2-2"/>
                                     <label for="choice-1-2-2">하계</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-3">
+                                    <input type="checkbox" id="choice-1-2-3"/>
                                     <label for="choice-1-2-3">동계</label>
                                 </li>
                             </ul>
@@ -189,27 +304,27 @@
                         <div class="accordion-content">
                             <ul class="accordion">
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-1">
+                                    <input type="checkbox" id="choice-1-3-1"/>
                                     <label for="choice-1-3-1">텐트/타프</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-2">
+                                    <input type="checkbox" id="choice-1-3-2"/>
                                     <label for="choice-1-3-2">테이블</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-3">
+                                    <input type="checkbox" id="choice-1-3-3"/>
                                     <label for="choice-1-3-3">의자</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-4">
+                                    <input type="checkbox" id="choice-1-3-4"/>
                                     <label for="choice-1-3-4">랜턴</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-5">
+                                    <input type="checkbox" id="choice-1-3-5"/>
                                     <label for="choice-1-3-5">조리도구</label>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-6">
+                                    <input type="checkbox" id="choice-1-3-6"/>
                                     <label for="choice-1-3-6">기타</label>
                                 </li>
                             </ul>
@@ -219,27 +334,27 @@
             </div>
         </div>
     </div>
-    <div class="content review_board_page">
+    <div class="content market_board_page">
         <!--1차이미지-->
-        <div class="review_board_page_1">
+        <div class="market_board_page_1">
             <ul>
-                <li th:each="article, stat : ${paging}" th:if="${stat.index < 9}">
-                    <nav class="item review_board_img">
-                        <a th:href="@{|/article/detail/${article.id}|}">
-                            <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="review_board_main_img"/>
+                <li th:each="market, stat : ${paging}" th:if="${stat.index < 9}">
+                    <nav class="item market_board_img">
+                        <a th:href="@{|/market/detail/${market.id}|}">
+                            <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="market_board_main_img"/>
                         </a>
                         <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
-                        <div class="review_board_text_box">
-                            <span>답글수 <span th:if="${#lists.size(article.answerList) > 0}"
-                                            th:text="${#lists.size(article.answerList)}">
-                                        </span></span>
-                            <span>추천수 <span th:if="${#lists.size(article.voter) > 0}"
-                                            th:text="${#lists.size(article.voter)}"></span></span>
+                        <div class="market_board_text_box">
+<!--                            <span>답글수 <span th:if="${#lists.size(market.marketanswerList) > 0}"-->
+<!--                                            th:text="${#lists.size(market.marketanswerList)}">-->
+<!--                                        </span></span>-->
+<!--                            <span>추천수 <span th:if="${#lists.size(market.voter) > 0}"-->
+<!--                                            th:text="${#lists.size(market.voter)}"></span></span>-->
                         </div>
                         <div class="text_box_name text_box_name_1">
-                            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+                            <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>
                         </div>
-                        <div class="review_board_text_box_tag">
+                        <div class="market_board_text_box_tag">
                             <span>#</span>
                         </div>
                     </nav>
@@ -275,7 +390,7 @@
 <!--footer-->
 <footer>
     <div class="footer-content">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
+        <p>&copy; 툴툴 Welcome</p>
         <nav>
             <a href="#">Home</a>
             <a href="#">About</a>
@@ -284,128 +399,4 @@
     </div>
 </footer>
 </body>
-<script>
-      $(document).ready(function () {
-        $(".heart").click(function () {
-          var currentSrc = $(this).attr("src");
-          var newSrc = "";
-
-          if (currentSrc === "https://i.postimg.cc/9FFnrSqh/image.png") {
-            newSrc = "https://i.postimg.cc/43GKgpk2/1.png";
-          } else {
-            newSrc = "https://i.postimg.cc/9FFnrSqh/image.png";
-          }
-          $(this).attr("src", newSrc);
-        });
-      });
-
-
-
-
-
-
-
-
-</script>
-<script>
-      $(document).ready(function () {
-  $(".accordion-header").click(function () {
-    $(this).toggleClass("active");
-    $(this).next(".accordion-content").slideToggle();
-  });
-  // 검색 버튼 클릭 이벤트 처리
-  $("#searchButton").click(function () {
-    var searchText = $("#searchBox").val().toLowerCase();
-    $(".accordion").hide();
-
-    $(".accordion").each(function () {
-      var headerText = $(this).find(".accordion-header").text().toLowerCase();
-      var nestedHeaderText = $(this)
-        .find(".nested-accordion .accordion-header")
-        .text()
-        .toLowerCase();
-
-      if (
-        headerText.includes(searchText) ||
-        nestedHeaderText.includes(searchText)
-      ) {
-        $(this).show();
-        $(this).find(".nested-accordion").show();
-      }
-    });
-  });
-});
-
-
-
-
-
-
-
-
-</script>
-<script>
-      var itemsPerPage = 9;
-    var $items = $('.item');
-    var totalPages = Math.ceil($items.length / itemsPerPage);
-    var currentPage = 1;
-
-    function showPage(page) {
-      var startIndex = (page - 1) * itemsPerPage;
-      var endIndex = startIndex + itemsPerPage;
-
-      $items.hide();
-      $items.slice(startIndex, endIndex).show();
-
-      var pageNumbers = '';
-      for (var i = 1; i <= totalPages; i++) {
-        if (i === page) {
-          pageNumbers += '<a href="#" class="page-number active">' + i + '</a>';
-        } else {
-          pageNumbers += '<a href="#" class="page-number">' + i + '</a>';
-        }
-      }
-      $('.page-numbers').html(pageNumbers);
-    }
-
-    function navigateToPreviousPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    }
-
-    function navigateToNextPage() {
-      if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    }
-
-    $('.previous').on('click', function(e) {
-      e.preventDefault();
-      navigateToPreviousPage();
-    });
-
-    $('.next').on('click', function(e) {
-      e.preventDefault();
-      navigateToNextPage();
-    });
-
-    $(document).on('click', '.page-number', function(e) {
-      e.preventDefault();
-      var page = parseInt($(this).text());
-      showPage(page);
-    });
-
-    showPage(currentPage);
-
-
-
-
-
-
-
-
-</script>
 </html>

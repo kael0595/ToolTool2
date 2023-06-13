@@ -6,11 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>툴툴</title>
     <link rel="stylesheet" href="/article_form.css"/>
-    <script src="/summernote/lang/summernote-lite.js"></script>
-    <script src="/summernote/lang/summernote-ko-KR.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+    $(document).ready(function () {
+    $('#summernote').summernote({
+    placeholder: '내용을 작성하세요',
+    height: 400,
+    maxHeight: 400
+    });
+    });
 
+
+
+
+    </script>
 </head>
-<html>
 <body>
 <!--top-bar라인-->
 <div class="top__bar">
@@ -98,19 +112,19 @@
             <label for="starScore" class="form-label">평점</label>
             <div class="form-control" id="rating">
 
-                <input type="radio" th:field="*{starScore}" id="star5" name="rating" value=5/>
+                <input type="radio" th:field="*{starScore}" id="star5" name="rating" value=5>
                 <label for="star5" title="5점">5점 </label>
 
-                <input type="radio" th:field="*{starScore}" id="star4" name="rating" value=4/>
+                <input type="radio" th:field="*{starScore}" id="star4" name="rating" value=4>
                 <label for="star4" title="4점">4점</label>
 
-                <input type="radio" th:field="*{starScore}" id="star3" name="rating" value=3/>
+                <input type="radio" th:field="*{starScore}" id="star3" name="rating" value=3>
                 <label for="star3" title="3점">3점</label>
 
-                <input type="radio" th:field="*{starScore}" id="star2" name="rating" value=2/>
+                <input type="radio" th:field="*{starScore}" id="star2" name="rating" value=2>
                 <label for="star2" title="2점">2점</label>
 
-                <input type="radio" th:field="*{starScore}" id="star1" name="rating" value=1/>
+                <input type="radio" th:field="*{starScore}" id="star1" name="rating" value=1>
                 <label for="star1" title="1점">1점</label>
 
             </div>
@@ -137,26 +151,15 @@
         <div class="photo"><p>사진등록버튼구현예정</p></div>
         <div class="mb-3">
             <label for="content" class="form-label"><p>내용</p></label>
-            <textarea th:field="*{content}" name="editordata" id="summernote" class="form-control" rows="10"></textarea>
+            <textarea sec:authorize="isAnonymous()" th:field="*{content}" id="summernote"
+                      class="form-control" rows="10" th:if="${#authorization.expression('isAnonymous()')}"></textarea>
+            <textarea sec:authorize="isAuthenticated()" th:field="*{content}" id="summernote"
+                      class="form-control" rows="10"
+                      th:if="${#authorization.expression('isAuthenticated()')}"></textarea>
         </div>
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
     </form>
 </div>
-<script>
-$(document).ready(function() {
-//여기 아래 부분
-$('#summernote').summernote({
-height: 300, // 에디터 높이
-minHeight: null, // 최소 높이
-maxHeight: null, // 최대 높이
-focus: true, // 에디터 로딩후 포커스를 맞출지 여부
-lang: "ko-KR", // 한글 설정
-placeholder: '최대 2048자까지 쓸 수 있습니다' //placeholder 설정
-
-});
-});
-
-</script>
 </body>
 <!--footer-->
 <footer>

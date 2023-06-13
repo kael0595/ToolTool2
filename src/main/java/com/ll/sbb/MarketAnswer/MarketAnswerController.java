@@ -32,6 +32,4 @@ public class MarketAnswerController {
         this.marketAnswerService.create(market, marketAnswerForm.getContent());
         return String.format("redirect:/market/detail/%s", id);
     }
-
-
 }

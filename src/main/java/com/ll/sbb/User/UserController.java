@@ -73,7 +73,6 @@ public class UserController {
 
     @GetMapping("/logout")
     public String processLogout(HttpSession session) {
-        // 로그아웃 로직 처리
         session.removeAttribute("loggedIn");
         return "redirect:/";
     }

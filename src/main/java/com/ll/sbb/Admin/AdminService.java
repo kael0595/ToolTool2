@@ -15,7 +15,6 @@ public class AdminService {
         SiteUser admin = new SiteUser();
         admin.setUsername(username);
         admin.setPassword(password);
-        admin.setAdmin(true);
         return userRepository.save(admin);
     }
 }

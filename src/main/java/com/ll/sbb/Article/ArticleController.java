@@ -34,7 +34,7 @@ public class ArticleController {
     private final UserService userService;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Article> paging = this.articleService.getList(page, kw);
         List<Article> articles = this.articleService.getAll();
@@ -141,7 +141,7 @@ public class ArticleController {
             return "article_form";
         }
         this.articleService.create(articleForm.getSubject(), articleForm.getContent(), articleForm.getPrice(), articleForm.getStarScore(), articleForm.getSeason(), articleForm.getType());
-        return "redirect:/article/list"; // 질문 저장후 질문목록으로 이동
+        return "redirect:/article/list";
     }
 
     @PreAuthorize("isAuthenticated()")

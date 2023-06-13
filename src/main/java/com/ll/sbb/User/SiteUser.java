@@ -25,6 +25,4 @@ public class SiteUser {
     @Column(unique = true)
     private String nickname;
 
-    private boolean isAdmin;
-
 }

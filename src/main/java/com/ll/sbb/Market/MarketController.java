@@ -28,10 +28,10 @@ public class MarketController {
         List<Market> markets = this.marketService.getAll();
         int marketCount = markets.size();
         model.addAttribute("markets", markets);
-        model.addAttribute("articleCount", marketCount);
+        model.addAttribute("marketCount", marketCount);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
-        return "market_list";
+        return "MarketPage";
     }
 
     @GetMapping("/category/{mainCategory}")
@@ -106,7 +106,7 @@ public class MarketController {
         model.addAttribute("mainCategory", mainCategory);
         model.addAttribute("subCategory", subCategory);
 
-        return "article_list";
+        return "MarketPage";
     }
 
 
