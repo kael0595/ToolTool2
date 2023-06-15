@@ -16,7 +16,13 @@ public class MarketForm {
     @NotEmpty(message = "내용 입력은 필수항목입니다.")
     private String content;
 
-    @NotEmpty(message = "구입 가격 입력은 필수항목입니다.(숫자만 입력 해주세요.)")
+
     private Integer price;
+
+    private String brand;
+
+    private String season;
+
+    private String type;
 
 }

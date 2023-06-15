@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
 
     Optional<SiteUser> findByusername(String username);
 
+//    SiteUser findUserByUserId(String userEmail);
 }

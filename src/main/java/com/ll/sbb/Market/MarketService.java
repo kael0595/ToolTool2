@@ -66,12 +66,15 @@ public class MarketService {
         }
     }
 
-    public void create(String subject, String content, Integer price) {
+    public void create(String subject, String content, Integer price, String brand, String type, String season) {
         Market q = new Market();
         q.setSubject(subject);
         q.setContent(content);
         q.setCreateDate(LocalDateTime.now());
         q.setPrice(price);
+        q.setBrand(brand);
+        q.setType(type);
+        q.setSeason(season);
         this.marketRepository.save(q);
     }
 

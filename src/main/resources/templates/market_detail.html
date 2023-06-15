@@ -4,11 +4,10 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/article_detail.css"/>
+    <link rel="stylesheet" href="/market_detail.css"/>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <title>툴툴</title>
 </head>
-
 <body>
 <!-- 네비바 시작 -->
 <div class="top__bar">
@@ -18,7 +17,7 @@
                 <li>
                     <a href="http://localhost:8080/">
                         <button type="button" class="logo_button">
-                            <img src="/img/230605_툴툴_로고 복사 1.png" />
+                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
                         </button>
                     </a>
                 </li>
@@ -55,7 +54,7 @@
             <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img" />
+                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
@@ -63,14 +62,14 @@
             <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
                 <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img" />
+                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img" />
+                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
@@ -79,10 +78,9 @@
 </div>
 <!-- 네비바 끝 -->
 
-<!-- 리뷰 박스 시작 -->
+<!-- 마켓 박스 시작 -->
 <div class="Review_form">
     <div class="Article_content_Box">
-
         <div class="article_header">
             <div class="modifyRemove">
                 <a href="#">
@@ -91,7 +89,7 @@
                 </a>
             </div>
             <div class="article_title">
-                <p th:text="${article.subject}" class="article_title"></p>
+                <p th:text="${market.subject}" class="article_title"></p>
             </div>
             <div class="userInfo">
                 <div class="userPhoto"></div>
@@ -103,9 +101,9 @@
                 </div>
                 <div class="article_info">
                     <span class="create">작성시간</span>
-                    <span th:text="${article.createDate}" class="create_time"></span>
+                    <span th:text="${market.createDate}" class="create_time"></span>
                     <span class="count">조회수 </span>
-                    <span th:text="${article.viewCount}" class="count"></span>
+                    <span th:text="${market.viewCount}" class="count"></span>
                 </div>
             </div>
         </div>
@@ -113,21 +111,21 @@
 
         <div class="gradeOrhashtag">
             <div class="grade">
-                <span class="user_grade">사용자 총 평점</span>
-                <strong th:text="${article.starScore}" class="user_grade_point"></strong>
+                <span class="user_grade">브랜드명:</span>
+                <strong th:text="${market.brand}" class="user_grade_point"></strong>
             </div>
             <br>
             <div class="grade">
-                <span class="user_grade">구입가격</span>
-                <strong th:text="${article.Price}" class="user_grade_point"></strong>
+                <span class="user_grade">판매가격</span>
+                <strong th:text="${market.price}" class="user_grade_point"></strong>
             </div>
 
             <div class="hashtag">
                 <a class="hashtaglink" href="#">
-                    <button th:text="${article.type}" type="button" class="category1"></button>
+                    <button th:text="${market.type}" type="button" class="category1"></button>
                 </a>
                 <a class="hashtaglink" href="#">
-                    <button th:text="${article.season}" type="button" class="category1"></button>
+                    <button th:text="${market.season}" type="button" class="category1"></button>
                 </a>
             </div>
 
@@ -136,15 +134,17 @@
             <div class="SaleInfo">
                 <div class="product_section">
                     <div class="product_img">
-                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjlfMTk1%2FMDAxNjY0Mzk2OTMyNjQ3.0KKPl1Wr1CMWG82iQihP3LvTBx1bW-FHtLU0MMbzHZIg.5y7qYhyWhitl6AUofXUUC-9pc0ihxJCMstNZYxIVHOYg.JPEG.leeny8907%2FIMG_3492.jpg&type=a340" width="500" height="500" alt="상품이미지" class="image">
-                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEyMTFfMTQz%2FMDAxNjM5MTk4NDc0OTM5.DNGpaDvvpWkazFv7yzQsW_scJWKqFTRL223iFvjQ2dEg.YvWsVttuOkm7c3cbxNTYUkMrd3xP7FU4UHzJJNhXubsg.JPEG.originality9%2FIMG_8284.jpg&type=a340" width="500" height="500" alt="상품이미지" class="image">
+                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjlfMTk1%2FMDAxNjY0Mzk2OTMyNjQ3.0KKPl1Wr1CMWG82iQihP3LvTBx1bW-FHtLU0MMbzHZIg.5y7qYhyWhitl6AUofXUUC-9pc0ihxJCMstNZYxIVHOYg.JPEG.leeny8907%2FIMG_3492.jpg&type=a340"
+                             width="500" height="500" alt="상품이미지" class="image">
+                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEyMTFfMTQz%2FMDAxNjM5MTk4NDc0OTM5.DNGpaDvvpWkazFv7yzQsW_scJWKqFTRL223iFvjQ2dEg.YvWsVttuOkm7c3cbxNTYUkMrd3xP7FU4UHzJJNhXubsg.JPEG.originality9%2FIMG_8284.jpg&type=a340"
+                             width="500" height="500" alt="상품이미지" class="image">
                     </div>
                     <div class=""></div>
                 </div>
             </div>
             <div class="content_form">
                 <div class="content_view">
-                    <p th:text="${article.content}" class="content_write"></p>
+                    <p th:text="${market.content}" class="content_write"></p>
                     <div class="icon_box">
                         <div class="iconLine">
                             <div class="like">
@@ -157,10 +157,11 @@
                                 <strong class="u_cnt _count">0</strong>
                             </div>
                             <i class="fa-regular fa-message" style="color: #73703f;"></i>
-                            <a href="#" role="button" aria-pressed="true" class="button_comment"><span class="icon_area"></span>
+                            <a href="#" role="button" aria-pressed="true" class="button_comment"><span
+                                    class="icon_area"></span>
                                 댓글<strong class="num">0</strong>
                             </a>
-
+                            <!--여기에 댓글 폼 작성 해야함-->
                             <div class="replyBox">
                                 <!--                                <h1 th:text="${article.subject}"></h1>-->
                                 <!--                                <div th:text="${question.content}"></div>-->
@@ -207,5 +208,6 @@
     </div>
 </footer>
 </div>
+
 </body>
 </html>

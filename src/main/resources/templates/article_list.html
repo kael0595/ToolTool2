@@ -31,12 +31,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Market/list">
+                    <a href="http://localhost:8080/market/list">
                         <span>Market</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Notice/list">
+                    <a href="http://localhost:8080/notice/list">
                         <span>Notice</span>
                     </a>
                 </li>
@@ -230,10 +230,11 @@
                         </a>
                         <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                         <div class="review_board_text_box">
-                            <span>답글수 <span th:if="${#lists.size(article.answerList) > 0}"
+                            <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
                                             th:text="${#lists.size(article.answerList)}">
                                         </span></span>
-                            <span>추천수 <span th:if="${#lists.size(article.voter) > 0}"
+                            <span>&nbsp;&nbsp;</span>
+                            <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
                                             th:text="${#lists.size(article.voter)}"></span></span>
                         </div>
                         <div class="text_box_name text_box_name_1">
@@ -303,9 +304,6 @@
 
 
 
-
-
-
 </script>
 <script>
       $(document).ready(function () {
@@ -335,9 +333,6 @@
     });
   });
 });
-
-
-
 
 
 
@@ -399,9 +394,6 @@
     });
 
     showPage(currentPage);
-
-
-
 
 
 

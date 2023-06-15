@@ -6,6 +6,7 @@ import com.ll.sbb.Category.subCategory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -118,16 +119,18 @@ public class MarketController {
     }
 
     @GetMapping("/create")
+    @PreAuthorize("isAuthenticated()")
     public String marketCreate(MarketForm marketForm) {
         return "market_form";
     }
 
     @PostMapping("/create")
+    @PreAuthorize("isAuthenticated()")
     public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "market_form";
         }
-        this.marketService.create(marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice());
+        this.marketService.create(marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice(), marketForm.getBrand(), marketForm.getType(), marketForm.getSeason());
         return "redirect:/market/list"; // 질문 저장후 질문목록으로 이동
     }
 

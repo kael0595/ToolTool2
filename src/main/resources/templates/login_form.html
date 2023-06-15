@@ -30,12 +30,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Market/list">
+                    <a href="http://localhost:8080/market/list">
                         <span>Market</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Notice/list">
+                    <a href="http://localhost:8080/notice/list">
                         <span>Notice</span>
                     </a>
                 </li>
@@ -97,6 +97,9 @@
             <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호">
         </div>
         <button type="submit" class="btn btn-primary">SIGN -IN</button>
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=52a81a61b5875bfb11fea3e2e2aa2450&redirect_uri=http://localhost:8080/login/oauth2/code/kakao&response_type=code">
+            <img src="/img/kakao_login_large_wide.png" alt=""/>
+        </a>
     </form>
     <form th:action="@{/user/login}" class="signupform">
         <div><h1 class="signin">Sign Up</h1>

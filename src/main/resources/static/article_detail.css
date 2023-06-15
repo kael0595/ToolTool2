@@ -1,0 +1,374 @@
+body {
+  font-family: "NanumBarunGothic", sans-serif;
+  color: #73703f;
+}
+
+/* 네비바 시작 */
+
+div,
+nav {
+  box-sizing: border-box;
+}
+span,
+p {
+  font-family: "NanumBarunGothic", sans-serif;
+  color: #6d6c6c;
+}
+button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.top__bar > .top__bar_menu {
+  width: 1320px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+.top__bar > .top__bar_menu > .logo_box {
+  flex-grow: 1;
+}
+.top__bar > .top__bar_menu > div > ul > li > a > button > img {
+  width: 300px;
+  height: 74px;
+}
+.top__bar > .top__bar_menu > .main_menu {
+  display: flex;
+  flex-grow: 4;
+}
+.top__bar > .top__bar_menu > .main_menu > .main_menu_ul {
+  display: flex;
+}
+.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li:hover > a > span {
+  color: #a5a773;
+}
+.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li > a > span {
+  font-size: 30px;
+  line-height: 32px;
+  margin: 20px;
+}
+.top__bar > .top__bar_menu > .signLine {
+  flex-grow: 2;
+  height: 74px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.top__bar > .top__bar_menu > .signLine > div {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.top__bar > .top__bar_menu > .signLine > div > a > button > img {
+  width: 46px;
+  height: 55px;
+}
+/* 네비바 끝 */
+
+/* 리뷰 박스 시작 */
+div{
+  display:block;
+}
+
+.Review_form{
+  display:block;
+  margin-top:80px;
+
+}
+.grade{
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: top;
+    margin-top: 20px;
+}
+.grade .user_grade{
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 18px;
+    color: #555;
+    vertical-align: top;
+}
+
+.grade .user_grade_point{
+    display: inline-block;
+    font-size: 22px;
+    color: #ff6c00;
+    vertical-align: top;
+}
+
+
+.Article_content_Box{
+    padding: 40px 40px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display:block;
+    width:68%;
+    margin:0 auto;
+    position:relative;
+}
+
+.ArticleContentBox .article_header {
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #565656;
+}
+
+.article_title {
+  margin-bottom:15px;
+  font-size:2rem;
+  display:block;
+  color:#000;
+  font-weight:bold;
+}
+
+
+.userInfo{
+  display:flex;
+}
+
+.article_info{
+  position:absolute;
+  margin-left:61px;
+  margin-top:25px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.userInfo .userPhoto{
+  float:left;
+  margin-right:10px;
+  background: #ff6c00;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+}
+.profile_area{
+  float:left;
+}
+.userInfo .profile_info .nick{
+  display:inline-block;
+  position:relative;
+  vertical-align:top;
+}
+
+.gradeOrhashtag{
+  margin:5px;
+}
+
+
+.userInfo .profile_info .user_level{
+  display:inline-block;
+  margin-right:6px;
+  font-size:13px;
+  vertical-align:top;
+  color:var(--skinText676767);
+}
+
+.article_info{
+  font-size:12px;
+  line-height:13px;
+  color:var(--skinText979797);
+}
+.userInfo .article_info .create{
+  margin-right:8px;
+}
+.userInfo .article_info {
+  font-size:12px;
+  line-height: 13px;
+  color:var(--skinText979797);
+}
+.Articletool{
+  position:absolute;
+  right:0;
+  bottom:28px;
+  font-size:13px;
+  line-height:18px;
+}
+
+.Articletool .button_comment{
+  display:inline-block;
+  margin-right:16px;
+  vertical-align:top;
+}
+
+.Articletool > a{
+  color:inherit;
+}
+.SaleInfo{
+  margin: 20px auto 30px;
+}
+.SaleInfo .product_img{
+  float:center;
+  position:relative;
+  margin: 0 auto;
+  margin-top:50px;
+}
+.content_form .content_write{
+  line-height:40px;
+}
+
+.ArticleContentBox .article_writer {
+    position: relative;
+    min-height: 36px;
+    margin: 40px 0 26px;
+}
+.icon_box .like{
+  display:inline-block;
+  position:relative;
+  vertical-align:top;
+  font-size:17px;
+}
+.reply_box .button_comment{
+  display:inline-block;
+  vertical-align:top;
+  font-size:17px;
+}
+.Comment_Box{
+  margin-top:-17px;
+  border-top: 1px solid #ccc);
+  background: #000;
+ }
+.Comment .comment_option{
+  position:relative;
+  padding-top:16px;
+  margin-bottom:11px;
+}
+.Comment_Writer{
+  margin:12px 0 29px;
+  padding:16px 10px 10px 18px;
+  border:2px solid var(--skinCommentWriterBorder);
+  border-radius:6px;
+  box-sizing:border-box;
+  background: var(--skinCommentWriterBg);
+}
+.Comment_Writer .comment_inbox{
+  position: relative;
+  margin-bottom:10px;
+}
+.blind{
+  position:absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+.Commen_Writer .comment_inbox_name{
+  display:block;
+  margin-bottom:10px;
+  font-weight:700;
+  font-size:13px;
+}
+
+.textarea.comment_inbox_text[data-v-afadf0bc] {
+    max-height: 500px;
+}
+.bottom_write_button{
+  position:absolute;
+}
+.articlebottonbtn{
+  padding-top:14px;
+  top:50%;
+  left:-50%;
+}
+
+.articlebottonbtn .left_area .write_button{
+  color:#fff;
+}
+.articlebottonbtn .left_area{
+  float: left;
+  padding: 15px 16px;
+  background: #ff6c00;
+  border-radius:8px;
+  margin-top:50px;
+}
+.hashtaglink .category1{
+  text-decoration:none;
+  border: 1px solid #ccc;
+  padding:10px 10px;
+  border-radius:7px;
+  margin-top:10px;
+}
+.modifyRemove{
+  text-align:right;
+}
+.modifyRemove .modify{
+  text-decoration:none;
+  border: 1px solid #ccc;
+  padding:10px 10px;
+  border-radius:7px;
+  margin-top:10px;
+
+}
+.modifyRemove .remove{
+  text-decoration:none;
+  border: 1px solid #ccc;
+  padding:10px 10px;
+  border-radius:7px;
+  margin-top:10px;
+}
+.replyBox .reply_summit{
+  text-decoration:none;
+  border: 1px solid #ccc;
+  padding:10px 10px;
+  border-radius:7px;
+  margin-top:10px;
+}
+/* 푸터시작 */
+footer {
+  background-color: #555;
+  padding: 20px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.footer-content nav a {
+  margin-right: 10px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-content nav a:hover {
+  text-decoration: underline;
+}
+
+/*
+0613/해야될일
+1. 사용자 평점 다듬기
+2. 댓글창 다듬기
+3. 조회수 아래에 카테고리에 해당하는 내용 해시태그로 만들기(a태그)
+
+*/
+/* 수정사항
+1. 아이콘 간격 라인 맞추기
+2. 평점, 댓글 수정해야함 모양잡는거
+3. 푸터 넣기 (완)
+4. 파랑색 밑에 두개가 해시태그(카테고리ex.사계절,의자) 버튼형태로
+5. 사용자 총 평점 글자랑 평점 숫자(컬러 오렌지) (완))
+
+6시 반까지하고 같이 수정사항 확인하고 인텔리제이
+*/

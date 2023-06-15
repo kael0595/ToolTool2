@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="AdminPage.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".menu-link").click(function (e) {
+          e.preventDefault();
+
+          var sectionId = $(this).data("section");
+          $(".content-section").hide(); // 모든 섹션을 숨김
+          $("#" + sectionId).show(); // 해당 섹션만 보이도록 함
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        // 삭제 버튼 클릭 시
+        $("button:contains('삭제')").click(function () {
+          // 선택된 모든 체크박스 가져오기
+          var checkboxes = $("input[name='delete-checkbox']:checked");
+
+          // 각 선택된 체크박스에 대해 반복
+          checkboxes.each(function () {
+            // 체크박스를 포함하는 테이블 행(tr) 가져오기
+            var row = $(this).closest("tr");
+
+            // 글번호, 제목, 글쓴이, 날짜, 조회수 내용을 모두 지우기
+            row.find(".number").empty();
+            row.find(".title").empty();
+            row.find(".date").empty();
+            row.find(".inquiry").empty();
+            row.find(".nickname").empty();
+
+            // 수정 버튼 숨기기
+            row.find(".modify button").hide();
+          });
+        });
+      });
+    </script>
+    <title>AdminPage</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>관리자 페이지</h1>
+      </div>
+      <div class="button">
+        <button type="button">로그아웃</button>
+      </div>
+    </header>
+    <div class="content">
+      <nav class="admin_menu">
+        <ul>
+          <li>
+            <a href="#" class="menu-link" data-section="notice-section"
+              >공시사항 관리</a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link" data-section="review-section"
+              >리뷰 글 관리</a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link" data-section="market-section"
+              >마켓 글 관리</a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link" data-section="member-section"
+              >회원 관리</a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link" data-section="admin-section"
+              >관리자 관리</a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link" data-section="admin-signup-section"
+              >관리자 회원가입</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <section id="notice-section" class="content-section">
+        <div class="top-bar">
+          <h2>공지사항 관리</h2>
+          <div class="button">
+            <button type="button"><a href="#">글쓰기</a></button>
+            <button type="button">삭제</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="check_box"></th>
+              <th class="number">글번호</th>
+              <th class="title">제목</th>
+              <th class="date">날짜</th>
+              <th class="inquiry">조회</th>
+              <th class="modify">수정</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="1" />
+              </td>
+              <td class="number">1</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="2" />
+              </td>
+              <td class="number">2</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="3" />
+              </td>
+              <td class="number">3</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="4" />
+              </td>
+              <td class="number">4</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="5" />
+              </td>
+              <td class="number">5</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="6" />
+              </td>
+              <td class="number">6</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="7" />
+              </td>
+              <td class="number">7</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="8" />
+              </td>
+              <td class="number">8</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="9" />
+              </td>
+              <td class="number">9</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="10" />
+              </td>
+              <td class="number">10</td>
+              <td class="title">제목</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+              <td class="modify">
+                <button type="button">수정</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="review-section" class="content-section">
+        <div class="top-bar">
+          <h2>리뷰 글 관리</h2>
+          <button type="button">삭제</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="check_box"></th>
+              <th class="number">글번호</th>
+              <th class="title">제목</th>
+              <th class="nickname">닉네임</th>
+              <th class="date">날짜</th>
+              <th class="inquiry">조회</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="1" />
+              </td>
+              <td class="number">1</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="2" />
+              </td>
+              <td class="number">2</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="3" />
+              </td>
+              <td class="number">3</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="4" />
+              </td>
+              <td class="number">4</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="5" />
+              </td>
+              <td class="number">5</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="6" />
+              </td>
+              <td class="number">6</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="7" />
+              </td>
+              <td class="number">7</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="8" />
+              </td>
+              <td class="number">8</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="9" />
+              </td>
+              <td class="number">9</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="10" />
+              </td>
+              <td class="number">10</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="market-section" class="content-section">
+        <div class="top-bar">
+          <h2>마켓 글 관리</h2>
+          <div class="button">
+            <button type="button">삭제</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="check_box"></th>
+              <th class="number">글번호</th>
+              <th class="title">제목</th>
+              <th class="nickname">닉네임</th>
+              <th class="date">날짜</th>
+              <th class="inquiry">조회</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="1" />
+              </td>
+              <td class="number">1</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="2" />
+              </td>
+              <td class="number">2</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="3" />
+              </td>
+              <td class="number">3</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="4" />
+              </td>
+              <td class="number">4</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="5" />
+              </td>
+              <td class="number">5</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="6" />
+              </td>
+              <td class="number">6</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="7" />
+              </td>
+              <td class="number">7</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="8" />
+              </td>
+              <td class="number">8</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="9" />
+              </td>
+              <td class="number">9</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="10" />
+              </td>
+              <td class="number">10</td>
+              <td class="title"><a href="#">제목</a></td>
+              <td class="nickname">닉네임</td>
+              <td class="date">작성날짜</td>
+              <td class="inquiry">조회수</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="member-section" class="content-section">
+        <div class="top-bar">
+          <h2>회원 관리</h2>
+          <button type="button">삭제</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="check_box"></th>
+              <th class="number">번호</th>
+              <th class="id">아이디</th>
+              <th class="nickname">닉네임</th>
+              <th class="email">이메일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="1" />
+              </td>
+              <td class="number">1</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="2" />
+              </td>
+              <td class="number">2</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="3" />
+              </td>
+              <td class="number">3</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="4" />
+              </td>
+              <td class="number">4</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="5" />
+              </td>
+              <td class="number">5</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="6" />
+              </td>
+              <td class="number">6</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="7" />
+              </td>
+              <td class="number">7</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="8" />
+              </td>
+              <td class="number">8</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="9" />
+              </td>
+              <td class="number">9</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="10" />
+              </td>
+              <td class="number">10</td>
+              <td class="id">아이디</td>
+              <td class="nickname">닉네임</td>
+              <td class="email">이메일</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="admin-section" class="content-section">
+        <div class="top-bar">
+          <h2>관리자 관리</h2>
+          <div class="button">
+            <button type="button">추방</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th class="check_box"></th>
+              <th class="number">번호</th>
+              <th class="name">관리자 성명</th>
+              <th class="admin-id">관리자아이디</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="1" />
+              </td>
+              <td class="number">1</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="2" />
+              </td>
+              <td class="number">2</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="3" />
+              </td>
+              <td class="number">3</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="4" />
+              </td>
+              <td class="number">4</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="5" />
+              </td>
+              <td class="number">5</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="6" />
+              </td>
+              <td class="number">6</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="7" />
+              </td>
+              <td class="number">7</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="8" />
+              </td>
+              <td class="number">8</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="9" />
+              </td>
+              <td class="number">9</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+            <tr>
+              <td class="checkbox">
+                <input type="checkbox" name="delete-checkbox" value="10" />
+              </td>
+              <td class="number">10</td>
+              <td class="name">관리자이름</td>
+              <td class="admin-id">관리자아이디</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="admin-signup-section" class="content-section">
+        <div class="top-bar">
+          <h2>관리자 회원가입</h2>
+        </div>
+        <form>
+          <label for="username">아이디</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="write"
+            placeholder="아이디을 입력하세요"
+          />
+
+          <label for="adminname">관리자성명</label>
+          <input
+            type="text"
+            id="adminname"
+            name="adminname"
+            class="write"
+            placeholder="관리자 이름을 입력하세요"
+          />
+
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="write"
+            placeholder="비밀번호을 입력하세요"
+          />
+
+          <input type="submit" value="신청" class="button-1" />
+        </form>
+      </section>
+    </div>
+    <footer>
+      <div class="footer-content">
+        <p>© 2023 관리자 페이지. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

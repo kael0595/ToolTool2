@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="MarketPage.css"/>
+    <link rel="stylesheet" href="/MarketPage.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -147,12 +147,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Market/list">
+                    <a href="http://localhost:8080/market/list">
                         <span>Market</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Notice/list">
+                    <a href="http://localhost:8080/notice/list">
                         <span>Notice</span>
                     </a>
                 </li>
@@ -345,11 +345,11 @@
                         </a>
                         <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                         <div class="market_board_text_box">
-<!--                            <span>답글수 <span th:if="${#lists.size(market.marketanswerList) > 0}"-->
+<!--                            <span>답글수 <span th:if="${#lists.size(market.marketanswerList) >= 0}"-->
 <!--                                            th:text="${#lists.size(market.marketanswerList)}">-->
 <!--                                        </span></span>-->
-<!--                            <span>추천수 <span th:if="${#lists.size(market.voter) > 0}"-->
-<!--                                            th:text="${#lists.size(market.voter)}"></span></span>-->
+<!--                            <span>추천수 <span th:if="${#lists.size(market.wishList) >= 0}"-->
+<!--                                            th:text="${#lists.size(market.wishList)}"></span></span>-->
                         </div>
                         <div class="text_box_name text_box_name_1">
                             <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>

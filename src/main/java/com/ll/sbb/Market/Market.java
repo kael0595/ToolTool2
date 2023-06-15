@@ -54,4 +54,6 @@ public class Market {
     @ManyToOne
     private SiteUser author;
 
+    private String brand;
+
 }

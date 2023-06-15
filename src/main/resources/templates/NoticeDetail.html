@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="NoticeDetail.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var title = "새로운 제목"; // 여기에 실제 제목 값을 할당하거나 서버에서 받아온 값을 사용합니다.
+        var content = "새로운 내용"; // 여기에 실제 내용 값을 할당하거나 서버에서 받아온 값을 사용합니다.
+
+        $("#notice-title").text(title);
+        $("#notice-content").text(content);
+      });
+    </script>
+    <title>공지사항</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>공지사항</h1>
+      <div class="notice">
+        <h2 id="notice-title">임시 제목</h2>
+        <div id="notice-content" class="content-box">
+          <p>임시 내용</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

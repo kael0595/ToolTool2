@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "NanumBarunGothic";
+  font-style: normal;
+  font-weight: 700;
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
+      format("woff"),
+    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
+      format("truetype");
+}
+div,
+nav {
+  box-sizing: border-box;
+}
+span,
+p {
+  font-family: "NanumBarunGothic", sans-serif;
+  color: #73703f;
+}
+button {
+  cursor: pointer;
+}
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  background-color: #73703f;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+}
+header > .button {
+  text-align: right;
+}
+header > .button > button {
+  padding: 10px;
+  background-color: #ff6c00;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+header > div > button:hover {
+  background-color: #4caf50;
+}
+
+.admin_menu {
+  background-color: #73703f;
+  padding: 10px;
+  width: 200px;
+  border-right: 1px solid #ddd;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+.admin_menu li {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.admin_menu li:hover > a {
+  color: #ff6c00;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.content-section {
+  display: none;
+  flex: 1;
+  padding: 20px;
+}
+.content-section > .top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.content-section .checkbox {
+  width: 3%;
+}
+.content-section .number {
+  width: 10%;
+}
+.content-section .title {
+  width: 60%;
+}
+.content-section .nickname {
+  width: 10%;
+}
+.content-section .date {
+  width: 10%;
+}
+.content-section .modify {
+  width: 7%;
+}
+.content-section .email {
+  width: 30%;
+}
+.content-section .name {
+  width: 30%;
+}
+.content-section .admin-id {
+  width: 30%;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border-bottom: 1px solid;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #73703f;
+  color: #fff;
+}
+
+#admin-signup-section > form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+#admin-signup-section label,
+#admin-signup-section input {
+  display: block;
+  margin-bottom: 10px;
+}
+#admin-signup-section .write {
+  width: 300px;
+  height: 20px;
+}
+#admin-signup-section input[type="submit"] {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 260px;
+  background-color: #ff6c00;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#admin-signup-section input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+footer {
+  background-color: #555;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  border-top: 1px solid #fff;
+}
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+  color: #ffffff;
+}
