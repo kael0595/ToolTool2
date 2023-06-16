@@ -4,10 +4,11 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/market_detail.css"/>
+    <link rel="stylesheet" href="/article_detail.css"/>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <title>툴툴</title>
 </head>
+
 <body>
 <!-- 네비바 시작 -->
 <div class="top__bar">
@@ -81,51 +82,65 @@
 <!-- 마켓 박스 시작 -->
 <div class="Review_form">
     <div class="Article_content_Box">
+
         <div class="article_header">
+            <div class="articlenum">
+                <span>no.</span>
+                <span th:text="${market.id}" class="articleNum">123</span>
+            </div>
             <div class="modifyRemove">
                 <a href="#">
                     <button class="modify">수정</button>
                     <button class="remove">삭제</button>
                 </a>
-            </div>
-            <div class="article_title">
-                <p th:text="${market.subject}" class="article_title"></p>
-            </div>
-            <div class="userInfo">
-                <div class="userPhoto"></div>
-                <div class="profile_area">
-                    <div class="profile_info">
-                        <span class="nick">닉네임</span>
 
+            </div>
+
+            <div class="article_title">
+                <p th:text="${market.subject}" class="article_title">헬리녹스 의자리뷰</p>
+            </div>
+            <div class="userInfoform">
+                <div class="userInfo">
+                    <div class="userPhoto"></div>
+                    <div class="profile_area">
+                        <div class="profile_info">
+                            <span th:if="${market.author != null}" th:text="${market.author.nickname}"
+                                  class="nick">닉네임</span>
+
+                        </div>
                     </div>
-                </div>
-                <div class="article_info">
-                    <span class="create">작성시간</span>
-                    <span th:text="${market.createDate}" class="create_time"></span>
-                    <span class="count">조회수 </span>
-                    <span th:text="${market.viewCount}" class="count"></span>
+                    <div class="article_info">
+                        <div class="createtime">
+                            <span class="create">작성시간</span>
+                            <span th:text="${market.createDate}" class="create_time"></span>
+                        </div>
+                        <div class="viewcount">
+                            <span class="count">조회수 </span>
+                            <span th:text="${market.viewCount}" class="count"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-
         <div class="gradeOrhashtag">
             <div class="grade">
-                <span class="user_grade">브랜드명:</span>
-                <strong th:text="${market.brand}" class="user_grade_point"></strong>
+                <span class="user_grade">브랜드</span>
+                <strong th:text="${market.brand}" class="user_grade_point">헬리녹스</strong>
             </div>
             <br>
             <div class="grade">
                 <span class="user_grade">판매가격</span>
-                <strong th:text="${market.price}" class="user_grade_point"></strong>
+                <strong th:text="${market.Price}" class="user_grade_point">000,000</strong>
+                <span>원</span>
             </div>
 
             <div class="hashtag">
                 <a class="hashtaglink" href="#">
-                    <button th:text="${market.type}" type="button" class="category1"></button>
+                    <button th:text="${market.type}" type="button" class="category1">의자</button>
                 </a>
                 <a class="hashtaglink" href="#">
-                    <button th:text="${market.season}" type="button" class="category1"></button>
+                    <button th:text="${market.season}" type="button" class="category1">사계절</button>
                 </a>
             </div>
 
@@ -149,65 +164,90 @@
                         <div class="iconLine">
                             <div class="like">
                                 <i class="fa-regular fa-heart" style="color: ##ff6c00 ;"></i>
-                                <a href="#" role="button"><span class="blind">
-                  </span>
-                                </a>
+                                <a href="#" role="button"></a>
                                 <em class="u_ico _icon"></em>
                                 <span class="u_txt _label">좋아요</span>
-                                <strong class="u_cnt _count">0</strong>
-                            </div>
-                            <i class="fa-regular fa-message" style="color: #73703f;"></i>
-                            <a href="#" role="button" aria-pressed="true" class="button_comment"><span
-                                    class="icon_area"></span>
-                                댓글<strong class="num">0</strong>
-                            </a>
-                            <!--여기에 댓글 폼 작성 해야함-->
-                            <div class="replyBox">
-                                <!--                                <h1 th:text="${article.subject}"></h1>-->
-                                <!--                                <div th:text="${question.content}"></div>-->
+                                <strong th:text="${#lists.size(market.wishList)}" class="u_cnt _count"></strong>
 
-                                <!--                                <form th:action="@{|/answer/create/${question.id}|}" method="post">-->
-                                <!--                                    <textarea name="content" id="content" rows="15">        </textarea>-->
-                                <!--                                    <input class="reply_summit" type="submit" value="답변등록">-->
-                                <!--                                </form>-->
+                                <i class="fa-regular fa-message" style="color: #73703f;"></i>
+                                <a href="#" role="button" aria-pressed="true" class="button_comment"><span
+                                        class="icon_area"></span>
+                                    댓글<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
+                                </a>
+                            </div>
+
+                            <div class="replyBox">
+                                <div th:each="MarketAnswer : ${market.marketAnswerList}" class="answerbox">
+                                    <!-- 댓글 닉네임   -->
+                                    <div class="answerNick">
+                                        <span th:if="${MarketAnswer.author != null}"
+                                              th:text="${MarketAnswer.author.nickname}" class="nick"></span>
+                                    </div>
+                                    <!-- 댓글 닉네임 끝 -->
+                                    <!-- 댓글내용 -->
+                                    <div class="answer">
+                                        <ul>
+                                            <li th:text="${MarketAnswer.content}"></li>
+                                        </ul>
+                                    </div>
+                                    <!--  댓글내용 끝  -->
+                                    <!-- 댓글 하단바   -->
+                                    <div class="answerCreateBox">
+                                        <div class="answerCreateDate">
+                                            <span>작성일:</span>
+                                            <span th:text="${MarketAnswer.createDate}"></span>
+                                            <!--  수정/삭제버튼 -->
+                                        </div>
+                                        <div class="answerModifyRemove">
+                                            <a href="#" class="answermodify_btn">
+                                                <button type="button" class="answermodify_btn">수정</button>
+                                            </a>
+                                            <a href="#" class="answerremove_btn">
+                                                <button type="button" class="answerremove_btn">삭제</button>
+                                            </a>
+                                            <!--  수정/삭제버튼 끝 -->
+                                        </div>
+                                    </div>
+                                    <!-- 댓글 하단바 끝   -->
+                                </div>
+                                <!--                                <div>-->
+                                <!--                                    <ul>-->
+                                <!--                                        <li th:each="answer : ${article.answerList}" th:text="${answer.content}"></li>-->
+                                <!--                                    </ul>-->
+                                <!--                                </div>-->
+                                <div class="formbox">
+                                    <form th:action="@{|/marketAnswer/create/${market.id}|}"
+                                          th:object="${marketAnswerForm}" method="post" class="formboxform">
+                                        <textarea name="content" id="content" rows="10"
+                                                  placeholder="내용을 입력해 주세요"></textarea>
+                                        <input class="reply_summit" type="submit" value="답변등록">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- 원래글쓰기버튼자리 -->
+
+
+        <!-- 리뷰 박스 끝 -->
+
+        <!--footer-->
+
     </div>
-</div>
-<!-- 원래글쓰기버튼자리 -->
-
-
-<!--  글쓰기 버튼 시작    -->
-<div class="bottom_write_button">
-    <div class="articlebottonbtn">
-        <div class="left_area">
-            <a href="#">
-                <i class="fa-solid fa-pen-to-square" style="color: #fff;"></i>
-                <span class="write_button">리뷰 작성</span>
-            </a>
-
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Your Website. All rights reserved.</p>
+            <nav>
+                <a href="http://localhost:8080/mypage">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
         </div>
-    </div>
+    </footer>
 </div>
-<!--  글쓰기 버튼 끝  =-->
-<!-- 리뷰 박스 끝 -->
-
-<!--footer-->
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
-        <nav>
-            <a href="http://localhost:8080/mypage">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </nav>
-    </div>
-</footer>
-</div>
-
 </body>
 </html>

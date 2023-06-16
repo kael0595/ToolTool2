@@ -1,7 +1,5 @@
 package com.ll.sbb.Market;
 
-import com.ll.sbb.Answer.Answer;
-import com.ll.sbb.Article.Article;
 import com.ll.sbb.DataNotFoundException;
 import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
@@ -38,7 +36,7 @@ public class MarketService {
             public Predicate toPredicate(Root<Market> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 query.distinct(true);  // 중복을 제거
                 Join<Market, SiteUser> u1 = q.join("author", JoinType.LEFT);
-                Join<Market, MarketAnswer> a = q.join("answerList", JoinType.LEFT);
+                Join<Market, MarketAnswer> a = q.join("marketAnswerList", JoinType.LEFT);
                 Join<MarketAnswer, SiteUser> u2 = a.join("author", JoinType.LEFT);
                 return cb.or(cb.like(q.get("subject"), "%" + kw + "%"), // 제목
                         cb.like(q.get("content"), "%" + kw + "%"),      // 내용
@@ -66,7 +64,7 @@ public class MarketService {
         }
     }
 
-    public void create(String subject, String content, Integer price, String brand, String type, String season) {
+    public void create(String subject, String content, Integer price, String brand, String type, String season, SiteUser user) {
         Market q = new Market();
         q.setSubject(subject);
         q.setContent(content);
@@ -75,6 +73,7 @@ public class MarketService {
         q.setBrand(brand);
         q.setType(type);
         q.setSeason(season);
+        q.setAuthor(user);
         this.marketRepository.save(q);
     }
 

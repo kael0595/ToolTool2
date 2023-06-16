@@ -11,19 +11,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script>
-    $(document).ready(function () {
-    $('#summernote').summernote({
-    placeholder: '내용을 작성하세요',
-    height: 400,
-    maxHeight: 400
-    });
-    });
 
 
-
-
-    </script>
 </head>
 <body>
 <!--top-bar라인-->
@@ -172,4 +161,26 @@
         </nav>
     </div>
 </footer>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            disableEnter: false,
+            placeholder: '내용을 작성하세요',
+            height: 400,
+            maxHeight: 400,
+            callbacks: {
+                onInit: function() {
+                    setTextareaReplace();
+                }
+            }
+        });
+
+        function setTextareaReplace() {
+            var str = document.getElementById("summernote").value;
+            str = "<p>" + str.replace(/(?:\r\n|\r|\n)/g, "</p>\r\n<p>") + "</p>";
+            document.getElementById("summernote").value = str;
+        }
+    });
+
+</script>
 </html>

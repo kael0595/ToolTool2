@@ -96,16 +96,17 @@ div{
 .grade .user_grade{
     display: inline-block;
     margin-right: 4px;
-    font-size: 18px;
+    font-size: 15px;
     color: #555;
     vertical-align: top;
 }
 
-.grade .user_grade_point{
+.grade > .user_grade_point{
     display: inline-block;
     font-size: 22px;
     color: #ff6c00;
     vertical-align: top;
+
 }
 
 
@@ -191,13 +192,7 @@ div{
   line-height: 13px;
   color:var(--skinText979797);
 }
-.Articletool{
-  position:absolute;
-  right:0;
-  bottom:28px;
-  font-size:13px;
-  line-height:18px;
-}
+
 
 .Articletool .button_comment{
   display:inline-block;
@@ -259,14 +254,7 @@ div{
   position: relative;
   margin-bottom:10px;
 }
-.blind{
-  position:absolute;
-  clip: rect(0 0 0 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-}
+
 .Commen_Writer .comment_inbox_name{
   display:block;
   margin-bottom:10px;
@@ -281,16 +269,18 @@ div{
   position:absolute;
 }
 .articlebottonbtn{
-  padding-top:14px;
-  top:50%;
-  left:-50%;
+  padding-top:10px;
+  top:500%;
+  left:-20%;
 }
-
+.bottom_write_area{
+  background: #000;
+}
 .articlebottonbtn .left_area .write_button{
   color:#fff;
 }
 .articlebottonbtn .left_area{
-  float: left;
+  margin-left:-40px;
   padding: 15px 16px;
   background: #ff6c00;
   border-radius:8px;
@@ -328,6 +318,15 @@ div{
   border-radius:7px;
   margin-top:10px;
 }
+
+
+.like{
+  padding-bottom:20px;
+}
+.reply_summit{
+  cursor:pointer;
+}
+
 /* 푸터시작 */
 footer {
   background-color: #555;
@@ -354,4 +353,80 @@ footer {
 
 .footer-content nav a:hover {
   text-decoration: underline;
+}
+
+.answer > ul > li{
+  list-style:none;
+}
+
+.answerbox{
+   border-bottom: 1px solid #ccc;
+   margin-bottom:20px;
+
+}
+
+.answerNick {
+    margin:20px;
+    font-size:20px;
+}
+
+.answerCreateBox{
+  margin:20px;
+}
+.answerCreateBox > div{
+  display:inline-block;
+
+}
+.answerCreateBox{
+  position:relative;
+}
+.answerModifyRemove{
+  position:absolute;
+  right:0.1%;
+}
+
+.answermodify_btn{
+ cursor:pointer;
+}
+.answerremove_btn{
+ cursor:pointer;
+}
+
+.answer{
+    margin:20px;
+}
+
+.formbox{
+  border:2px solid #ccc;
+  margin-top:30px;
+  border-radius:6px;
+  text-align:right;
+  width:100%;
+}
+
+
+textarea{
+  display:inline-block;
+  width:100%;
+    border-radius:6px;
+    resize:none;
+    border-style:none;
+    margin:0;
+    padding:0;
+  }
+
+.formbox .reply_summit{
+    display:inline-block;
+  margin:20px;
+
+}
+
+input{
+  background: #ff6c00;
+  color:#fff;
+
+}
+.articleNum{
+  font-weight:bold;
+  font-size:20px;
 }

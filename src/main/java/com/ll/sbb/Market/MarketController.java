@@ -1,8 +1,9 @@
 package com.ll.sbb.Market;
 
 
-import com.ll.sbb.Article.Article;
 import com.ll.sbb.Category.subCategory;
+import com.ll.sbb.User.SiteUser;
+import com.ll.sbb.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,8 @@ import java.util.List;
 public class MarketController {
 
     private final MarketService marketService;
+
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
@@ -126,11 +131,12 @@ public class MarketController {
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
-    public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult) {
+    public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "market_form";
         }
-        this.marketService.create(marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice(), marketForm.getBrand(), marketForm.getType(), marketForm.getSeason());
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.marketService.create(marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice(), marketForm.getBrand(), marketForm.getType(), marketForm.getSeason(), siteUser);
         return "redirect:/market/list"; // 질문 저장후 질문목록으로 이동
     }
 

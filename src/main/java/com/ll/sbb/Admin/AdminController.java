@@ -64,7 +64,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public String adminroot() {
         return "redirect:/admin/login";
     }

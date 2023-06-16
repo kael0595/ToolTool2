@@ -70,6 +70,14 @@
                     </button>
                 </a>
             </div>
+            <div class="signUp" sec:authorize="isAuthenticated()" th:if="${user != null and user.admin != null and user.admin >= 1}">
+                <a href="http://localhost:8080/admin">
+                    <button type="button" class="signUp_button">
+                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
+                        <span>관리자 페이지</span>
+                    </button>
+                </a>
+            </div>
             <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
@@ -174,8 +182,8 @@
                 </a>
                 <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                 <div class="text_box .text_box_1">
-<!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
-<!--                                              th:text="${#lists.size(market.answerList)}"></span>-->
+                    <!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
+                    <!--                                              th:text="${#lists.size(market.answerList)}"></span>-->
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">
@@ -217,6 +225,13 @@
           $(this).attr("src", newSrc);
         });
       });
+
+
+
+
+
+
+
 
 
 

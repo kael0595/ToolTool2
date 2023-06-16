@@ -67,7 +67,7 @@ public class ArticleService {
         }
     }
 
-    public void create(String subject, String content, Integer price, SiteUser user, Integer starScore, String season, String type) {
+    public void create(String subject, String content, Integer price, Integer starScore, String season, String type, SiteUser user) {
         Article q = new Article();
         q.setSubject(subject);
         q.setContent(content);
@@ -80,26 +80,26 @@ public class ArticleService {
         this.articleRepository.save(q);
     }
 
-    public void create(String subject, String content, Integer price, int starScore, String season, String type) {
-        Article q = new Article();
-        q.setSubject(subject);
-        q.setContent(content);
-        q.setCreateDate(LocalDateTime.now());
-        q.setPrice(price);
-        q.setStarScore(starScore);
-        q.setSeason(season);
-        q.setType(type);
-        this.articleRepository.save(q);
-    }
+//    public void create(String subject, String content, Integer price, int starScore, String season, String type) {
+//        Article q = new Article();
+//        q.setSubject(subject);
+//        q.setContent(content);
+//        q.setCreateDate(LocalDateTime.now());
+//        q.setPrice(price);
+//        q.setStarScore(starScore);
+//        q.setSeason(season);
+//        q.setType(type);
+//        this.articleRepository.save(q);
+//    }
 
-    public void create(String subject, String content, Integer price, int starScore) {
-        Article q = new Article();
-        q.setSubject(subject);
-        q.setContent(content);
-        q.setCreateDate(LocalDateTime.now());
-        q.setPrice(price);
-        this.articleRepository.save(q);
-    }
+//    public void create(String subject, String content, Integer price, int starScore) {
+//        Article q = new Article();
+//        q.setSubject(subject);
+//        q.setContent(content);
+//        q.setCreateDate(LocalDateTime.now());
+//        q.setPrice(price);
+//        this.articleRepository.save(q);
+//    }
 
 
     public List<Article> getMainCategory(String mainCategory) {

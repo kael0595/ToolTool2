@@ -28,6 +28,7 @@ public class UserController {
 
     private final UserService userService;
 
+
     @GetMapping("/user/signup_menual")
     private String signup_manual() {
         return "signup_menual";
@@ -71,6 +72,11 @@ public class UserController {
     public String login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
         if (userService.authenticateUser(username, password)) {
             session.setAttribute("loggedIn", true);
+
+            SiteUser user = userService.getUser(username);
+//            user.setAdmin(2);
+            session.setAttribute("user", user);
+
             return "redirect:/";
         } else {
             return "login_form";

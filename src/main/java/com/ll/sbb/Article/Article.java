@@ -17,6 +17,7 @@ import java.util.Set;
 @Setter
 public class Article {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
