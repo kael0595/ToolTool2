@@ -1,5 +1,6 @@
 package com.ll.sbb.Market;
 
+import com.ll.sbb.Article.Article;
 import com.ll.sbb.Market.Market;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,4 +17,6 @@ public interface MarketRepository extends JpaRepository<Market, Integer> {
     List<Market> findBySeason(String season);
 
     Page<Market> findAll(Specification<Market> spec, Pageable pageable);
+
+    List<Market> findByPriceBetween(int min, int max);
 }

@@ -24,6 +24,9 @@
 
 
 
+
+
+
     </script>
     <script>
       $(document).ready(function () {
@@ -56,6 +59,9 @@
           });
         });
       });
+
+
+
 
 
 
@@ -117,6 +123,9 @@
       });
 
       showPage(currentPage);
+
+
+
 
 
 
@@ -198,7 +207,7 @@
 </div>
 <div class="sorting">
     <div class="total_count">
-        <span>총 <span>0</span></span>
+        <span>총 <span th:text="${marketCount}"></span>건</span>
     </div>
     <div class="sorting_menu">
         <ul>
@@ -235,7 +244,7 @@
         <!--write_box-->
         <div class="write_box">
             <button type="button">
-                <a href="#">
+                <a href="http://localhost:8080/market/create">
                     <img src="https://i.postimg.cc/13HmB7VP/Vector.png"/>
                     <span>글쓰기</span>
                 </a>
@@ -345,11 +354,11 @@
                         </a>
                         <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
                         <div class="market_board_text_box">
-<!--                            <span>답글수 <span th:if="${#lists.size(market.marketanswerList) >= 0}"-->
-<!--                                            th:text="${#lists.size(market.marketanswerList)}">-->
-<!--                                        </span></span>-->
-<!--                            <span>추천수 <span th:if="${#lists.size(market.wishList) >= 0}"-->
-<!--                                            th:text="${#lists.size(market.wishList)}"></span></span>-->
+                            <!--                            <span>답글수 <span th:if="${#lists.size(market.marketanswerList) >= 0}"-->
+                            <!--                                            th:text="${#lists.size(market.marketanswerList)}">-->
+                            <!--                                        </span></span>-->
+                            <!--                            <span>추천수 <span th:if="${#lists.size(market.wishList) >= 0}"-->
+                            <!--                                            th:text="${#lists.size(market.wishList)}"></span></span>-->
                         </div>
                         <div class="text_box_name text_box_name_1">
                             <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>

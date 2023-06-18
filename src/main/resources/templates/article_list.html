@@ -97,8 +97,8 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <span>별점순</span>
+                <a href="#" class="classclass">
+                    <span>평점순</span>
                 </a>
             </li>
             <li>
@@ -120,7 +120,7 @@
         <!--write_box-->
         <div class="write_box">
             <button type="button">
-                <a href="http://localhost:8080/article/create">
+                <a th:href="@{/article/create}">
                     <img src="https://i.postimg.cc/13HmB7VP/Vector.png"/>
                     <span>글쓰기</span>
                 </a>
@@ -142,75 +142,64 @@
             <div class="accordion-header">카테고리</div>
             <div class="accordion-content">
                 <ul>
-                    <li class="accordion">
+                    <li class="accordion_list">
                         <div class="accordion-header">금액범위</div>
                         <div class="accordion-content">
-                            <ul class="accordion">
+                            <ul class="accordion_ul">
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-1">
-                                    <label for="choice-1-1-1">~15만원</label>
+                                    <button type="button"><a th:href="@{/article/list/under/15}">0 ~ 15만원</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-2">
-                                    <label for="choice-1-1-2">15만원 ~ 30만원</label>
+                                    <button type="button"><a th:href="@{/article/list/under/30}">15만원 ~ 30만원</a>
+                                    </button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-3">
-                                    <label for="choice-1-1-3">30만원 ~ 50만원</label>
+                                    <button type="button"><a th:href="@{/article/list/under/50}">30만원 ~ 50만원</a>
+                                    </button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-1-4">
-                                    <label for="choice-1-1-4">그 외</label>
+                                    <button type="button"><a th:href="@{/article/list/under/100}">그 외</a></button>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="accordion">
+                    <li class="accordion_list">
                         <div class="accordion-header">계절별</div>
                         <div class="accordion-content">
-                            <ul class="accordion">
+                            <ul class="accordion_ul">
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-1">
-                                    <label for="choice-1-2-1">사계</label>
+                                    <button type="button"><a th:href="@{/article/list/season_all}">사계</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-2">
-                                    <label for="choice-1-2-2">하계</label>
+                                    <button type="button"><a th:href="@{/article/list/season_summer}">하계</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-2-3">
-                                    <label for="choice-1-2-3">동계</label>
+                                    <button type="button"><a th:href="@{/article/list/season_winter}">동계</a></button>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="accordion">
+                    <li class="accordion_list">
                         <div class="accordion-header">종류별</div>
                         <div class="accordion-content">
-                            <ul class="accordion">
+                            <ul class="accordion_ul">
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-1">
-                                    <label for="choice-1-3-1">텐트/타프</label>
+                                    <button type="button"><a th:href="@{/article/list/type_tent}">텐트/타프</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-2">
-                                    <label for="choice-1-3-2">테이블</label>
+                                    <button class="button"><a th:href="@{/article/list/type_table}">테이블</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-3">
-                                    <label for="choice-1-3-3">의자</label>
+                                    <button><a th:href="@{/article/list/type_chair}">의자</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-4">
-                                    <label for="choice-1-3-4">랜턴</label>
+                                    <button type="button"><a th:href="@{/article/list/type_lanturn}">랜턴</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-5">
-                                    <label for="choice-1-3-5">조리도구</label>
+                                    <button type="button"><a th:href="@{/article/list/type_cook}">조리도구</a></button>
                                 </li>
                                 <li>
-                                    <input type="checkbox" id="choice-1-3-6">
-                                    <label for="choice-1-3-6">기타</label>
+                                    <button type="button"><a th:href="@{/article/list/type_etc}">기타</a></button>
                                 </li>
                             </ul>
                         </div>
@@ -228,7 +217,9 @@
                         <a th:href="@{|/article/detail/${article.id}|}">
                             <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="review_board_main_img"/>
                         </a>
-                        <img src="https://i.postimg.cc/9FFnrSqh/image.png" class="heart"/>
+                        <div class="text_box_name text_box_name_1">
+                            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+                        </div>
                         <div class="review_board_text_box">
                             <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
                                             th:text="${#lists.size(article.answerList)}">
@@ -237,11 +228,13 @@
                             <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
                                             th:text="${#lists.size(article.voter)}"></span></span>
                         </div>
-                        <div class="text_box_name text_box_name_1">
-                            <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
-                        </div>
+
                         <div class="review_board_text_box_tag">
                             <span>#</span>
+                            <span th:text="${article.type}"></span>
+                            <span>,</span>
+                            <span>#</span>
+                            <span th:text="${article.season}"></span>
                         </div>
                     </nav>
                 </li>
@@ -252,13 +245,13 @@
                 <ul class="page-list">
                     <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
                         <a class="page-link"
-                           th:href="${paging.hasPrevious} ? @{|?page=${paging.number-1}|} : @{|?page=1|}">
+                           th:href="${paging.hasPrevious} ? @{|?page=${paging.number+1}|} : @{|?page=0|}">
                             <span>이전</span>
                         </a>
                     </li>
-                    <li th:each="page: ${#numbers.sequence(1, paging.totalPages)}"
+                    <li th:each="page: ${#numbers.sequence(0, paging.totalPages)}"
                         th:if="${page >= paging.number-3 and page <= paging.number+3}"
-                        th:classappend="${page == paging.number+1} ? 'active'"
+                        th:classappend="${page == paging.number} ? 'active'"
                         class="page-item">
                         <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
                     </li>
@@ -304,6 +297,7 @@
 
 
 
+
 </script>
 <script>
       $(document).ready(function () {
@@ -333,6 +327,7 @@
     });
   });
 });
+
 
 
 
@@ -394,6 +389,7 @@
     });
 
     showPage(currentPage);
+
 
 
 

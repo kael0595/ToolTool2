@@ -16,6 +16,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 
     List<Article> findByType(String type);
 
+
     List<Article> findByPriceBetween(int min, int max);
 
     List<Article> findBySeason(String season);
@@ -29,6 +30,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     Page<Article> findAll(Pageable pageable);
 
     Page<Article> findAll(Specification<Article> spec, Pageable pageable);
+
 
     @Query("SELECT DISTINCT q " +
             "FROM Article q " +

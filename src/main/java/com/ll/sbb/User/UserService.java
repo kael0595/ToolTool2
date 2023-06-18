@@ -21,9 +21,25 @@ public class UserService {
         user.setEmail(email);
         user.setNickname(nickname);
         user.setPassword(passwordEncoder.encode(password));
-//        user.setAdmin(false);
         this.userRepository.save(user);
         return user;
+    }
+
+    public void updateMailKey(String mailKey, String email, Long id) {
+        userRepository.updateMailKey(mailKey, email, id);
+    }
+
+    public void updateMailAuth(String email, String mailKey) {
+        int updatedRows = userRepository.updateMailAuth(email, mailKey);
+        if (updatedRows > 0) {
+            System.out.println("Mail auth updated successfully.");
+        } else {
+            System.out.println("Failed to update mail auth.");
+        }
+    }
+
+    public long countByEmailAndMailAuth(String email) {
+        return userRepository.countByEmailAndMailAuth(email, true);
     }
 
     public SiteUser getUser(String username) {
@@ -45,4 +61,25 @@ public class UserService {
         }
         return false;
     }
+
+    public SiteUser getUserByEmail(String email) {
+        Optional<SiteUser> siteUserOptional = this.userRepository.findByEmail(email);
+        if (siteUserOptional.isPresent()) {
+            return siteUserOptional.get();
+        } else {
+            throw new DataNotFoundException("siteuser not found");
+        }
+
+    }
+
+    public void emailConfirm(String email, String mailKey) throws Exception {
+        SiteUser user = getUserByEmail(email);
+
+        if (user != null && user.getMailKey().equals(mailKey)) {
+            updateMailAuth(email, mailKey);
+        } else {
+            throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");
+        }
+    }
+
 }

@@ -202,6 +202,8 @@ font-size : 20px;
   margin-top: 20px;
 }
 /*categori_accordion*/
+
+/*categori_accordion*/
 .flex_box > .categori_accordion > .accordion {
   margin-bottom: 10px;
   width: 200px;
@@ -211,59 +213,24 @@ font-size : 20px;
 .flex_box > .categori_accordion > .accordion .accordion-header {
   background-color: #73703f;
   padding: 10px;
-  color:#fff;
+  color: #fff;
   font-weight: bold;
   margin-bottom: 10px;
   margin-top: 10px;
-  cursor: pointer;
+  text-align: center;
 }
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #73703f;
-  outline: none;
-  border-radius: 50%;
-  vertical-align: middle;
-  transition: border-color 0.3s;
-  position: relative;
-  color: #ff6c00;
+.flex_box > .categori_accordion > .accordion .accordion_ul li {
+  list-style-type: square;
+  list-style-position: inside;
+  color: #73703f;
+  padding: 5px;
+}
+.flex_box > .categori_accordion > .accordion .accordion_ul a {
+  font-weight: bold;
+  font-size: 16px;
 }
 
-input[type="checkbox"]:checked {
-  background-color: #73703f;
-}
 
-input[type="checkbox"]::before {
-  content: "\2713";
-  font-size: 14px;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-}
-
-input[type="checkbox"]:checked::before {
-  display: block;
-}
-.flex_box > .categori_accordion > .accordion .accordion-header::after {
-  content: "\25B8"; /* 오른쪽 화살표 아이콘 */
-  float: right;
-  transition: transform 0.3s ease;
-}
-
-.flex_box > .categori_accordion > .accordion .accordion-header.active::after {
-  transform: rotate(90deg);
-}
-
-.flex_box > .categori_accordion > .accordion .accordion-content {
-  display: none;
-  padding-top: 10px;
-}
 .review_board_page {
   width: 950px;
   margin: 0 auto;

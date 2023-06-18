@@ -1,8 +1,5 @@
-//package com.ll.sbb;
+//package com.ll.sbb.kakao_login;
 //
-//import com.ll.exam.app10.app.member.entity.Member;
-//import com.ll.exam.app10.app.member.repository.MemberRepository;
-//import com.ll.exam.app10.app.security.dto.MemberContext;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;

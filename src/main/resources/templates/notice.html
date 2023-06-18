@@ -4,285 +4,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="notice.css" />
-    <title>NoticeList</title>
+    <link rel="stylesheet" href="/notice.css"/>
+    <title>NoticList</title>
 </head>
 
 <body>
-    <div id="wrapper">
-        <!-- 네비바 -->
-        <div class="top__bar">
-            <nav class="top__bar_menu">
-                <div class="logo_box">
-                    <ul>
-                        <li>
-                            <a href="http://localhost:8080/">
-                                <button type="button" class="logo_button">
-                                    <img src="/img/230605_툴툴_로고 복사 1.png" />
-                                </button>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="main_menu">
-                    <ul class="main_menu_ul">
-                        <li>
-                            <a href="http://localhost:8080/article/list">
-                                <span>Review</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://localhost:8080/Market/list">
-                                <span>Market</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://localhost:8080/Notice/list">
-                                <span>Notice</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="signLine">
-                    <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                        <a href="http://localhost:8080/user/logout">
-                            <button type="button" class="signIn_button">
-                                <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
+<div id="wrapper">
+    <!-- 네비바 -->
+    <div class="top__bar">
+        <nav class="top__bar_menu">
+            <div class="logo_box">
+                <ul>
+                    <li>
+                        <a href="http://localhost:8080/">
+                            <button type="button" class="logo_button">
+                                <img src="/img/230605_툴툴_로고 복사 1.png"/>
                             </button>
                         </a>
-                    </div>
-
-                    <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                        <a href="http://localhost:8080/user/login">
-                            <button type="button" class="signIn_button">
-                                <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img" />
-                            </button>
-                        </a>
-                    </div>
-
-                    <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                        <a href="http://localhost:8080/mypage">
-                            <button type="button" class="signUp_button">
-                                <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img" />
-                            </button>
-                        </a>
-                    </div>
-                    <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                        <a href="user/signup_menual">
-                            <button type="button" class="signUp_button">
-                                <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img" />
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- 중앙 -->
-        <div id="container">
-            <div class="containerbody">
-                <h1 class="subtitle">공지사항</h1>
-                <div id="boardlist">
-
-                    <table class="board_col">
-                        <caption class="hidden">글목록</caption>
-                        <colgroup>
-                            <col style="width:8%">
-                            <col>
-                            <col style="width:10%">
-                            <col style="width:12%">
-                            <col style="width:8%">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th scope="col">번호</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">작성자</th>
-                                <th scope="col">작성일</th>
-                                <th scope="col">조회수</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>[공지]</strong></td>
-                                <td class="tal">
-                                    <a href="http://localhost:8080/">개인정보처리방침 개정 안내</a>
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-12-12</td>
-                                <td>21</td>
-                            </tr>
-                            <tr>
-                                <td><strong>[공지]</strong></td>
-                                <td class="tal">
-                                    <a href="#">대표 관리자 리뉴얼에 따른 비밀번호 재설정 안내</a>
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-06-23</td>
-                                <td>3474</td>
-                            </tr>
-                            <tr>
-                                <td><strong>[공지]</strong></td>
-                                <td class="tal">
-                                    <a href="#">2022년 1월 멤버십 등급 및 혜택 변경 안내</a>
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2021-12-20</td>
-                                <td>126</td>
-                            </tr>
-                            <tr>
-                                <td><strong>[공지]</strong></td>
-                                <td class="tal">
-                                    <a href="#">유의사항</a>
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2012-05-29</td>
-                                <td>1362</td>
-                            </tr>
-                            <tr>
-                                <td>39</td>
-                                <td class="subject tal">
-                                    <a href="#">이전 개인정보 처리방침 </a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-12-12</td>
-                                <td>92</td>
-                            </tr>
-                            <tr>
-                                <td>38</td>
-                                <td class="subject tal">
-                                    <a href="#">대표 관리자</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-03-28</td>
-                                <td>129</td>
-                            </tr>
-                            <tr>
-                                <td>37</td>
-                                <td class="subject tal">
-                                    <a href="#">대표 관리자 안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-03-16</td>
-                                <td>76</td>
-                            </tr>
-                            <tr>
-                                <td>36</td>
-                                <td class="subject tal"> 
-                                    <a href="#">CJ대한통운 파업에 따른 배송불가 지역 안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-01-21</td>
-                                <td>57</td>
-                            </tr>
-                            <tr>
-                                <td>35</td>
-                                <td class="subject tal">
-                                    <a href="#">2022 1월 설날 연휴 배송안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자</td>
-                                <td>2022-01-18</td>
-                                <td>224</td>
-                            </tr>
-                            <tr>
-                                <td>34</td>
-                                <td class="subject tal">
-                                    <a href="#">2020 1월 설날 연휴 배송안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2020-01-13</td>
-                                <td>94</td>
-                            </tr>
-                            <tr>
-                                <td>33</td>
-                                <td class="subject tal">
-                                    <a href="">2019 12월 연말 이벤트</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2019-12-12</td>
-                                <td>91</td>
-                            </tr>
-                            <tr>
-                                <td>32</td>
-                                <td class="subject tal">
-                                    <a href="#">2019 9월 추석 연휴배송안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2019-09-02</td>
-                                <td>77</td>
-                            </tr>
-                            <tr>
-                                <td>31</td>
-                                <td class="subject tal">
-                                    <a href="">2019 5월 연휴 배송안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2019-04-29</td>
-                                <td>102</td>
-                            </tr>
-                            <tr>
-                                <td>30</td>
-                                <td class="subject tal">
-                                    <a href="#">2019 설날 연휴 배송안내</a>
-                                    <img src="" align="absmiddle">
-                                </td>
-                                <td>대표 관리자몰</td>
-                                <td>2019-01-21</td>
-                                <td>93</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="page_write">
-                        <ul class="paging">
-                            <li></li>
-                            <li><strong>1</strong></li>
-                            <li><a href="#">2</a></li>
-                            <li></li>
-                        </ul>
-                        <div class="box_btn w100 write">
-                            <a style="display:none;">글쓰기</a>
-                        </div>
-                    </div>
-                    <!-- 검색창 -->
-                    <div class="board_search">
-                        <form method="get">
-                            <input type="hidden" name="cate" value="">
-                            <input type="hidden" name="db" value="basic_1">
-
-                            <select name="search">
-                                <option value="title">제목</option>
-                                <option value="content">내용</option>
-                                <option value="name" checked="">작성자</option>
-                            </select>
-                            <input type="text" name="search_str" value="" class="form_input search"
-                                isplaceholderinited="true">
-                            <input type="submit" value="검색" class="btn_search">
-                        </form>
-                    </div>
-                </div>
-
+                    </li>
+                </ul>
             </div>
-        </div>
-        <!-- 하단 -->
-        <div id="footer">
-            <div class="footer-content">
-                <p>&copy; 2023 Your Website. All rights reserved.</p>
-                <nav>
-                    <a href="http://localhost:8080/mypage">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                </nav>
+            <div class="main_menu">
+                <ul class="main_menu_ul">
+                    <li>
+                        <a href="http://localhost:8080/article/list">
+                            <span>Review</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8080/Market/list">
+                            <span>Market</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://localhost:8080/Notice/list">
+                            <span>Notice</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="signLine">
+                <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+                    <a href="http://localhost:8080/user/logout">
+                        <button type="button" class="signIn_button">
+                            <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+                    <a href="http://localhost:8080/user/login">
+                        <button type="button" class="signIn_button">
+                            <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+                    <a href="http://localhost:8080/mypage">
+                        <button type="button" class="signUp_button">
+                            <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
+                        </button>
+                    </a>
+                </div>
+                <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+                    <a href="user/signup_menual">
+                        <button type="button" class="signUp_button">
+                            <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- 중앙 -->
+    <div id="container">
+        <div class="containerbody">
+            <h1 class="subtitle">공지사항</h1>
+            <div id="boardlist">
+
+                <table class="board_col">
+                    <caption class="hidden">글목록</caption>
+                    <colgroup>
+                        <col style="width:8%">
+                        <col>
+                        <col style="width:10%">
+                        <col style="width:12%">
+                        <col style="width:8%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일</th>
+                        <th scope="col">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><strong>[공지]</strong></td>
+                        <td class="tal">
+                            <a href="http://localhost:8080/">개인정보처리방침 개정 안내</a>
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-12-12</td>
+                        <td>21</td>
+                    </tr>
+                    <tr>
+                        <td><strong>[공지]</strong></td>
+                        <td class="tal">
+                            <a href="#">대표 관리자 리뉴얼에 따른 비밀번호 재설정 안내</a>
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-06-23</td>
+                        <td>3474</td>
+                    </tr>
+                    <tr>
+                        <td><strong>[공지]</strong></td>
+                        <td class="tal">
+                            <a href="#">2022년 1월 멤버십 등급 및 혜택 변경 안내</a>
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2021-12-20</td>
+                        <td>126</td>
+                    </tr>
+                    <tr>
+                        <td><strong>[공지]</strong></td>
+                        <td class="tal">
+                            <a href="#">유의사항</a>
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2012-05-29</td>
+                        <td>1362</td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td class="subject tal">
+                            <a href="#">이전 개인정보 처리방침 </a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-12-12</td>
+                        <td>92</td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td class="subject tal">
+                            <a href="#">대표 관리자</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-03-28</td>
+                        <td>129</td>
+                    </tr>
+                    <tr>
+                        <td>37</td>
+                        <td class="subject tal">
+                            <a href="#">대표 관리자 안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-03-16</td>
+                        <td>76</td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td class="subject tal">
+                            <a href="#">CJ대한통운 파업에 따른 배송불가 지역 안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-01-21</td>
+                        <td>57</td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td class="subject tal">
+                            <a href="#">2022 1월 설날 연휴 배송안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자</td>
+                        <td>2022-01-18</td>
+                        <td>224</td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td class="subject tal">
+                            <a href="#">2020 1월 설날 연휴 배송안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2020-01-13</td>
+                        <td>94</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td class="subject tal">
+                            <a href="">2019 12월 연말 이벤트</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2019-12-12</td>
+                        <td>91</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td class="subject tal">
+                            <a href="#">2019 9월 추석 연휴배송안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2019-09-02</td>
+                        <td>77</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td class="subject tal">
+                            <a href="">2019 5월 연휴 배송안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2019-04-29</td>
+                        <td>102</td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td class="subject tal">
+                            <a href="#">2019 설날 연휴 배송안내</a>
+                            <img src="" align="absmiddle">
+                        </td>
+                        <td>대표 관리자몰</td>
+                        <td>2019-01-21</td>
+                        <td>93</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <!-- 하단 -->
+    <div id="footer">
+        <div class="footer-content">
+            <p>&copy; 2023 Your Website. All rights reserved.</p>
+            <nav>
+                <a href="http://localhost:8080/">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>

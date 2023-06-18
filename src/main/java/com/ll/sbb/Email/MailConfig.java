@@ -1,37 +1,35 @@
 package com.ll.sbb.Email;
 
+import java.util.Properties;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-import java.util.Properties;
-
 @Configuration
+@RequiredArgsConstructor
 public class MailConfig {
+
     @Bean
-    public JavaMailSender javaMailService() {
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+    public JavaMailSender javaMailSender() {
 
-        javaMailSender.setHost("smtp.naver.com");
-        javaMailSender.setUsername("네이버 SMTP 설정 이메일");
-        javaMailSender.setPassword("네이버 계정 비밀번호");
+        Properties mailProperties = new Properties();
+        mailProperties.put("mail.transport.protocol", "smtp");
+        mailProperties.put("mail.smtp.auth", "true");
+        mailProperties.put("mail.smtp.starttls.enable", "true");
+        mailProperties.put("mail.smtp.debug", "true");
+        mailProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mailProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        javaMailSender.setPort(465);
-
-        javaMailSender.setJavaMailProperties(getMailProperties());
-
-        return javaMailSender;
-    }
-
-    private Properties getMailProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.smtp.auth", "true");
-        properties.setProperty("mail.smtp.starttls.enable", "true");
-        properties.setProperty("mail.debug", "true");
-        properties.setProperty("mail.smtp.ssl.trust", "smtp.naver.com");
-        properties.setProperty("mail.smtp.ssl.enable", "true");
-        return properties;
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setJavaMailProperties(mailProperties);
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("changgyu549@gmail.com");
+        mailSender.setPassword("pzgbscuypjrnondt");
+        mailSender.setDefaultEncoding("utf-8");
+        return mailSender;
     }
 }

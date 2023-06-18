@@ -82,6 +82,14 @@ a {
   margin-bottom : 5px;
 }
 
+.top__bar > .top__bar_menu > .signLine > div > a > button > .signline {
+        font-size: 46px; /* 원하는 크기로 조정하세요 */
+        display: inline-block;
+        width: 46px; /* 원하는 넓이로 조정하세요 */
+        height: 55px; /* 원하는 높이로 조정하세요 */
+        margin-bottom: 5px;
+}
+
 .top__bar > .top__bar_menu > .signLine > div > a > button > span {
 display : block;
 font-size : 20px;

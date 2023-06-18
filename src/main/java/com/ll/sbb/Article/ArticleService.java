@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.persistence.criteria.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,6 @@ import com.ll.sbb.DataNotFoundException;
 import com.ll.sbb.Answer.Answer;
 import com.ll.sbb.User.SiteUser;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -57,6 +52,69 @@ public class ArticleService {
         return this.articleRepository.findAll(spec, pageable);
     }
 
+    public Page<Article> getSeasonList(int page, String kw, String season) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchSeason(season);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Specification<Article> searchSeason(String sea) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Season 컬럼을 기준으로 검색 조건 생성
+            if (sea != null) {
+                Path<String> seasonPath = root.get("season");
+                Predicate seasonPredicate = criteriaBuilder.equal(seasonPath, sea);
+                predicates.add(seasonPredicate);
+            }
+
+            // 다른 조건들을 추가하고 싶다면 여기에 추가
+
+            // 검색 조건들을 조합하여 최종 검색 조건 생성
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+    public Page<Article> getTypeList(int page, String kw, String type) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchType(type);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Specification<Article> searchType(String sea) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Season 컬럼을 기준으로 검색 조건 생성
+            if (sea != null) {
+                Path<String> typePath = root.get("type");
+                Predicate typePredicate = criteriaBuilder.equal(typePath, sea);
+                predicates.add(typePredicate);
+            }
+
+            // 다른 조건들을 추가하고 싶다면 여기에 추가
+
+            // 검색 조건들을 조합하여 최종 검색 조건 생성
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+    public Page<Article> getPriceList(int page, String kw, int min, int max) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = (root, query, builder) -> {
+            return builder.between(root.get("price"), min, max);
+        };
+        // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
 
     public Article getArticle(Integer id) {
         Optional<Article> article = this.articleRepository.findById(id);
@@ -80,41 +138,24 @@ public class ArticleService {
         this.articleRepository.save(q);
     }
 
-//    public void create(String subject, String content, Integer price, int starScore, String season, String type) {
-//        Article q = new Article();
-//        q.setSubject(subject);
-//        q.setContent(content);
-//        q.setCreateDate(LocalDateTime.now());
-//        q.setPrice(price);
-//        q.setStarScore(starScore);
-//        q.setSeason(season);
-//        q.setType(type);
-//        this.articleRepository.save(q);
-//    }
-
-//    public void create(String subject, String content, Integer price, int starScore) {
-//        Article q = new Article();
-//        q.setSubject(subject);
-//        q.setContent(content);
-//        q.setCreateDate(LocalDateTime.now());
-//        q.setPrice(price);
-//        this.articleRepository.save(q);
-//    }
-
 
     public List<Article> getMainCategory(String mainCategory) {
         return this.articleRepository.findByMainCategory(mainCategory);
     }
 
+
     public List<Article> getAll() {
+
         return this.articleRepository.findAll();
     }
 
     public List<Article> getByType(String type) {
+
         return this.articleRepository.findByType(type);
     }
 
     public List<Article> getBySeason(String season) {
+
         return this.articleRepository.findBySeason(season);
     }
 
@@ -132,5 +173,11 @@ public class ArticleService {
     public void vote(Article article, SiteUser siteUser) {
         article.getVoter().add(siteUser);
         this.articleRepository.save(article);
+    }
+
+    public List<Article> getByPrice(int min, int max) {
+
+        return this.articleRepository.findByPriceBetween(min, max);
+        // 비트윈을 사용하면 인트값의 범위를 지정하여 불러올 수 있다. (프라이스가 int값으로 지정되어있음 )
     }
 }

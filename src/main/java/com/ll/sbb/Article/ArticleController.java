@@ -52,81 +52,143 @@ public class ArticleController {
         model.addAttribute("article", article);
         return "article_detail";
     }
+//     가격범위 카데고리 리스트 맵핑
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("list/category/{mainCategory}")
-    public String mainCategory(Model model, @PathVariable("mainCategory") String mainCategory, @RequestParam(value = "subCategory", required = false) List<subCategory> subCategory) {
-        List<Article> articleList;
-        if (subCategory == null || subCategory.isEmpty()) {
-            articleList = articleService.getMainCategory(mainCategory);
-            model.addAttribute("articles", articleList);
+    @GetMapping(value = "/list/under/{id}")
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("id") Integer price) {
+        int min;
+        int max;
+        if (price == 15) {
+            min = 0;
+            max = 150000;
+            Page<Article> paging = this.articleService.getPriceList(page, kw, min, max);
+            List<Article> articles = this.articleService.getByPrice(min, max);
+            // 받은 url값을 기준으로 미니멈, 맥시멈 값을 지정하여 서비스로 넘김 .
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (price == 30) {
+            min = 150000;
+            max = 300000;
+            Page<Article> paging = this.articleService.getPriceList(page, kw, min, max);
+            List<Article> articles = this.articleService.getByPrice(min, max);
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (price == 50) {
+            min = 300000;
+            max = 500000;
+            Page<Article> paging = this.articleService.getPriceList(page, kw, min, max);
+            List<Article> articles = this.articleService.getByPrice(min, max);
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else {
+            min = 500000;
+            max = 5000000;
+            Page<Article> paging = this.articleService.getPriceList(page, kw, min, max);
+            List<Article> articles = this.articleService.getByPrice(min, max);
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
         }
-        if (mainCategory.equals("type")) {
-            if (subCategory.contains("tent")) {
-                List<Article> tentArticles = articleService.getByType("tent");
-                model.addAttribute("articles", tentArticles);
-            } else if (subCategory.contains("table")) {
-                List<Article> tableArticles = articleService.getByType("table");
-                model.addAttribute("articles", tableArticles);
-            } else if (subCategory.contains("chair")) {
-                List<Article> chairArticles = articleService.getByType("chair");
-                model.addAttribute("articles", chairArticles);
-            } else if (subCategory.contains("lantern")) {
-                List<Article> lanternArticles = articleService.getByType("lantern");
-                model.addAttribute("articles", lanternArticles);
-            } else if (subCategory.contains("cookware")) {
-                List<Article> cookwareArticles = articleService.getByType("cookware");
-                model.addAttribute("articles", cookwareArticles);
-            } else if (subCategory.contains("etc")) {
-                List<Article> etcArticles = articleService.getByType("etc");
-                model.addAttribute("articles", etcArticles);
-            }
-        } else if (mainCategory.equals("pricerange")) {
-            List<Article> articles = articleService.getAll();
-            List<Article> priceRangeArticles = new ArrayList<>();
 
-            for (Article article : articles) {
-                int price = article.getPrice();
-
-                if (price <= 150000) {
-                    if (subCategory.contains("15만원 이하")) {
-                        priceRangeArticles.add(article);
-                    }
-                } else if (price <= 300000) {
-                    if (subCategory.contains("30만원 이하")) {
-                        priceRangeArticles.add(article);
-                    }
-                } else if (price <= 500000) {
-                    if (subCategory.contains("50만원 이하")) {
-                        priceRangeArticles.add(article);
-                    }
-                } else {
-                    if (subCategory.contains("그 외")) {
-                        priceRangeArticles.add(article);
-                    }
-                }
-            }
-        } else if (mainCategory.equals("season")) {
-            if (subCategory.contains("summer")) {
-                List<Article> summerArticles = articleService.getBySeason("summer");
-                model.addAttribute("articles", summerArticles);
-            } else if (subCategory.contains("winter")) {
-                List<Article> winterArticles = articleService.getBySeason("winter");
-                model.addAttribute("articles", winterArticles);
-            } else if (subCategory.contains("all")) {
-                List<Article> allSeasonArticles = articleService.getBySeason("all");
-                model.addAttribute("articles", allSeasonArticles);
-            }
-        } else if (mainCategory.equals("beginner")) {
-
-        } else if (mainCategory.equals("all")) {
-            List<Article> allArticles = articleService.getAll();
-            model.addAttribute("articles", allArticles);
-        }
-        model.addAttribute("mainCategory", mainCategory);
-        model.addAttribute("subCategory", subCategory);
         return "article_list";
     }
+
+    // 시즌,타입  카데고리 리스트 맵핑 시즌=serson , 타입=type
+
+    @GetMapping("/list/{category}")
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("category") String category) {
+        if (category.equals("season_all")) {
+            Page<Article> paging = this.articleService.getSeasonList(page, kw, "사계");
+            List<Article> articles = this.articleService.getBySeason("사계");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("season_summer")) {
+            Page<Article> paging = this.articleService.getSeasonList(page, kw, "하계");
+            List<Article> articles = this.articleService.getBySeason("하계");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+
+        } else if (category.equals("season_winter")) {
+            Page<Article> paging = this.articleService.getSeasonList(page, kw, "동계");
+            List<Article> articles = this.articleService.getBySeason("동계");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_tent")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "텐트/타프");
+            List<Article> articles = this.articleService.getByType("텐트/타프");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_table")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "테이블");
+            List<Article> articles = this.articleService.getByType("테이블");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_chair")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "의자");
+            List<Article> articles = this.articleService.getByType("의자");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_lanturn")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "랜턴");
+            List<Article> articles = this.articleService.getByType("랜턴");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_cook")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "조리도구");
+            List<Article> articles = this.articleService.getByType("조리도구");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        } else if (category.equals("type_etc")) {
+            Page<Article> paging = this.articleService.getTypeList(page, kw, "기타");
+            List<Article> articles = this.articleService.getByType("기타");
+            int articleCount = articles.size();
+            model.addAttribute("articles", articles);
+            model.addAttribute("articleCount", articleCount);
+            model.addAttribute("paging", paging);
+            model.addAttribute("kw", kw);
+        }
+
+
+        return "article_list";
+    }
+
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")

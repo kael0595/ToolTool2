@@ -70,7 +70,8 @@
                     </button>
                 </a>
             </div>
-            <div class="signUp" sec:authorize="isAuthenticated()" th:if="${user != null and user.admin != null and user.admin >= 1}">
+            <div class="signUp" sec:authorize="isAuthenticated()"
+                 th:if="${user != null and user.admin != null and user.admin >= 1}">
                 <a href="http://localhost:8080/admin">
                     <button type="button" class="signUp_button">
                         <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
@@ -174,7 +175,7 @@
     <ul>
         <li th:each="market, stat : ${marketList}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
-                <a href="#">
+                <a th:href="@{|/market/detail/${market.id}|}">
                     <img
                             src="https://i.postimg.cc/m23RYKm6/product-box1.png"
                             class="rm_content_main_img review_main_img review_main_img_1"
@@ -225,6 +226,9 @@
           $(this).attr("src", newSrc);
         });
       });
+
+
+
 
 
 

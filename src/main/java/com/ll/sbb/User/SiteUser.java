@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Setter
 @Getter
@@ -27,6 +30,13 @@ public class SiteUser {
     @Column(unique = true)
     private String nickname;
 
-    private Integer admin = 0;
-    //일반유저 : 0, 관리자 : 1, 슈퍼관리자 : 2
+    @ElementCollection(targetClass = UserRole.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<UserRole> roles;
+
+    private String mailKey;
+
+    private boolean mailAuth;
+
 }

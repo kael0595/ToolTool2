@@ -1,11 +1,12 @@
 package com.ll.sbb.Notice;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ll.sbb.User.SiteUser;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -19,4 +20,11 @@ public class Notice {
     private String subject;
 
     private String content;
+
+    private LocalDateTime createDate;
+
+    private LocalDateTime modifyDate;
+
+    private int viewCount;
+
 }
