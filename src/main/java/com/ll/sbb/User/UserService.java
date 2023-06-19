@@ -75,7 +75,7 @@ public class UserService {
     public void emailConfirm(String email, String mailKey) throws Exception {
         SiteUser user = getUserByEmail(email);
 
-        if (user != null && user.getMailKey().equals(mailKey)) {
+        if (user != null && mailKey != null && mailKey.equals(user.getMailKey())) {
             updateMailAuth(email, mailKey);
         } else {
             throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");

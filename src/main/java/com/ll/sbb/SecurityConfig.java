@@ -22,33 +22,26 @@ public class SecurityConfig {
 //    private OAuth2UserService oAuth2UserService;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(
-                        csrf -> csrf.disable()
-                )
-                .authorizeRequests(
-                        authorizeRequests -> authorizeRequests
-                                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                                .requestMatchers("/**")
-                                .permitAll()
-                )
-                .formLogin(
-                        formLogin -> formLogin
-                                .loginPage("/user/login") // GET
-                                .loginProcessingUrl("/user/login") // POST
-                )
-//                .oauth2Login(
-//                        oauth2Login -> oauth2Login
-//                                .loginPage("/user/login")
-//                                .userInfoEndpoint(
-//                                        userInfoEndpoint -> userInfoEndpoint
-//                                                .userService(oAuth2UserService)
-//                                )
-//                )
-                .logout(logout -> logout
-                        .logoutUrl("/user/logout")
-                );
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                .requestMatchers("/**").permitAll()
+                .and()
+                .csrf().ignoringRequestMatchers(
+                        new AntPathRequestMatcher("/h2-console/**"))
+                .and()
+                .headers()
+                .addHeaderWriter(new XFrameOptionsHeaderWriter(
+                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .and()
+                .formLogin()
+                .loginPage("/user/login")
+                .defaultSuccessUrl("/")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+        ;
         return http.build();
     }
 
