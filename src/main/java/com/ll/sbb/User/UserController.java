@@ -69,9 +69,9 @@ public class UserController {
         try {
             String mailKey = tempKey.getKey(10, true); // 이메일 인증을 위한 랜덤 키 생성
             userCreateForm.setMailKey(mailKey); // 사용자 폼에 인증번호 설정
-            userService.emailConfirm(userCreateForm.getEmail(), userCreateForm.getMailKey());
             userService.create(userCreateForm.getUsername(),
                     userCreateForm.getPassword1(), userCreateForm.getEmail(), userCreateForm.getNickname());
+            userService.emailConfirm(userCreateForm.getEmail(), userCreateForm.getMailKey());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
