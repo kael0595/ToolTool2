@@ -50,8 +50,10 @@ public class UserController {
 
     @GetMapping("/user/signup")
     private String signup(UserCreateForm userCreateForm) {
-        return "signup_form";
+//        return "signup_form";
+        return "mailCheck";
     }
+
 
     @PostMapping("/user/signup")
     private String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
@@ -144,7 +146,6 @@ public class UserController {
                 , HttpMethod.POST, kakaoTokenRequest, String.class);
         return "카카오 토큰 요청 완료 : 토큰에 대한 응답 : " + response;
     }
-
 
     @GetMapping("/user/logout")
     public String Logout(HttpSession session) {

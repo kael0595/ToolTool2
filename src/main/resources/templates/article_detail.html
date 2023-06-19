@@ -18,7 +18,8 @@
                 <li>
                     <a href="http://localhost:8080/">
                         <button type="button" class="logo_button">
-                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
+                            <a href='https://ifh.cc/v-Hlz6bC' target='_blank'><img src='https://ifh.cc/g/Hlz6bC.png'
+                                                                                   border='0' class="logoimg"></a>
                         </button>
                     </a>
                 </li>
@@ -48,29 +49,30 @@
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
                         <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
+
                     </button>
                 </a>
             </div>
 
-            <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+            <div class="signOut" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
+                        <i class="fa-regular fa-arrow-right-from-bracket" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
 
-            <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+            <div class="myPage" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
                 <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
+                        <i class="fa-solid fa-user" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
             <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
+                        <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
@@ -89,16 +91,24 @@
                 <span th:text="${article.id}" class="articleNum">123</span>
             </div>
             <div class="modifyRemove">
-                <a href="#">
+                <a th:href="@{|/article/modify/${article.id}|}"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${article.author != null and #authentication.getPrincipal().getUsername() == article.author.username}"
+                >
                     <button class="modify">수정</button>
+                </a>
+                <a href="javascript:void(0);" th:data-uri="@{|/article/delete/${article.id}|}"
+                   sec:authorize="isAuthenticated()" class="delete btn btn-sm btn-outline-secondary"
+                   th:if="${article.author != null and #authentication.getPrincipal().getUsername() == article.author.username}"
+                >
                     <button class="remove">삭제</button>
                 </a>
-
             </div>
 
             <div class="article_title">
                 <p th:text="${article.subject}" class="article_title">헬리녹스 의자리뷰</p>
             </div>
+            <hr>
             <div class="userInfoform">
                 <div class="userInfo">
                     <div class="userPhoto"></div>
@@ -163,11 +173,14 @@
                     <div class="icon_box">
                         <div class="iconLine">
                             <div class="like">
-                                <i class="fa-regular fa-heart" style="color: ##ff6c00 ;"></i>
-                                <a href="#" role="button"></a>
+                                <a href="#" role="button" class="like_heart">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+
                                 <em class="u_ico _icon"></em>
                                 <span class="u_txt _label">좋아요</span>
                                 <strong th:text="${#lists.size(article.voter)}" class="u_cnt _count"></strong>
+
 
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
@@ -199,22 +212,27 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a href="#" class="answermodify_btn">
+                                            <a th:href="@{|/answer/modify/${answer.id}|}"
+                                               sec:authorize="isAuthenticated()"
+                                               th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                                               class="answermodify_btn">
                                                 <button type="button" class="answermodify_btn">수정</button>
+                                                '
                                             </a>
-                                            <a href="#" class="answerremove_btn">
+                                            <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
+                                               class="delete btn btn-sm btn-outline-secondary"
+                                               sec:authorize="isAuthenticated()"
+                                               th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                                               th:text="삭제">
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
                                         </div>
                                     </div>
+
                                     <!-- 댓글 하단바 끝   -->
                                 </div>
-                                <!--                                <div>-->
-                                <!--                                    <ul>-->
-                                <!--                                        <li th:each="answer : ${article.answerList}" th:text="${answer.content}"></li>-->
-                                <!--                                    </ul>-->
-                                <!--                                </div>-->
+
                                 <div class="formbox">
                                     <form th:action="@{|/answer/create/${article.id}|}" th:object="${answerForm}"
                                           method="post" class="formboxform">
@@ -251,5 +269,18 @@
         </div>
     </footer>
 </div>
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+</script>
+
+
 </body>
 </html>

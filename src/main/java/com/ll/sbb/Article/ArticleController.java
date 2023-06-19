@@ -11,11 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ll.sbb.Answer.AnswerForm;
@@ -216,6 +212,10 @@ public class ArticleController {
         }
         articleForm.setSubject(article.getSubject());
         articleForm.setContent(article.getContent());
+        articleForm.setPrice(article.getPrice());
+        articleForm.setType(article.getType());
+        articleForm.setSeason(article.getSeason());
+        articleForm.setStarScore(article.getStarScore());
         return "article_form";
     }
 
@@ -230,7 +230,7 @@ public class ArticleController {
         if (!article.getAuthor().getUsername().equals(principal.getName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
         }
-        this.articleService.modify(article, articleForm.getSubject(), articleForm.getContent());
+        this.articleService.modify(article, articleForm.getSubject(), articleForm.getContent(), articleForm.getType(), articleForm.getSeason(), articleForm.getPrice(), articleForm.getStarScore());
         return String.format("redirect:/article/detail/%s", id);
     }
 
@@ -247,10 +247,11 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/vote/{id}")
+    @ResponseBody
     public String articleVote(Principal principal, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.articleService.vote(article, siteUser);
-        return String.format("redirect:/article/detail/%s", id);
+        return "성공";
     }
 }

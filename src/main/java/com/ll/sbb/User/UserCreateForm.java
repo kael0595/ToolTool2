@@ -29,9 +29,4 @@ public class UserCreateForm {
 
     private String mailKey;
 
-    private String enteredMailkey;
-
-    public String getEnteredMailkey() {
-        return enteredMailkey;
-    }
 }

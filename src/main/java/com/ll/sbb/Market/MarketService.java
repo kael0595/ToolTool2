@@ -174,4 +174,20 @@ public class MarketService {
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
+
+    public void modify(Market market, String subject, String content, Integer price, String brand, String season, String type) {
+        market.setSubject(subject);
+        market.setContent(content);
+        market.setPrice(price);
+        market.setBrand(brand);
+        market.setSeason(season);
+        market.setType(type);
+        market.setModifyDate(LocalDateTime.now());
+        this.marketRepository.save(market);
+    }
+
+    public void delete(Market market) {
+        this.marketRepository.delete(market);
+    }
+
 }

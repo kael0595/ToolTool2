@@ -22,6 +22,8 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
     long countByEmailAndMailAuth(String email, boolean mailAuth);
 
     Optional<SiteUser> findByEmail(String email);
+
+    SiteUser getByEmail(String email);
 }
 
 //    SiteUser findUserByUserId(String userEmail);

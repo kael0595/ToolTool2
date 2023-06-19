@@ -2,17 +2,20 @@ package com.ll.sbb.Market;
 
 
 import com.ll.sbb.Article.Article;
+import com.ll.sbb.Article.ArticleForm;
 import com.ll.sbb.Category.subCategory;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -280,4 +283,45 @@ public class MarketController {
         return "redirect:/market/list"; // 질문 저장후 질문목록으로 이동
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String marketModify(MarketForm marketForm, @PathVariable("id") Integer id, Principal principal) {
+        Market market = this.marketService.getMarket(id);
+        if (!market.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        marketForm.setSubject(market.getSubject());
+        marketForm.setContent(market.getContent());
+        marketForm.setPrice(market.getPrice());
+        marketForm.setType(market.getType());
+        marketForm.setSeason(market.getSeason());
+        marketForm.setBrand(market.getBrand());
+        return "market_form";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String marketModify(@Valid MarketForm marketForm, BindingResult bindingResult,
+                               Principal principal, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "market_form";
+        }
+        Market market = this.marketService.getMarket(id);
+        if (!market.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.marketService.modify(market, marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice(), marketForm.getBrand(), marketForm.getSeason(), marketForm.getType());
+        return String.format("redirect:/market/detail/%s", id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String marketDelete(Principal principal, @PathVariable("id") Integer id) {
+        Market market = this.marketService.getMarket(id);
+        if (!market.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.marketService.delete(market);
+        return "redirect:/";
+    }
 }

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+
 @Entity
 @Getter
 @Setter
@@ -55,5 +56,6 @@ public class Article {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private SiteUser author;
+
 
 }

@@ -159,9 +159,13 @@ public class ArticleService {
         return this.articleRepository.findBySeason(season);
     }
 
-    public void modify(Article article, String subject, String content) {
+    public void modify(Article article, String subject, String content, String type, String season, int price, int starscore) {
         article.setSubject(subject);
         article.setContent(content);
+        article.setPrice(price);
+        article.setSeason(season);
+        article.setType(type);
+        article.setStarScore(starscore);
         article.setModifyDate(LocalDateTime.now());
         this.articleRepository.save(article);
     }
