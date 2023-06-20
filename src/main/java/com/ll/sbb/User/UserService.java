@@ -1,6 +1,7 @@
 package com.ll.sbb.User;
 
 import com.ll.sbb.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,21 +16,23 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public SiteUser create(String username, String password, String email, String nickname) {
+    public SiteUser create(String username, String password, String email, String nickname, int mailKey) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setEmail(email);
         user.setNickname(nickname);
+        user.setMailKey(mailKey);
         user.setPassword(passwordEncoder.encode(password));
         this.userRepository.save(user);
         return user;
     }
 
-    public void updateMailKey(String mailKey, String email, Long id) {
+
+    public void updateMailKey(int mailKey, String email, Long id) {
         userRepository.updateMailKey(mailKey, email, id);
     }
 
-    public void updateMailAuth(String email, String mailKey) {
+    public void updateMailAuth(String email, int mailKey) {
         int updatedRows = userRepository.updateMailAuth(email, mailKey);
         if (updatedRows > 0) {
             System.out.println("Mail auth updated successfully.");
@@ -72,10 +75,10 @@ public class UserService {
 
     }
 
-    public void emailConfirm(String email, String mailKey) throws Exception {
-        SiteUser user = getUserByEmail(email);
+    public void emailConfirm(String email, int mailKey) throws Exception {
+        SiteUser user = this.getUserByEmail(email);
 
-        if (user != null && mailKey != null && mailKey.equals(user.getMailKey())) {
+        if (user != null && user.getMailKey() == mailKey) {
             updateMailAuth(email, mailKey);
         } else {
             throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");

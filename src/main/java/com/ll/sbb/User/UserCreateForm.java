@@ -27,6 +27,6 @@ public class UserCreateForm {
     @NotEmpty(message = "닉네임은 필수항목입니다.")
     private String nickname;
 
-    private String mailKey;
+    private int mailKey;
 
 }

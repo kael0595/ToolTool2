@@ -23,8 +23,8 @@ import static org.springframework.core.annotation.MergedAnnotations.search;
 @RequiredArgsConstructor
 @Service
 public class MarketService {
-    private final MarketRepository marketRepository;
 
+    private final MarketRepository marketRepository;
 
     private Specification<Market> search(String kw) {
         return new Specification<>() {

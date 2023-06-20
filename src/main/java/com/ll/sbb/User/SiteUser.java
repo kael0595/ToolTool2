@@ -25,6 +25,8 @@ public class SiteUser {
     private String password;
 
     @Column(unique = true)
+    @Email
+    @NotNull
     private String email;
 
     @Column(unique = true)
@@ -35,7 +37,7 @@ public class SiteUser {
     @Enumerated(EnumType.STRING)
     private Set<UserRole> roles;
 
-    private String mailKey;
+    private int mailKey;
 
     private boolean mailAuth;
 

@@ -1,10 +1,8 @@
 package com.ll.sbb.Article;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ll.sbb.Category.subCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ll.sbb.Answer.AnswerForm;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 
@@ -101,7 +98,7 @@ public class ArticleController {
         return "article_list";
     }
 
-    // 시즌,타입  카데고리 리스트 맵핑 시즌=serson , 타입=type
+    // 시즌,타입  카데고리 리스트 맵핑 시즌=season , 타입=type
 
     @GetMapping("/list/{category}")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,

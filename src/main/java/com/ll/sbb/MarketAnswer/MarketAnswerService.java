@@ -39,4 +39,11 @@ public class MarketAnswerService {
         }
     }
 
+
+    public void modify(MarketAnswer marketAnswer, String content) {
+        marketAnswer.setContent(content);
+        marketAnswer.setModifyDate(LocalDateTime.now());
+        this.marketAnswerRepository.save(marketAnswer);
+    }
+
 }

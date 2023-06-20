@@ -430,3 +430,23 @@ input{
   font-weight:bold;
   font-size:20px;
 }
+
+.alert alert-danger{
+    display:block;
+}
+.formmodifybox{
+  border:2px solid #ccc;
+  margin-top:30px;
+  border-radius:6px;
+  text-align:right;
+  width:100%;
+  display:none;
+}
+
+.replyBox .reply_summit_exit{
+  text-decoration:none;
+  border: 1px solid #ccc;
+  padding:10px 10px;
+  border-radius:7px;
+  margin-top:10px;
+}
