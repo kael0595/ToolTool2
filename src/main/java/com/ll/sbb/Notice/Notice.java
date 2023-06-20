@@ -27,4 +27,8 @@ public class Notice {
 
     private int viewCount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private SiteUser author;
+
 }

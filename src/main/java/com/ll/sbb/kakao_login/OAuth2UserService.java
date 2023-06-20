@@ -1,8 +1,11 @@
 //package com.ll.sbb.kakao_login;
 //
+//import com.ll.sbb.User.SiteUser;
 //import lombok.RequiredArgsConstructor;
+//import com.ll.sbb.User.UserRepository;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.User;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 //import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -21,6 +24,8 @@
 //@RequiredArgsConstructor
 //public class OAuth2UserService extends DefaultOAuth2UserService {
 //
+//    private final UserRepository userRepository;
+//
 //    @Override
 //    @Transactional
 //    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -32,7 +37,7 @@
 //
 //        String oauthId = oAuth2User.getName();
 //
-//        Member member = null;
+//        SiteUser user = null;
 //        String oauthType = userRequest.getClientRegistration().getRegistrationId().toUpperCase();
 //
 //        if (!"KAKAO".equals(oauthType)) {
@@ -52,29 +57,27 @@
 //                        email = (String) attributesKakaoAcount.get("email");
 //                    }
 //
-//                    member = Member.builder()
+//                    user = SiteUser.builder()
 //                            .email(email)
 //                            .username(username)
 //                            .password(passwordEncoder.encode(UUID.randomUUID().toString()))
 //                            .build();
 //
-//                    memberRepository.save(member);
+//                    userRepository.save(user);
 //                }
 //            }
 //        } else {
-//            member = memberRepository.findByUsername("%s_%s".formatted(oauthType, oauthId))
-//                    .orElseThrow(MemberNotFoundException::new);
+//            user = userRepository.findByUsername("%s_%s".formatted(oauthType, oauthId));
 //        }
 //
 //        Set<GrantedAuthority> authorities = new LinkedHashSet<>();
 //        authorities.add(new SimpleGrantedAuthority("USER"));
-//        return new MemberContext(member, authorities, attributes, userNameAttributeName);
+//        return new MemberContext(user, authorities, attributes, userNameAttributeName);
 //    }
 //
 //
-//
 //    private boolean isNew(String oAuthType, String oAuthId) {
-//        return memberRepository.findByUsername("%s_%s".formatted(oAuthType, oAuthId)).isEmpty();
+//        return userRepository.findByUsername("%s_%s".formatted(oAuthType, oAuthId)).isEmpty();
 //    }
 //
 //}

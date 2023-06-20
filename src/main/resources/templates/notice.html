@@ -102,141 +102,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr th:each="notice, stat : ${noticeList}" th:if="${stat.index < 10}">
                         <td><strong>[공지]</strong></td>
                         <td class="tal">
-                            <a href="http://localhost:8080/">개인정보처리방침 개정 안내</a>
+                            <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.subject}"></a>
                         </td>
-                        <td>대표 관리자</td>
-                        <td>2022-12-12</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[공지]</strong></td>
-                        <td class="tal">
-                            <a href="#">대표 관리자 리뉴얼에 따른 비밀번호 재설정 안내</a>
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-06-23</td>
-                        <td>3474</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[공지]</strong></td>
-                        <td class="tal">
-                            <a href="#">2022년 1월 멤버십 등급 및 혜택 변경 안내</a>
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2021-12-20</td>
-                        <td>126</td>
-                    </tr>
-                    <tr>
-                        <td><strong>[공지]</strong></td>
-                        <td class="tal">
-                            <a href="#">유의사항</a>
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2012-05-29</td>
-                        <td>1362</td>
-                    </tr>
-                    <tr>
-                        <td>39</td>
-                        <td class="subject tal">
-                            <a href="#">이전 개인정보 처리방침 </a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-12-12</td>
-                        <td>92</td>
-                    </tr>
-                    <tr>
-                        <td>38</td>
-                        <td class="subject tal">
-                            <a href="#">대표 관리자</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-03-28</td>
-                        <td>129</td>
-                    </tr>
-                    <tr>
-                        <td>37</td>
-                        <td class="subject tal">
-                            <a href="#">대표 관리자 안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-03-16</td>
-                        <td>76</td>
-                    </tr>
-                    <tr>
-                        <td>36</td>
-                        <td class="subject tal">
-                            <a href="#">CJ대한통운 파업에 따른 배송불가 지역 안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-01-21</td>
-                        <td>57</td>
-                    </tr>
-                    <tr>
-                        <td>35</td>
-                        <td class="subject tal">
-                            <a href="#">2022 1월 설날 연휴 배송안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자</td>
-                        <td>2022-01-18</td>
-                        <td>224</td>
-                    </tr>
-                    <tr>
-                        <td>34</td>
-                        <td class="subject tal">
-                            <a href="#">2020 1월 설날 연휴 배송안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2020-01-13</td>
-                        <td>94</td>
-                    </tr>
-                    <tr>
-                        <td>33</td>
-                        <td class="subject tal">
-                            <a href="">2019 12월 연말 이벤트</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2019-12-12</td>
-                        <td>91</td>
-                    </tr>
-                    <tr>
-                        <td>32</td>
-                        <td class="subject tal">
-                            <a href="#">2019 9월 추석 연휴배송안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2019-09-02</td>
-                        <td>77</td>
-                    </tr>
-                    <tr>
-                        <td>31</td>
-                        <td class="subject tal">
-                            <a href="">2019 5월 연휴 배송안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2019-04-29</td>
-                        <td>102</td>
-                    </tr>
-                    <tr>
-                        <td>30</td>
-                        <td class="subject tal">
-                            <a href="#">2019 설날 연휴 배송안내</a>
-                            <img src="" align="absmiddle">
-                        </td>
-                        <td>대표 관리자몰</td>
-                        <td>2019-01-21</td>
-                        <td>93</td>
+                        <td th:text="${notice.author}"></td>
+                        <td th:text="${notice.createDate}"></td>
+                        <td th:text="${notice.viewCount}"></td>
                     </tr>
                     </tbody>
                 </table>

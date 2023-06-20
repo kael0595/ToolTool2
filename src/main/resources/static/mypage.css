@@ -180,11 +180,7 @@ font-size : 20px;
   height: 100%;
   align-content: center;
 }
-.profile_mark > .mark_Recommendation {
-  margin-right: 50px;
-  display: flex;
-  align-items: center;
-}
+
 .profile_mark > .mark_total_review {
   display: flex;
   align-items: center;

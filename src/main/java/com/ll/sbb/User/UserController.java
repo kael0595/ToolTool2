@@ -39,8 +39,7 @@ public class UserController {
 
     @GetMapping("/user/signup")
     private String signup(UserCreateForm userCreateForm) {
-//        return "signup_form";
-        return "mailCheck";
+        return "signup_form";
     }
 
 
@@ -70,19 +69,6 @@ public class UserController {
         }
         return "redirect:/";
     }
-
-//    @PostMapping("/user/email_confirm")
-//    public String emailConfirm(@RequestParam("email") String email,
-//                               @RequestParam("mailKey") int mailKey,
-//                               Model model) {
-//        try {
-//            userService.emailConfirm(email, mailKey);
-//            model.addAttribute("message", "이메일 인증이 완료되었습니다.");
-//        } catch (Exception e) {
-//            model.addAttribute("error", "유효하지 않은 이메일 또는 메일 키입니다.");
-//        }
-//        return "email_confirm_result";
-//    }
 
     @GetMapping("/user/login")
     public String login() {

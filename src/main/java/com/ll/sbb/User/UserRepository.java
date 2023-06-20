@@ -28,6 +28,7 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
 
     Optional<SiteUser> findByEmail(String email);
 
+    SiteUser findByUsername(String formatted);
 }
 
 //    SiteUser findUserByUserId(String userEmail);
