@@ -18,8 +18,7 @@
                 <li>
                     <a href="http://localhost:8080/">
                         <button type="button" class="logo_button">
-                            <a href='https://ifh.cc/v-Hlz6bC' target='_blank'><img src='https://ifh.cc/g/Hlz6bC.png'
-                                                                                   border='0' class="logoimg"></a>
+                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
                         </button>
                     </a>
                 </li>
@@ -33,7 +32,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/Market/list">
+                    <a href="http://localhost:8080/market/list">
                         <span>Market</span>
                     </a>
                 </li>
@@ -49,30 +48,29 @@
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
                         <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
-
                     </button>
                 </a>
             </div>
 
-            <div class="signOut" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+            <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <i class="fa-regular fa-arrow-right-from-bracket" style="color: #73703f;"></i>
+                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
                     </button>
                 </a>
             </div>
 
-            <div class="myPage" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+            <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
                 <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
-                        <i class="fa-solid fa-user" style="color: #73703f;"></i>
+                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
             <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
-                        <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
+                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
                     </button>
                 </a>
             </div>
@@ -192,6 +190,7 @@
                             <div class="replyBox">
                                 <div th:each="answer : ${article.answerList}" class="answerbox">
                                     <!-- 댓글 닉네임   -->
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <div class="answerNick">
                                         <span th:if="${answer.author != null}" th:text="${answer.author.nickname}"
                                               class="nick">닉네임</span>
@@ -204,6 +203,20 @@
                                         </ul>
                                     </div>
                                     <!--  댓글내용 끝  -->
+                                    <!--수정-->
+                                    <div class="formmodifybox">
+                                    <form th:action="@{|/answer/modify/${answer.id}|}" th:object="${answerForm}"
+                                          method="post" class="formboxform" >
+
+                                        <textarea name="content" id="content" rows="10"
+                                                  placeholder= "수정할 내용을 작성해주세요"></textarea>
+                                        <button class="reply_summit" type="submit" value="답변수정">답변수정</button>
+                                        <button class="reply_summit_exit" type="button" value="취소" onclick="hideFormModifyBox(event, this)">수정취소</button>
+
+                                    </form>
+
+                                    </div>
+                                    <!--수정 끝-->
                                     <!-- 댓글 하단바   -->
                                     <div class="answerCreateBox">
                                         <div class="answerCreateDate">
@@ -212,11 +225,10 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a th:href="@{|/answer/modify/${answer.id}|}"
-                                               sec:authorize="isAuthenticated()"
+                                            <a href="#" sec:authorize="isAuthenticated()"  class="modify btn btn-sm btn-outline-secondary"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                               class="answermodify_btn">
-                                                <button type="button" class="answermodify_btn">수정</button>
+                                               th:text="수정" onclick="showFormModifyBox(event, this)" >
+                                                <button type="button" class="answermodify_btn" >수정</button>
                                                 '
                                             </a>
                                             <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
@@ -228,6 +240,7 @@
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
                                         </div>
+
                                     </div>
 
                                     <!-- 댓글 하단바 끝   -->
@@ -281,6 +294,28 @@ Array.from(delete_elements).forEach(function(element) {
 
 </script>
 
+<!--수정 댓글-->
 
+
+<script>
+  function showFormModifyBox(event, button) {
+    event.preventDefault(); // 페이지 새로고침 방지
+
+    var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+    $(formModifyBox).css('display', 'block');
+
+    var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+    $(answerCreateBox).css('display', 'none');
+  }
+  function hideFormModifyBox(event, button) {
+  event.preventDefault(); // 이벤트의 기본 동작 방지
+
+  var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+  $(formModifyBox).css('display', 'none');
+
+  var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+  $(answerCreateBox).css('display', 'block');
+}
+</script>
 </body>
 </html>

@@ -28,6 +28,7 @@ public class MarketAnswer {
     @CreatedDate
     private LocalDateTime createDate;
 
+    @CreatedDate
     private LocalDateTime modifyDate;
 
     @ManyToOne
