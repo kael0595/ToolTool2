@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -20,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -37,9 +39,14 @@ public class UserController {
         return "signup_menual";
     }
 
+//    @GetMapping("/user/signup")
+//    private String signup(UserCreateForm userCreateForm) {
+//        return "signup_form";
+//    }
+
     @GetMapping("/user/signup")
     private String signup(UserCreateForm userCreateForm) {
-        return "signup_form";
+        return "mailCheck";
     }
 
 
@@ -127,19 +134,58 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    private String mypage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-                          @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Article> paging = this.articleService.getList(page, kw);
-        List<Article> articles = this.articleService.getAll();
-        List<Market> markets = this.marketService.getAll();
+    private String mypage(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                          @RequestParam(value = "kw", defaultValue = "") String kw , Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        Page<Article> articlePaging = this.articleService.getUserList(page, kw,siteUser.getUsername());
+        Page<Market> marketPaging = this.marketService.getUserList(page, kw,siteUser.getUsername());
+
+        List<Article> articles = this.articleService.getAuthor(siteUser);
+        List<Market> markets = this.marketService.getAuthor(siteUser);
+
         int articleCount = articles.size();
         int marketCount = markets.size();
         model.addAttribute("markets", markets);
         model.addAttribute("marketCount", marketCount);
         model.addAttribute("articles", articles);
         model.addAttribute("articleCount", articleCount);
-        model.addAttribute("paging", paging);
+        model.addAttribute("articlePaging", articlePaging);
+        model.addAttribute("marketPaging", marketPaging);
         model.addAttribute("kw", kw);
+        model.addAttribute("user",siteUser);
         return "mypage";
     }
+
+    @GetMapping("/mypage/article")
+    @ResponseBody
+    private Model mypageArticlePaging( Model model,@RequestParam(value = "page", defaultValue = "0") int page,
+                          @RequestParam(value = "kw", defaultValue = "") String kw , Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        Page<Article> articlePaging = this.articleService.getUserList(page, kw,siteUser.getUsername());
+        List<Article> articles = this.articleService.getAuthor(siteUser);
+        int articleCount = articles.size();
+        model.addAttribute("articlePaging",articlePaging);
+        model.addAttribute("articles", articles);
+        model.addAttribute("articleCount", articleCount);
+        return model;
+
+    }
+
+    @GetMapping("/mypage/market")
+    @ResponseBody
+    private Model mypageMarketPaging( Model model,@RequestParam(value = "page", defaultValue = "0") int page,
+                                       @RequestParam(value = "kw", defaultValue = "") String kw , Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        Page<Market> marketPaging = this.marketService.getUserList(page, kw,siteUser.getUsername());
+        List<Market> markets = this.marketService.getAuthor(siteUser);
+        int marketCount = markets.size();
+        model.addAttribute("marketPaging",marketPaging);
+        model.addAttribute("markets", markets);
+        model.addAttribute("marketCount", marketCount);
+        return model;
+
+    }
+
+
+
 }

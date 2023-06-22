@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,5 +41,10 @@ public class SiteUser {
     private int mailKey;
 
     private boolean mailAuth;
+
+
+    private LocalDate createDate;
+
+
 
 }

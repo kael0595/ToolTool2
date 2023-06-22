@@ -47,7 +47,7 @@ public class ArticleController {
     }
 //     가격범위 카데고리 리스트 맵핑
 
-    @GetMapping(value = "/list/under/{id}")
+    @GetMapping(value = "/under/{id}/sort")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("id") Integer price) {
         int min;
@@ -100,7 +100,7 @@ public class ArticleController {
 
     // 시즌,타입  카데고리 리스트 맵핑 시즌=season , 타입=type
 
-    @GetMapping("/list/{category}")
+    @GetMapping("/{category}/sort")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("category") String category) {
         if (category.equals("season_all")) {

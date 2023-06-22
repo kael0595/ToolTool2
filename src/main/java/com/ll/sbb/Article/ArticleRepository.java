@@ -1,5 +1,6 @@
 package com.ll.sbb.Article;
 
+import com.ll.sbb.User.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,6 +27,8 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     Article findBySubjectAndContent(String subject, String content);
 
     List<Article> findBySubjectLike(String subject);
+
+    List<Article> findByAuthor(SiteUser siteUser);
 
     Page<Article> findAll(Pageable pageable);
 

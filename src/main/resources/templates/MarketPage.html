@@ -206,7 +206,7 @@
     <div class="sorting_menu">
         <ul>
             <li>
-                <a href="#">
+                <a href="?sort=createSort" class="Sort">
                     <span>최신순</span>
                 </a>
             </li>
@@ -215,18 +215,14 @@
                     <span>추천순</span>
                 </a>
             </li>
+
             <li>
-                <a href="#">
-                    <span>별점순</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
+                <a href="?sort=rowPriceSort" class="Sort">
                     <span>낮은금액별</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="?sort=highPriceSort" class="Sort">
                     <span>높은금액별</span>
                 </a>
             </li>
@@ -265,16 +261,16 @@
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/under/15}">0 ~ 15만원</a></button>
+                                    <button type="button"><a th:href="@{/market/under/15/sort}">>0 ~ 15만원</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/under/30}">15만원 ~ 30만원</a></button>
+                                    <button type="button"><a th:href="@{/market/under/30/sort}">15만원 ~ 30만원</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/under/50}">30만원 ~ 50만원</a></button>
+                                    <button type="button"><a th:href="@{/market/under/50/sort}">30만원 ~ 50만원</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/under/100}">그 외</a></button>
+                                    <button type="button"><a th:href="@{/market/under/100/sort}">그 외</a></button>
                                 </li>
                             </ul>
                         </div>
@@ -284,13 +280,13 @@
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/season_all}">사계</a></button>
+                                    <button type="button"><a th:href="@{/market/season_all/sort}">사계</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/season_summer}">하계</a></button>
+                                    <button type="button"><a th:href="@{/market/season_summer/sort}">하계</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/season_winter}">동계</a></button>
+                                    <button type="button"><a th:href="@{/market/season_winter/sort}">동계</a></button>
                                 </li>
                             </ul>
                         </div>
@@ -300,22 +296,22 @@
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/type_tent}">텐트/타프</a></button>
+                                    <button type="button"><a th:href="@{/market/type_tent/sort}">텐트/타프</a></button>
                                 </li>
                                 <li>
-                                    <button class="button"><a th:href="@{/market/list/type_table}">테이블</a></button>
+                                    <button class="button"><a th:href="@{/market/type_table/sort}">테이블</a></button>
                                 </li>
                                 <li>
-                                    <button><a th:href="@{/market/list/type_chair}">의자</a></button>
+                                    <button><a th:href="@{/market/type_chair/sort}">의자</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/type_lanturn}">랜턴</a></button>
+                                    <button type="button"><a th:href="@{/market/type_lanturn/sort}">랜턴</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/type_cook}">조리도구</a></button>
+                                    <button type="button"><a th:href="@{/market/type_cook/sort}">조리도구</a></button>
                                 </li>
                                 <li>
-                                    <button type="button"><a th:href="@{/market/list/type_etc}">기타</a></button>
+                                    <button type="button"><a th:href="@{/market/type_etc/sort}">기타</a></button>
                                 </li>
                             </ul>
                         </div>
@@ -327,7 +323,7 @@
     <div class="content market_board_page">
         <!--1차이미지-->
         <div class="market_board_page_1">
-            <ul>
+            <ul id="marketItem">
                 <li th:each="market, stat : ${paging}" th:if="${stat.index < 9}">
                     <nav class="item market_board_img">
                         <a th:href="@{|/market/detail/${market.id}|}">
@@ -364,7 +360,7 @@
                     </li>
                     <li th:each="page: ${#numbers.sequence(0, paging.totalPages)}"
                         th:if="${page >= paging.number-3 and page <= paging.number+3}"
-                        th:classappend="${page == paging.number+1} ? 'active'"
+                        th:classappend="${page == paging.number} ? 'active'"
                         class="page-item">
                         <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
                     </li>
@@ -390,5 +386,31 @@
         </nav>
     </div>
 </footer>
+<script>
+    $(document).ready(function() {
+  // .pagination-2 내의 페이지 링크 클릭 이벤트 처리
+  $('.sorting_menu a.Sort').on('click', function(e) {
+    e.preventDefault(); // 기본 링크 동작 방지
+
+    var pageUrl = `listCategory${$(this).attr('href')}`; // 클릭된 링크의 URL 가져오기
+
+<!--    location.href = pageUrl;-->
+<!--    console.log(pageUrl)-->
+    // 업데이트된 내용을 가져오기 위해 AJAX 요청 생성
+    $.ajax({
+      url: pageUrl,
+      method: 'GET',
+      //dataType: 'text',
+      success: function(response) {
+       $('#marketItem').replaceWith(response);
+      },
+      error: function() {
+        // AJAX 요청이 실패한 경우 에러 처리
+        console.log('내용을 가져오는 중에 오류가 발생했습니다.');
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>

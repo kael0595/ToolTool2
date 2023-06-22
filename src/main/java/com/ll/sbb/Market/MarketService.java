@@ -53,6 +53,32 @@ public class MarketService {
         return this.marketRepository.findAll(spec, pageable);
     }
 
+    public Page<Market> getUserList(int page, String kw, String user) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchUser(user);
+        return this.marketRepository.findAll(spec,pageable);
+    }
+
+
+    private Specification<Market> searchUser(String user) {
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Add a condition to check for equality between the username field and the provided user value
+            predicates.add(builder.equal(root.get("author").get("username"), user));
+
+            // Add any other search conditions if needed
+            // ...
+
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+
+
+
     public Market getMarket(Integer id) {
         Optional<Market> Market = this.marketRepository.findById(id);
         if (Market.isPresent()) {
@@ -86,6 +112,10 @@ public class MarketService {
 
     public List<Market> getAll() {
         return this.marketRepository.findAll();
+    }
+
+    public List<Market> getAuthor(SiteUser siteUser){
+        return this.marketRepository.findByAuthor(siteUser);
     }
 
 
@@ -188,6 +218,79 @@ public class MarketService {
 
     public void delete(Market market) {
         this.marketRepository.delete(market);
+    }
+
+
+
+
+
+    // 카테고리 /////////////////////////////
+    public Page<Market> getHigtList(int page, String kw, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = search(kw);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+    public Page<Market> getRowList(int page, String kw, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = search(kw);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+
+    public Page<Market> getPriceHigtList(int page, String kw, int min, int max,String sortKey) {
+
+        Specification<Market> spec = (root, query, builder) -> {
+            return builder.between(root.get("price"), min, max);
+        };
+        // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        return this.marketRepository.findAll(spec, pageable);
+    }
+    public Page<Market> getPriceRowList(int page, String kw, int min, int max,String sortKey) {
+
+        Specification<Market> spec = (root, query, builder) -> {
+            return builder.between(root.get("price"), min, max);
+        };
+        // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        return this.marketRepository.findAll(spec, pageable);
+    }
+
+    public Page<Market> getSeasonHighList(int page, String kw, String season,String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchSeason(season);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+    public Page<Market> getSeasonRowList(int page, String kw, String season,String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchSeason(season);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+
+    public Page<Market> getTypeHighList(int page, String kw, String type,String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchType(type);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+    public Page<Market> getTypeRowList(int page, String kw, String type,String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchType(type);
+        return this.marketRepository.findAll(spec, pageable);
     }
 
 }
