@@ -57,5 +57,5 @@ public class Article {
     @JoinColumn(name = "author_id")
     private SiteUser author;
 
-
+    private int likeCount;
 }

@@ -177,87 +177,8 @@ public class MarketController {
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
         }
-
-
         return "article_list";
     }
-
-
-//    @GetMapping("/category/{mainCategory}")
-//    public String mainCategory(Model model, @PathVariable("mainCategory") String mainCategory, @RequestParam(value = "subCategory", required = false) List<subCategory> subCategory) {
-//        List<Market> marketList;
-//        if (subCategory == null || subCategory.isEmpty()) {
-//            marketList = marketService.getMainCategory(mainCategory);
-//            model.addAttribute("marketList", marketList);
-//        }
-//        if (mainCategory.equals("type")) {
-//            if (subCategory.contains("tent")) {
-//                List<Market> tentMarketList = marketService.findByType("tent");
-//                model.addAttribute("marketList", tentMarketList);
-//            } else if (subCategory.contains("table")) {
-//                List<Market> tableMarketList = marketService.findByType("table");
-//                model.addAttribute("marketList", tableMarketList);
-//            } else if (subCategory.contains("chair")) {
-//                List<Market> chairMarketList = marketService.findByType("chair");
-//                model.addAttribute("marketList", chairMarketList);
-//            } else if (subCategory.contains("lantern")) {
-//                List<Market> lanternMarketList = marketService.findByType("lantern");
-//                model.addAttribute("marketList", lanternMarketList);
-//            } else if (subCategory.contains("cookware")) {
-//                List<Market> cookwareMarketList = marketService.findByType("cookware");
-//                model.addAttribute("marketList", cookwareMarketList);
-//            } else if (subCategory.contains("etc")) {
-//                List<Market> etcMarketList = marketService.findByType("etc");
-//                model.addAttribute("marketList", etcMarketList);
-//            }
-//        } else if (mainCategory.equals("pricerange")) {
-//            List<Market> markets = marketService.getAll(); // 기사 전체 목록 가져오기
-//            List<Market> priceRangemarketList = new ArrayList<>(); // 가격 범위에 해당하는 기사 저장할 리스트
-//
-//            for (Market market : markets) {
-//                int price = market.getPrice();
-//
-//                if (price <= 150000) {
-//                    if (subCategory.contains("15만원 이하")) {
-//                        priceRangemarketList.add(market);
-//                    }
-//                } else if (price <= 300000) {
-//                    if (subCategory.contains("30만원 이하")) {
-//                        priceRangemarketList.add(market);
-//                    }
-//                } else if (price <= 500000) {
-//                    if (subCategory.contains("50만원 이하")) {
-//                        priceRangemarketList.add(market);
-//                    }
-//                } else {
-//                    if (subCategory.contains("그 외")) {
-//                        priceRangemarketList.add(market);
-//                    }
-//                }
-//            }
-//        } else if (mainCategory.equals("season")) {
-//            if (subCategory.contains("summer")) {
-//                List<Market> summerMarketList = marketService.findBySeason("summer");
-//                model.addAttribute("MarketList", summerMarketList);
-//            } else if (subCategory.contains("winter")) {
-//                List<Market> winterMarketList = marketService.findBySeason("winter");
-//                model.addAttribute("MarketList", winterMarketList);
-//            } else if (subCategory.contains("all")) {
-//                List<Market> allSeasonMarketList = marketService.getAll();
-//                model.addAttribute("MarketList", allSeasonMarketList);
-//            }
-//        } else if (mainCategory.equals("beginner")) {
-//
-//        } else if (mainCategory.equals("all")) {
-//            List<Market> allMarketList = marketService.getAll();
-//            model.addAttribute("MarketList", allMarketList);
-//        }
-//        model.addAttribute("mainCategory", mainCategory);
-//        model.addAttribute("subCategory", subCategory);
-//
-//        return "MarketPage";
-//    }
-
 
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
@@ -323,5 +244,35 @@ public class MarketController {
         }
         this.marketService.delete(market);
         return "redirect:/";
+    }
+
+    @PostMapping("/vote/{id}")
+    @ResponseBody
+    public int marketVote(Principal principal, @PathVariable("id") Integer id) {
+        if (principal == null) {
+            return -1;
+        } else {
+            Market market = this.marketService.getMarket(id);
+            SiteUser siteUser = this.userService.getUser(principal.getName());
+
+            int tempLikeCount = market.getLikeCount();
+
+            if (market.getVoter().isEmpty()) {
+                market.setLikeCount(tempLikeCount + 1);
+                this.marketService.vote(market, siteUser);
+            } else {
+                for (SiteUser voter : market.getVoter()) {
+                    if (voter.getId() == siteUser.getId()) {
+                        market.setLikeCount(tempLikeCount - 1);
+                        this.marketService.delVote(market, siteUser);
+                    }
+                }
+            }
+
+            // => Join Count(*)
+            Market upadateMarket = this.marketService.getMarket(id);
+            //
+            return upadateMarket.getLikeCount();
+        }
     }
 }

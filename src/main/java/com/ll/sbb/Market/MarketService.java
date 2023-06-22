@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.error.Mark;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ import static org.springframework.core.annotation.MergedAnnotations.search;
 @RequiredArgsConstructor
 @Service
 public class MarketService {
-
     private final MarketRepository marketRepository;
+
 
     private Specification<Market> search(String kw) {
         return new Specification<>() {
@@ -186,8 +187,18 @@ public class MarketService {
         this.marketRepository.save(market);
     }
 
+    public void vote(Market market, SiteUser siteUser) {
+        market.getVoter().add(siteUser);
+        this.marketRepository.save(market);
+    }
+
     public void delete(Market market) {
         this.marketRepository.delete(market);
+    }
+
+    public void delVote(Market market, SiteUser siteUser) {
+        market.getVoter().remove(siteUser);
+        this.marketRepository.save(market);
     }
 
 }

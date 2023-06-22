@@ -1,5 +1,7 @@
 package com.ll.sbb;
 
+//import com.ll.sbb.kakao_login.OAuth2UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,27 +25,36 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                .requestMatchers("/**").permitAll()
-                .and()
-                .csrf().ignoringRequestMatchers(
-                        new AntPathRequestMatcher("/h2-console/**"))
-                .and()
-                .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
-                .and()
-                .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/")
-                .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-        ;
+        http.authorizeRequests(
+                        authorizeRequests -> authorizeRequests
+                                .requestMatchers("/admin/**").
+                                hasAnyRole("ADMIN", "SUPER_ADMIN")
+                                .requestMatchers("/**")
+                                .permitAll()
+                )
+                .csrf(
+                        csrf -> csrf.disable()
+                )
+
+                .formLogin(
+                        formLogin -> formLogin
+                                .loginPage("/user/login") // GET
+                                .loginProcessingUrl("/user/login") // POST
+                )
+//                .oauth2Login(
+//                        oauth2Login -> oauth2Login
+//                                .loginPage("/user/login")
+//                                .userInfoEndpoint(
+//                                        userInfoEndpoint -> userInfoEndpoint
+//                                                .userService(oAuth2UserService)
+//                                )
+//                )
+                .logout(logout -> logout
+                        .logoutUrl("/user/logout")
+                );
         return http.build();
     }
+
 
     @Bean
     PasswordEncoder passwordEncoder() {

@@ -1,8 +1,8 @@
 package com.ll.sbb.User;
 
-
 import com.ll.sbb.Article.Article;
 import com.ll.sbb.Article.ArticleService;
+import com.ll.sbb.Email.MailService;
 import com.ll.sbb.Market.Market;
 import com.ll.sbb.Market.MarketService;
 import jakarta.servlet.http.HttpSession;
@@ -20,7 +20,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,6 +35,8 @@ public class UserController {
 
     private final UserService userService;
 
+    private final MailService mailService;
+
     @GetMapping("/user/signup_menual")
     private String signup_menual() {
         return "signup_menual";
@@ -39,9 +44,9 @@ public class UserController {
 
     @GetMapping("/user/signup")
     private String signup(UserCreateForm userCreateForm) {
+//        return "mailCheck";
         return "signup_form";
     }
-
 
     @PostMapping("/user/signup")
     private String signup(@Valid UserCreateForm userCreateForm, BindingResult bindingResult) {
@@ -55,8 +60,9 @@ public class UserController {
             return "signup_form";
         }
         try {
+            UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
             userService.create(userCreateForm.getUsername(),
-                    userCreateForm.getPassword1(), userCreateForm.getEmail(), userCreateForm.getNickname(), userCreateForm.getMailKey());
+                    userCreateForm.getPassword1(), userCreateForm.getEmail(), userCreateForm.getNickname(), userCreateForm.getMailKey(), role);
             userService.emailConfirm(userCreateForm.getEmail(), userCreateForm.getMailKey());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
@@ -128,7 +134,8 @@ public class UserController {
 
     @GetMapping("/mypage")
     private String mypage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
-                          @RequestParam(value = "kw", defaultValue = "") String kw) {
+                          @RequestParam(value = "kw", defaultValue = "") String kw, Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
         Page<Article> paging = this.articleService.getList(page, kw);
         List<Article> articles = this.articleService.getAll();
         List<Market> markets = this.marketService.getAll();
@@ -141,5 +148,34 @@ public class UserController {
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
         return "mypage";
+    }
+
+    @GetMapping("/user/find")
+    public String find() {
+        return "UserSearch";
+    }
+
+    @PostMapping("/user/findId")
+    public String findId(@RequestParam("email") String email, Model model) {
+        SiteUser findId = userService.getUserByEmail(email);
+        if (findId != null) {
+            model.addAttribute(findId);
+        }
+        return "";
+    }
+
+    @GetMapping("/check/findPw")
+    @ResponseBody
+    public Map<String, Boolean> findPw(String userEmail, String userName) {
+        Map<String, Boolean> json = new HashMap<>();
+        boolean pwFindCheck = userService.userEmailCheck(userEmail, userName);
+
+        System.out.println(pwFindCheck);
+        json.put("check", pwFindCheck);
+        return json;
+    }
+
+    public void updatePassword(@RequestParam("password") String password, @RequestParam("email") String email) {
+        mailService.updatePassword(password, email);
     }
 }

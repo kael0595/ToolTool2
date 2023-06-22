@@ -14,10 +14,7 @@
 //import org.springframework.stereotype.Service;
 //import org.springframework.transaction.annotation.Transactional;
 //
-//import java.util.LinkedHashSet;
-//import java.util.Map;
-//import java.util.Set;
-//import java.util.UUID;
+//import java.util.*;
 //
 //@Service
 //@Transactional(readOnly = true)
@@ -25,6 +22,8 @@
 //public class OAuth2UserService extends DefaultOAuth2UserService {
 //
 //    private final UserRepository userRepository;
+//
+//    private final PasswordEncoder passwordEncoder;
 //
 //    @Override
 //    @Transactional
@@ -70,11 +69,10 @@
 //            user = userRepository.findByUsername("%s_%s".formatted(oauthType, oauthId));
 //        }
 //
-//        Set<GrantedAuthority> authorities = new LinkedHashSet<>();
-//        authorities.add(new SimpleGrantedAuthority("USER"));
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority("member"));
 //        return new MemberContext(user, authorities, attributes, userNameAttributeName);
 //    }
-//
 //
 //    private boolean isNew(String oAuthType, String oAuthId) {
 //        return userRepository.findByUsername("%s_%s".formatted(oAuthType, oAuthId)).isEmpty();

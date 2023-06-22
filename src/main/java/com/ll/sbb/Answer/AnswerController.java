@@ -5,6 +5,7 @@ import com.ll.sbb.Article.ArticleService;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class AnswerController {
 
     private final ArticleService articleService;
     private final AnswerService answerService;
+    @Autowired
     private final UserService userService;
 
     @PreAuthorize("isAuthenticated()")

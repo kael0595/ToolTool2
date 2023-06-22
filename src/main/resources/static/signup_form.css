@@ -117,8 +117,8 @@ a {
  h1 {
    text-align: center;
    text-transform: uppercase;
-   margin-bottom: 40px;
-   font-weight: 700px;
+   margin-bottom: 20px;
+   font-weight: 400px;
  }
 
  section#formHolder {
@@ -342,6 +342,18 @@ a {
   margin-bottom:30px;
 }
 
+.form-group .emailCF{
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  background: #ff6c00;
+  color: #fff;
+  border-radius: 30px;
+  margin-right: 20px;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  margin-top:13px;
+}
 .signup-form .CTA a.switch {
   font-size: 13px;
 }

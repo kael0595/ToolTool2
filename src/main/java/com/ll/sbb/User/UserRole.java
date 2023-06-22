@@ -1,6 +1,8 @@
 package com.ll.sbb.User;
 
+import lombok.Getter;
 
+@Getter
 public enum UserRole {
 
     SUPER_ADMIN("ROLE_SUPER_ADMIN"),

@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/signup_form.css">
     <title>회원가입</title>
 </head>
@@ -112,8 +113,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">E-mail </label>
-                    <input type="email" th:field="*{email}" name="emailAdress" id="email" class="email">
+                    <label for="email">이메일 </label>
+                    <input type="email" th:field="*{email}" name="email" id="email" class="email">
+                    <button class="emailCF" type="button" id="emailCF"
+                            onclick="sendEmailConfirmation()">인증번호 보내기
+                    </button>
                     <span class="error"></span>
                 </div>
 
@@ -122,9 +126,19 @@
                     <input type="text" th:field="*{nickname}" name="nickname" id="nickname">
                 </div>
 
+                <div class="form-group">
+                    <label for="mailKey">이메일 인증번호</label>
+                    <input type="mailKey" th:field="*{mailKey}" name="mailKey" id="mailKey"
+                           class="passConfirm">
+                    <button type="submit" class="emailCF" id="emailCF">
+                        인증번호 확인
+                    </button>
+                    <span class="error"></span>
+                </div>
+
                 <div class="CTA">
                     <input type="submit" value="Signup Now" id="submit">
-                    <a href="#" class="switch">로그인하기</a>
+                    <a href="http://localhost:8080/user/login" class="switch">로그인하기</a>
                 </div>
             </form>
 
@@ -147,5 +161,40 @@
 </div>
 
 </body>
+<script>
+    function sendEmailConfirmation() {
+        // 이메일 주소 가져오기
+        var email = $("#email").val();
+        var mailKey = $("#mailKey").val();
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "http://localhost:8080/mailCheck", // 이메일 인증번호를 보낼 서버의 URL
+            method: "GET",
+            data: {sm_email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
+            success: function(response) {
+                alert("이메일 인증번호를 전송했습니다.");
+            },
+            error: function(xhr, status, error) {
+                alert("이메일 인증번호 전송에 실패했습니다. 다시 시도해주세요.");
+            }
+        });
+    }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </html>

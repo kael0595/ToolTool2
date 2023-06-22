@@ -54,7 +54,6 @@ public class MarketAnswerController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
         this.marketAnswerService.delete(marketAnswer);
-//        return "redirect:/market/list";
         return String.format("redirect:/market/detail/%s", marketAnswer.getMarket().getId());
     }
 

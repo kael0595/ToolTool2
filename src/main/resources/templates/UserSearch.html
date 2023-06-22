@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/UserSearch.css"/>
+    <title>UserSearch</title>
+</head>
+
+<body>
+<!-- 네비바 -->
+<div class="top__bar">
+    <nav class="top__bar_menu">
+        <div class="logo_box">
+            <ul>
+                <li>
+                    <a href="http://localhost:8080/">
+                        <button type="button" class="logo_button">
+                            <img src="국기수업_중프[툴툴]/디자인/툴툴1.png"/>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main_menu">
+            <ul class="main_menu_ul">
+                <li>
+                    <a href="http://localhost:8080/article/list">
+                        <span class="review">Review</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/market/list">
+                        <span class="market">Market</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:8080/notice/list">
+                        <span class="notice">Notice</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="signLine">
+            <div class="signIn">
+                <a href="http://localhost:8080/user/login">
+                    <button type="button" class="signIn_button">
+                        <img src="img/sign in.png" class="signIn_img"/>
+                    </button>
+                </a>
+            </div>
+            <div class="signUp">
+                <a href="http://localhost:8080/user/signup">
+                    <button type="button" class="signUp_button">
+                        <img src="img/sing up.png" class="signUp_img"/>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- 중앙 -->
+<div layout:fragment="content" class="">
+    <form th:action="@{/user/findid}" method="">
+        <div>
+            <h1 class="find">Find ID</h1>
+            <h3 class="findment">가입하신 정보를 입력해주세요</h3>
+        </div>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">이메일을 다시 확인해 주세요.</div>
+        </div>
+        <div class="mb-3">
+            <input type="email" name="email" id="d" class="form-control" placeholder="이메일"/>
+        </div>
+        <button type="submit" class="btn btn-primary">FIND-ID</button>
+        <a href="">
+            <img src="" alt=""/>
+        </a>
+    </form>
+    <form th:action="@{/user/findpw}" class="usersearchform">
+        <div>
+            <h1 class="find">Find PW</h1>
+            <h3 class="findment">가입하신 정보를 입력해주세요</h3>
+        </div>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                가입하신 정보를 다시 확인해 주세요.
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="text" name="userid" id="userid" class="form-control" placeholder="아이디"/>
+        </div>
+        <div class="mb-3">
+            <input type="email" name="email" id="d" class="form-control" placeholder="이메일"/>
+        </div>
+        <button type="submit" class="btn btn-primary">FIND-PW</button>
+        <a href="">
+            <img src="" alt=""/>
+        </a>
+    </form>
+</div>
+</body>
+<script>
+
+    $('.modal').on('hidden.bs.modal', function (e) {
+        console.log('modal close');
+        $(this).find('form')[0].reset()
+    });
+
+    $("#checkEmail").click(function () {
+        let userEmail = $("#userEmail").val();
+        let userName = $("#userName").val();
+
+        $.ajax({
+            type: "GET",
+            url: "/check/findPw",
+            data: {
+                "userEmail": userEmail,
+                "userName": userName
+            },
+            success: function (res) {
+                if (res['check']) {
+                    swal("발송 완료!", "입력하신 이메일로 임시비밀번호가 발송되었습니다.", "success").then((OK) = > {
+                        if(OK) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/check/findPw/sendEmail",
+                                data: {
+                                    "userEmail": userEmail,
+                                    "userName": userName
+                                }
+                            })
+                            window.location = "/login";
+                        }
+
+
+                    }
+                )
+                    $('#checkMsg').html('<p style="color:darkblue"></p>');
+                } else {
+                    $('#checkMsg').html('<p style="color:red">일치하는 정보가 없습니다.</p>');
+                }
+            }
+        })
+    })
+
+
+</script>
+</html>

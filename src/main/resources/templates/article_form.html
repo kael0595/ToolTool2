@@ -11,8 +11,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-
 </head>
 <body>
 <!--top-bar라인-->
@@ -85,8 +83,7 @@
 <!--아래부터 폼 -->
 <div layout:fragment="content" class="container">
     <form th:object="${articleForm}" method="post" class="form">
-        <h1 class="my-3 border-bottom pb-2"><p>Review</p></h1>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <h1 class="my-3 border-bottom pb-2">Review</h1>
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
@@ -121,25 +118,25 @@
         <div class="mb-3">
             <div class="season"><p>사용계절:</p></div>
             <select name=”season” id="season" th:field="*{season}">
-                <option id="seasonmenu1" name=”season” value=사계>사계절</option>
-                <option id="seasonmenu2" name=”season” value=하계>하계</option>
-                <option id="seasonmenu3" name=”season” value=동계>동계</option>
+                <option id="seasonmenu1" name="season" value=사계>사계절</option>
+                <option id="seasonmenu2" name="season" value=하계>하계</option>
+                <option id="seasonmenu3" name="season" value=동계>동계</option>
 
             </select>
 
             <div class="season2"><p>용품종류:</p></div>
             <select name=”type” id=“type” th:field="*{type}">
-                <option id="typemenu1" name=”type” value=텐트/타프>텐트/타프</option>
-                <option id="typemenu2" name=”type” value=테이블>테이블</option>
-                <option id="typemenu3" name=”type” value=의자>의자</option>
-                <option id="typemenu4" name=”type” value=랜턴>랜턴</option>
-                <option id="typemenu5" name=”type” value=조리도구>조리도구</option>
-                <option id="typemenu6" name=”type” value=기타>기타</option>
+                <option id="typemenu1" name="type" value=텐트/타프>텐트/타프</option>
+                <option id="typemenu2" name="type" value=테이블>테이블</option>
+                <option id="typemenu3" name="type" value=의자>의자</option>
+                <option id="typemenu4" name="type" value=랜턴>랜턴</option>
+                <option id="typemenu5" name="type" value=조리도구>조리도구</option>
+                <option id="typemenu6" name="type" value=기타>기타</option>
             </select>
         </div>
         <div class="photo"><p>사진등록버튼구현예정</p></div>
         <div class="mb-3">
-            <label for="content" class="form-label"><p>내용</p></label>
+            <label for="content" class="form-label">내용</label>
             <textarea sec:authorize="isAnonymous()" th:field="*{content}" id="summernote"
                       class="form-control" rows="10" th:if="${#authorization.expression('isAnonymous()')}"></textarea>
             <textarea sec:authorize="isAuthenticated()" th:field="*{content}" id="summernote"
@@ -181,6 +178,8 @@
             document.getElementById("summernote").value = str;
         }
     });
+
+
 
 </script>
 </html>

@@ -5,10 +5,7 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,4 +38,43 @@ public class MailController {
         }
         return mailKey;
     }
+
+
+    @PostMapping("/check/findPw/sendEmail")
+    @ResponseBody
+    public void sendEmail(@RequestParam("sm_email") String sm_email) {
+        char[] TempKey = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+        String str = "";
+
+        int idx = 0;
+        for (int i = 0; i < 10; i++) {
+            idx = (int) (TempKey.length * Math.random());
+            str += TempKey[idx];
+
+            String from = "admin@ToolTool.com";//보내는 이 메일주소
+            String to = sm_email;
+            String title = "임시 비밀번호입니다.";
+            String content = "[임시 비밀번호] " + TempKey + " 입니다. <br/> 접속한 후 비밀번호를 변경해주세요";
+            try {
+                MimeMessage mail = mailSender.createMimeMessage();
+                MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+
+                mailHelper.setFrom(from);
+                mailHelper.setTo(to);
+                mailHelper.setSubject(title);
+                mailHelper.setText(content, true);
+
+                mailSender.send(mail);
+
+            } catch (Exception e) {
+                throw new DataNotFoundException("error");
+            }
+        }
+    }
+
+
+
+
 }

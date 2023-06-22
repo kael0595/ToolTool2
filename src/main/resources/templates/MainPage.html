@@ -70,9 +70,9 @@
                     </button>
                 </a>
             </div>
-            <div class="signUp" sec:authorize="isAuthenticated()"
-                 th:if="${user != null and user.admin != null and user.admin >= 1}">
-                <a href="http://localhost:8080/admin">
+            <div class="signUp"
+                 th:if="${#authorization.expression('isAuthenticated() and (hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN''))')}">
+                <a href="http://localhost:8080/admin/">
                     <button type="button" class="signUp_button">
                         <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
                         <span>관리자 페이지</span>
@@ -226,6 +226,8 @@
           $(this).attr("src", newSrc);
         });
       });
+
+
 
 
 

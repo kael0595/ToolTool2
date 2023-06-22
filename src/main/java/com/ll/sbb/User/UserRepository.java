@@ -28,8 +28,14 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
 
     Optional<SiteUser> findByEmail(String email);
 
-    SiteUser findByUsername(String formatted);
+//    SiteUser findByUsername(String username);
+
+    SiteUser findPwByEmailAndUsername(String email, String username);
+
+    SiteUser findUserById(String userEmail);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE SiteUser u SET u.password = :password WHERE u.id = :id")
+    void updateUserPassword(@Param("id") int id, @Param("password") String password);
 }
-
-//    SiteUser findUserByUserId(String userEmail);
-

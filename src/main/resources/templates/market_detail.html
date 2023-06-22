@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/market/list">
+                    <a href="http://localhost:8080/Market/list">
                         <span>Market</span>
                     </a>
                 </li>
@@ -164,29 +164,33 @@
                     <div class=""></div>
                 </div>
             </div>
+            <!--좋아요/ 댓글 버튼 시작-->
             <div class="content_form">
                 <div class="content_view">
                     <p th:text="${market.content}" class="content_write"></p>
                     <div class="icon_box">
                         <div class="iconLine">
                             <div class="like">
-                                <i class="fa-regular fa-heart" style="color: ##ff6c00 ;"></i>
-                                <a href="#" role="button"></a>
+                                <a href="#" role="button" class="like_heart">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+
                                 <em class="u_ico _icon"></em>
                                 <span class="u_txt _label">좋아요</span>
-                                <strong th:text="${#lists.size(market.wishList)}" class="u_cnt _count"></strong>
-
+                                <strong th:text="${market.likeCount}" id="checkedLikeCount"
+                                        class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
+
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
-                                    댓글<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
+                                    댓글<strong th:text="|${#lists.size(market.marketList)}" class="num"></strong>
                                 </a>
                             </div>
+                            <!--좋아요/ 댓글 버튼 끝-->
 
                             <div class="replyBox">
                                 <div th:each="MarketAnswer : ${market.marketAnswerList}" class="answerbox">
                                     <!-- 댓글 닉네임   -->
-                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <div class="answerNick">
                                         <span th:if="${MarketAnswer.author != null}"
                                               th:text="${MarketAnswer.author.nickname}" class="nick"></span>
@@ -199,23 +203,6 @@
                                         </ul>
                                     </div>
                                     <!--  댓글내용 끝  -->
-                                    <!--수정-->
-                                    <div class="formmodifybox">
-                                        <form th:action="@{|/marketAnswer/modify/${MarketAnswer.id}|}"
-                                              th:object="${marketAnswerForm}"
-                                              method="post" class="formboxform">
-
-                                        <textarea name="content" id="content" rows="10"
-                                                  placeholder="수정할 내용을 작성해주세요"></textarea>
-                                            <button class="reply_summit" type="submit" value="답변수정">답변수정</button>
-                                            <button class="reply_summit_exit" type="button" value="취소"
-                                                    onclick="hideFormModifyBox(event, this)">수정취소
-                                            </button>
-
-                                        </form>
-
-                                    </div>
-                                    <!--수정 끝-->
                                     <!-- 댓글 하단바   -->
                                     <div class="answerCreateBox">
                                         <div class="answerCreateDate">
@@ -224,18 +211,10 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a href="#" sec:authorize="isAuthenticated()"
-                                               class="modify btn btn-sm btn-outline-secondary"
-                                               th:if="${MarketAnswer.author != null and #authentication.getPrincipal().getUsername() == MarketAnswer.author.username}"
-                                               th:text="수정" onclick="showFormModifyBox(event, this)">
+                                            <a href="#" class="answermodify_btn">
                                                 <button type="button" class="answermodify_btn">수정</button>
                                             </a>
-                                            <a href="javascript:void(0);"
-                                               th:data-uri="@{|/marketAnswer/delete/${MarketAnswer.id}|}"
-                                               class="delete btn btn-sm btn-outline-secondary"
-                                               sec:authorize="isAuthenticated()"
-                                               th:if="${MarketAnswer.author != null and #authentication.getPrincipal().getUsername() == MarketAnswer.author.username}"
-                                               th:text="삭제">
+                                            <a href="#" class="answerremove_btn">
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
@@ -263,9 +242,6 @@
             </div>
         </div>
 
-        <!-- 원래글쓰기버튼자리 -->
-
-
         <!-- 리뷰 박스 끝 -->
 
         <!--footer-->
@@ -292,31 +268,55 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 
+/*<![CDATA[*/
+    var likeCount = [[${#lists.size(market.voter)}]]
+    var articleId = [[${market.id}]]
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
 
-</script>
+    var checkedLike = [[${checkedLike}]]
 
-<!--수정 댓글-->
+   if (checkedLike) {
+    $('.fa-heart').removeClass('fa-regular')
+    $('.fa-heart').addClass('fa-solid')
+    $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+   }
 
+    $('.like_heart').on('click', function(e){
+        e.preventDefault()
 
-<script>
-  function showFormModifyBox(event, button) {
-    event.preventDefault(); // 페이지 새로고침 방지
+        // ajax 통신
+        $.ajax({
+            type : "POST",            // HTTP method type(GET, POST) 형식이다.
+            url : "/market/vote/" + marketId,      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: 'json',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(res){
+                if (res === -1) {
+                    alert("좋아요를 누르시려면 로그인을 해주세요.")
+                    location.href="/user/login"
+                    return
+                }
 
-    var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
-    $(formModifyBox).css('display', 'block');
-
-    var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
-    $(answerCreateBox).css('display', 'none');
-  }
-  function hideFormModifyBox(event, button) {
-  event.preventDefault(); // 이벤트의 기본 동작 방지
-
-  var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
-  $(formModifyBox).css('display', 'none');
-
-  var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
-  $(answerCreateBox).css('display', 'block');
-}
+               if ($('.fa-heart').hasClass('fa-regular')) {
+                $('.fa-heart').removeClass('fa-regular')
+                $('.fa-heart').addClass('fa-solid')
+                $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               } else {
+                $('.fa-heart').addClass('fa-regular') //안채워져있을 때
+                $('.fa-heart').removeClass('fa-solid') //눌렀을때 색 채우기 addClass
+                $('.fa-heart').css('color','#73703f') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               }
+            },
+            error : function(err){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(err)
+            }
+        })
+    })
 
 </script>
 </body>

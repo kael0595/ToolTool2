@@ -54,4 +54,15 @@ public class NoticeService {
         return this.noticeRepository.findAll();
     }
 
+    public void modify(String subject, String content) {
+        Notice q = new Notice();
+        q.setSubject(subject);
+        q.setContent(content);
+        q.getModifyDate();
+        this.noticeRepository.save(q);
+    }
+
+    public void delete(Notice notice) {
+        this.noticeRepository.delete(notice);
+    }
 }

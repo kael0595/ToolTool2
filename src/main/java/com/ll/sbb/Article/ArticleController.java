@@ -1,8 +1,10 @@
 package com.ll.sbb.Article;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ll.sbb.Category.subCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.ll.sbb.Answer.AnswerForm;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 
@@ -40,8 +43,21 @@ public class ArticleController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String articleDetail(Model model, @PathVariable("id") Integer id) {
+    public String articleDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
+        boolean checkedLike = false;
+
+        if (principal != null) {
+            SiteUser siteUser = this.userService.getUser(principal.getName());
+            for (SiteUser voter : article.getVoter()) {
+                if (voter.getId() == siteUser.getId()) {
+                    checkedLike = true;
+                }
+            }
+        }
+
+
+        model.addAttribute("checkedLike", checkedLike);
         model.addAttribute("article", article);
         return "article_detail";
     }
@@ -98,7 +114,7 @@ public class ArticleController {
         return "article_list";
     }
 
-    // 시즌,타입  카데고리 리스트 맵핑 시즌=season , 타입=type
+    // 시즌,타입  카데고리 리스트 맵핑 시즌=serson , 타입=type
 
     @GetMapping("/list/{category}")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
@@ -178,7 +194,6 @@ public class ArticleController {
             model.addAttribute("kw", kw);
         }
 
-
         return "article_list";
     }
 
@@ -242,13 +257,33 @@ public class ArticleController {
         return "redirect:/";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/vote/{id}")
+    @PostMapping("/vote/{id}")
     @ResponseBody
-    public String articleVote(Principal principal, @PathVariable("id") Integer id) {
-        Article article = this.articleService.getArticle(id);
-        SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.articleService.vote(article, siteUser);
-        return "성공";
+    public int articleVote(Principal principal, @PathVariable("id") Integer id) {
+        if (principal == null) {
+            return -1;
+        } else {
+            Article article = this.articleService.getArticle(id);
+            SiteUser siteUser = this.userService.getUser(principal.getName());
+
+            int tempLikeCount = article.getLikeCount();
+
+            if (article.getVoter().isEmpty()) {
+                article.setLikeCount(tempLikeCount + 1);
+                this.articleService.vote(article, siteUser);
+            } else {
+                for (SiteUser voter : article.getVoter()) {
+                    if (voter.getId() == siteUser.getId()) {
+                        article.setLikeCount(tempLikeCount - 1);
+                        this.articleService.delVote(article, siteUser);
+                    }
+                }
+            }
+
+            // => Join Count(*)
+            Article upadateArticle = this.articleService.getArticle(id);
+            //
+            return upadateArticle.getLikeCount();
+        }
     }
 }

@@ -56,4 +56,9 @@ public class Market {
 
     private String brand;
 
+    @OneToMany
+    private Set<SiteUser> voter;
+
+    private int likeCount;
+
 }

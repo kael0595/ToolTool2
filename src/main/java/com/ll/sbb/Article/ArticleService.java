@@ -184,4 +184,9 @@ public class ArticleService {
         return this.articleRepository.findByPriceBetween(min, max);
         // 비트윈을 사용하면 인트값의 범위를 지정하여 불러올 수 있다. (프라이스가 int값으로 지정되어있음 )
     }
+
+    public void delVote(Article article, SiteUser siteUser) {
+        article.getVoter().remove(siteUser);
+        this.articleRepository.save(article);
+    }
 }

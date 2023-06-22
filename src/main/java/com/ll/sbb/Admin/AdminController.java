@@ -1,71 +1,60 @@
 package com.ll.sbb.Admin;
 
+import com.ll.sbb.Article.Article;
+import com.ll.sbb.Article.ArticleService;
+import com.ll.sbb.Market.Market;
+import com.ll.sbb.Market.MarketService;
+import com.ll.sbb.Notice.Notice;
+import com.ll.sbb.Notice.NoticeService;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserCreateForm;
+import com.ll.sbb.User.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
+
+//    private final ArticleService articleService;
 //
-//    private AdminService adminService;
+//    private final MarketService marketService;
 //
-//    @GetMapping("/signup")
-//    public String createAdmin(AdminCreateForm adminCreateForm) {
-//        return "admin_signup_form";
-//    }
+//    private final UserService userService;
 //
-//    @PostMapping("/signup")
-//    public String createAdmin(@Valid AdminCreateForm adminCreateForm, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "admin_signup_form";
-//        }
-//        if (!adminCreateForm.getPassword1().equals(adminCreateForm.getPassword2())) {
-//            bindingResult.rejectValue("password2", "비밀번호 2개가 일치하지 않습니다.");
-//            return "admin_signup_form";
-//        }
-//        try {
-//            adminService.createAdmin(adminCreateForm.getUsername(), adminCreateForm.getPassword1());
-//        } catch (DataIntegrityViolationException e) {
-//            e.printStackTrace();
-//            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-//            return "admin_signup_form";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            bindingResult.reject("signupFailed", e.getMessage());
-//            return "admin_signup_form";
-//        }
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/login")
-//    public String login() {
-//
-//        return "admin_login_form";
-//    }
-//
-//    @PostMapping("/login")
-//    public String processLogin(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) {
-//        if (adminService.authenticateUser(username, password)) {
-//            session.setAttribute("loggedIn", true);
-//            return "redirect:/";
-//        } else {
-//            return "login_form";
-//        }
-//    }
+//    private final NoticeService noticeService;
 
     @GetMapping("/")
     public String adminroot() {
+//        SiteUser siteUser = this.userService.getUser(principal.getName());
+//        Page<Article> paging = this.articleService.getList(page, kw);
+//        List<Article> articles = this.articleService.getAll();
+//        List<Market> markets = this.marketService.getAll();
+//        List<Notice> notices = this.noticeService.getAll();
+//        int articleCount = articles.size();
+//        int marketCount = markets.size();
+//        model.addAttribute("markets", markets);
+//        model.addAttribute("marketCount", marketCount);
+//        model.addAttribute("articles", articles);
+//        model.addAttribute("articleCount", articleCount);
+//        model.addAttribute("notices", notices);
+//        model.addAttribute("paging", paging);
+//        model.addAttribute("kw", kw);
+
         return "AdminPage";
     }
 

@@ -4,8 +4,11 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <link rel="stylesheet" href="/article_detail.css"/>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>툴툴</title>
 </head>
 
@@ -18,7 +21,8 @@
                 <li>
                     <a href="http://localhost:8080/">
                         <button type="button" class="logo_button">
-                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
+                            <a href='http://localhost:8080/'><img src='https://ifh.cc/g/Hlz6bC.png'
+                                                                  border='0' class="logoimg"></a>
                         </button>
                     </a>
                 </li>
@@ -32,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/market/list">
+                    <a href="http://localhost:8080/Market/list">
                         <span>Market</span>
                     </a>
                 </li>
@@ -48,29 +52,30 @@
                 <a href="http://localhost:8080/user/logout">
                     <button type="button" class="signIn_button">
                         <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
+
                     </button>
                 </a>
             </div>
 
-            <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
+            <div class="signOut" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="http://localhost:8080/user/login">
                     <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
+                        <i class="fa-regular fa-arrow-right-from-bracket" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
 
-            <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
+            <div class="myPage" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
                 <a href="http://localhost:8080/mypage">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
+                        <i class="fa-solid fa-user" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
             <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
                 <a href="user/signup_menual">
                     <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
+                        <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
                     </button>
                 </a>
             </div>
@@ -86,7 +91,7 @@
         <div class="article_header">
             <div class="articlenum">
                 <span>no.</span>
-                <span th:text="${article.id}" class="articleNum">123</span>
+                <span th:text="${article.id}" class="articleNum" id="articleId">123</span>
             </div>
             <div class="modifyRemove">
                 <a th:href="@{|/article/modify/${article.id}|}"
@@ -177,10 +182,9 @@
 
                                 <em class="u_ico _icon"></em>
                                 <span class="u_txt _label">좋아요</span>
-                                <strong th:text="${#lists.size(article.voter)}" class="u_cnt _count"></strong>
-
-
+                                <strong th:text="${article.likeCount}" id="checkedLikeCount" class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
+
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
                                     댓글<strong th:text="|${#lists.size(article.answerList)}" class="num"></strong>
@@ -190,7 +194,6 @@
                             <div class="replyBox">
                                 <div th:each="answer : ${article.answerList}" class="answerbox">
                                     <!-- 댓글 닉네임   -->
-                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <div class="answerNick">
                                         <span th:if="${answer.author != null}" th:text="${answer.author.nickname}"
                                               class="nick">닉네임</span>
@@ -203,22 +206,6 @@
                                         </ul>
                                     </div>
                                     <!--  댓글내용 끝  -->
-                                    <!--수정-->
-                                    <div class="formmodifybox">
-                                        <form th:action="@{|/answer/modify/${answer.id}|}" th:object="${answerForm}"
-                                              method="post" class="formboxform">
-
-                                        <textarea name="content" id="content" rows="10"
-                                                  placeholder="수정할 내용을 작성해주세요"></textarea>
-                                            <button class="reply_summit" type="submit" value="답변수정">답변수정</button>
-                                            <button class="reply_summit_exit" type="button" value="취소"
-                                                    onclick="hideFormModifyBox(event, this)">수정취소
-                                            </button>
-
-                                        </form>
-
-                                    </div>
-                                    <!--수정 끝-->
                                     <!-- 댓글 하단바   -->
                                     <div class="answerCreateBox">
                                         <div class="answerCreateDate">
@@ -227,10 +214,10 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a href="#" sec:authorize="isAuthenticated()"
-                                               class="modify btn btn-sm btn-outline-secondary"
+                                            <a th:href="@{|/answer/modify/${answer.id}|}"
+                                               sec:authorize="isAuthenticated()"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                               th:text="수정" onclick="showFormModifyBox(event, this)">
+                                               class="answermodify_btn">
                                                 <button type="button" class="answermodify_btn">수정</button>
                                                 '
                                             </a>
@@ -243,7 +230,6 @@
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
                                         </div>
-
                                     </div>
 
                                     <!-- 댓글 하단바 끝   -->
@@ -295,32 +281,55 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 
+/*<![CDATA[*/
+    var likeCount = [[${#lists.size(article.voter)}]]
+    var articleId = [[${article.id}]]
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
 
-</script>
+    var checkedLike = [[${checkedLike}]]
 
-<!--수정 댓글-->
+   if (checkedLike) {
+    $('.fa-heart').removeClass('fa-regular')
+    $('.fa-heart').addClass('fa-solid')
+    $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+   }
 
+    $('.like_heart').on('click', function(e){
+        e.preventDefault()
 
-<script>
-  function showFormModifyBox(event, button) {
-    event.preventDefault(); // 페이지 새로고침 방지
+        // ajax 통신
+        $.ajax({
+            type : "POST",            // HTTP method type(GET, POST) 형식이다.
+            url : "/article/vote/" + articleId,      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: 'json',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(res){
+                if (res === -1) {
+                    alert("좋아요를 누르시려면 로그인을 해주세요.")
+                    location.href="/user/login"
+                    return
+                }
 
-    var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
-    $(formModifyBox).css('display', 'block');
-
-    var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
-    $(answerCreateBox).css('display', 'none');
-  }
-  function hideFormModifyBox(event, button) {
-  event.preventDefault(); // 이벤트의 기본 동작 방지
-
-  var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
-  $(formModifyBox).css('display', 'none');
-
-  var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
-  $(answerCreateBox).css('display', 'block');
-}
-
+               if ($('.fa-heart').hasClass('fa-regular')) {
+                $('.fa-heart').removeClass('fa-regular')
+                $('.fa-heart').addClass('fa-solid')
+                $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               } else {
+                $('.fa-heart').addClass('fa-regular') //안채워져있을 때
+                $('.fa-heart').removeClass('fa-solid') //눌렀을때 색 채우기 addClass
+                $('.fa-heart').css('color','#73703f') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               }
+            },
+            error : function(err){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(err)
+            }
+        })
+    })
 </script>
 </body>
 </html>

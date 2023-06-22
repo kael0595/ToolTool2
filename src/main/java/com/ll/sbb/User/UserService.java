@@ -1,10 +1,10 @@
 package com.ll.sbb.User;
 
 import com.ll.sbb.DataNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,17 +16,18 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public SiteUser create(String username, String password, String email, String nickname, int mailKey) {
+    @Transactional
+    public SiteUser create(String username, String password, String email, String nickname, int mailKey, UserRole role) {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setEmail(email);
         user.setNickname(nickname);
         user.setMailKey(mailKey);
+        user.setUserRole(role);
         user.setPassword(passwordEncoder.encode(password));
         this.userRepository.save(user);
         return user;
     }
-
 
     public void updateMailKey(int mailKey, String email, Long id) {
         userRepository.updateMailKey(mailKey, email, id);
@@ -52,7 +53,6 @@ public class UserService {
         } else {
             throw new DataNotFoundException("siteuser not found");
         }
-
     }
 
 
@@ -72,7 +72,6 @@ public class UserService {
         } else {
             throw new DataNotFoundException("siteuser not found");
         }
-
     }
 
     public void emailConfirm(String email, int mailKey) throws Exception {
@@ -84,5 +83,20 @@ public class UserService {
             throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");
         }
     }
+
+    public SiteUser getPwByEmailAndUserName(String email, String username) {
+        return this.userRepository.findPwByEmailAndUsername(email, username);
+    }
+
+    public boolean userEmailCheck(String userEmail, String userName) {
+
+        SiteUser user = userRepository.findUserById(userEmail);
+        if (user != null && user.getUsername().equals(userName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }
