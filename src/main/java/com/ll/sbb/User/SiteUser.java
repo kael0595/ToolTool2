@@ -42,6 +42,6 @@ public class SiteUser {
 
     private boolean mailAuth;
 
-//    private LocalDate createDate;
+    private LocalDate createDate;
 
 }

@@ -24,18 +24,16 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
     @Query("UPDATE SiteUser u SET u.mailAuth = true WHERE u.email = :email AND u.mailKey = :mailKey")
     int updateMailAuth(@Param("email") String email, @Param("mailKey") int mailKey);
 
-    long countByEmailAndMailAuth(String email, boolean mailAuth);
-
-    Optional<SiteUser> findByEmail(String email);
-
-//    SiteUser findByUsername(String username);
-
-    SiteUser findPwByEmailAndUsername(String email, String username);
-
-    SiteUser findUserById(String userEmail);
-
     @Modifying
     @Transactional
     @Query("UPDATE SiteUser u SET u.password = :password WHERE u.id = :id")
     void updateUserPassword(@Param("id") int id, @Param("password") String password);
+
+    long countByEmailAndMailAuth(String email, boolean mailAuth);
+
+    Optional<SiteUser> findByEmail(String email);
+
+    SiteUser findPwByEmailAndUsername(String email, String username);
+
+    SiteUser findUserById(String userEmail);
 }

@@ -1,0 +1,25 @@
+<ul id="marketItem">
+    <li th:fragment="marketitemFragment" th:each="market, stat : ${paging}" th:if="${stat.index < 9}">
+        <nav class="item market_board_img">
+            <a th:href="@{|/market/detail/${market.id}|}">
+                <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="market_board_main_img"/>
+            </a>
+            <div class="text_box_name text_box_name_1">
+                <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>
+            </div>
+            <div class="market_board_text_box">
+                            <span>판매가격 : <span
+                                    th:text="${market.price}">
+                                        </span>원</span>
+
+            </div>
+            <div class="market_board_text_box_tag">
+                <span>#</span>
+                <span th:text="${market.type}"></span>
+                <span>,</span>
+                <span>#</span>
+                <span th:text="${market.brand}"></span>
+            </div>
+        </nav>
+    </li>
+</ul>

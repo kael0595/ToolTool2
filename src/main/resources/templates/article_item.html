@@ -1,0 +1,28 @@
+<ul id="articleItem">
+    <li th:fragment="articleitemFragment" th:each="article, stat : ${paging}" th:if="${stat.index < 9}">
+        <nav class="item review_board_img">
+            <a th:href="@{|/article/detail/${article.id}|}">
+                <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="review_board_main_img"/>
+            </a>
+            <div class="text_box_name text_box_name_1">
+                <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+            </div>
+            <div class="review_board_text_box">
+                              <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
+                                              th:text="${#lists.size(article.answerList)}">
+                                          </span></span>
+                <span>&nbsp;&nbsp;</span>
+                <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
+                                th:text="${#lists.size(article.voter)}"></span></span>
+            </div>
+
+            <div class="review_board_text_box_tag">
+                <span>#</span>
+                <span th:text="${article.type}"></span>
+                <span>,</span>
+                <span>#</span>
+                <span th:text="${article.season}"></span>
+            </div>
+        </nav>
+    </li>
+</ul>

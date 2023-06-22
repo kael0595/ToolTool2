@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/UserSearch.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>UserSearch</title>
 </head>
 
@@ -61,7 +62,7 @@
 </div>
 <!-- 중앙 -->
 <div layout:fragment="content" class="">
-    <form th:action="@{/user/findid}" method="">
+    <form th:action="@{/user/findId}" method="post">
         <div>
             <h1 class="find">Find ID</h1>
             <h3 class="findment">가입하신 정보를 입력해주세요</h3>
@@ -70,14 +71,11 @@
             <div class="alert alert-danger">이메일을 다시 확인해 주세요.</div>
         </div>
         <div class="mb-3">
-            <input type="email" name="email" id="d" class="form-control" placeholder="이메일"/>
+            <input type="email" name="email" id="email" class="form-control" placeholder="이메일"/>
         </div>
-        <button type="submit" class="btn btn-primary">FIND-ID</button>
-        <a href="">
-            <img src="" alt=""/>
-        </a>
+        <button type="button" onclick="sendEmailForId()" class="btn btn-primary">FIND-ID</button>
     </form>
-    <form th:action="@{/user/findpw}" class="usersearchform">
+    <form th:action="@{/user/findPw}" class="usersearchform" method="post">
         <div>
             <h1 class="find">Find PW</h1>
             <h3 class="findment">가입하신 정보를 입력해주세요</h3>
@@ -88,61 +86,101 @@
             </div>
         </div>
         <div class="mb-3">
-            <input type="text" name="userid" id="userid" class="form-control" placeholder="아이디"/>
+            <input type="text" name="userName" id="userName" class="form-control"
+                   placeholder="아이디"/>
         </div>
         <div class="mb-3">
-            <input type="email" name="email" id="d" class="form-control" placeholder="이메일"/>
+            <input type="email" name="userEmail" id="userEmail" class="form-control" placeholder="이메일"/>
         </div>
-        <button type="submit" class="btn btn-primary">FIND-PW</button>
-        <a href="">
-            <img src="" alt=""/>
-        </a>
+        <button type="submit" id="sendTempPw" onclick="sendTempPw()" class="btn btn-primary">임시 비밀번호 전송</button>
     </form>
 </div>
 </body>
 <script>
 
-    $('.modal').on('hidden.bs.modal', function (e) {
-        console.log('modal close');
-        $(this).find('form')[0].reset()
-    });
+<!--    $('.modal').on('hidden.bs.modal', function (e) {-->
+<!--        console.log('modal close');-->
+<!--        $(this).find('form')[0].reset()-->
+<!--    });-->
 
-    $("#checkEmail").click(function () {
-        let userEmail = $("#userEmail").val();
-        let userName = $("#userName").val();
 
+<!--     function sendTempPw() {-->
+<!--        // 이메일 주소 가져오기-->
+<!--        var userEmail = $("#userEmail").val();-->
+<!--        var userName = $("#userName").val();-->
+<!--        // AJAX 요청 보내기-->
+<!--        $.ajax({-->
+<!--            url: "http://localhost:8080/findPw", // 이메일 인증번호를 보낼 서버의 URL-->
+<!--            method: "GET",-->
+<!--            data: {userEmail: userEmail, userName: userName}, // 이메일 주소를 서버로 전달-->
+<!--            success: function(response) {-->
+<!--                alert("임시 비밀번호를 전송했습니다.");-->
+<!--            },-->
+<!--            error: function(xhr, status, error) {-->
+<!--                alert("임시 비밀번호 전송에 실패했습니다. 다시 시도해주세요.");-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+<!--$('#checkEmail').on('click', function() {-->
+<!--    checkEmail();-->
+<!--});-->
+
+<!--function checkEmail() {-->
+<!--    var email = $('#d').val();-->
+
+<!--    if (!email || email.trim() === "") {-->
+<!--        alert("이메일을 입력하세요.");-->
+<!--    } else {-->
+<!--        $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url: '/checkEmail',-->
+<!--            data: {-->
+<!--                'email': email-->
+<!--            },-->
+<!--            beforeSend: function(xhr) {-->
+<!--                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");-->
+<!--                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");-->
+<!--            },-->
+<!--            success: function(response) {-->
+<!--                if (response === "true") {-->
+<!--                    sendEmail(email);-->
+<!--                    alert('임시 비밀번호가 이메일로 전송되었습니다.');-->
+<!--                    window.location.href = "/auth/login";-->
+<!--                } else {-->
+<!--                    alert('가입되지 않은 이메일입니다.');-->
+<!--                }-->
+<!--            },-->
+<!--            error: function(xhr, status, error) {-->
+<!--                alert('에러 발생: ' + error);-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--}-->
+
+ function sendEmailForId() {
+        // 이메일 주소 가져오기
+        var email = $("#email").val();
+        console.log(email);
+        // AJAX 요청 보내기
         $.ajax({
-            type: "GET",
-            url: "/check/findPw",
-            data: {
-                "userEmail": userEmail,
-                "userName": userName
+            url: "http://localhost:8080/check/findIw/sendEmail", // 이메일 인증번호를 보낼 서버의 URL
+            method: "GET",
+            data: {email: email}, // 이메일 주소를 서버로 전달
+            success: function(response) {
+                alert("아이디 발송 성공.");
             },
-            success: function (res) {
-                if (res['check']) {
-                    swal("발송 완료!", "입력하신 이메일로 임시비밀번호가 발송되었습니다.", "success").then((OK) = > {
-                        if(OK) {
-                            $.ajax({
-                                type: "POST",
-                                url: "/check/findPw/sendEmail",
-                                data: {
-                                    "userEmail": userEmail,
-                                    "userName": userName
-                                }
-                            })
-                            window.location = "/login";
-                        }
-
-
-                    }
-                )
-                    $('#checkMsg').html('<p style="color:darkblue"></p>');
-                } else {
-                    $('#checkMsg').html('<p style="color:red">일치하는 정보가 없습니다.</p>');
-                }
+            error: function(xhr, status, error) {
+                alert("아이디 발송 실패.");
             }
-        })
-    })
+        });
+    }
+
+
+
+
+
+
 
 
 </script>

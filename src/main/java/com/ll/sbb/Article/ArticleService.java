@@ -52,9 +52,66 @@ public class ArticleService {
         return this.articleRepository.findAll(spec, pageable);
     }
 
+    public Page<Article> getHigtList(int page, String kw, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = search(kw);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getRowList(int page, String kw, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = search(kw);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+
+    public Page<Article> getUserList(int page, String kw, String user) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchUser(user);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+
+    private Specification<Article> searchUser(String user) {
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Add a condition to check for equality between the username field and the provided user value
+            predicates.add(builder.equal(root.get("author").get("username"), user));
+
+            // Add any other search conditions if needed
+            // ...
+
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
+
+
     public Page<Article> getSeasonList(int page, String kw, String season) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchSeason(season);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getSeasonHighList(int page, String kw, String season, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchSeason(season);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getSeasonRowList(int page, String kw, String season, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
         Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
         Specification<Article> spec = searchSeason(season);
         return this.articleRepository.findAll(spec, pageable);
@@ -86,6 +143,22 @@ public class ArticleService {
         return this.articleRepository.findAll(spec, pageable);
     }
 
+    public Page<Article> getTypeHighList(int page, String kw, String type, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchType(type);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getTypeRowList(int page, String kw, String type, String sortKey) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Article> spec = searchType(type);
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
     public Specification<Article> searchType(String sea) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -112,6 +185,30 @@ public class ArticleService {
             return builder.between(root.get("price"), min, max);
         };
         // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getPriceHigtList(int page, String kw, int min, int max, String sortKey) {
+
+        Specification<Article> spec = (root, query, builder) -> {
+            return builder.between(root.get("price"), min, max);
+        };
+        // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        return this.articleRepository.findAll(spec, pageable);
+    }
+
+    public Page<Article> getPriceRowList(int page, String kw, int min, int max, String sortKey) {
+
+        Specification<Article> spec = (root, query, builder) -> {
+            return builder.between(root.get("price"), min, max);
+        };
+        // 비트윈으로 미니멈, 맥시멈값 지정후 spec변수에 담고 해당변수값의 아티클만 파인드올로 불러옴  //
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.asc(sortKey));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
         return this.articleRepository.findAll(spec, pageable);
     }
 
@@ -157,6 +254,10 @@ public class ArticleService {
     public List<Article> getBySeason(String season) {
 
         return this.articleRepository.findBySeason(season);
+    }
+
+    public List<Article> getAuthor(SiteUser siteUser) {
+        return this.articleRepository.findByAuthor(siteUser);
     }
 
     public void modify(Article article, String subject, String content, String type, String season, int price, int starscore) {

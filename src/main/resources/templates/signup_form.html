@@ -170,7 +170,7 @@
         $.ajax({
             url: "http://localhost:8080/mailCheck", // 이메일 인증번호를 보낼 서버의 URL
             method: "GET",
-            data: {sm_email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
+            data: {email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
             success: function(response) {
                 alert("이메일 인증번호를 전송했습니다.");
             },
@@ -179,22 +179,5 @@
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </html>

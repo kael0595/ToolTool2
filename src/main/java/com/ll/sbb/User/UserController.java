@@ -2,11 +2,10 @@ package com.ll.sbb.User;
 
 import com.ll.sbb.Article.Article;
 import com.ll.sbb.Article.ArticleService;
-import com.ll.sbb.Email.MailService;
+import com.ll.sbb.Email.MailController;
 import com.ll.sbb.Market.Market;
 import com.ll.sbb.Market.MarketService;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -35,7 +34,7 @@ public class UserController {
 
     private final UserService userService;
 
-    private final MailService mailService;
+    private final MailController mailController;
 
     @GetMapping("/user/signup_menual")
     private String signup_menual() {
@@ -133,21 +132,56 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    private String mypage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+    private String mypage(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                           @RequestParam(value = "kw", defaultValue = "") String kw, Principal principal) {
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        Page<Article> paging = this.articleService.getList(page, kw);
-        List<Article> articles = this.articleService.getAll();
-        List<Market> markets = this.marketService.getAll();
+        Page<Article> articlePaging = this.articleService.getUserList(page, kw, siteUser.getUsername());
+        Page<Market> marketPaging = this.marketService.getUserList(page, kw, siteUser.getUsername());
+
+        List<Article> articles = this.articleService.getAuthor(siteUser);
+        List<Market> markets = this.marketService.getAuthor(siteUser);
+
         int articleCount = articles.size();
         int marketCount = markets.size();
         model.addAttribute("markets", markets);
         model.addAttribute("marketCount", marketCount);
         model.addAttribute("articles", articles);
         model.addAttribute("articleCount", articleCount);
-        model.addAttribute("paging", paging);
+        model.addAttribute("articlePaging", articlePaging);
+        model.addAttribute("marketPaging", marketPaging);
         model.addAttribute("kw", kw);
+        model.addAttribute("user", siteUser);
         return "mypage";
+    }
+
+    @GetMapping("/mypage/article")
+    @ResponseBody
+    private Model mypageArticlePaging(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                                      @RequestParam(value = "kw", defaultValue = "") String kw, Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        Page<Article> articlePaging = this.articleService.getUserList(page, kw, siteUser.getUsername());
+        List<Article> articles = this.articleService.getAuthor(siteUser);
+        int articleCount = articles.size();
+        model.addAttribute("articlePaging", articlePaging);
+        model.addAttribute("articles", articles);
+        model.addAttribute("articleCount", articleCount);
+        return model;
+
+    }
+
+    @GetMapping("/mypage/market")
+    @ResponseBody
+    private Model mypageMarketPaging(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                                     @RequestParam(value = "kw", defaultValue = "") String kw, Principal principal) {
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        Page<Market> marketPaging = this.marketService.getUserList(page, kw, siteUser.getUsername());
+        List<Market> markets = this.marketService.getAuthor(siteUser);
+        int marketCount = markets.size();
+        model.addAttribute("marketPaging", marketPaging);
+        model.addAttribute("markets", markets);
+        model.addAttribute("marketCount", marketCount);
+        return model;
+
     }
 
     @GetMapping("/user/find")
@@ -156,13 +190,18 @@ public class UserController {
     }
 
     @PostMapping("/user/findId")
-    public String findId(@RequestParam("email") String email, Model model) {
-        SiteUser findId = userService.getUserByEmail(email);
-        if (findId != null) {
-            model.addAttribute(findId);
+    @ResponseBody
+    public String checkEmail(@RequestParam("email") String email) {
+        SiteUser user = userService.getUserByEmail(email);
+
+        if (user != null) {
+            mailController.sendEmailForId(user.getUsername(), email);
+            return "true";
+        } else {
+            return "redirect:/user/find";
         }
-        return "";
     }
+
 
     @GetMapping("/check/findPw")
     @ResponseBody
@@ -176,6 +215,6 @@ public class UserController {
     }
 
     public void updatePassword(@RequestParam("password") String password, @RequestParam("email") String email) {
-        mailService.updatePassword(password, email);
+        userService.updatePassword(password, email);
     }
 }

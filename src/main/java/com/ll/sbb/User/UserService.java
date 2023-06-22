@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -23,8 +24,8 @@ public class UserService {
         user.setEmail(email);
         user.setNickname(nickname);
         user.setMailKey(mailKey);
-        user.setUserRole(role);
         user.setPassword(passwordEncoder.encode(password));
+        user.setCreateDate(LocalDate.now());
         this.userRepository.save(user);
         return user;
     }
@@ -96,6 +97,12 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+    public void updatePassword(String str, String userEmail) {
+        String pw = passwordEncoder.encode(str);
+        int id = userRepository.findUserById(userEmail).getId();
+        userRepository.updateUserPassword(id, pw);
     }
 
 

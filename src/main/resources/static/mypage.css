@@ -345,3 +345,20 @@ footer {
 .footer-content nav a:hover {
   text-decoration: underline;
 }
+.page-list{
+list-style:none;
+text-align:row;
+}
+
+.page-list>li{
+display:imline-block;
+}
+
+.page-item{
+display:inline-block;
+list-style:none;
+}
+
+.disabled{
+display:inline-block;
+}
