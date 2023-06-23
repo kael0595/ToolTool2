@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -36,6 +39,8 @@ public class UserController {
     private final UserService userService;
 
     private final MailController mailController;
+
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/user/signup_menual")
     private String signup_menual() {
@@ -207,26 +212,33 @@ public class UserController {
     @PostMapping("/user/findPw")
     @ResponseBody
     public String findPw(@RequestParam("userEmail") String userEmail, @RequestParam("userName") String userName) {
-        SiteUser user = userService.getPwByEmailAndUserName(userEmail, userName);
-
+        SiteUser user = userService.getUserByEmailAndUsername(userEmail, userName);
         if (user != null) {
-            mailController.sendEmail(userEmail, user.getUsername());
+            // 유저를 찾았을 때, 임시 비밀번호를 이메일로 전송하는 메서드 호출
+            mailController.sendEmailForPw(userEmail, user.getUsername());
             return "true";
         } else {
             return "redirect:/user/find";
         }
     }
 
-//    @PostMapping("/check/findPw")
-//    @ResponseBody
-//    public Map<String, Boolean> findPw(String userEmail, String userName) {
-//        Map<String, Boolean> json = new HashMap<>();
-//        boolean pwFindCheck = userService.userEmailCheck(userEmail, userName);
-//
-//        System.out.println(pwFindCheck);
-//        json.put("check", pwFindCheck);
-//        return json;
-//    }
+    @PostMapping("/user/changePassword")
+    @ResponseBody
+    public String updatePassword(@RequestParam("password") String pw, @RequestParam("newpassword") String newpw, @RequestParam("newpasswordcf") String newpwcf) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        SiteUser user = userService.getUserByUsername(username);
+
+        if (!passwordEncoder.matches(pw, user.getPassword())) {
+            return "현재 비밀번호와 일치하지 않습니다.";
+        }
+        if (!newpw.equals(newpwcf)) {
+            return "변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.";
+        }
+        user.setPassword(passwordEncoder.encode(newpw));
+        userService.saveUser(user);
+        return "success";
+    }
 
     public void updatePassword(@RequestParam("password") String password, @RequestParam("email") String email) {
         userService.updatePassword(password, email);

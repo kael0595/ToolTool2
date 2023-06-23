@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
 public interface UserRepository extends JpaRepository<SiteUser, Integer> {
 
     Optional<SiteUser> findByusername(String username);
@@ -29,11 +28,13 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
     @Query("UPDATE SiteUser u SET u.password = :password WHERE u.id = :id")
     void updateUserPassword(@Param("id") int id, @Param("password") String password);
 
+    Optional<SiteUser> findUserByEmailAndUsername(String email, String username);
+
     long countByEmailAndMailAuth(String email, boolean mailAuth);
 
     Optional<SiteUser> findByEmail(String email);
 
-    Optional<SiteUser> findPwByEmailAndUsername(String email, String username);
-
     SiteUser findUserById(String userEmail);
+
+    Optional<SiteUser> findByUsername(String username);
 }

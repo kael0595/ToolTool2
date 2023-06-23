@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -87,14 +88,26 @@ public class UserService {
         }
     }
 
-    public SiteUser getPwByEmailAndUserName(String email, String username) {
-        Optional<SiteUser> siteUserOptional = this.userRepository.findPwByEmailAndUsername(email, username);
+    public SiteUser getUserByEmailAndUsername(String email, String username) {
+        Optional<SiteUser> siteUserOptional = userRepository.findUserByEmailAndUsername(email, username);
         if (siteUserOptional.isPresent()) {
             return siteUserOptional.get();
         } else {
             throw new DataNotFoundException("siteuser not found");
         }
+    }
 
+    public String generateTempPassword() {
+        String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder sb = new StringBuilder();
+
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+
+        return sb.toString();
     }
 
     public boolean userEmailCheck(String userEmail, String userName) {
@@ -113,5 +126,12 @@ public class UserService {
         userRepository.updateUserPassword(id, pw);
     }
 
+    public SiteUser getUserByUsername(String username) {
+        Optional<SiteUser> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElseThrow(() -> new DataNotFoundException("User not found"));
+    }
 
+    public SiteUser saveUser(SiteUser user) {
+        return userRepository.save(user);
+    }
 }

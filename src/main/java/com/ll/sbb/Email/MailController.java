@@ -1,11 +1,15 @@
 package com.ll.sbb.Email;
 
 import com.ll.sbb.DataNotFoundException;
+import com.ll.sbb.User.SiteUser;
+import com.ll.sbb.User.UserRepository;
+import com.ll.sbb.User.UserService;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -13,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class MailController {
 
     private final JavaMailSender mailSender;
+
+    private final UserService userService;
+
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/mailCheck")
     @ResponseBody
@@ -43,43 +53,47 @@ public class MailController {
 
     @PostMapping("/user/findPw/sendEmail")
     @ResponseBody
-    public void sendEmail(@RequestParam("email") String userEmail, String userName) {
-        char[] TempKey = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    public void sendEmailForPw(@RequestParam("email") String userEmail, String userName) {
+//        char[] TempKey = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+//                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+//
+//        String str = "";
+//
+//        int idx = 0;
+//        for (int i = 0; i < 10; i++) {
+//            idx = (int) (TempKey.length * Math.random());
+//            str += TempKey[idx];
+        String tempPw = userService.generateTempPassword();
+        String from = "admin@ToolTool.com";//보내는 이 메일주소
+        String to = userEmail;
+        String title = "임시 비밀번호입니다.";
+        String content = userName + "님의" + "[임시 비밀번호] " + tempPw + " 입니다. <br/> 접속한 후 비밀번호를 변경해주세요";
+        try {
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
 
-        String str = "";
+            mailHelper.setFrom(from);
+            mailHelper.setTo(to);
+            mailHelper.setSubject(title);
+            mailHelper.setText(content, true);
 
-        int idx = 0;
-        for (int i = 0; i < 10; i++) {
-            idx = (int) (TempKey.length * Math.random());
-            str += TempKey[idx];
+            mailSender.send(mail);
 
-            String from = "admin@ToolTool.com";//보내는 이 메일주소
-            String to = userEmail;
-            String title = "임시 비밀번호입니다.";
-            String content = userName + "님의" + "[임시 비밀번호] " + str + " 입니다. <br/> 접속한 후 비밀번호를 변경해주세요";
-            try {
-                MimeMessage mail = mailSender.createMimeMessage();
-                MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+            SiteUser user = userService.getUserByEmailAndUsername(userEmail, userName);
+            user.setPassword(passwordEncoder.encode(tempPw));
+            userRepository.save(user);
 
-                mailHelper.setFrom(from);
-                mailHelper.setTo(to);
-                mailHelper.setSubject(title);
-                mailHelper.setText(content, true);
-
-                mailSender.send(mail);
-
-            } catch (Exception e) {
-                throw new DataNotFoundException("error");
-            }
+        } catch (Exception e) {
+            throw new DataNotFoundException("error");
         }
     }
 
+
     @PostMapping("/user/findId/sendEmail")
     @ResponseBody
-    public void sendEmailForId(@RequestParam("email") String email, String userName) {
+    public void sendEmailForId(@RequestParam("userEmail") String userEmail, String userName) {
         String from = "admin@ToolTool.com";//보내는 이 메일주소
-        String to = email;
+        String to = userEmail;
         String title = "아이디 찾기 결과입니다.";
         String content = "[아이디] " + userName + " 입니다. <br/>";
         try {
