@@ -4,7 +4,11 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+<!--    <meta name="_csrf_parameter" content="${_csrf.parameterName}" />-->
+<!--    <meta name="_csrf_header" content="${_csrf.headerName}" />-->
+<!--    <meta name="_csrf" content="${_csrf.token}" />-->
     <link rel="stylesheet" href="/article_detail.css"/>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -219,13 +223,13 @@
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
                                                class="answermodify_btn">
                                                 <button type="button" class="answermodify_btn">수정</button>
-                                                '
+
                                             </a>
                                             <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
                                                class="delete btn btn-sm btn-outline-secondary"
                                                sec:authorize="isAuthenticated()"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                               th:text="삭제">
+                                               >
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->

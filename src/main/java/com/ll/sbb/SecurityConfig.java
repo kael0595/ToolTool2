@@ -32,9 +32,7 @@ public class SecurityConfig {
                                 .requestMatchers("/**")
                                 .permitAll()
                 )
-                .csrf(
-                        csrf -> csrf.disable()
-                )
+
 
                 .formLogin(
                         formLogin -> formLogin
