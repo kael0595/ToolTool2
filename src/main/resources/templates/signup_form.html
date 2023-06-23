@@ -95,20 +95,20 @@
                 <hr>
                 <div class="form-group">
                     <label for="name">아이디</label>
-                    <input type="text" th:field="*{username}" name="username" id="name" class="name">
+                    <input type="text" th:field="*{username}" name="username" id="username" class="username">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="password">비밀번호</label>
-                    <input type="password" th:field="*{password1}" name="password" id="password" class="pass">
+                    <input type="password" th:field="*{password1}" name="password" id="password" class="password">
                     <span class="error"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="passwordCon">비밀번호 확인</label>
                     <input type="password" th:field="*{password2}" name="passwordCon" id="passwordCon"
-                           class="passConfirm">
+                           class="passwordCon">
                     <span class="error"></span>
                 </div>
 
@@ -122,14 +122,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="nick">닉네임<small></small></label>
+                    <label for="nickname">닉네임<small></small></label>
                     <input type="text" th:field="*{nickname}" name="nickname" id="nickname">
                 </div>
 
                 <div class="form-group">
                     <label for="mailKey">이메일 인증번호</label>
                     <input type="mailKey" th:field="*{mailKey}" name="mailKey" id="mailKey"
-                           class="passConfirm">
+                           class="mailKey">
                     <button type="submit" class="emailCF" id="emailCF">
                         인증번호 확인
                     </button>
@@ -179,5 +179,8 @@
             }
         });
     }
+
+
+
 </script>
 </html>

@@ -24,6 +24,7 @@ import static org.springframework.core.annotation.MergedAnnotations.search;
 @RequiredArgsConstructor
 @Service
 public class MarketService {
+
     private final MarketRepository marketRepository;
 
 
@@ -99,10 +100,6 @@ public class MarketService {
         this.marketRepository.save(q);
     }
 
-
-    public List<Market> getMainCategory(String mainCategory) {
-        return this.marketRepository.findByMainCategory(mainCategory);
-    }
 
     public List<Market> findByType(String type) {
         return this.marketRepository.findByType(type);

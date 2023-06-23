@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ll.sbb.Category.subCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -63,7 +62,7 @@ public class ArticleController {
     }
 //     가격범위 카데고리 리스트 맵핑
 
-    @GetMapping(value = "/list/under/{id}")
+    @GetMapping(value = "/under/{id}/sort")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("id") Integer price) {
         int min;
@@ -114,9 +113,9 @@ public class ArticleController {
         return "article_list";
     }
 
-    // 시즌,타입  카데고리 리스트 맵핑 시즌=serson , 타입=type
+    // 시즌,타입  카데고리 리스트 맵핑 시즌=season , 타입=type
 
-    @GetMapping("/list/{category}")
+    @GetMapping("/{category}/sort")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
                        @RequestParam(value = "kw", defaultValue = "") String kw, @PathVariable("category") String category) {
         if (category.equals("season_all")) {
@@ -193,6 +192,7 @@ public class ArticleController {
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
         }
+
 
         return "article_list";
     }

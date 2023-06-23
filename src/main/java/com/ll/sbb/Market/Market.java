@@ -1,6 +1,5 @@
 package com.ll.sbb.Market;
 
-import com.ll.sbb.Category.Category;
 import com.ll.sbb.MarketAnswer.MarketAnswer;
 
 import com.ll.sbb.User.SiteUser;
@@ -40,9 +39,6 @@ public class Market {
 
     @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
     private List<MarketAnswer> marketAnswerList;
-
-    @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
-    private List<Category> mainCategory;
 
     @OneToMany
     private Set<SiteUser> wishList;

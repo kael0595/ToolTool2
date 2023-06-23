@@ -236,11 +236,6 @@ public class ArticleService {
     }
 
 
-    public List<Article> getMainCategory(String mainCategory) {
-        return this.articleRepository.findByMainCategory(mainCategory);
-    }
-
-
     public List<Article> getAll() {
 
         return this.articleRepository.findAll();

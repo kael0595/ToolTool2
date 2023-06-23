@@ -8,6 +8,7 @@ import com.ll.sbb.Market.MarketService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
@@ -191,11 +192,11 @@ public class UserController {
 
     @PostMapping("/user/findId")
     @ResponseBody
-    public String checkEmail(@RequestParam("email") String email) {
+    public String findId(@RequestParam("email") String email) {
         SiteUser user = userService.getUserByEmail(email);
 
         if (user != null) {
-            mailController.sendEmailForId(user.getUsername(), email);
+            mailController.sendEmailForId(email, user.getUsername());
             return "true";
         } else {
             return "redirect:/user/find";
@@ -203,16 +204,29 @@ public class UserController {
     }
 
 
-    @GetMapping("/check/findPw")
+    @PostMapping("/user/findPw")
     @ResponseBody
-    public Map<String, Boolean> findPw(String userEmail, String userName) {
-        Map<String, Boolean> json = new HashMap<>();
-        boolean pwFindCheck = userService.userEmailCheck(userEmail, userName);
+    public String findPw(@RequestParam("userEmail") String userEmail, @RequestParam("userName") String userName) {
+        SiteUser user = userService.getPwByEmailAndUserName(userEmail, userName);
 
-        System.out.println(pwFindCheck);
-        json.put("check", pwFindCheck);
-        return json;
+        if (user != null) {
+            mailController.sendEmail(userEmail, user.getUsername());
+            return "true";
+        } else {
+            return "redirect:/user/find";
+        }
     }
+
+//    @PostMapping("/check/findPw")
+//    @ResponseBody
+//    public Map<String, Boolean> findPw(String userEmail, String userName) {
+//        Map<String, Boolean> json = new HashMap<>();
+//        boolean pwFindCheck = userService.userEmailCheck(userEmail, userName);
+//
+//        System.out.println(pwFindCheck);
+//        json.put("check", pwFindCheck);
+//        return json;
+//    }
 
     public void updatePassword(@RequestParam("password") String password, @RequestParam("email") String email) {
         userService.updatePassword(password, email);

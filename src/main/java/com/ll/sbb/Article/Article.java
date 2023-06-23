@@ -1,7 +1,6 @@
 package com.ll.sbb.Article;
 
 import com.ll.sbb.Answer.Answer;
-import com.ll.sbb.Category.Category;
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -44,9 +43,6 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-    private List<Category> mainCategory;
 
     @Size(max = 20)
     private String type;

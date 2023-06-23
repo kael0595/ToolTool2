@@ -2,6 +2,7 @@ package com.ll.sbb.User;
 
 import com.ll.sbb.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -86,7 +88,13 @@ public class UserService {
     }
 
     public SiteUser getPwByEmailAndUserName(String email, String username) {
-        return this.userRepository.findPwByEmailAndUsername(email, username);
+        Optional<SiteUser> siteUserOptional = this.userRepository.findPwByEmailAndUsername(email, username);
+        if (siteUserOptional.isPresent()) {
+            return siteUserOptional.get();
+        } else {
+            throw new DataNotFoundException("siteuser not found");
+        }
+
     }
 
     public boolean userEmailCheck(String userEmail, String userName) {

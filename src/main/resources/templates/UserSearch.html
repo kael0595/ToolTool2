@@ -62,7 +62,7 @@
 </div>
 <!-- 중앙 -->
 <div layout:fragment="content" class="">
-    <form th:action="@{/user/findId}" method="post">
+    <form onsubmit="return false;">
         <div>
             <h1 class="find">Find ID</h1>
             <h3 class="findment">가입하신 정보를 입력해주세요</h3>
@@ -75,7 +75,7 @@
         </div>
         <button type="button" onclick="sendEmailForId()" class="btn btn-primary">FIND-ID</button>
     </form>
-    <form th:action="@{/user/findPw}" class="usersearchform" method="post">
+    <form class="usersearchform" method="post">
         <div>
             <h1 class="find">Find PW</h1>
             <h3 class="findment">가입하신 정보를 입력해주세요</h3>
@@ -98,74 +98,14 @@
 </body>
 <script>
 
-<!--    $('.modal').on('hidden.bs.modal', function (e) {-->
-<!--        console.log('modal close');-->
-<!--        $(this).find('form')[0].reset()-->
-<!--    });-->
-
-
-<!--     function sendTempPw() {-->
-<!--        // 이메일 주소 가져오기-->
-<!--        var userEmail = $("#userEmail").val();-->
-<!--        var userName = $("#userName").val();-->
-<!--        // AJAX 요청 보내기-->
-<!--        $.ajax({-->
-<!--            url: "http://localhost:8080/findPw", // 이메일 인증번호를 보낼 서버의 URL-->
-<!--            method: "GET",-->
-<!--            data: {userEmail: userEmail, userName: userName}, // 이메일 주소를 서버로 전달-->
-<!--            success: function(response) {-->
-<!--                alert("임시 비밀번호를 전송했습니다.");-->
-<!--            },-->
-<!--            error: function(xhr, status, error) {-->
-<!--                alert("임시 비밀번호 전송에 실패했습니다. 다시 시도해주세요.");-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-
-<!--$('#checkEmail').on('click', function() {-->
-<!--    checkEmail();-->
-<!--});-->
-
-<!--function checkEmail() {-->
-<!--    var email = $('#d').val();-->
-
-<!--    if (!email || email.trim() === "") {-->
-<!--        alert("이메일을 입력하세요.");-->
-<!--    } else {-->
-<!--        $.ajax({-->
-<!--            type: 'POST',-->
-<!--            url: '/checkEmail',-->
-<!--            data: {-->
-<!--                'email': email-->
-<!--            },-->
-<!--            beforeSend: function(xhr) {-->
-<!--                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");-->
-<!--                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");-->
-<!--            },-->
-<!--            success: function(response) {-->
-<!--                if (response === "true") {-->
-<!--                    sendEmail(email);-->
-<!--                    alert('임시 비밀번호가 이메일로 전송되었습니다.');-->
-<!--                    window.location.href = "/auth/login";-->
-<!--                } else {-->
-<!--                    alert('가입되지 않은 이메일입니다.');-->
-<!--                }-->
-<!--            },-->
-<!--            error: function(xhr, status, error) {-->
-<!--                alert('에러 발생: ' + error);-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-<!--}-->
-
  function sendEmailForId() {
         // 이메일 주소 가져오기
         var email = $("#email").val();
         console.log(email);
         // AJAX 요청 보내기
         $.ajax({
-            url: "http://localhost:8080/check/findIw/sendEmail", // 이메일 인증번호를 보낼 서버의 URL
-            method: "GET",
+            url: "/user/findId", // 이메일 인증번호를 보낼 서버의 URL
+            method: "POST",
             data: {email: email}, // 이메일 주소를 서버로 전달
             success: function(response) {
                 alert("아이디 발송 성공.");
@@ -175,6 +115,33 @@
             }
         });
     }
+
+    function sendTempPw() {
+    // 이메일 주소 가져오기
+    var userEmail = $("#userEmail").val();
+    var userName = $("#userName").val();
+
+    // AJAX 요청 보내기
+    $.ajax({
+        url: "/user/findPw", // 이메일 인증번호를 보낼 서버의 URL
+        method: "POST",
+        data: {userEmail: userEmail, userName: userName}, // 이메일 주소를 서버로 전달
+        success: function(response) {
+            alert("임시 비밀번호 발송 성공.");
+        },
+        error: function(xhr, status, error) {
+            alert("임시 비밀번호 발송 실패.");
+        }
+    });
+}
+
+
+
+
+
+
+
+
 
 
 

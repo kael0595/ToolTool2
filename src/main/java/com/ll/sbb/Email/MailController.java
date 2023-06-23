@@ -41,9 +41,9 @@ public class MailController {
     }
 
 
-    @PostMapping("/check/findPw/sendEmail")
+    @PostMapping("/user/findPw/sendEmail")
     @ResponseBody
-    public void sendEmail(@RequestParam("userEmail") String userEmail) {
+    public void sendEmail(@RequestParam("email") String userEmail, String userName) {
         char[] TempKey = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
                 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
@@ -57,7 +57,7 @@ public class MailController {
             String from = "admin@ToolTool.com";//보내는 이 메일주소
             String to = userEmail;
             String title = "임시 비밀번호입니다.";
-            String content = "[임시 비밀번호] " + str + " 입니다. <br/> 접속한 후 비밀번호를 변경해주세요";
+            String content = userName + "님의" + "[임시 비밀번호] " + str + " 입니다. <br/> 접속한 후 비밀번호를 변경해주세요";
             try {
                 MimeMessage mail = mailSender.createMimeMessage();
                 MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
@@ -75,7 +75,8 @@ public class MailController {
         }
     }
 
-    @GetMapping("/check/findIw/sendEmail")
+    @PostMapping("/user/findId/sendEmail")
+    @ResponseBody
     public void sendEmailForId(@RequestParam("email") String email, String userName) {
         String from = "admin@ToolTool.com";//보내는 이 메일주소
         String to = email;

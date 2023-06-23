@@ -33,7 +33,7 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
 
     Optional<SiteUser> findByEmail(String email);
 
-    SiteUser findPwByEmailAndUsername(String email, String username);
+    Optional<SiteUser> findPwByEmailAndUsername(String email, String username);
 
     SiteUser findUserById(String userEmail);
 }
