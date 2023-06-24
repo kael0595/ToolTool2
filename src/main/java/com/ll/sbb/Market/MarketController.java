@@ -35,7 +35,7 @@ public class MarketController {
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Market> paging = this.marketService.getList(page, kw);
         List<Market> markets = this.marketService.getAll();
-        int marketCount = markets.size();
+        int marketCount = paging.getNumberOfElements();
         model.addAttribute("markets", markets);
         model.addAttribute("marketCount", marketCount);
         model.addAttribute("paging", paging);

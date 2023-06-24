@@ -105,7 +105,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="?sort=voterSort">
                     <span>추천순</span>
                 </a>
             </li>
@@ -136,12 +136,12 @@
         </div>
         <!--search_box-->
         <div class="search_box">
-            <a href="#">
-                <input type="text" placeholder="검색" id="searchBox"/>
-                <button type="button" class="search_button">
-                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png"/>
+            <div class="input-group">
+                <input type="text" id="search_kw" class="form-control" th:value="${kw}" placeholder="검색">
+                <button class="btn btn-outline-secondary" type="button" id="btn_search">
+                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
                 </button>
-            </a>
+            </div>
         </div>
         <!--dotted-->
         <div class="underline"></div>
@@ -273,6 +273,10 @@
         </div>
     </div>
 </div>
+<form th:action="@{/market/list}" method="get" id="searchForm">
+    <input type="hidden" id="kw" name="kw" th:value="${kw}">
+    <input type="hidden" id="page" name="page" th:value="${paging.number}">
+</form>
 <!--footer-->
 <footer th:replace="layout/footer.html"></footer>
 <script>
@@ -349,6 +353,21 @@
 
 
 
+</script>
+<script layout:fragment="script" type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
 </script>
 </body>
 </html>

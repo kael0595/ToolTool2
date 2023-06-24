@@ -33,6 +33,7 @@ public class Article {
     @OneToMany
     private Set<SiteUser> voter;
 
+
     private int starScore;
 
     private int viewCount;

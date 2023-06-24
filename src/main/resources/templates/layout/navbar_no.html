@@ -18,7 +18,7 @@
         <div class="logo_box">
             <ul>
                 <li>
-                    <a href="http://localhost:8080/">
+                    <a  th:href="@{/}">
                         <button type="button" class="logo_button">
                             <img src="https://i.postimg.cc/7hypz0Gz/230605-1.png"/>
                         </button>
@@ -29,17 +29,17 @@
         <div class="main_menu">
             <ul class="main_menu_ul">
                 <li>
-                    <a href="http://localhost:8080/article/list">
+                    <a  th:href="@{/article/list}">
                         <span>Review</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/market/list">
+                    <a  th:href="@{/market/list}">
                         <span>Market</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:8080/notice/list">
+                    <a  th:href="@{/notice/list}">
                         <span>Notice</span>
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                     sec:authorize="isAuthenticated()"
                     th:href="@{/user/logout}"
             >
-                <a href="http://localhost:8080/user/logout">
+                <a  th:href="@{/user/logout}">
                     <button type="button" class="logout_button">
                         <span class="signline">
                             <i class="fa-regular fa-right-to-bracket" style="color: #73703f;"></i>
@@ -66,7 +66,7 @@
                     sec:authorize="isAnonymous()"
                     th:href="@{/user/login}"
             >
-                <a href="http://localhost:8080/user/login">
+                <a   th:href="@{/user/login}">
                     <button type="button" class="signIn_button">
                         <span class="signline">
                             <i class="fa-solid fa-right-to-bracket" style="color: #73703f;"></i>
@@ -81,7 +81,7 @@
                     sec:authorize="isAuthenticated()"
                     th:href="@{/user/logout}"
             >
-                <a href="http://localhost:8080/mypage">
+                <a  th:href="@{/mypage}">
                     <button type="button" class="mypage_button">
                         <span class="signline">
                             <i class="fa-solid fa-user" style="color: #73703f;"></i>
@@ -92,7 +92,7 @@
             </div>
             <div class="adminPage" sec:authorize="isAuthenticated()"
                  th:if="${#authorization.expression('isAuthenticated() and (hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN''))')}">
-                <a href="http://localhost:8080/admin/">
+                <a  th:href="@{/admin/}">
                     <button type="button" class="admin_button">
                         <span class="signline">
                         <i class="fa-solid fa-gear" style="color: #73703f;"></i>
@@ -106,7 +106,7 @@
                     sec:authorize="isAnonymous()"
                     th:href="@{/user/login}"
             >
-                <a href="http://localhost:8080/user/signup_menual">
+                <a  th:href="@{/user/signup_menual}">
                     <button type="button" class="signUp_button">
                         <span class="signline">
                             <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
