@@ -5,81 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/article_list.css"/>
-    <title>ListlPage</title>
+    <link rel="stylesheet" href="/layout/navbar.css"/>
+    <link rel="stylesheet" href="/layout/footer.css"/>
+    <title>ListPage</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 <body>
-<!--detail-topbar-->
-<div class="detail_top__bar">
-    <nav class="detail_top__bar_menu">
-        <div class="logo_box">
-            <ul>
-                <li>
-                    <a href="http://localhost:8080/">
-                        <button type="button" class="logo_button">
-                            <img src="/img/230605_툴툴_로고 복사 1.png"/>
-                        </button>
-                    </a>
-                </li>
-            </ul>
+<div th:replace="layout/navbar.html"></div>
+<!--banner라인-->
+<div class="banner__bar">
+    <div class="banner__list">
+        <div class="banner">
+            <img src="/img/banner-1.png" alt=""/>
         </div>
-        <div class="main_menu">
-            <ul class="main_menu_ul">
-                <li>
-                    <a href="http://localhost:8080/article/list">
-                        <span>Review</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/market/list">
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/notice/list">
-                        <span>Notice</span>
-                    </a>
-                </li>
-            </ul>
+        <div class="banner">
+            <img src="/img/banner-2.png" alt=""/>
         </div>
-        <div class="signLine">
-            <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                <a href="http://localhost:8080/user/logout">
-                    <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/sDydgSfq/logout.png" class="signIn_img"/>
-                        <span>로그아웃</span>
-                    </button>
-                </a>
-            </div>
-
-            <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                <a href="http://localhost:8080/user/login">
-                    <button type="button" class="signIn_button">
-                        <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
-                        <span>로그인</span>
-                    </button>
-                </a>
-            </div>
-
-            <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                <a href="http://localhost:8080/mypage">
-                    <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
-                        <span>마이페이지</span>
-                    </button>
-                </a>
-            </div>
-            <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                <a href="http://localhost:8080/user/signup_menual">
-                    <button type="button" class="signUp_button">
-                        <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
-                        <span>회원가입</span>
-                    </button>
-                </a>
-            </div>
+        <div class="banner">
+            <img src="/img/banner-3.png" alt=""/>
         </div>
-    </nav>
+    </div>
+    <div class="buttons">
+        <div class="button" data-index="0"></div>
+        <div class="button" data-index="1"></div>
+        <div class="button" data-index="2"></div>
+    </div>
 </div>
+
 <div class="sorting">
     <div class="total_count">
         <p>총 <span th:text="${articleCount}"></span>건</p>
@@ -139,11 +91,13 @@
         <div class="underline"></div>
         <!--categori_accordion-->
         <div class="accordion">
-            <div class="accordion-header">카테고리</div>
             <div class="accordion-content">
+                <div class="accordion-header_1">Review</div>
+                <div class="borderline_1"></div>
                 <ul>
                     <li class="accordion_list">
-                        <div class="accordion-header">금액범위</div>
+                        <div class="accordion-header">Price</div>
+                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
@@ -164,7 +118,8 @@
                         </div>
                     </li>
                     <li class="accordion_list">
-                        <div class="accordion-header">계절별</div>
+                        <div class="accordion-header">Season</div>
+                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
@@ -180,7 +135,8 @@
                         </div>
                     </li>
                     <li class="accordion_list">
-                        <div class="accordion-header">종류별</div>
+                        <div class="accordion-header">Type</div>
+                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
@@ -267,70 +223,7 @@
     </div>
 </div>
 <!--footer-->
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2023 Your Website. All rights reserved.</p>
-        <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </nav>
-    </div>
-</footer>
-
-<script>
-      $(document).ready(function () {
-        $(".heart").click(function () {
-          var currentSrc = $(this).attr("src");
-          var newSrc = "";
-
-          if (currentSrc === "https://i.postimg.cc/9FFnrSqh/image.png") {
-            newSrc = "https://i.postimg.cc/43GKgpk2/1.png";
-          } else {
-            newSrc = "https://i.postimg.cc/9FFnrSqh/image.png";
-          }
-          $(this).attr("src", newSrc);
-        });
-      });
-
-
-</script>
-<script>
-      $(document).ready(function () {
-  $(".accordion-header").click(function () {
-    $(this).toggleClass("active");
-    $(this).next(".accordion-content").slideToggle();
-  });
-  // 검색 버튼 클릭 이벤트 처리
-  $("#searchButton").click(function () {
-    var searchText = $("#searchBox").val().toLowerCase();
-    $(".accordion").hide();
-
-    $(".accordion").each(function () {
-      var headerText = $(this).find(".accordion-header").text().toLowerCase();
-      var nestedHeaderText = $(this)
-        .find(".nested-accordion .accordion-header")
-        .text()
-        .toLowerCase();
-
-      if (
-        headerText.includes(searchText) ||
-        nestedHeaderText.includes(searchText)
-      ) {
-        $(this).show();
-        $(this).find(".nested-accordion").show();
-      }
-    });
-  });
-});
-
-
-
-
-
-
-
-</script>
+<footer th:replace="layout/footer.html"></footer>
 <script>
       var itemsPerPage = 9;
     var $items = $('.item');
@@ -389,10 +282,6 @@
 
 
 
-
-
-
-
 </script>
 <script>
     $(document).ready(function() {
@@ -419,6 +308,48 @@
     });
   });
 });
+
+
+
+</script>
+
+<!--banner script-->
+<script>
+      $(document).ready(function () {
+        const banner__bar = $(".banner__bar");
+        const banner__list = $(".banner__list");
+        const banners = $(".banner");
+        const buttons = $(".button");
+        const slideWidth = banner__bar.width();
+        let currentIndex = 0;
+        let interval;
+
+        banners.css("width", slideWidth + "px");
+        banner__list.css("width", slideWidth * banners.length + "px");
+
+        function moveSlide(index) {
+          currentIndex = index;
+          banner__list.animate(
+            { marginLeft: "-" + slideWidth * currentIndex + "px" },
+            500
+          );
+          buttons.removeClass("active");
+          buttons.eq(currentIndex).addClass("active");
+        }
+
+        buttons.click(function () {
+          const index = $(this).data("index");
+          moveSlide(index);
+        });
+
+        interval = setInterval(function () {
+          currentIndex++;
+          if (currentIndex >= banners.length) {
+            currentIndex = 0;
+          }
+          moveSlide(currentIndex);
+        }, 3000);
+      });
 
 </script>
 </body>

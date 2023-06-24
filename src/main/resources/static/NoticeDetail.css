@@ -35,90 +35,38 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.top__bar > .top__bar_menu {
-  width: 1320px;
-  height: 100px;
-  margin: 0 auto;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-}
-.top__bar > .top__bar_menu > .logo_box {
-  flex-grow: 1;
-}
-.top__bar > .top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
-  height: 74px;
-}
-.top__bar > .top__bar_menu > .main_menu {
-  display: flex;
-  flex-grow: 4;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul {
-  display: flex;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li:hover > a > span {
-  color: #a5a773;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li > a > span {
-  font-size: 30px;
-  line-height: 32px;
-  margin: 20px;
-}
-.top__bar > .top__bar_menu > .signLine {
-  flex-grow: 2;
-  height: 74px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-.top__bar > .top__bar_menu > .signLine > div {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.top__bar > .top__bar_menu > .signLine > div > a > button > .login {
-  font-size: 46px; /* 원하는 크기로 조정하세요 */
-  display: inline-block;
-  width: 46px; /* 원하는 넓이로 조정하세요 */
-  height: 55px; /* 원하는 높이로 조정하세요 */
-}
-.top__bar > .top__bar_menu > .signLine > div > a > button > span {
-  display: block;
-  font-size: 20px;
-}
 /*notice-detail*/
 .container {
   max-width: 800px;
   margin: 0 auto;
-  background-color: #fff;
   padding: 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
 }
 .container > span {
-  font-size: 45px;
-  text-align: center;
+  font-size: 25px;
   margin: auto 0;
   display: block;
   color: black;
 }
+.underline {
+  border-bottom: double;
+  width: 750px;
+}
+.notice-subject table {
+  border-spacing: 0 30px; /* 원하는 간격으로 조정하세요 */
+}
 .notice-subject {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
   margin-top: 40px; /* Add margin-top to create spacing */
 }
 .notice-subject th {
-  background-color: #dcd785;
   width: 100px;
-  padding: 5px;
-  font-size: 20px;
-  border-radius: 10px;
+  font-size: 15px;
+  text-align: left;
+  border-right: 1px solid;
 }
 .notice-subject td {
   padding-left: 10px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .notice {
@@ -126,41 +74,27 @@ a {
 }
 
 .notice-content {
-  border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
   margin-top: 30px; /* Add margin-top to create spacing */
 }
 .notice-content > span {
   color: black;
-  font-size: 20px;
+  font-size: 15px;
 }
-
-/*footer*/
-footer {
-  background-color: #555;
-  padding: 20px;
-  text-align: center;
-  margin-top: 100px;
+/*button*/
+.button {
+  display: flex;
+  margin-top: 20px;
 }
-
-.footer-content {
-  max-width: 800px;
-  margin: 0 auto;
+.button > div {
+  margin-right: 5px;
 }
-
-.footer-content p {
-  margin-bottom: 10px;
-  color: #ffffff;
+.button_3 {
+  margin-left: auto;
+  margin-right: 0;
 }
-
-.footer-content nav a {
-  margin-right: 10px;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.footer-content nav a:hover {
-  text-decoration: underline;
+.button button {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
 }

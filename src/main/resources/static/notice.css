@@ -46,11 +46,6 @@ a:focus {
 /* 공통 */
 /* ----------------------------------- */
 
-body {
-    font-family: "NanumBarunGothic", sans-serif;
-    color: #73703f;
-}
-
 .hidden {
     visibility: hidden;
     overflow: hidden;
@@ -92,33 +87,6 @@ h1.subtitle {
     margin: 0 auto;
 }
 
-#footer {
-    background-color: #555;
-    padding: 20px;
-    text-align: center;
-    margin-top: 100px;
-}
-
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.footer-content p {
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-.footer-content nav a {
-    margin-right: 10px;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.footer-content nav a:hover {
-    text-decoration: underline;
-}
-
 /* ----------------------------------- */
 /* 네비바 스타일 */
 /* ----------------------------------- */
@@ -129,9 +97,9 @@ nav {
 }
 
 span,
-p {
+p,h1,th {
     font-family: "NanumBarunGothic", sans-serif;
-    color: #6d6c6c;
+    color: #73703f;
 }
 
 button {
@@ -151,61 +119,6 @@ li {
 a {
     color: inherit;
     text-decoration: none;
-}
-
-.top__bar>.top__bar_menu {
-    width: 1320px;
-    height: 100px;
-    margin: 0 auto;
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.top__bar>.top__bar_menu>.logo_box {
-    flex-grow: 1;
-}
-
-.top__bar>.top__bar_menu>div>ul>li>a>button>img {
-    width: 300px;
-    height: 74px;
-}
-
-.top__bar>.top__bar_menu>.main_menu {
-    display: flex;
-    flex-grow: 4;
-}
-
-.top__bar>.top__bar_menu>.main_menu>.main_menu_ul {
-    display: flex;
-}
-
-.top__bar>.top__bar_menu>.main_menu>.main_menu_ul>li:hover>a>span {
-    color: #a5a773;
-}
-
-.top__bar>.top__bar_menu>.main_menu>.main_menu_ul>li>a>span {
-    font-size: 30px;
-    line-height: 32px;
-    margin: 20px;
-}
-
-.top__bar>.top__bar_menu>.signLine {
-    flex-grow: 2;
-    height: 74px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-.top__bar>.top__bar_menu>.signLine>div {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.top__bar>.top__bar_menu>.signLine>div>a>button>img {
-    width: 60px;
-    height: 60px;
 }
 
 /* ----------------------------------- */
@@ -294,4 +207,28 @@ a {
 #boardlist .board_col>tbody>tr>td.subject img {
     margin-right: 5px;
     vertical-align: middle;
+}
+/*search_box*/
+.search_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+#dropdown {
+  padding: 5px;
+}
+.search_box select,
+.search_box input[type="text"],
+.search_box button {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.search_box input[type="text"] {
+  padding: 5px;
+}
+
+.search_box button {
+  padding: 5px 10px;
+  border: 1px solid;
 }

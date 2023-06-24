@@ -4,8 +4,9 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <link rel="stylesheet" href="/article_detail.css"/>
+    <link rel="stylesheet" href="/layout/navbar_no.css"/>
+    <link rel="stylesheet" href="/layout/footer.css"/>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -14,74 +15,7 @@
 
 <body>
 <!-- 네비바 시작 -->
-<div class="top__bar">
-    <nav class="top__bar_menu">
-        <div class="logo_box">
-            <ul>
-                <li>
-                    <a href="http://localhost:8080/">
-                        <button type="button" class="logo_button">
-                            <a href='http://localhost:8080/'><img src='https://ifh.cc/g/Hlz6bC.png'
-                                                                  border='0' class="logoimg"></a>
-                        </button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main_menu">
-            <ul class="main_menu_ul">
-                <li>
-                    <a href="http://localhost:8080/article/list">
-                        <span>Review</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/Market/list">
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/Notice/list">
-                        <span>Notice</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="signLine">
-            <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                <a href="http://localhost:8080/user/logout">
-                    <button type="button" class="signIn_button">
-                        <i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #73703f;"></i>
-
-                    </button>
-                </a>
-            </div>
-
-            <div class="signOut" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                <a href="http://localhost:8080/user/login">
-                    <button type="button" class="signIn_button">
-                        <i class="fa-regular fa-arrow-right-from-bracket" style="color: #73703f;"></i>
-                    </button>
-                </a>
-            </div>
-
-            <div class="myPage" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                <a href="http://localhost:8080/mypage">
-                    <button type="button" class="signUp_button">
-                        <i class="fa-solid fa-user" style="color: #73703f;"></i>
-                    </button>
-                </a>
-            </div>
-            <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                <a href="user/signup_menual">
-                    <button type="button" class="signUp_button">
-                        <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </nav>
-</div>
+<div th:replace="layout/navbar_no.html"></div>
 <!-- 네비바 끝 -->
 
 <!-- 리뷰 박스 시작 -->
@@ -182,7 +116,8 @@
 
                                 <em class="u_ico _icon"></em>
                                 <span class="u_txt _label">좋아요</span>
-                                <strong th:text="${article.likeCount}" id="checkedLikeCount" class="u_cnt _count"></strong>
+                                <strong th:text="${article.likeCount}" id="checkedLikeCount"
+                                        class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
 
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
@@ -260,16 +195,7 @@
         <!--footer-->
 
     </div>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2023 Your Website. All rights reserved.</p>
-            <nav>
-                <a href="http://localhost:8080/mypage">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-        </div>
-    </footer>
+    <footer th:replace="layout/footer.html"></footer>
 </div>
 <script type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
@@ -330,6 +256,7 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
+
 </script>
 </body>
 </html>

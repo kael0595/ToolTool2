@@ -54,15 +54,7 @@ public class MailController {
     @PostMapping("/user/findPw/sendEmail")
     @ResponseBody
     public void sendEmailForPw(@RequestParam("email") String userEmail, String userName) {
-//        char[] TempKey = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-//                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-//
-//        String str = "";
-//
-//        int idx = 0;
-//        for (int i = 0; i < 10; i++) {
-//            idx = (int) (TempKey.length * Math.random());
-//            str += TempKey[idx];
+
         String tempPw = userService.generateTempPassword();
         String from = "admin@ToolTool.com";//보내는 이 메일주소
         String to = userEmail;

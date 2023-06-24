@@ -4,62 +4,14 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/UserSearch.css"/>
+    <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>UserSearch</title>
 </head>
 
 <body>
 <!-- 네비바 -->
-<div class="top__bar">
-    <nav class="top__bar_menu">
-        <div class="logo_box">
-            <ul>
-                <li>
-                    <a href="http://localhost:8080/">
-                        <button type="button" class="logo_button">
-                            <img src="국기수업_중프[툴툴]/디자인/툴툴1.png"/>
-                        </button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main_menu">
-            <ul class="main_menu_ul">
-                <li>
-                    <a href="http://localhost:8080/article/list">
-                        <span class="review">Review</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/market/list">
-                        <span class="market">Market</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/notice/list">
-                        <span class="notice">Notice</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="signLine">
-            <div class="signIn">
-                <a href="http://localhost:8080/user/login">
-                    <button type="button" class="signIn_button">
-                        <img src="img/sign in.png" class="signIn_img"/>
-                    </button>
-                </a>
-            </div>
-            <div class="signUp">
-                <a href="http://localhost:8080/user/signup">
-                    <button type="button" class="signUp_button">
-                        <img src="img/sing up.png" class="signUp_img"/>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </nav>
-</div>
+<div th:replace="layout/navbar_no.html"></div>
 <!-- 중앙 -->
 <div layout:fragment="content" class="">
     <form onsubmit="return false;">
@@ -133,24 +85,6 @@
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/layout/navbar.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
+    <title>navbar</title>
+</head>
+<body>
+<div class="top__bar">
+    <nav class="top__bar_menu">
+        <div class="logo_box">
+            <ul>
+                <li>
+                    <a href="http://localhost:8080/">
+                        <button type="button" class="logo_button">
+                            <img src="https://i.postimg.cc/7hypz0Gz/230605-1.png"/>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main_menu">
+            <ul class="main_menu_ul">
+                <li class="main_menu_li">
+                    <a href="http://localhost:8080/article/list"> Review </a>
+                    <div class="bc__menu"></div>
+                    <ul class="main_menu_ul_2">
+                        <li class="main_menu_li_2">
+                            <a href="#">금액범위</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">0 ~ 15만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">15 ~ 30만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">30 ~ 50만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">그 외</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="main_menu_li_2">
+                            <a href="#">계절별</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">사계</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">동계</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">하계</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="main_menu_li_2">
+                            <a href="#">종류별</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">텐트/타프</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">테이블</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">의자</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">랜턴</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">조리도구</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">기타</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main_menu_li">
+                    <a href="http://localhost:8080/market/list"> Market </a>
+                    <div class="bc__menu_2"></div>
+                    <ul class="main_menu_ul_2">
+                        <li class="main_menu_li_2">
+                            <a href="#">금액범위</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">0 ~ 15만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">15 ~ 30만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">30 ~ 50만원</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">그 외</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="main_menu_li_2">
+                            <a href="#">계절별</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">사계</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">동계</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">하계</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="main_menu_li_2">
+                            <a href="#">종류별</a>
+                            <ul class="main_menu_ul_3">
+                                <li class="main_menu_li_3">
+                                    <a href="#">텐트/타프</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">테이블</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">의자</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">랜턴</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">조리도구</a>
+                                </li>
+                                <li class="main_menu_li_3">
+                                    <a href="#">기타</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="main_menu_li">
+                    <a href="http://localhost:8080/notice/list"> Notice </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="signLine">
+            <div
+                    class="logout"
+                    sec:authorize="isAuthenticated()"
+                    th:href="@{/user/logout}"
+            >
+                <a href="http://localhost:8080/user/logout">
+                    <button type="button" class="logout_button">
+                        <span class="signline">
+                            <i class="fa-regular fa-right-to-bracket" style="color: #73703f;"></i>
+                        </span>
+                        <span>로그아웃</span>
+                    </button>
+                </a>
+            </div>
+
+            <div
+                    class="signIn"
+                    sec:authorize="isAnonymous()"
+                    th:href="@{/user/login}"
+            >
+                <a href="http://localhost:8080/user/login">
+                    <button type="button" class="signIn_button">
+                        <span class="signline">
+                            <i class="fa-solid fa-right-to-bracket" style="color: #73703f;"></i>
+                        </span>
+                        <span>로그인</span>
+                    </button>
+                </a>
+            </div>
+
+            <div
+                    class="mypage"
+                    sec:authorize="isAuthenticated()"
+                    th:href="@{/user/logout}"
+            >
+                <a href="http://localhost:8080/mypage">
+                    <button type="button" class="mypage_button">
+                        <span class="signline">
+                            <i class="fa-solid fa-user" style="color: #73703f;"></i>
+                        </span>
+                        <span>마이페이지</span>
+                    </button>
+                </a>
+            </div>
+            <div class="adminPage" sec:authorize="isAuthenticated()"
+                 th:if="${#authorization.expression('isAuthenticated() and (hasRole(''ADMIN'') or hasRole(''SUPER_ADMIN''))')}">
+                <a href="http://localhost:8080/admin/">
+                    <button type="button" class="admin_button">
+                        <span class="signline">
+                        <i class="fa-solid fa-gear" style="color: #73703f;"></i>
+                        </span>
+                        <span>관리자 페이지</span>
+                    </button>
+                </a>
+            </div>
+            <div
+                    class="signUp"
+                    sec:authorize="isAnonymous()"
+                    th:href="@{/user/login}"
+            >
+                <a href="http://localhost:8080/user/signup_menual">
+                    <button type="button" class="signUp_button">
+                        <span class="signline">
+                            <i class="fa-solid fa-user-plus" style="color: #73703f;"></i>
+                        </span>
+                        <span>회원가입</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

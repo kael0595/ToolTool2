@@ -1,7 +1,3 @@
-body {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
-}
 
 /* 네비바 시작 */
 
@@ -29,51 +25,6 @@ li {
 a {
   color: inherit;
   text-decoration: none;
-}
-.top__bar > .top__bar_menu {
-  width: 1320px;
-  height: 100px;
-  margin: 0 auto;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-}
-.top__bar > .top__bar_menu > .logo_box {
-  flex-grow: 1;
-}
-.top__bar > .top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
-  height: 74px;
-}
-.top__bar > .top__bar_menu > .main_menu {
-  display: flex;
-  flex-grow: 4;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul {
-  display: flex;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li:hover > a > span {
-  color: #a5a773;
-}
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li > a > span {
-  font-size: 30px;
-  line-height: 32px;
-  margin: 20px;
-}
-.top__bar > .top__bar_menu > .signLine {
-  flex-grow: 2;
-  height: 74px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-.top__bar > .top__bar_menu > .signLine > div {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.top__bar > .top__bar_menu > .signLine > div > a > button > img {
-  width: 46px;
-  height: 55px;
 }
 /* 네비바 끝 */
 
@@ -326,35 +277,6 @@ div{
 .reply_summit{
   cursor:pointer;
 }
-
-/* 푸터시작 */
-footer {
-  background-color: #555;
-  padding: 20px;
-  text-align: center;
-  margin-top: 100px;
-}
-
-.footer-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.footer-content p {
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.footer-content nav a {
-  margin-right: 10px;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.footer-content nav a:hover {
-  text-decoration: underline;
-}
-
 .answer > ul > li{
   list-style:none;
 }

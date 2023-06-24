@@ -118,8 +118,8 @@ header > div > button:hover {
 .content-section .name {
   width: 30%;
 }
-.content-section .admin-id {
-  width: 30%;
+.content-section .administrator {
+  width: 20%;
 }
 table {
   width: 100%;

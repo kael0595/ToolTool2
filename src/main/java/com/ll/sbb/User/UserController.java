@@ -172,7 +172,6 @@ public class UserController {
         model.addAttribute("articles", articles);
         model.addAttribute("articleCount", articleCount);
         return model;
-
     }
 
     @GetMapping("/mypage/market")
@@ -214,7 +213,6 @@ public class UserController {
     public String findPw(@RequestParam("userEmail") String userEmail, @RequestParam("userName") String userName) {
         SiteUser user = userService.getUserByEmailAndUsername(userEmail, userName);
         if (user != null) {
-            // 유저를 찾았을 때, 임시 비밀번호를 이메일로 전송하는 메서드 호출
             mailController.sendEmailForPw(userEmail, user.getUsername());
             return "true";
         } else {
@@ -224,7 +222,7 @@ public class UserController {
 
     @PostMapping("/user/changePassword")
     @ResponseBody
-    public String updatePassword(@RequestParam("password") String pw, @RequestParam("newpassword") String newpw, @RequestParam("newpasswordcf") String newpwcf) {
+    public String changePassword(@RequestParam("password") String pw, @RequestParam("newpassword") String newpw, @RequestParam("newpasswordcf") String newpwcf) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         SiteUser user = userService.getUserByUsername(username);
@@ -237,10 +235,23 @@ public class UserController {
         }
         user.setPassword(passwordEncoder.encode(newpw));
         userService.saveUser(user);
-        return "success";
+        return "/mypage";
     }
 
-    public void updatePassword(@RequestParam("password") String password, @RequestParam("email") String email) {
-        userService.updatePassword(password, email);
+    public String changeNickname(@RequestParam("newnickname") String newnickname) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        SiteUser user = userService.getUserByUsername(username);
+        user.setNickname(newnickname);
+        userService.saveUser(user);
+        return "/mypage";
+    }
+
+    public String changeEmail(@RequestParam("newemail") String newemail) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        SiteUser user = userService.getUserByUsername(username);
+        user.setEmail(newemail);
+        return "/mypage";
     }
 }

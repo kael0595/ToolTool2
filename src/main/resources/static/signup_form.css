@@ -91,248 +91,94 @@ a {
   margin-top: 20px;
 }
 
-/* 회원가입 */
- .container {
-   max-width: 700px;
- }
-
- a {
-   display: inline-block;
-   text-decoration: none;
- }
- .heading{
-  margin-top:-200px;
- }
-
- .heading > b{
-  font-size: 20px;
- }
- input {
-   outline: none !important;
- }
- .row{
-  text-align: left;
-  padding:30px;
- }
- h1 {
-   text-align: center;
-   text-transform: uppercase;
-   margin-bottom: 20px;
-   font-weight: 400px;
- }
-
- section#formHolder {
-   padding: 50px 0;
- }
-
- .brand {
-    padding-top:30px;
-   /* padding: 60px; */
-   /* background-size: cover; */
-   /* background-position: center center; */
-   color: #a5a773;
-   /* min-height: 540px; */
-   /* position: relative; */
-   z-index: 9999;
- }
- .brand.active {
-   width: 100%;
- }
-
-
- .brand a.logo span {
-   font-size: 30px;
-   color: #fff;
-   transform: translateX(-5px);
-   display: inline-block;
- }
- .brand .heading {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   text-align: center;
-   transition: all 0.6s;
- }
- .brand .heading.active {
-   top: 100px;
-   left: 100px;
-   transform: translate(0);
- }
- .brand .heading h2 {
-   font-size: 70px;
-   font-weight: 700;
-   text-transform: uppercase;
-   margin-bottom: 0;
- }
- .brand .heading p {
-   font-size: 15px;
-   font-weight: 300;
-   text-transform: uppercase;
-   letter-spacing: 2px;
-   white-space: 4px;
-   font-family: "Raleway", sans-serif;
- }
- .brand .success-msg {
-   width: 100%;
-   text-align: center;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   margin-top: 60px;
- }
- .brand .success-msg p {
-   font-size: 25px;
-   font-weight: 400;
-   font-family: "Raleway", sans-serif;
- }
- .brand .success-msg a {
-   font-size: 12px;
-   text-transform: uppercase;
-   padding: 8px 30px;
-   background: #ff6c00;
-   text-decoration: none;
-   color: #fff;
-   border-radius: 30px;
-
-
- }
- .brand .success-msg p, .brand .success-msg a {
-   transition: all 0.9s;
-   transform: translateY(20px);
-   opacity: 0;
- }
- .brand .success-msg p.active, .brand .success-msg a.active {
-   transform: translateY(0);
-   opacity: 1;
-
- }
-
- .form {
-  position: relative;
-  display: flex;
+.heading{
+  text-align:center;
 }
 
+.headingTop > h1{
+  text-align:center;
+  font-size:4rem;
+}
 
-.signup.form-peice {
-  background: #fff;
-  /* min-height: 480px; */
+.signupFormPeice{
+
+  width:600px;
   margin: 0 auto;
-  margin-top: 500px;
-  /* box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); */
-  color: #bbbbbb;
-  transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
-  /* position: absolute; */
-  top: 0%;
-  left: -50%;
-  /* transform: translateX(-50%, -50%); */
-  width: 100%;
-  /* overflow: hidden; */
-  justify-content: center;
 }
 
-.signup.form-peice.switched {
-  transform: translateX(-100%);
-  width: 100%;
-  left: 0;
-}
-
-.signup-form {
-  padding: 0 40px;
-  margin-left: 180px;
-  width: 60%;
-  position: absolute;
-  top: 55%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  margin-top:100px;
-}
-
-.signup.form-peice .signup-form > hr{
-  border: 4px solid #ff6c00;
-  width: 300px;
-  margin-bottom:30px;
-  margin-left:-40px;
-  align-items:center;
-}
-
-.signup-form .form-group {
-  margin-bottom: 5px;
-  position: relative;
-}
-
-.signup-form .form-group.hasError input {
+.signupForm .form-group.hasError input {
   border-color: #ff6c00 !important;
 }
 
-.signup-form .form-group.hasError label {
+.signupForm .form-group.hasError label {
   color: #ff6c00 !important;
 }
 
-.signup-form label {
+.signupForm label {
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
-  font-family: "Montserrat", sans-serif;
+  font-family: "MADE TOMMY", sans-serif;
   transform: translateY(40px);
   transition: all 0.4s;
   cursor: text;
   z-index: -1;
 }
 
-.signup-form label.active {
+.signupInputform{
+  width:300px;
+  margin: 0 auto;
+}
+
+.signupForm label.active {
   transform: translateY(10px);
   font-size: 10px;
 }
 
-.signup-form label.fontSwitch {
+.signupForm label.fontSwitch {
   font-family: "Raleway", sans-serif !important;
   font-weight: 600;
 }
 
-.signup-form input:not([type=submit]) {
+.signupForm input:not([type=submit]) {
   background: none;
   outline: none;
   border: none;
   display: block;
   padding: 10px 0;
-  width: 20%;
+  width: 100%;
   border-bottom: 1px solid #eee;
   color: #444;
   font-size: 15px;
   font-family: "Montserrat", sans-serif;
   z-index: 1;
-
-
 }
 
-.signup-form input:not([type=submit]).hasError {
+.signupForm input:not([type=submit]).hasError {
   border-color: #ff6c00;
 }
 
-.signup-form span.error {
+.signupForm span.error {
   color: #ff6c00;
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
-  position: absolute;
   bottom: -20px;
   right: 0;
   display: none;
 }
 
-.signup-form input[type=password] {
+.signupForm input[type=password] {
   color: #ff6c00;
 }
 
-.signup-form .CTA {
+.signupForm .CTA {
   margin-top: 30px;
 }
 
-.signup-form .CTA input {
+.signupForm .CTA input {
   font-size: 12px;
   text-transform: uppercase;
-  padding: 5px 30px;
+  padding: 8px 20px;
   background: #ff6c00;
   color: #fff;
   border-radius: 30px;
@@ -346,29 +192,33 @@ a {
   font-size: 12px;
   text-transform: uppercase;
   padding: 5px 15px;
-  background: #ff6c00;
-  color: #fff;
+  background: #fff;
+  color: #ff6c00;
   border-radius: 30px;
   margin-right: 20px;
-  border: none;
+  border: 1px solid #ff6c00;
   font-family: "Montserrat", sans-serif;
   margin-top:13px;
+  margin-bottom:20px;
 }
-.signup-form .CTA a.switch {
+
+.signupForm .CTA a.switch {
   font-size: 13px;
 }
- /* footer */
-  .footer_container{
 
+/* footer */
+  .footer_container{
   background: #000;
   text-align:center;
+  margin: 0 auto;
+  margin-top: 200px;
   }
 
  .footer {
   background-color: #555;
   padding: 20px;
   text-align:center;
-  margin-top: 100px;
+  margin: 0 auto;
 }
 
 
@@ -386,4 +236,10 @@ a {
 
 .footer-content nav a:hover {
   text-decoration: underline;
+}
+
+hr{
+  border: 2px solid #ff6c00;
+  width: 400px;
+  margin-bottom:40px;
 }

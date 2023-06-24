@@ -4,178 +4,16 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="mypage.css"/>
+    <link rel="stylesheet" href="/mypage.css"/>
+    <link rel="stylesheet" href="/layout/footer.css"/>
+    <link rel="stylesheet" href="/layout/navbar.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script>
-      //사진변경 쿼리
-      $(document).ready(function () {
-        $(".change-icon").click(function () {
-          // "file" 타입의 input 요소 생성
-          var inputFile = $('<input type="file">');
-
-          // input 요소에 클릭 이벤트 트리거
-          inputFile.trigger("click");
-
-          // 파일 선택 시
-          inputFile.change(function () {
-            var file = this.files[0];
-
-            if (file) {
-              var reader = new FileReader();
-
-              // 파일을 데이터 URL로 읽기
-              reader.readAsDataURL(file);
-
-              // 파일 로드가 완료되었을 때
-              reader.onload = function (e) {
-                // 선택한 파일로 프로필 이미지 업데이트
-                $(".profile_img_1").attr("src", e.target.result);
-              };
-            }
-          });
-        });
-      });
-
-    </script>
-    <script>
-      $(document).ready(function () {
-        $(".menu_box a").click(function (e) {
-          e.preventDefault();
-          var pageId = $(this).data("page");
-          $(".page").hide();
-          $("#" + pageId).show();
-        });
-      });
-    </script>
-
-    <script>
-      $(document).ready(function () {
-        $(".menu_box a").click(function (e) {
-          e.preventDefault();
-          var pageId = $(this).data("page");
-          $(".page").hide();
-          $("#" + pageId).show();
-        });
-
-        $("#change-password-btn").click(function () {
-          if (!$("#current-password").is(":disabled")) {
-            $("#current-password").prop("disabled", true);
-            $("#save-password-btn").prop("disabled", true);
-          } else {
-            $("#current-password").prop("disabled", false);
-            $(this).prop("disabled", true);
-            $("#save-password-btn").prop("disabled", false);
-          }
-        });
-
-        $("#change-nickname-btn").click(function () {
-          $("#nickname").removeAttr("disabled");
-          $(this).attr("disabled", true);
-          $("#save-nickname-btn").removeAttr("disabled");
-        });
-
-        $("#change-email-btn").click(function () {
-          $("#email").removeAttr("disabled");
-          $(this).attr("disabled", true);
-          $("#save-email-btn").removeAttr("disabled");
-        });
-
-        $("#save-password-btn").click(function () {
-          $("#current-password").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-password-btn").removeAttr("disabled");
-        });
-
-        $("#save-nickname-btn").click(function () {
-          $("#nickname").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-nickname-btn").removeAttr("disabled");
-        });
-
-        $("#save-email-btn").click(function () {
-          $("#email").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-email-btn").removeAttr("disabled");
-        });
-        $("#current-password").prop("disabled", true);
-        $("#save-password-btn").prop("disabled", true);
-      });
-    </script>
     <title>My툴</title>
 </head>
 <body>
 <div class="my_page">
     <!--topbar-->
-    <div class="detail_top__bar">
-        <nav class="detail_top__bar_menu">
-            <div class="logo_box">
-                <ul>
-                    <li>
-                        <a href="http://localhost:8080/">
-                            <button type="button" class="logo_button">
-                                <img src="/img/230605_툴툴_로고 복사 1.png"/>
-                            </button>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="main_menu">
-                <ul class="main_menu_ul">
-                    <li>
-                        <a href="http://localhost:8080/article/list">
-                            <span>Review</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:8080/market/list">
-                            <span>Market</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://localhost:8080/notice/list">
-                            <span>Notice</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="signLine">
-                <div class="signIn" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                    <a href="http://localhost:8080/user/logout">
-                        <button type="button" class="signIn_button">
-                            <img src="https://i.postimg.cc/sDydgSfq/logout.png" class="signIn_img"/>
-                            <span>로그아웃</span>
-                        </button>
-                    </a>
-                </div>
-
-                <div class="signIn" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                    <a href="http://localhost:8080/user/login">
-                        <button type="button" class="signIn_button">
-                            <img src="https://i.postimg.cc/dQGcFnFG/login.png" class="signIn_img"/>
-                            <span>로그인</span>
-                        </button>
-                    </a>
-                </div>
-
-                <div class="signUp" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">
-                    <a href="http://localhost:8080/mypage">
-                        <button type="button" class="signUp_button">
-                            <img src="https://i.postimg.cc/wMXCkx2w/mypage.png" class="signUp_img"/>
-                            <span>마이페이지</span>
-                        </button>
-                    </a>
-                </div>
-                <div class="signUp" sec:authorize="isAnonymous()" th:href="@{/user/login}">
-                    <a href="user/signup_menual">
-                        <button type="button" class="signUp_button">
-                            <img src="https://i.postimg.cc/vHzRgBcB/signup.png" class="signUp_img"/>
-                            <span>회원가입</span>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <div th:replace="layout/navbar.html"></div>
     <!--secondbar-->
     <div class="my_page_second_bar">
         <div class="profile_img">
@@ -291,11 +129,16 @@
                     </div>
                     <div class="underline"></div>
                     <div class="form_group">
-                        <label for="current-password">현재 비밀번호</label>
+                        <label for="current-password">변경할 비밀번호</label>
                         <input type="password" id="current-password" value=""/>
                         <button type="button" id="change-password-btn">
                             비밀번호 변경
                         </button>
+                    </div>
+                    <div class="underline"></div>
+                    <div class="form_group">
+                        <label for="current-password">확인할 비밀번호</label>
+                        <input type="password" id="current-password" value=""/>
                         <button type="button" id="save-password-btn" disabled>
                             완료
                         </button>
@@ -480,16 +323,7 @@
         </div>
     </div>
     <!--footer-->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 툴툴 Welcome</p>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-        </div>
-    </footer>
+    <footer th:replace="layout/footer.html"></footer>
 </div>
 <script>
 $(document).ready(function() {
@@ -517,6 +351,7 @@ $(document).ready(function() {
     });
   });
 });
+
 
 
 </script>
@@ -547,7 +382,104 @@ $(document).ready(function() {
   });
 });
 
+
+</script>
+<script>
+      //사진변경 쿼리
+      $(document).ready(function () {
+        $(".change-icon").click(function () {
+          // "file" 타입의 input 요소 생성
+          var inputFile = $('<input type="file">');
+
+          // input 요소에 클릭 이벤트 트리거
+          inputFile.trigger("click");
+
+          // 파일 선택 시
+          inputFile.change(function () {
+            var file = this.files[0];
+
+            if (file) {
+              var reader = new FileReader();
+
+              // 파일을 데이터 URL로 읽기
+              reader.readAsDataURL(file);
+
+              // 파일 로드가 완료되었을 때
+              reader.onload = function (e) {
+                // 선택한 파일로 프로필 이미지 업데이트
+                $(".profile_img_1").attr("src", e.target.result);
+              };
+            }
+          });
+        });
+      });
+
+</script>
+<script>
+      $(document).ready(function () {
+        $(".menu_box a").click(function (e) {
+          e.preventDefault();
+          var pageId = $(this).data("page");
+          $(".page").hide();
+          $("#" + pageId).show();
+        });
+      });
+
 </script>
 
+<script>
+      $(document).ready(function () {
+        $(".menu_box a").click(function (e) {
+          e.preventDefault();
+          var pageId = $(this).data("page");
+          $(".page").hide();
+          $("#" + pageId).show();
+        });
+
+        $("#change-password-btn").click(function () {
+          if (!$("#current-password").is(":disabled")) {
+            $("#current-password").prop("disabled", true);
+            $("#save-password-btn").prop("disabled", true);
+          } else {
+            $("#current-password").prop("disabled", false);
+            $(this).prop("disabled", true);
+            $("#save-password-btn").prop("disabled", false);
+          }
+        });
+
+        $("#change-nickname-btn").click(function () {
+          $("#nickname").removeAttr("disabled");
+          $(this).attr("disabled", true);
+          $("#save-nickname-btn").removeAttr("disabled");
+        });
+
+        $("#change-email-btn").click(function () {
+          $("#email").removeAttr("disabled");
+          $(this).attr("disabled", true);
+          $("#save-email-btn").removeAttr("disabled");
+        });
+
+        $("#save-password-btn").click(function () {
+          $("#current-password").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-password-btn").removeAttr("disabled");
+        });
+
+        $("#save-nickname-btn").click(function () {
+          $("#nickname").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-nickname-btn").removeAttr("disabled");
+        });
+
+        $("#save-email-btn").click(function () {
+          $("#email").attr("disabled", true);
+          $(this).attr("disabled", true);
+          $("#change-email-btn").removeAttr("disabled");
+        });
+        $("#current-password").prop("disabled", true);
+        $("#save-password-btn").prop("disabled", true);
+      });
+
+</script>
 </body>
 </html>
