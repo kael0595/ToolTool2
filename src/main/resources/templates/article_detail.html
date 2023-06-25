@@ -43,7 +43,7 @@
             </div>
 
             <div class="article_title">
-                <p th:text="${article.subject}" class="article_title">헬리녹스 의자리뷰</p>
+                <p th:text="${article.subject}" class="article_title"></p>
             </div>
             <hr>
             <div class="userInfoform">
@@ -96,10 +96,7 @@
             <div class="SaleInfo">
                 <div class="product_section">
                     <div class="product_img">
-                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA5MjlfMTk1%2FMDAxNjY0Mzk2OTMyNjQ3.0KKPl1Wr1CMWG82iQihP3LvTBx1bW-FHtLU0MMbzHZIg.5y7qYhyWhitl6AUofXUUC-9pc0ihxJCMstNZYxIVHOYg.JPEG.leeny8907%2FIMG_3492.jpg&type=a340"
-                             width="500" height="500" alt="상품이미지" class="image">
-                        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEyMTFfMTQz%2FMDAxNjM5MTk4NDc0OTM5.DNGpaDvvpWkazFv7yzQsW_scJWKqFTRL223iFvjQ2dEg.YvWsVttuOkm7c3cbxNTYUkMrd3xP7FU4UHzJJNhXubsg.JPEG.originality9%2FIMG_8284.jpg&type=a340"
-                             width="500" height="500" alt="상품이미지" class="image">
+                        <img th:src="${article.filepath}" width="500" height="500" alt="상품이미지" class="image">
                     </div>
                     <div class=""></div>
                 </div>
@@ -256,6 +253,7 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
+
 
 </script>
 </body>

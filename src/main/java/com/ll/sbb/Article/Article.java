@@ -54,4 +54,10 @@ public class Article {
     private SiteUser author;
 
     private int likeCount;
+
+    @Column
+    private String filename;
+
+    @Column
+    private String filepath;
 }

@@ -62,7 +62,7 @@ public class NoticeController {
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
         this.noticeService.create(noticeForm.getSubject(), noticeForm.getContent());
-        return "redirect:/admin";
+        return "redirect:/admin/";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")

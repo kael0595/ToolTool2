@@ -31,9 +31,8 @@
         <li th:each="article, stat : ${articleList}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
                 <a th:href="@{|/article/detail/${article.id}|}">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img review_main_img review_main_img_1"
+                    <img th:src="${article.filepath}"
+                         class="rm_content_main_img review_main_img review_main_img_1"
                     />
                 </a>
                 <div class="text_box .text_box_1">
@@ -63,14 +62,13 @@
         <li th:each="market, stat : ${marketList}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
                 <a th:href="@{|/market/detail/${market.id}|}">
-                    <img
-                            src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                            class="rm_content_main_img review_main_img review_main_img_1"
+                    <img th:src="${market.filepath}"
+                         class="rm_content_main_img review_main_img review_main_img_1"
                     />
                 </a>
                 <div class="text_box .text_box_1">
-                    <!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
-                    <!--                                              th:text="${#lists.size(market.answerList)}"></span>-->
+                  <span>답글수 <span th:if="${#lists.size(market.marketAnswerList) >= 0}"
+                                  th:text="${#lists.size(market.marketAnswerList)}"></span></span>
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">

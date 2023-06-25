@@ -22,13 +22,14 @@
     });
     });
 
+
     </script>
 </head>
 <body>
 <footer th:replace="layout/navbar_no.html"></footer>
 <!--아래부터 폼 -->
 <div layout:fragment="content" class="container">
-    <form th:object="${marketForm}" method="post" class="form">
+    <form th:object="${marketForm}" method="post" class="form" enctype="multipart/form-data">
         <h1 class="my-3 border-bottom pb-2"><p>Market</p></h1>
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         <div class="mb-3">
@@ -63,7 +64,10 @@
                 <option id="typemenu6" name=”type” value=기타>기타</option>
             </select>
         </div>
-        <div class="photo"><p>사진등록버튼구현예정</p></div>
+        <div class="product-img-box">
+            <label for="avatar1">상품사진:</label>
+            <input accept="image/png, image/jpeg, image/jpg" id="avatar1" name="file" type="file">
+        </div>
         <div class="mb-3">
             <label for="content" class="form-label"><p>내용</p></label>
             <textarea sec:authorize="isAnonymous()" th:field="*{content}" id="summernote"

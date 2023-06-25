@@ -8,7 +8,6 @@ import com.ll.sbb.Market.MarketService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.*;
@@ -220,16 +219,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/user/changePassword")
+    @PostMapping("/mypage/changePassword")
     @ResponseBody
-    public String changePassword(@RequestParam("password") String pw, @RequestParam("newpassword") String newpw, @RequestParam("newpasswordcf") String newpwcf) {
+    public String changePassword(@RequestParam("newpassword") String newpw, @RequestParam("newpasswordcf") String newpwcf) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         SiteUser user = userService.getUserByUsername(username);
 
-        if (!passwordEncoder.matches(pw, user.getPassword())) {
-            return "현재 비밀번호와 일치하지 않습니다.";
-        }
         if (!newpw.equals(newpwcf)) {
             return "변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.";
         }
@@ -238,6 +234,8 @@ public class UserController {
         return "/mypage";
     }
 
+    @PostMapping("/mypage/changeNickname")
+    @ResponseBody
     public String changeNickname(@RequestParam("newnickname") String newnickname) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -247,6 +245,8 @@ public class UserController {
         return "/mypage";
     }
 
+    @PostMapping("/mypage/changeEmail")
+    @ResponseBody
     public String changeEmail(@RequestParam("newemail") String newemail) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

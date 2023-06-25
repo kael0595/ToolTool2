@@ -90,14 +90,14 @@ textarea{
 #form2{
   width:50%;
 }
-.photo{
+/*.photo{
   border:1px solid black;
   display:inline-block;
   height:80px;
   width:80px;
   text-align:center;
   margin-top:30px;
-}
+}*/
 p{
   font-family: "NanumBarunGothic", sans-serif;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="AdminPage.css"/>
+    <link rel="stylesheet" href="/AdminPage.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -15,6 +15,54 @@
           $("#" + sectionId).show(); // 해당 섹션만 보이도록 함
         });
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script>
@@ -43,6 +91,54 @@
           });
         });
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script>
@@ -84,6 +180,53 @@ $(document).ready(function () {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
     <title>AdminPage</title>
 </head>
@@ -122,7 +265,7 @@ $(document).ready(function () {
         <div class="top-bar">
             <h2>공지사항 관리</h2>
             <div class="button">
-                <button type="button"><a href="#">글쓰기</a></button>
+                <button type="button"><a th:href="@{/notice/create}">글쓰기</a></button>
                 <button type="button">삭제</button>
             </div>
         </div>
@@ -132,133 +275,24 @@ $(document).ready(function () {
                 <th class="check_box"></th>
                 <th class="number">글번호</th>
                 <th class="title">제목</th>
-                <th class="date">날짜</th>
+                <th class="date">작성일</th>
                 <th class="inquiry">조회</th>
-                <th class="modify">수정</th>
+                <th class="modify">수정일</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="notice : ${noticeList}">
                 <td class="checkbox">
                     <input type="checkbox" name="delete-checkbox" value="1"/>
                 </td>
-                <td class="number">1</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
+                <td class="number" th:text="${notice.id}"></td>
+                <td class="title"><a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.subject}"></a></td>
+                <td class="date" th:text="${notice.createDate}"></td>
+                <td class="inquiry" th:text="${notice.viewCount}"></td>
+                <td class="modify" th:text="${notice.modifyDate}">
+                    <button type="button"></button>
                 </td>
             </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="2"/>
-                </td>
-                <td class="number">2</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="3"/>
-                </td>
-                <td class="number">3</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="4"/>
-                </td>
-                <td class="number">4</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="5"/>
-                </td>
-                <td class="number">5</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="6"/>
-                </td>
-                <td class="number">6</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="7"/>
-                </td>
-                <td class="number">7</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="8"/>
-                </td>
-                <td class="number">8</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="9"/>
-                </td>
-                <td class="number">9</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="10"/>
-                </td>
-                <td class="number">10</td>
-                <td class="title">제목</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-                <td class="modify">
-                    <button type="button">수정</button>
-                </td>
-            </tr>
-            </tbody>
         </table>
     </section>
     <section id="review-section" class="content-section">
@@ -278,105 +312,15 @@ $(document).ready(function () {
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="article : ${articleList}">
                 <td class="checkbox">
                     <input type="checkbox" name="delete-checkbox" value="1"/>
                 </td>
-                <td class="number">1</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="2"/>
-                </td>
-                <td class="number">2</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="3"/>
-                </td>
-                <td class="number">3</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="4"/>
-                </td>
-                <td class="number">4</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="5"/>
-                </td>
-                <td class="number">5</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="6"/>
-                </td>
-                <td class="number">6</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="7"/>
-                </td>
-                <td class="number">7</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="8"/>
-                </td>
-                <td class="number">8</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="9"/>
-                </td>
-                <td class="number">9</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="10"/>
-                </td>
-                <td class="number">10</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
+                <td class="number" th:text="${article.id}"></td>
+                <td class="title"><a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a></td>
+                <td class="nickname" th:text="${article.author}"></td>
+                <td class="date" th:text="${article.createDate}"></td>
+                <td class="inquiry" th:text="${article.viewCount}"></td>
             </tr>
             </tbody>
         </table>
@@ -400,105 +344,15 @@ $(document).ready(function () {
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="market : ${marketList}">
                 <td class="checkbox">
                     <input type="checkbox" name="delete-checkbox" value="1"/>
                 </td>
-                <td class="number">1</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="2"/>
-                </td>
-                <td class="number">2</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="3"/>
-                </td>
-                <td class="number">3</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="4"/>
-                </td>
-                <td class="number">4</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="5"/>
-                </td>
-                <td class="number">5</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="6"/>
-                </td>
-                <td class="number">6</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="7"/>
-                </td>
-                <td class="number">7</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="8"/>
-                </td>
-                <td class="number">8</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="9"/>
-                </td>
-                <td class="number">9</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="10"/>
-                </td>
-                <td class="number">10</td>
-                <td class="title"><a href="#">제목</a></td>
-                <td class="nickname">닉네임</td>
-                <td class="date">작성날짜</td>
-                <td class="inquiry">조회수</td>
+                <td class="number" th:text="${market.id}"></td>
+                <td class="title"><a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a></td>
+                <td class="nickname" th:text="${market.author}"></td>
+                <td class="date" th:text="${market.createDate}"></td>
+                <td class="inquiry" th:text="${market.viewCount}"></td>
             </tr>
             </tbody>
         </table>
@@ -520,124 +374,18 @@ $(document).ready(function () {
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="user : ${userList}">
                 <td class="checkbox">
                     <input type="checkbox" name="delete-checkbox" value="1"/>
                 </td>
-                <td class="number">1</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
+                <td class="number" th:text="${user.id}"></td>
+                <td class="id" th:text="${user.username}"></td>
+                <td class="nickname" th:text="${user.nickname}"></td>
+                <td class="email" th:text="${user.email}"></td>
                 <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="1"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="2"/>
-                </td>
-                <td class="number">2</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="2"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="3"/>
-                </td>
-                <td class="number">3</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="3"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="4"/>
-                </td>
-                <td class="number">4</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="4"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="5"/>
-                </td>
-                <td class="number">5</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="5"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="6"/>
-                </td>
-                <td class="number">6</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="6"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="7"/>
-                </td>
-                <td class="number">7</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="7"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="8"/>
-                </td>
-                <td class="number">8</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</tadministratord>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="8"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="9"/>
-                </td>
-                <td class="number">9</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="9"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="10"/>
-                </td>
-                <td class="number">10</td>
-                <td class="id">아이디</td>
-                <td class="nickname">닉네임</td>
-                <td class="email">이메일</td>
-                <td class="checkbox administrator">
-                    <input type="checkbox" name="administrator-checkbox" value="10"/>
+                    <input type="checkbox" name="addadmin-checkbox" value="1"
+                           th:checked="${user.userRole != T(com.ll.sbb.User.UserRole).ADMIN}"
+                           th:onclick="'toggleAdminRole(\'' + ${user.id} + '\')'"/>
                 </td>
             </tr>
             </tbody>
@@ -659,16 +407,18 @@ $(document).ready(function () {
             </tr>
             </thead>
             <tbody>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
+            <tr th:each="user : ${userList}" th:if="${user.userRole == T(com.ll.sbb.User.UserRole).ADMIN}">
+                <td class="check_box"></td>
+                <td class="number" th:text="${user.id}"></td>
+                <td class="id" th:text="${user.username}"></td>
+                <td class="nickname" th:text="${user.nickname}"></td>
+                <td class="email" th:text="${user.email}"></td>
+                <td class="administrator">
+                    <input type="checkbox" name="minusadmin-checkbox" value="1"
+                           th:checked="${user.userRole == T(com.ll.sbb.User.UserRole).ADMIN}"
+                           th:onclick="'toggleAdminRole(\'' + ${user.id} + '\')'"/>
+                </td>
+            </tr>
             </tbody>
         </table>
     </section>
@@ -679,4 +429,48 @@ $(document).ready(function () {
     </div>
 </footer>
 </body>
+<script>
+    function toggleAdminRole(userId) {
+        var checkbox = document.querySelector('input[name="admin-checkbox"][value="' + userId + '"]');
+        var isAdmin = checkbox.checked;
+
+        if (isAdmin) {
+            addAdminRole(userId);
+        } else {
+            minusAdminRole(userId);
+        }
+    }
+
+    function addAdminRole(userId) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/addAdminRole',
+            data: { id: userId },
+            success: function(response) {
+                alert(response);
+                // 관리자 권한이 부여된 경우에 필요한 처리를 수행합니다.
+            },
+            error: function(xhr, status, error) {
+                alert('오류가 발생했습니다: ' + error);
+            }
+        });
+    }
+
+    function minusAdminRole(userId) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/minusAdminRole',
+            data: { id: userId },
+            success: function(response) {
+                alert(response);
+                // 관리자 권한이 회수된 경우에 필요한 처리를 수행합니다.
+            },
+            error: function(xhr, status, error) {
+                alert('오류가 발생했습니다: ' + error);
+            }
+        });
+    }
+
+</script>
+
 </html>

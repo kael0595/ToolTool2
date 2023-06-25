@@ -1,9 +1,12 @@
 package com.ll.sbb.Article;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import jakarta.persistence.criteria.*;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,7 @@ import com.ll.sbb.Answer.Answer;
 import com.ll.sbb.User.SiteUser;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -222,16 +226,33 @@ public class ArticleService {
         }
     }
 
-    public void create(String subject, String content, Integer price, Integer starScore, String season, String type, SiteUser user) {
+    public void create(ArticleForm articleForm, SiteUser user, MultipartFile file) throws IOException {
+        // 저장할 경로를 여기서 지정해줌
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+
+//      String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+
+        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
+        // uuid는 파일에 붙일 랜덤이름을 생성
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
+        String filePath = "/files/" + fileName;
+
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
         Article q = new Article();
-        q.setSubject(subject);
-        q.setContent(content);
+        q.setSubject(articleForm.getSubject());
+        q.setContent(articleForm.getContent());
         q.setCreateDate(LocalDateTime.now());
         q.setAuthor(user);
-        q.setPrice(price);
-        q.setStarScore(starScore);
-        q.setSeason(season);
-        q.setType(type);
+        q.setPrice(articleForm.getPrice());
+        q.setStarScore(articleForm.getStarScore());
+        q.setSeason(articleForm.getSeason());
+        q.setType(articleForm.getType());
+        q.setFilename(fileName);
+        q.setFilepath(filePath);
         this.articleRepository.save(q);
     }
 

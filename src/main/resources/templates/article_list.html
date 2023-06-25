@@ -171,7 +171,7 @@
                 <li th:each="article, stat : ${paging}" th:if="${stat.index < 9}">
                     <nav class="item review_board_img">
                         <a th:href="@{|/article/detail/${article.id}|}">
-                            <img src="https://i.postimg.cc/m23RYKm6/product-box1.png" class="review_board_main_img"/>
+                            <img th:src="${article.filepath}" class="review_board_main_img"/>
                         </a>
                         <div class="text_box_name text_box_name_1">
                             <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
@@ -223,7 +223,7 @@
     </div>
 </div>
 <!--footer-->
-<footer th:replace="layout/footer.html"></footer>
+<footer th:replace="/layout/footer.html"></footer>
 <script>
       var itemsPerPage = 9;
     var $items = $('.item');
@@ -282,6 +282,7 @@
 
 
 
+
 </script>
 <script>
     $(document).ready(function() {
@@ -308,6 +309,7 @@
     });
   });
 });
+
 
 
 
@@ -350,6 +352,7 @@
           moveSlide(currentIndex);
         }, 3000);
       });
+
 
 </script>
 </body>

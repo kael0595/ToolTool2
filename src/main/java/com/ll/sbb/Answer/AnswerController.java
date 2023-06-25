@@ -24,7 +24,6 @@ public class AnswerController {
 
     private final ArticleService articleService;
     private final AnswerService answerService;
-    @Autowired
     private final UserService userService;
 
     @PreAuthorize("isAuthenticated()")

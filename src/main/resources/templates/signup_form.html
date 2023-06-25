@@ -7,63 +7,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/signup_form.css">
+    <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <title>회원가입</title>
 </head>
 
 <body>
-<!-- 상단 네비바 -->
-<div class="top__bar">
-    <nav class="top__bar_menu">
-        <div class="logo_box">
-            <ul>
-                <li>
-                    <a href="http://localhost:8080/">
-                        <button type="button" class="logo_button">
-                            <img src="국기수업_중프[툴툴]/디자인/툴툴1.png"/>
-                        </button>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="main_menu">
-            <ul class="main_menu_ul">
-                <li>
-                    <a href="http://localhost:8080/article/list">
-                        <span class="review">Review</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/market/list">
-                        <span class="market">Market</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://localhost:8080/notice/list">
-                        <span class="notice">Notice</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="signLine">
-            <div class="signIn">
-                <a href="http://localhost:8080/user/login">
-                    <button type="button" class="signIn_button">
-                        <img src="img/sign in.png" class="signIn_img"/>
-                    </button>
-                </a>
-            </div>
-            <div class="signUp">
-                <a href="http://localhost:8080/user/signup">
-                    <button type="button" class="signUp_button">
-                        <img src="img/sing up.png" class="signUp_img"/>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </nav>
-</div>
-<!-- 상단 네비바 끝 -->
-
+<div th:replace="layout/navbar_no.html"></div>
 <div class="container">
     <section id="formHolder">
 
@@ -110,7 +59,7 @@
                             <div class="form-group">
                                 <label for="email">이메일 </label>
                                 <input type="email" th:field="*{email}" name="email" id="email" class="email">
-                                <button class="emailCF" type="emailCF" id="submit">인증번호 보내기
+                                <button class="emailCF" type="button" onclick="sendEmailConfirmation()" id="emailCF">인증번호 보내기
                                 </button>
                                 <span class="error"></span>
                             </div>
@@ -139,20 +88,7 @@
                 </form>
             </div>
         </section>
-</div>
-
-<div class="footer_container">
-
-    <div class="footer">
-        <div class="footer-content">
-            <p>&copy; 2023 Your Website. All rights reserved.</p>
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </nav>
-        </div>
-    </div>
+    </section>
 </div>
 
 </body>
@@ -174,19 +110,6 @@
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

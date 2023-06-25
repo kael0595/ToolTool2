@@ -16,7 +16,6 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 
     List<Article> findByType(String type);
 
-
     List<Article> findByPriceBetween(int min, int max);
 
     List<Article> findBySeason(String season);

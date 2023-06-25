@@ -1,6 +1,7 @@
 package com.ll.sbb.Market;
 
 import com.ll.sbb.Article.Article;
+import com.ll.sbb.Article.ArticleForm;
 import com.ll.sbb.DataNotFoundException;
 import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
@@ -12,12 +13,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.yaml.snakeyaml.error.Mark;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.core.annotation.MergedAnnotations.search;
 
@@ -87,16 +92,32 @@ public class MarketService {
         }
     }
 
-    public void create(String subject, String content, Integer price, String brand, String type, String season, SiteUser user) {
+    public void create(MarketForm marketForm, SiteUser user, MultipartFile file) throws IOException {
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+
+//      String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+
+        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
+        // uuid는 파일에 붙일 랜덤이름을 생성
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
+        String filePath = "/files/" + fileName;
+
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
         Market q = new Market();
-        q.setSubject(subject);
-        q.setContent(content);
+        q.setSubject(marketForm.getSubject());
+        q.setContent(marketForm.getContent());
         q.setCreateDate(LocalDateTime.now());
-        q.setPrice(price);
-        q.setBrand(brand);
-        q.setType(type);
-        q.setSeason(season);
+        q.setPrice(marketForm.getPrice());
+        q.setBrand(marketForm.getBrand());
+        q.setType(marketForm.getType());
+        q.setSeason(marketForm.getSeason());
         q.setAuthor(user);
+        q.setFilename(fileName);
+        q.setFilepath(filePath);
         this.marketRepository.save(q);
     }
 

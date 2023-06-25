@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ll.sbb.Answer.AnswerForm;
@@ -206,12 +207,15 @@ public class ArticleController {
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
-    public String articleCreate(@Valid ArticleForm articleForm, BindingResult bindingResult, Principal principal) {
+    public String articleCreate(@Valid ArticleForm articleForm,
+                                BindingResult bindingResult,
+                                Principal principal,
+                                @RequestParam("file") MultipartFile file) throws Exception {
         if (bindingResult.hasErrors()) {
             return "article_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.articleService.create(articleForm.getSubject(), articleForm.getContent(), articleForm.getPrice(), articleForm.getStarScore(), articleForm.getSeason(), articleForm.getType(), siteUser);
+        this.articleService.create(articleForm, siteUser, file);
         return "redirect:/article/list";
     }
 

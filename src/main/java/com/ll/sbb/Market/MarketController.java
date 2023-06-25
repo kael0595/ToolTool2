@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
@@ -197,12 +198,13 @@ public class MarketController {
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
-    public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult, Principal principal) {
+    public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult, Principal principal
+            , @RequestParam("file") MultipartFile file) throws Exception {
         if (bindingResult.hasErrors()) {
             return "market_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.marketService.create(marketForm.getSubject(), marketForm.getContent(), marketForm.getPrice(), marketForm.getBrand(), marketForm.getType(), marketForm.getSeason(), siteUser);
+        this.marketService.create(marketForm, siteUser, file);
         return "redirect:/market/list"; // 질문 저장후 질문목록으로 이동
     }
 

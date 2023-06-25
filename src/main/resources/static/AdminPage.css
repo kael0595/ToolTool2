@@ -1,25 +1,19 @@
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+ font-family: 'Noto Sans KR', sans-serif;
 }
 div,
 nav {
   box-sizing: border-box;
 }
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
+span,p,a{
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #73703f;
 }
 button {
+  border: 0;
+  background-color: transparent;
   cursor: pointer;
 }
 body,

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -133,5 +134,17 @@ public class UserService {
 
     public SiteUser saveUser(SiteUser user) {
         return userRepository.save(user);
+    }
+
+    public SiteUser getUserById(int id) {
+        return userRepository.findById(id);
+    }
+
+    public List<SiteUser> getAll() {
+        return this.userRepository.findAll();
+    }
+
+    public List<SiteUser> getUserByUserRole(UserRole admin) {
+        return this.userRepository.findUserByUserRole(UserRole.ADMIN);
     }
 }

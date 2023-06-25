@@ -57,4 +57,10 @@ public class Market {
 
     private int likeCount;
 
+    @Column
+    private String filename;
+
+    @Column
+    private String filepath;
+
 }
