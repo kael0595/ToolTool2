@@ -70,7 +70,7 @@ public class AdminController {
         return ResponseEntity.ok("관리자 권한이 부여되었습니다.");
     }
 
-    @PostMapping("/admin/minusAdminRole")
+    @PostMapping("/minusAdminRole")
     @ResponseBody
     public ResponseEntity<String> minusAdminRole(@RequestParam("id") int id) {
 

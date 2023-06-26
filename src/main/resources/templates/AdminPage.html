@@ -18,58 +18,6 @@
         });
       });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script>
-      $(document).ready(function () {
         // 삭제 버튼 클릭 시
         $("button:contains('삭제')").click(function () {
           // 선택된 모든 체크박스 가져오기
@@ -96,143 +44,37 @@
       });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script>
-     $(document).ready(function () {
-  // 회원 관리에서 체크박스 변경 이벤트 감지
-  $("#member-section").on(
-    "change",
-    'input[name="administrator-checkbox"]',
-    function () {
-      if ($(this).is(":checked")) {
-        // 체크박스가 선택되었을 때
-        var row = $(this).closest("tr"); // 선택된 행 찾기
-        var rowData = row.html(); // 선택된 행의 HTML 내용 가져오기
-        row.remove(); // 선택된 행 삭제
-
-        // 관리자 관리에 행 추가
-        $("#admin-section table tbody").append("<tr>" + rowData + "</tr>");
-      }
-    }
-  );
-});
-$(document).ready(function () {
-  // 관리자 관리에서 체크박스 변경 이벤트 감지
-  $("#admin-section").on(
-    "change",
-    'input[name="administrator-checkbox"]',
-    function () {
-      if ($(this).is(":checked")) {
-        // 체크박스가 선택되었을 때
-        var row = $(this).closest("tr"); // 선택된 행 찾기
-        var rowData = row.html(); // 선택된 행의 HTML 내용 가져오기
-        row.remove(); // 선택된 행 삭제
-
-        // 회원 관리에 행 추가
-        $("#member-section table tbody").append("<tr>" + rowData + "</tr>");
-      }
-    }
-  );
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
+    // 회원 관리에서 관리자 권한 부여 버튼 클릭 이벤트
+    $("#member-section").on("click", 'button[name="addadmin-checkbox"]', function() {
+      var button = $(this);
+      var row = button.closest("tr"); // 선택된 행 찾기
+      var rowData = row.html(); // 선택된 행의 HTML 내용 가져오기
+      row.remove(); // 선택된 행 삭제
+
+      // 관리자 관리에 행 추가
+      $("#admin-section table tbody").append("<tr>" + rowData + "</tr>");
+
+      // 버튼 텍스트 변경: 관리자 회수 버튼으로
+      button.text("관리자 회수");
+      button.attr("name", "minusadmin-checkbox");
+    });
+
+    // 관리자 관리에서 관리자 회수 버튼 클릭 이벤트
+    $("#admin-section").on("click", 'button[name="minusadmin-checkbox"]', function() {
+      var button = $(this);
+      var row = button.closest("tr"); // 선택된 행 찾기
+      var rowData = row.html(); // 선택된 행의 HTML 내용 가져오기
+      row.remove(); // 선택된 행 삭제
+
+      // 회원 관리에 행 추가
+      $("#member-section table tbody").append("<tr>" + rowData + "</tr>");
+
+      // 버튼 텍스트 변경: 관리자 권한 부여 버튼으로
+      button.text("관리자 부여");
+      button.attr("name", "addadmin-checkbox");
+    });
+  });
+   </script>
     <title>AdminPage</title>
 </head>
 <body>
@@ -388,9 +230,9 @@ $(document).ready(function () {
                 <td class="nickname" th:text="${user.nickname}"></td>
                 <td class="email" th:text="${user.email}"></td>
                 <td class="checkbox administrator">
-                    <input type="checkbox" name="addadmin-checkbox" value="1"
-                           th:onclick="addAdminRole([[${user.id}]])"
-                    />
+                    <button type="button" name="addadmin-checkbox" class="adminbutton"
+                            th:onclick="addAdminRole([[${user.id}]])">관리자부여
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -419,9 +261,9 @@ $(document).ready(function () {
                 <td class="nickname" th:text="${user.nickname}"></td>
                 <td class="email" th:text="${user.email}"></td>
                 <td class="administrator">
-                    <input type="checkbox" name="minusadmin-checkbox" value="1"
-                           th:onclick="minusAdminRole([[${user.id}]])"
-                    />
+                    <button type="button" name="minusadmin-checkbox" class="adminbutton"
+                            th:onclick="minusAdminRole([[${user.id}]])">관리자회수
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -471,7 +313,5 @@ $(document).ready(function () {
         });
     }
 
-
 </script>
-
 </html>

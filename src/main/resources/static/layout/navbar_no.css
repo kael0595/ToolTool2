@@ -32,7 +32,7 @@ a {
   font-size: 20px;
 }
 .top__bar > .top__bar_menu {
-  width: 1320px;
+  width: 1520px;
   height: 100px;
   margin: 0 auto;
   margin-top: 20px;
@@ -78,6 +78,7 @@ a {
     margin-bottom: 0;
     color: black;
     letter-spacing : -1px;
+    margin-right : 90px;
 }
 .top__bar > .top__bar_menu > .signLine {
   flex-grow: 2;

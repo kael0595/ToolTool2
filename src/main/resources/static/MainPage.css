@@ -10,12 +10,43 @@
   width: 100%;
   height: 100%;
 }
+/*main-menu-categori*/
+.main_categori {
+   width: 1200px;
+   margin: 0 auto;
+   height: 100px;
+   margin-top: 20px;
+   display: flex;
+   justify-content: center;
+ }
+ .main_categori > .main_categori_menu > ul {
+   display: flex;
+   justify-content: center;
+ }
+ .main_categori > .main_categori_menu > ul > li {
+   margin-left: 30px;
+ }
+.main_categori > .main_categori_menu > ul > li > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+.main_categori > .main_categori_menu > ul > li > a > button > img {
+  width: 230px;
+  height: 100px;
+}
+ .main_categori > .main_categori_menu > ul > li > a > span {
+   text-align: center; /* 텍스트 가운데 정렬 */
+   color: black;
+   margin-top: 5px; /* 이미지와 텍스트 사이에 공간을 만들기 위한 margin-top 추가 */
+ }
 /*name*/
 .mainpage_name {
   width: 1200px;
   margin: 0 auto;
   height: 40px;
-  margin-top: 20px;
+  margin-top: 80px;
   display: flex;
   align-items: center;
 }

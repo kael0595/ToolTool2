@@ -28,7 +28,7 @@ a {
   text-decoration: none;
 }/*logo*/
 .top__bar > .top__bar_menu {
-  width: 1320px;
+  width: 1520px;
   height: 100px;
   margin: 0 auto;
   margin-top: 20px;
@@ -58,6 +58,7 @@ a {
 .main_menu > .main_menu_ul > .main_menu_li {
   position: relative;
   z-index: 7;
+  margin-right : 80px;
 }
 .main_menu > ul > .main_menu_li:hover > ul,
 .main_menu > ul > .main_menu_li:hover > div {
@@ -144,7 +145,7 @@ a {
     margin-left: 5px;
 }
 .bc__menu {
-  width: 1450px;
+  width: 1700px;
   height: 420px;
   position: absolute;
   top: 140%;
@@ -153,7 +154,7 @@ a {
   display: none;
 }
 .bc__menu_2 {
-  width: 1450px;
+  width: 1700px;
   height: 420px;
   position: absolute;
   top: 140%;

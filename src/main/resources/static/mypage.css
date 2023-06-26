@@ -4,6 +4,7 @@
   width: 1440px;
   height: 330px;
   padding: 30px;
+  margin-left : 50px;
 }
 /*profile_img*/
 .my_page_second_bar {
@@ -174,7 +175,7 @@ input[type="email"] {
 
 .content_box button {
   padding: 8px 12px;
-  background-color: #ff6c00;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 4px;
@@ -187,8 +188,8 @@ input[type="email"] {
 }
 
 .content_box button:hover {
-  background-color: #45a049;
-}
+ background-color: #ff6c00;
+ }
 
 .content_box button:disabled {
   background-color: #ccc;
