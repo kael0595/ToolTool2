@@ -147,7 +147,7 @@ a {
   width: 1450px;
   height: 420px;
   position: absolute;
-  top: 100%;
+  top: 140%;
   left: -430px;
   background-color: rgba(255,255,255,0.8);
   display: none;
@@ -156,7 +156,7 @@ a {
   width: 1450px;
   height: 420px;
   position: absolute;
-  top: 100%;
+  top: 140%;
   left: -570px;
   background-color: rgba(255,255,255,0.8);
   display: none;

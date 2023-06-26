@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="/AdminPage.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -15,6 +17,7 @@
           $("#" + sectionId).show(); // 해당 섹션만 보이도록 함
         });
       });
+
 
 
 
@@ -140,6 +143,7 @@
 
 
 
+
     </script>
     <script>
      $(document).ready(function () {
@@ -178,6 +182,7 @@ $(document).ready(function () {
     }
   );
 });
+
 
 
 
@@ -384,8 +389,8 @@ $(document).ready(function () {
                 <td class="email" th:text="${user.email}"></td>
                 <td class="checkbox administrator">
                     <input type="checkbox" name="addadmin-checkbox" value="1"
-                           th:checked="${user.userRole != T(com.ll.sbb.User.UserRole).ADMIN}"
-                           th:onclick="'toggleAdminRole(\'' + ${user.id} + '\')'"/>
+                           th:onclick="addAdminRole([[${user.id}]])"
+                    />
                 </td>
             </tr>
             </tbody>
@@ -415,8 +420,8 @@ $(document).ready(function () {
                 <td class="email" th:text="${user.email}"></td>
                 <td class="administrator">
                     <input type="checkbox" name="minusadmin-checkbox" value="1"
-                           th:checked="${user.userRole == T(com.ll.sbb.User.UserRole).ADMIN}"
-                           th:onclick="'toggleAdminRole(\'' + ${user.id} + '\')'"/>
+                           th:onclick="minusAdminRole([[${user.id}]])"
+                    />
                 </td>
             </tr>
             </tbody>
@@ -430,22 +435,17 @@ $(document).ready(function () {
 </footer>
 </body>
 <script>
-    function toggleAdminRole(userId) {
-        var checkbox = document.querySelector('input[name="admin-checkbox"][value="' + userId + '"]');
-        var isAdmin = checkbox.checked;
-
-        if (isAdmin) {
-            addAdminRole(userId);
-        } else {
-            minusAdminRole(userId);
-        }
-    }
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
 
     function addAdminRole(userId) {
         $.ajax({
             type: 'POST',
             url: '/admin/addAdminRole',
             data: { id: userId },
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
             success: function(response) {
                 alert(response);
                 // 관리자 권한이 부여된 경우에 필요한 처리를 수행합니다.
@@ -470,6 +470,7 @@ $(document).ready(function () {
             }
         });
     }
+
 
 </script>
 

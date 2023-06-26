@@ -111,7 +111,7 @@
                                 </a>
 
                                 <em class="u_ico _icon"></em>
-                                <span class="u_txt _label">좋아요</span>
+                                <span class="u_txt _label">좋아요&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <strong th:text="${article.likeCount}" id="checkedLikeCount"
                                         class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
@@ -150,7 +150,6 @@
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
                                                class="answermodify_btn">
                                                 <button type="button" class="answermodify_btn">수정</button>
-                                                '
                                             </a>
                                             <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
                                                class="delete btn btn-sm btn-outline-secondary"
@@ -252,6 +251,7 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
+
 
 
 </script>

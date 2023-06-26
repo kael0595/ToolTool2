@@ -80,31 +80,21 @@
     </form>
 </div>
 <script>
-    $(document).ready(function() {
-      $('.allcheck').click(function() {
-        var checked = $('.allcheck').is(':checked');
-       if (checked) {
-      $('input:checkbox').prop('checked', true);
-    } else {
-      $('input:checkbox').prop('checked', false);
-    }
-      });
-
-      $('.btn-primary').click(function(e) {
-        if (!$('.check:checked').length||!$('.check2:checked').length) {
-          e.preventDefault();
-          alert('필수 체크박스를 선택해주세요.');
-        }
-      });
-    });
-
-</script>
-<script>
   $(document).ready(function() {
     $('.allcheck').click(function() {
       var checked = $('.allcheck').is(':checked');
-      if (checked)
+      if (checked) {
         $('input:checkbox').prop('checked', true);
+      } else {
+        $('input:checkbox').prop('checked', false);
+      }
+    });
+
+    $('.btn-primary').click(function(e) {
+      if (!$('.check:checked').length || !$('.check2:checked').length) {
+        e.preventDefault();
+        alert('필수 체크박스를 선택해주세요.');
+      }
     });
   });
 

@@ -15,4 +15,6 @@ public class NoticeForm {
 
     @NotEmpty(message = "내용 입력은 필수항목입니다.")
     private String content;
+
+
 }

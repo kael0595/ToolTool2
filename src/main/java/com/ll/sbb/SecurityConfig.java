@@ -32,7 +32,8 @@ public class SecurityConfig {
                                 .requestMatchers("/**")
                                 .permitAll()
                 )
-                .csrf()
+                .csrf().ignoringRequestMatchers(
+                        new AntPathRequestMatcher("/**"))
                 .and()
                 .formLogin()
                 .loginPage("/user/login")

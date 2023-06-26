@@ -51,18 +51,15 @@
   display: flex;
   align-items: center;
   margin-top: 80px;
-  margin-left: auto;
+  margin-left: 700px;
   margin-right: 50px;
-}
-.sorting > .total_count {
-  margin-left: 15px;
 }
 .sorting span {
   font-family: initial;
   color: black;
 }
 .sorting_menu {
-  margin-left: 450px;
+  margin-left: 455px;
 }
 .sorting_menu > ul {
   display: flex;

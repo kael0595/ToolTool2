@@ -89,7 +89,7 @@ public class MarketController {
             List<Market> markets = this.marketService.getByPrice(min, max);
             // 받은 url값을 기준으로 미니멈, 맥시멈 값을 지정하여 서비스로 넘김 .
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -124,7 +124,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getSeasonList(page, kw, "동계");
             List<Market> markets = this.marketService.getBySeason("동계");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -132,7 +132,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "텐트/타프");
             List<Market> markets = this.marketService.getByType("텐트/타프");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -140,7 +140,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "테이블");
             List<Market> markets = this.marketService.getByType("테이블");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -148,7 +148,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "의자");
             List<Market> markets = this.marketService.getByType("의자");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -156,7 +156,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "랜턴");
             List<Market> markets = this.marketService.getByType("랜턴");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -164,7 +164,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "조리도구");
             List<Market> markets = this.marketService.getByType("조리도구");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
@@ -172,7 +172,7 @@ public class MarketController {
             Page<Market> paging = this.marketService.getTypeList(page, kw, "기타");
             List<Market> markets = this.marketService.getByType("기타");
             int marketCount = markets.size();
-            model.addAttribute("articles", markets);
+            model.addAttribute("markets", markets);
             model.addAttribute("marketCount", marketCount);
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);

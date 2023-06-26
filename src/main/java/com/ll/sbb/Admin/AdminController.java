@@ -55,7 +55,7 @@ public class AdminController {
         return "AdminPage";
     }
 
-    @PostMapping("/admin/addAdminRole")
+    @PostMapping("/addAdminRole")
     @ResponseBody
     public ResponseEntity<String> addAdminRole(@RequestParam("id") int id) {
         // 관리자 권한을 부여할 유저를 조회합니다.

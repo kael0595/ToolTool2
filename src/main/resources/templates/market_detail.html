@@ -110,14 +110,14 @@
                                 </a>
 
                                 <em class="u_ico _icon"></em>
-                                <span class="u_txt _label">좋아요</span>
+                                <span class="u_txt _label">추천&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <strong th:text="${market.likeCount}" id="checkedLikeCount"
                                         class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
 
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
-                                    댓글<strong th:text="|${#lists.size(market.marketList)}" class="num"></strong>
+                                    댓글<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
                                 </a>
                             </div>
                             <!--좋아요/ 댓글 버튼 끝-->
@@ -156,11 +156,12 @@
                                     </div>
                                     <!-- 댓글 하단바 끝   -->
                                 </div>
-                                <!--                                <div>-->
-                                <!--                                    <ul>-->
-                                <!--                                        <li th:each="answer : ${article.answerList}" th:text="${answer.content}"></li>-->
-                                <!--                                    </ul>-->
-                                <!--                                </div>-->
+                                <div>
+                                    <ul>
+                                        <li th:each="answer : ${market.marketAnswerList}"
+                                            th:text="${answer.content}"></li>
+                                    </ul>
+                                </div>
                                 <div class="formbox">
                                     <form th:action="@{|/marketAnswer/create/${market.id}|}"
                                           th:object="${marketAnswerForm}" method="post" class="formboxform">
@@ -177,10 +178,10 @@
         </div>
 
         <!-- 리뷰 박스 끝 -->
-        <footer th:replace="layout/footer.html"></footer>
         <!--footer-->
 
     </div>
+    <footer th:replace="layout/footer.html"></footer>
 </div>
 <script type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
@@ -194,7 +195,7 @@ Array.from(delete_elements).forEach(function(element) {
 
 /*<![CDATA[*/
     var likeCount = [[${#lists.size(market.voter)}]]
-    var articleId = [[${market.id}]]
+    var marketId = [[${market.id}]]
     var header = $("meta[name='_csrf_header']").attr('content');
     var token = $("meta[name='_csrf']").attr('content');
 
@@ -241,6 +242,10 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
+
+
+
+
 
 
 

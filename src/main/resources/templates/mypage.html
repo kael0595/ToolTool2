@@ -266,227 +266,133 @@
     <footer th:replace="layout/footer.html"></footer>
 </div>
 <script>
-$(document).ready(function() {
-  // .pagination-1 내의 페이지 링크 클릭 이벤트 처리
-  $('.pagination-1 a.page-link').on('click', function(e) {
-    e.preventDefault(); // 기본 링크 동작 방지
+  $(document).ready(function() {
+    // Handle click event for '.pagination-1' page links
+    $('.pagination-1 a.page-link').on('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
 
-    var pageUrl = $(this).attr('href'); // 클릭된 링크의 URL 가져오기
+      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
 
-    // 업데이트된 내용을 가져오기 위해 AJAX 요청 생성
-    $.ajax({
-      url: pageUrl,
-      method: 'GET',
-      success: function(response) {
-        // 응답에서 업데이트된 내용 추출하기
-        var updatedContent = $(response).find('.review_board_table').html();
+      // Create an AJAX request to fetch updated content
+      $.ajax({
+        url: pageUrl,
+        method: 'GET',
+        success: function(response) {
+          // Extract the updated content from the response
+          var updatedContent = $(response).find('.review_board_table').html();
 
-        // 기존 테이블 내용 대체하기
-        $('.review_board_table').html(updatedContent);
-      },
-      error: function() {
-        // AJAX 요청이 실패한 경우 에러 처리
-        console.log('내용을 가져오는 중에 오류가 발생했습니다.');
-      }
-    });
-  });
-});
-
-
-</script>
-<script>
-    $(document).ready(function() {
-  // .pagination-2 내의 페이지 링크 클릭 이벤트 처리
-  $('.pagination-2 a.page-link').on('click', function(e) {
-    e.preventDefault(); // 기본 링크 동작 방지
-
-    var pageUrl = $(this).attr('href'); // 클릭된 링크의 URL 가져오기
-
-    // 업데이트된 내용을 가져오기 위해 AJAX 요청 생성
-    $.ajax({
-      url: pageUrl,
-      method: 'GET',
-      success: function(response) {
-        // 응답에서 업데이트된 내용 추출하기
-        var updatedContent = $(response).find('.market_board_table').html();
-
-        // 기존 테이블 내용 대체하기
-        $('.market_board_table').html(updatedContent);
-      },
-      error: function() {
-        // AJAX 요청이 실패한 경우 에러 처리
-        console.log('내용을 가져오는 중에 오류가 발생했습니다.');
-      }
-    });
-  });
-});
-
-
-</script>
-<script>
-      //사진변경 쿼리
-      $(document).ready(function () {
-        $(".change-icon").click(function () {
-          // "file" 타입의 input 요소 생성
-          var inputFile = $('<input type="file">');
-
-          // input 요소에 클릭 이벤트 트리거
-          inputFile.trigger("click");
-
-          // 파일 선택 시
-          inputFile.change(function () {
-            var file = this.files[0];
-
-            if (file) {
-              var reader = new FileReader();
-
-              // 파일을 데이터 URL로 읽기
-              reader.readAsDataURL(file);
-
-              // 파일 로드가 완료되었을 때
-              reader.onload = function (e) {
-                // 선택한 파일로 프로필 이미지 업데이트
-                $(".profile_img_1").attr("src", e.target.result);
-              };
-            }
-          });
-        });
+          // Replace the existing table content
+          $('.review_board_table').html(updatedContent);
+        },
+        error: function() {
+          // Handle error when AJAX request fails
+          console.log('An error occurred while fetching the content.');
+        }
       });
+    });
 
+    // Handle click event for '.pagination-2' page links
+    $('.pagination-2 a.page-link').on('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
 
-</script>
-<script>
-      $(document).ready(function () {
-        $(".menu_box a").click(function (e) {
-          e.preventDefault();
-          var pageId = $(this).data("page");
-          $(".page").hide();
-          $("#" + pageId).show();
-        });
+      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
+
+      // Create an AJAX request to fetch updated content
+      $.ajax({
+        url: pageUrl,
+        method: 'GET',
+        success: function(response) {
+          // Extract the updated content from the response
+          var updatedContent = $(response).find('.market_board_table').html();
+
+          // Replace the existing table content
+          $('.market_board_table').html(updatedContent);
+        },
+        error: function() {
+          // Handle error when AJAX request fails
+          console.log('An error occurred while fetching the content.');
+        }
       });
+    });
 
+    // Handle profile picture change
+    $(".change-icon").click(function() {
+      // Create a "file" type input element
+      var inputFile = $('<input type="file">');
 
-</script>
+      // Trigger click event on the input element
+      inputFile.trigger("click");
 
-<script>
-      $(document).ready(function () {
-        $(".menu_box a").click(function (e) {
-          e.preventDefault();
-          var pageId = $(this).data("page");
-          $(".page").hide();
-          $("#" + pageId).show();
-        });
+      // When a file is selected
+      inputFile.change(function() {
+        var file = this.files[0];
 
-        $("#change-password-btn").click(function () {
-          if (!$("#current-password").is(":disabled")) {
-            $("#current-password").prop("disabled", true);
-            $("#save-password-btn").prop("disabled", true);
-          } else {
-            $("#current-password").prop("disabled", false);
-            $(this).prop("disabled", true);
-            $("#save-password-btn").prop("disabled", false);
-          }
-        });
+        if (file) {
+          var reader = new FileReader();
 
-        $("#change-nickname-btn").click(function () {
-          $("#nickname").removeAttr("disabled");
-          $(this).attr("disabled", true);
-          $("#save-nickname-btn").removeAttr("disabled");
-        });
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
 
-        $("#change-email-btn").click(function () {
-          $("#email").removeAttr("disabled");
-          $(this).attr("disabled", true);
-          $("#save-email-btn").removeAttr("disabled");
-        });
+          // When the file is loaded
+          reader.onload = function(e) {
+            // Update the profile image with the selected file
+            $(".profile_img_1").attr("src", e.target.result);
+          };
+        }
+      });
+    });
 
-        $("#save-password-btn").click(function () {
-          $("#current-password").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-password-btn").removeAttr("disabled");
-        });
+    // Handle menu box navigation
+    $(".menu_box a").click(function(e) {
+      e.preventDefault();
+      var pageId = $(this).data("page");
+      $(".page").hide();
+      $("#" + pageId).show();
+    });
 
-        $("#save-nickname-btn").click(function () {
-          $("#nickname").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-nickname-btn").removeAttr("disabled");
-        });
-
-        $("#save-email-btn").click(function () {
-          $("#email").attr("disabled", true);
-          $(this).attr("disabled", true);
-          $("#change-email-btn").removeAttr("disabled");
-        });
+    // Handle change password functionality
+    $("#change-password-btn").click(function() {
+      if (!$("#current-password").is(":disabled")) {
         $("#current-password").prop("disabled", true);
         $("#save-password-btn").prop("disabled", true);
-      });
-
-
-</script>
-
-<script>
-  $(document).ready(function() {
-    // "비밀번호 변경" 버튼 클릭 시
-    $("#save-password-btn").click(function() {
-        var newPassword = $("#current-password").val();
-        var confirmPassword = $("#confirm-password").val();
-
-        // 비밀번호와 비밀번호 확인이 일치하는지 확인
-        if (newPassword === confirmPassword) {
-            // AJAX 요청 보내기
-            $.ajax({
-                url: "/mypage/changePassword",
-                type: "POST",
-                data: {
-                    newpassword: newPassword,
-                    newpasswordcf: confirmPassword
-                },
-                success: function(response) {
-                    // 비밀번호 변경 성공 시 페이지 리로드
-                    window.location.href = response;
-                },
-                error: function(xhr, status, error) {
-                    // 비밀번호 변경 실패 시 메시지 출력
-                    console.log("비밀번호 변경 실패: " + error);
-                }
-            });
-        } else {
-            // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
-            console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-        }
+      } else {
+        $("#current-password").prop("disabled", false);
+        $(this).prop("disabled", true);
+        $("#save-password-btn").prop("disabled", false);
+      }
     });
-});
 
+    $("#save-password-btn").click(function() {
+      $("#current-password").attr("disabled", true);
+      $(this).attr("disabled", true);
+      $("#change-password-btn").removeAttr("disabled");
+    });
 
-</script>
-
-<script>
-  $(document).ready(function() {
+    // Handle change nickname functionality
     $("#change-nickname-btn").click(function() {
-        $("#nickname").removeAttr("disabled");
-        $(this).attr("disabled", true);
-        $("#save-nickname-btn").removeAttr("disabled");
+      $("#nickname").removeAttr("disabled");
+      $(this).attr("disabled", true);
+      $("#save-nickname-btn").removeAttr("disabled");
     });
 
     $("#save-nickname-btn").click(function() {
-        var newNickname = $("#nickname").val();
+      var newNickname = $("#nickname").val();
 
-        $.ajax({
-            url: "/mypage/changeNickname",
-            type: "POST",
-            data: {
-                newnickname: newNickname
-            },
-            success: function(response) {
-                window.location.href = response;
-            },
-            error: function(xhr, status, error) {
-                console.log("닉네임 변경 실패: " + error);
-            }
-        });
+      $.ajax({
+        url: "/mypage/changeNickname",
+        type: "POST",
+        data: {
+          newnickname: newNickname
+        },
+        success: function(response) {
+          window.location.href = response;
+        },
+        error: function(xhr, status, error) {
+          console.log("닉네임 변경 실패: " + error);
+        }
+      });
     });
-});
-
+  });
 
 </script>
 </body>
