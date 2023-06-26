@@ -226,34 +226,36 @@ public class ArticleService {
         }
     }
 
-    public void create(ArticleForm articleForm, SiteUser user, MultipartFile file) throws IOException {
-        // 저장할 경로를 여기서 지정해줌
+    public void create(ArticleForm articleForm, SiteUser user, MultipartFile[] files) throws IOException {
         String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
-//      String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+        List<String> filenames = new ArrayList<>();
+        List<String> filepaths = new ArrayList<>();
 
-        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
-        // uuid는 파일에 붙일 랜덤이름을 생성
+        for (MultipartFile file : files) {
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+            String filePath = "/files/" + fileName;
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
-        String filePath = "/files/" + fileName;
+            File saveFile = new File(projectPath, fileName);
+            file.transferTo(saveFile);
 
-        File saveFile = new File(projectPath, fileName);
-        file.transferTo(saveFile);
+            filenames.add(fileName);
+            filepaths.add(filePath);
+        }
 
-        Article q = new Article();
-        q.setSubject(articleForm.getSubject());
-        q.setContent(articleForm.getContent());
-        q.setCreateDate(LocalDateTime.now());
-        q.setAuthor(user);
-        q.setPrice(articleForm.getPrice());
-        q.setStarScore(articleForm.getStarScore());
-        q.setSeason(articleForm.getSeason());
-        q.setType(articleForm.getType());
-        q.setFilename(fileName);
-        q.setFilepath(filePath);
-        this.articleRepository.save(q);
+        Article article = new Article();
+        article.setSubject(articleForm.getSubject());
+        article.setContent(articleForm.getContent());
+        article.setCreateDate(LocalDateTime.now());
+        article.setAuthor(user);
+        article.setPrice(articleForm.getPrice());
+        article.setStarScore(articleForm.getStarScore());
+        article.setSeason(articleForm.getSeason());
+        article.setType(articleForm.getType());
+        article.setFilenames(filenames);
+        article.setFilepaths(filepaths);
+        this.articleRepository.save(article);
     }
 
 
@@ -306,4 +308,11 @@ public class ArticleService {
         article.getVoter().remove(siteUser);
         this.articleRepository.save(article);
     }
+
+    public void viewCountUp(Article article) {
+
+        article.setViewCount(article.getViewCount() + 1);
+        this.articleRepository.save(article);
+    }
+
 }

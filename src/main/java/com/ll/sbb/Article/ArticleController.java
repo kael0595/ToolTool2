@@ -46,7 +46,7 @@ public class ArticleController {
     public String articleDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         boolean checkedLike = false;
-
+        this.articleService.viewCountUp(article);
         if (principal != null) {
             SiteUser siteUser = this.userService.getUser(principal.getName());
             for (SiteUser voter : article.getVoter()) {
@@ -210,12 +210,12 @@ public class ArticleController {
     public String articleCreate(@Valid ArticleForm articleForm,
                                 BindingResult bindingResult,
                                 Principal principal,
-                                @RequestParam("file") MultipartFile file) throws Exception {
+                                @RequestParam("files") MultipartFile[] files) throws Exception {
         if (bindingResult.hasErrors()) {
             return "article_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.articleService.create(articleForm, siteUser, file);
+        this.articleService.create(articleForm, siteUser, files);
         return "redirect:/article/list";
     }
 

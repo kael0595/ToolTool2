@@ -186,6 +186,7 @@ public class MarketController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         Market market = this.marketService.getMarket(id);
+        this.marketService.viewCountUp(market);
         model.addAttribute("market", market);
         return "market_detail";
     }
@@ -198,13 +199,15 @@ public class MarketController {
 
     @PostMapping("/create")
     @PreAuthorize("isAuthenticated()")
-    public String marketCreate(@Valid MarketForm marketForm, BindingResult bindingResult, Principal principal
-            , @RequestParam("file") MultipartFile file) throws Exception {
+    public String marketCreate(@Valid MarketForm marketForm,
+                               BindingResult bindingResult,
+                               Principal principal
+            , @RequestParam("files") MultipartFile[] files) throws Exception {
         if (bindingResult.hasErrors()) {
             return "market_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
-        this.marketService.create(marketForm, siteUser, file);
+        this.marketService.create(marketForm, siteUser, files);
         return "redirect:/market/list"; // 질문 저장후 질문목록으로 이동
     }
 

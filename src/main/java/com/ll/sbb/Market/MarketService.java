@@ -92,20 +92,25 @@ public class MarketService {
         }
     }
 
-    public void create(MarketForm marketForm, SiteUser user, MultipartFile file) throws IOException {
+    public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
         String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
 //      String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
-        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
-        // uuid는 파일에 붙일 랜덤이름을 생성
+        List<String> filenames = new ArrayList<>();
+        List<String> filepaths = new ArrayList<>();
 
-        String fileName = uuid + "_" + file.getOriginalFilename();
-        // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
-        String filePath = "/files/" + fileName;
+        for (MultipartFile file : files) {
+            UUID uuid = UUID.randomUUID();
+            String fileName = uuid + "_" + file.getOriginalFilename();
+            String filePath = "/files/" + fileName;
 
-        File saveFile = new File(projectPath, fileName);
-        file.transferTo(saveFile);
+            File saveFile = new File(projectPath, fileName);
+            file.transferTo(saveFile);
+
+            filenames.add(fileName);
+            filepaths.add(filePath);
+        }
 
         Market q = new Market();
         q.setSubject(marketForm.getSubject());
@@ -116,8 +121,8 @@ public class MarketService {
         q.setType(marketForm.getType());
         q.setSeason(marketForm.getSeason());
         q.setAuthor(user);
-        q.setFilename(fileName);
-        q.setFilepath(filePath);
+        q.setFilenames(filenames);
+        q.setFilepaths(filepaths);
         this.marketRepository.save(q);
     }
 
@@ -318,4 +323,10 @@ public class MarketService {
         Specification<Market> spec = searchType(type);
         return this.marketRepository.findAll(spec, pageable);
     }
+
+    public void viewCountUp(Market market) {
+        market.setViewCount(market.getViewCount() + 1);
+        this.marketRepository.save(market);
+    }
+
 }

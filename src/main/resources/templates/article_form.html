@@ -23,7 +23,8 @@
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">가격</label>
-            <input type="number" th:field="*{price}" class="form-control form-control-1" placeholder=" 구입가격 (단위 : 원)" id="form2">
+            <input type="number" th:field="*{price}" class="form-control form-control-1" placeholder=" 구입가격 (단위 : 원)"
+                   id="form2">
 
         </div>
         <div class="mb-3">
@@ -68,7 +69,7 @@
         </div>
         <div class="product-img-box">
             <label for="avatar1" class="picture">상품사진:</label>
-            <input accept="image/png, image/jpeg, image/jpg" id="avatar1" name="file" type="file">
+            <input accept="image/png, image/jpeg, image/jpg" id="avatar1" name="files" type="file" multiple>
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용</label>

@@ -136,21 +136,21 @@
         <div class="gradeOrhashtag">
             <div class="grade">
                 <span class="user_grade">브랜드</span>
-                <strong th:text="${market.brand}" class="user_grade_point">헬리녹스</strong>
+                <strong th:text="${market.brand}" class="user_grade_point"></strong>
             </div>
             <br>
             <div class="grade">
                 <span class="user_grade">판매가격</span>
-                <strong th:text="${market.Price}" class="user_grade_point">000,000</strong>
+                <strong th:text="${market.Price}" class="user_grade_point"></strong>
                 <span>원</span>
             </div>
 
             <div class="hashtag">
                 <a class="hashtaglink" href="#">
-                    <button th:text="${market.type}" type="button" class="category1">의자</button>
+                    <button th:text="${market.type}" type="button" class="category1"></button>
                 </a>
                 <a class="hashtaglink" href="#">
-                    <button th:text="${market.season}" type="button" class="category1">사계절</button>
+                    <button th:text="${market.season}" type="button" class="category1"></button>
                 </a>
             </div>
 
@@ -158,8 +158,8 @@
         <div class="article_container">
             <div class="SaleInfo">
                 <div class="product_section">
-                    <div class="product_img">
-                        <img th:src="${market.filepath}" width="500" height="500" alt="상품이미지" class="image">
+                    <div class="product_img" th:each="filepath : ${market.filepaths}">
+                        <img th:src="${filepath}" width="500" height="500" class="review_board_main_img"/>
                     </div>
                     <div class=""></div>
                 </div>
@@ -296,6 +296,8 @@ Array.from(delete_elements).forEach(function(element) {
 
 
 
+
+
 </script>
 
 <!--수정 댓글-->
@@ -320,6 +322,8 @@ Array.from(delete_elements).forEach(function(element) {
   var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
   $(answerCreateBox).css('display', 'block');
 }
+
+
 
 
 

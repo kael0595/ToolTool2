@@ -55,9 +55,14 @@ public class Article {
 
     private int likeCount;
 
-    @Column
-    private String filename;
+    @ElementCollection
+    @CollectionTable(name = "article_files", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "filename")
+    private List<String> filenames;
 
-    @Column
-    private String filepath;
+    @ElementCollection
+    @CollectionTable(name = "article_files", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "filepath")
+    private List<String> filepaths;
+
 }
