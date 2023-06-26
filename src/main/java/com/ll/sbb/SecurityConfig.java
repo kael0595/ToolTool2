@@ -32,15 +32,16 @@ public class SecurityConfig {
                                 .requestMatchers("/**")
                                 .permitAll()
                 )
-                .csrf(
-                        csrf -> csrf.disable()
-                )
-
-                .formLogin(
-                        formLogin -> formLogin
-                                .loginPage("/user/login") // GET
-                                .loginProcessingUrl("/user/login") // POST
-                )
+                    .csrf()
+                .and()
+                    .formLogin()
+                    .loginPage("/user/login")
+                    .defaultSuccessUrl("/")
+                .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true);
 //                .oauth2Login(
 //                        oauth2Login -> oauth2Login
 //                                .loginPage("/user/login")
@@ -49,9 +50,7 @@ public class SecurityConfig {
 //                                                .userService(oAuth2UserService)
 //                                )
 //                )
-                .logout(logout -> logout
-                        .logoutUrl("/user/logout")
-                );
+
         return http.build();
     }
 

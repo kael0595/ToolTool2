@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/article_detail.css"/>
     <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
