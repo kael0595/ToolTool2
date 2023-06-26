@@ -64,5 +64,4 @@ public class AnswerController {
         this.answerService.modify(answer, answerForm.getContent());
         return String.format("redirect:/article/detail/%s", answer.getArticle().getId());
     }
-
 }

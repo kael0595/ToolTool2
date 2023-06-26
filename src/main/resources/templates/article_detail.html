@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/article_detail.css"/>
     <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -96,6 +98,7 @@
                 <div class="product_section">
                     <div class="product_img">
                         <img th:src="${article.filepath}" width="500" height="500" alt="상품이미지" class="image">
+                        
                     </div>
                     <div class=""></div>
                 </div>
@@ -107,18 +110,18 @@
                         <div class="iconLine">
                             <div class="like">
                                 <a href="#" role="button" class="like_heart">
-                                    <i class="fa-regular fa-heart"></i>
+                                    <i class="fa-regular fa-thumbs-up" style="color: #000000;"></i>
                                 </a>
 
                                 <em class="u_ico _icon"></em>
-                                <span class="u_txt _label">좋아요&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="u_txt _label">&nbsp;추천</span>
                                 <strong th:text="${article.likeCount}" id="checkedLikeCount"
                                         class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
 
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
-                                    댓글<strong th:text="|${#lists.size(article.answerList)}" class="num"></strong>
+                                    댓글&nbsp;<strong th:text="|${#lists.size(article.answerList)}" class="num"></strong>
                                 </a>
                             </div>
 
@@ -155,7 +158,7 @@
                                                class="delete btn btn-sm btn-outline-secondary"
                                                sec:authorize="isAuthenticated()"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                               th:text="삭제">
+                                               >
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
@@ -182,9 +185,6 @@
             </div>
         </div>
 
-        <!-- 원래글쓰기버튼자리 -->
-
-
         <!-- 리뷰 박스 끝 -->
 
         <!--footer-->
@@ -202,7 +202,7 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 
-/*<![CDATA[*/
+    /*<![CDATA[*/
     var likeCount = [[${#lists.size(article.voter)}]]
     var articleId = [[${article.id}]]
     var header = $("meta[name='_csrf_header']").attr('content');
@@ -211,9 +211,9 @@ Array.from(delete_elements).forEach(function(element) {
     var checkedLike = [[${checkedLike}]]
 
    if (checkedLike) {
-    $('.fa-heart').removeClass('fa-regular')
-    $('.fa-heart').addClass('fa-solid')
-    $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+    $('.fa-thumbs-up').removeClass('fa-regular')
+    $('fa-thumbs-up').addClass('fa-solid')
+    $('fa-thumbs-up').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
    }
 
     $('.like_heart').on('click', function(e){
@@ -229,20 +229,20 @@ Array.from(delete_elements).forEach(function(element) {
             },
             success : function(res){
                 if (res === -1) {
-                    alert("좋아요를 누르시려면 로그인을 해주세요.")
+                    alert("추천을 누르시려면 로그인을 해주세요.")
                     location.href="/user/login"
                     return
                 }
 
-               if ($('.fa-heart').hasClass('fa-regular')) {
-                $('.fa-heart').removeClass('fa-regular')
-                $('.fa-heart').addClass('fa-solid')
-                $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+               if ($('.fa-thumbs-up').hasClass('fa-regular')) {
+                $('.fa-thumbs-up').removeClass('fa-regular')
+                $('.fa-thumbs-up').addClass('fa-solid')
+                $('.fa-thumbs-up').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
                 $('#checkedLikeCount').text(res);
                } else {
-                $('.fa-heart').addClass('fa-regular') //안채워져있을 때
-                $('.fa-heart').removeClass('fa-solid') //눌렀을때 색 채우기 addClass
-                $('.fa-heart').css('color','#73703f') //눌렀을때 색 바꾸기 css
+                $('.fa-thumbs-up').addClass('fa-regular') //안채워져있을 때
+                $('.fa-thumbs-up').removeClass('fa-solid') //눌렀을때 색 채우기 addClass
+                $('.fa-thumbs-up').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
                 $('#checkedLikeCount').text(res);
                }
             },
@@ -251,8 +251,6 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
-
-
 
 </script>
 </body>

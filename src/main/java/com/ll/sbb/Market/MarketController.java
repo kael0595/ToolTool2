@@ -184,12 +184,22 @@ public class MarketController {
 
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String marketDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Market market = this.marketService.getMarket(id);
+        boolean checkedLike = false;
+
+        if (principal != null) {
+            SiteUser siteUser = this.userService.getUser(principal.getName());
+            for (SiteUser voter : market.getVoter()) {
+                if (voter.getId() == siteUser.getId()) {
+                    checkedLike = true;
+                }
+            }
+        }
+        model.addAttribute("checkedLike", checkedLike);
         model.addAttribute("market", market);
         return "market_detail";
     }
-
     @GetMapping("/create")
     @PreAuthorize("isAuthenticated()")
     public String marketCreate(MarketForm marketForm) {

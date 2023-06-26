@@ -4,10 +4,13 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/market_detail.css"/>
+    <link rel="stylesheet" href="/article_detail.css"/>
     <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>툴툴</title>
 </head>
 
@@ -107,17 +110,18 @@
                             <div class="like">
                                 <a href="#" role="button" class="like_heart">
                                     <i class="fa-regular fa-heart"></i>
+
                                 </a>
 
                                 <em class="u_ico _icon"></em>
-                                <span class="u_txt _label">추천&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="u_txt _label">&nbsp;좋아요</span>
                                 <strong th:text="${market.likeCount}" id="checkedLikeCount"
                                         class="u_cnt _count"></strong>
                                 <i class="fa-regular fa-message" style="color: #73703f;"></i>
 
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
-                                    댓글<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
+                                    댓글&nbsp;<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
                                 </a>
                             </div>
                             <!--좋아요/ 댓글 버튼 끝-->
@@ -193,7 +197,7 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 
-/*<![CDATA[*/
+    /*<![CDATA[*/
     var likeCount = [[${#lists.size(market.voter)}]]
     var marketId = [[${market.id}]]
     var header = $("meta[name='_csrf_header']").attr('content');
@@ -242,12 +246,6 @@ Array.from(delete_elements).forEach(function(element) {
             }
         })
     })
-
-
-
-
-
-
 
 </script>
 </body>
