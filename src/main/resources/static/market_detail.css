@@ -1,13 +1,10 @@
-
 /* 네비바 시작 */
-
 div,
 nav {
   box-sizing: border-box;
 }
 span,
 p {
-  font-family: "NanumBarunGothic", sans-serif;
   color: #6d6c6c;
 }
 button {

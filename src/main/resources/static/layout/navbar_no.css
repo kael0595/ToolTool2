@@ -1,23 +1,15 @@
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+ font-family: 'Noto Sans KR', sans-serif;
 }
 div,
 nav {
   box-sizing: border-box;
 }
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
+span,p,a,h1,h2,h3{
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #73703f;
 }
 button {
   border: 0;
@@ -36,8 +28,7 @@ a {
   text-decoration: none;
 }
 .main_menu > ul > li {
-  color: #73703f;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 20px;
 }
 .top__bar > .top__bar_menu {
@@ -52,7 +43,7 @@ a {
   flex-grow: 1;
 }
 .top__bar > .top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
+  width: 260px;
   height: 74px;
 }
 .top__bar > .top__bar_menu > .main_menu {
@@ -81,31 +72,12 @@ a {
   > span {
   font-size: 30px;
   line-height: 32px;
-  margin: 20px;
+  margin: 10px;
     height: 100%;
     display: block;
     margin-bottom: 0;
-}
-.top__bar > .top__bar_menu > .signLine {
-  flex-grow: 2;
-  height: 74px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-.top__bar > .top__bar_menu > .signLine > div {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.top__bar > .top__bar_menu > .signLine > div > a > button > img {
-  width: 46px;
-  height: 50px;
-  margin-bottom: 5px;
-}
-
-.top__bar > .top__bar_menu > .signLine > div > a > button > span {
-  display: block;
-  font-size: 20px;
+    color: black;
+    letter-spacing : -1px;
 }
 .top__bar > .top__bar_menu > .signLine {
   flex-grow: 2;
@@ -120,12 +92,17 @@ a {
 }
 .top__bar > .top__bar_menu > .signLine > div > a > button > span {
   display: block;
-  font-size: 20px;
+  color: black;
 }
 .top__bar > .top__bar_menu > .signLine > div > a > button > .signline {
-  font-size: 46px; /* 원하는 크기로 조정하세요 */
+  font-size: 20px; /* 원하는 크기로 조정하세요 */
   display: inline-block;
-  width: 46px; /* 원하는 넓이로 조정하세요 */
-  height: 55px; /* 원하는 높이로 조정하세요 */
+  width: 20px; /* 원하는 넓이로 조정하세요 */
+  height: 30px; /* 원하는 높이로 조정하세요 */
   margin-bottom: 5px;
+}
+.top__bar > .top__bar_menu > .signLine > div > a > button > .signline_img{
+    width: 20px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }

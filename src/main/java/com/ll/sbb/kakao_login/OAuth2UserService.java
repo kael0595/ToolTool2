@@ -1,5 +1,6 @@
 //package com.ll.sbb.kakao_login;
 //
+//import com.ll.sbb.DataNotFoundException;
 //import com.ll.sbb.User.SiteUser;
 //import lombok.RequiredArgsConstructor;
 //import com.ll.sbb.User.UserRepository;
@@ -56,17 +57,21 @@
 //                        email = (String) attributesKakaoAcount.get("email");
 //                    }
 //
-//                    user = SiteUser.builder()
-//                            .email(email)
-//                            .username(username)
-//                            .password(passwordEncoder.encode(UUID.randomUUID().toString()))
-//                            .build();
+//                    user = new SiteUser();
+//                    user.setEmail(email);
+//                    user.setUsername(username);
+//                    user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString()));
 //
 //                    userRepository.save(user);
 //                }
 //            }
 //        } else {
-//            user = userRepository.findByUsername("%s_%s".formatted(oauthType, oauthId));
+//            Optional<SiteUser> optionalUser = userRepository.findByUsername("%s_%s".formatted(oauthType, oauthId));
+//            if (optionalUser.isPresent()) {
+//                user = optionalUser.get();
+//            } else {
+//                new DataNotFoundException("siteuser not found");
+//            }
 //        }
 //
 //        List<GrantedAuthority> authorities = new ArrayList<>();

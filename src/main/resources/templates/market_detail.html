@@ -42,7 +42,7 @@
             </div>
 
             <div class="article_title">
-                <p th:text="${market.subject}" class="article_title"></p>
+                <p th:text="${market.subject}" class="article_title">헬리녹스 의자리뷰</p>
             </div>
             <div class="userInfoform">
                 <div class="userInfo">
@@ -93,9 +93,7 @@
             <div class="SaleInfo">
                 <div class="product_section">
                     <div class="product_img">
-                        <div class="product_img">
-                            <img th:src="${market.filepath}" width="500" height="500" alt="상품이미지" class="image">
-                        </div>
+                        <img th:src="${market.filepath}" width="500" height="500" alt="상품이미지" class="image">
                     </div>
                     <div class=""></div>
                 </div>
@@ -119,7 +117,7 @@
 
                                 <a href="#" role="button" aria-pressed="true" class="button_comment"><span
                                         class="icon_area"></span>
-                                    댓글<strong th:text="|${#lists.size(market.marketAnswerList)}" class="num"></strong>
+                                    댓글<strong th:text="|${#lists.size(market.marketList)}" class="num"></strong>
                                 </a>
                             </div>
                             <!--좋아요/ 댓글 버튼 끝-->
@@ -178,73 +176,74 @@
             </div>
         </div>
 
+        <!-- 리뷰 박스 끝 -->
+        <footer th:replace="layout/footer.html"></footer>
+        <!--footer-->
 
     </div>
-    <!-- 리뷰 박스 끝 -->
-    <footer th:replace="layout/footer.html"></footer>
-    <!--footer-->
 </div>
-<!--<script type='text/javascript'>-->
-<!--const delete_elements = document.getElementsByClassName("delete");-->
-<!--Array.from(delete_elements).forEach(function(element) {-->
-<!--    element.addEventListener('click', function() {-->
-<!--        if(confirm("정말로 삭제하시겠습니까?")) {-->
-<!--            location.href = this.dataset.uri;-->
-<!--        };-->
-<!--    });-->
-<!--});-->
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
 
-<!--/*<![CDATA[*/-->
-<!--    var likeCount = [[${#lists.size(market.voter)}]]-->
-<!--    var marketId = [[${market.id}]]-->
-<!--    var header = $("meta[name='_csrf_header']").attr('content');-->
-<!--    var token = $("meta[name='_csrf']").attr('content');-->
+/*<![CDATA[*/
+    var likeCount = [[${#lists.size(market.voter)}]]
+    var articleId = [[${market.id}]]
+    var header = $("meta[name='_csrf_header']").attr('content');
+    var token = $("meta[name='_csrf']").attr('content');
 
-<!--    var checkedLike = [[${checkedLike}]]-->
+    var checkedLike = [[${checkedLike}]]
 
-<!--   if (checkedLike) {-->
-<!--    $('.fa-heart').removeClass('fa-regular')-->
-<!--    $('.fa-heart').addClass('fa-solid')-->
-<!--    $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css-->
-<!--   }-->
+   if (checkedLike) {
+    $('.fa-heart').removeClass('fa-regular')
+    $('.fa-heart').addClass('fa-solid')
+    $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+   }
 
-<!--    $('.like_heart').on('click', function(e){-->
-<!--        e.preventDefault()-->
+    $('.like_heart').on('click', function(e){
+        e.preventDefault()
 
-<!--        // ajax 통신-->
-<!--        $.ajax({-->
-<!--            type : "POST",            // HTTP method type(GET, POST) 형식이다.-->
-<!--            url : "/market/vote/" + marketId,      // 컨트롤러에서 대기중인 URL 주소이다.-->
-<!--            data: 'json',-->
-<!--            beforeSend: function(xhr){-->
-<!--                xhr.setRequestHeader(header, token);-->
-<!--            },-->
-<!--            success : function(res){-->
-<!--                if (res === -1) {-->
-<!--                    alert("좋아요를 누르시려면 로그인을 해주세요.")-->
-<!--                    location.href="/user/login"-->
-<!--                    return-->
-<!--                }-->
+        // ajax 통신
+        $.ajax({
+            type : "POST",            // HTTP method type(GET, POST) 형식이다.
+            url : "/market/vote/" + marketId,      // 컨트롤러에서 대기중인 URL 주소이다.
+            data: 'json',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(res){
+                if (res === -1) {
+                    alert("좋아요를 누르시려면 로그인을 해주세요.")
+                    location.href="/user/login"
+                    return
+                }
 
-<!--               if ($('.fa-heart').hasClass('fa-regular')) {-->
-<!--                $('.fa-heart').removeClass('fa-regular')-->
-<!--                $('.fa-heart').addClass('fa-solid')-->
-<!--                $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css-->
-<!--                $('#checkedLikeCount').text(res);-->
-<!--               } else {-->
-<!--                $('.fa-heart').addClass('fa-regular') //안채워져있을 때-->
-<!--                $('.fa-heart').removeClass('fa-solid') //눌렀을때 색 채우기 addClass-->
-<!--                $('.fa-heart').css('color','#73703f') //눌렀을때 색 바꾸기 css-->
-<!--                $('#checkedLikeCount').text(res);-->
-<!--               }-->
-<!--            },-->
-<!--            error : function(err){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.-->
-<!--                console.log(err)-->
-<!--            }-->
-<!--        })-->
-<!--    })-->
+               if ($('.fa-heart').hasClass('fa-regular')) {
+                $('.fa-heart').removeClass('fa-regular')
+                $('.fa-heart').addClass('fa-solid')
+                $('.fa-heart').css('color','#ff6c00') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               } else {
+                $('.fa-heart').addClass('fa-regular') //안채워져있을 때
+                $('.fa-heart').removeClass('fa-solid') //눌렀을때 색 채우기 addClass
+                $('.fa-heart').css('color','#73703f') //눌렀을때 색 바꾸기 css
+                $('#checkedLikeCount').text(res);
+               }
+            },
+            error : function(err){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                console.log(err)
+            }
+        })
+    })
 
 
-<!--</script>-->
+
+</script>
 </body>
 </html>

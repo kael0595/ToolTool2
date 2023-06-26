@@ -34,20 +34,19 @@
                     <img th:src="${article.filepath}"
                          class="rm_content_main_img review_main_img review_main_img_1"
                     />
-                </a>
-                <div class="text_box .text_box_1">
+                    <div class="text_box .text_box_1">
                     <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
                                     th:text="${#lists.size(article.answerList)}">
                                         </span></span>
-                    <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
-                                    th:text="${#lists.size(article.voter)}"></span></span>
-                </div>
-                <div class="text_box_name text_box_name_1">
-                    <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
-                </div>
-                <div class="text_box_tag text_box_tag_1">
-                    <span>#</span>
-                </div>
+                        <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
+                                        th:text="${#lists.size(article.voter)}"></span></span>
+                    </div>
+                    <div class="text_box_name text_box_name_1">
+                        <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
+                    </div>
+                    <div class="text_box_tag text_box_tag_1">
+                        <span>#</span>
+                    </div>
             </nav>
         </li>
     </ul>
@@ -67,8 +66,8 @@
                     />
                 </a>
                 <div class="text_box .text_box_1">
-                  <span>답글수 <span th:if="${#lists.size(market.marketAnswerList) >= 0}"
-                                  th:text="${#lists.size(market.marketAnswerList)}"></span></span>
+                    <!--                                        <span th:if="${#lists.size(market.answerList) > 0}"-->
+                    <!--                                              th:text="${#lists.size(market.answerList)}"></span>-->
                     <span>관심수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">

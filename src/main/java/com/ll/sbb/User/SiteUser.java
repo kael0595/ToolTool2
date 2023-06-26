@@ -44,4 +44,10 @@ public class SiteUser {
 
     private LocalDate createDate;
 
+    @Column
+    private String filename;
+
+    @Column
+    private String filepath;
+
 }

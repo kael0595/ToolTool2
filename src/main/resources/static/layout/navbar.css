@@ -1,24 +1,15 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
+.notosanskr * {
+ font-family: 'Noto Sans KR', sans-serif;
 }
 div,
 nav {
   box-sizing: border-box;
 }
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
+span,p,a,h1,h2,h3{
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #73703f;
 }
 button {
   border: 0;
@@ -48,7 +39,7 @@ a {
   flex-grow: 1;
 }
 .top__bar > .top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
+  width: 260px;
   height: 74px;
 }
 /*1차메뉴*/
@@ -58,8 +49,8 @@ a {
 }
 .main_menu > ul li a {
   color: #73703f;
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
 }
 .main_menu > .main_menu_ul {
   display: flex;
@@ -80,9 +71,10 @@ a {
   display: block;
   font-size: 30px;
   line-height: 32px;
-  margin: 20px;
+  margin: 10px;
   margin-bottom: 0;
-  color: #73703f;
+  color: black;
+  letter-spacing : -1px;
 }
 /*2차메뉴라인*/
 .main_menu ul ul {
@@ -98,7 +90,9 @@ a {
   width: 100%;
   display: inline-block;
   padding: 10px 0;
-  text-align: center;
+  padding-left: 10px;
+  color: black;
+  font-weight: normal;
 }
 .main_menu > ul ul > li:hover > ul {
   display: block;
@@ -135,29 +129,34 @@ a {
 }
 .top__bar > .top__bar_menu > .signLine > div > a > button > span {
   display: block;
-  font-size: 20px;
+  color: black;
 }
 .top__bar > .top__bar_menu > .signLine > div > a > button > .signline {
-  font-size: 46px; /* 원하는 크기로 조정하세요 */
+  font-size: 20px; /* 원하는 크기로 조정하세요 */
   display: inline-block;
-  width: 46px; /* 원하는 넓이로 조정하세요 */
-  height: 55px; /* 원하는 높이로 조정하세요 */
+  width: 20px; /* 원하는 넓이로 조정하세요 */
+  height: 30px; /* 원하는 높이로 조정하세요 */
   margin-bottom: 5px;
+}
+.top__bar > .top__bar_menu > .signLine > div > a > button > .signline_img{
+    width: 20px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 .bc__menu {
   width: 1450px;
-  height: 400px;
+  height: 420px;
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: -430px;
   background-color: rgba(255,255,255,0.8);
   display: none;
 }
 .bc__menu_2 {
   width: 1450px;
-  height: 400px;
+  height: 420px;
   position: absolute;
-  top: 120%;
+  top: 100%;
   left: -570px;
   background-color: rgba(255,255,255,0.8);
   display: none;

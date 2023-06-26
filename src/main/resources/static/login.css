@@ -1,15 +1,4 @@
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
-}
+
 div,
 nav {
   box-sizing: border-box;
@@ -36,7 +25,7 @@ a {
   text-decoration: none;
 }
 form{
-  width:40%;
+  width:60%;
   height:100vh;
   position:absolute;
   top:30%;
@@ -62,12 +51,12 @@ form>div{
   margin-top:10px;
   border-radius:10px;
 }
-.btn-primary{
+.btnPrimary{
   width:100%;
   height:60px;
   margin-top:20px;
   margin-bottom:20px;
-  background: #a5a773;
+  background: #000;
   color:white;
   border-radius:10px;
   border:none;
@@ -77,21 +66,91 @@ form>div{
  width:100%;
  height:60px;
 }
-.btn-primary:hover{
-  background: white;
-  color:#a5a773;
-  border:1px solid #a5a773;
 
+.btnPrimary:hover{
+  background: #ff6c00;
+  color:#fff;
 }
-.alert-danger{
+
+.alertDanger{
   text-align:center;
-  color:red;
+  color: #ff6c00;
 }
 .signupform{
-
   width:40%;
   height:100vh;
   position:absolute;
   top:30%;
   left:55%;
+}
+
+.signComent > p{
+  font-size:18px;
+  font-weight:light;
+  color:#000;
+}
+
+hr{
+  border:2px solid #000;
+  margin-bottom:40px;
+  width:500px;
+}
+
+.signInput{
+  display:flex;
+  flex-direction:column;
+  margin-top: 60px;
+  margin-left:200px;
+}
+
+.signInput .form-control{
+  border-radius:0px;
+  border-style:none;
+  border-bottom:2px solid #000;
+  width:500px;
+  left:30px;
+  margin-left:150px;
+}
+
+.signupSummitBtn {
+ display:flex;
+ flex-direction:row;
+
+}
+
+.signupSummitBtn .btnPrimary{
+  background: #000;
+  width:200px;
+  padding:20px;
+  border-radius:10px;
+  margin-top:30px;
+  margin-left:380px;
+  color:#fff;
+  font-size:20px;
+}
+
+.signupSummitBtn .btnPrimary:hover{
+  background: #ff6c00;
+}
+
+.signupSummitBtn .kakaoLoginBtn{
+  background: #FEE500;
+  width:200px;
+  height:60px;
+  padding:20px;
+  border-radius:10px;
+  margin-top:30px;
+  margin-left:40px;
+  color:#000;
+  font-size:20px;
+  text-align:center;
+}
+
+.signupBtnArea .btnPrimary{
+  width:500px;
+  margin-left:150px;
+}
+
+.signComent .signUpment{
+  text-align:center;
 }

@@ -46,3 +46,7 @@ spring:
     subject:
       member:
         registration: Thank you for joining our site!
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB

@@ -87,17 +87,13 @@
                 </button>
             </a>
         </div>
-        <!--dotted-->
-        <div class="underline"></div>
         <!--categori_accordion-->
         <div class="accordion">
             <div class="accordion-content">
                 <div class="accordion-header_1">Review</div>
-                <div class="borderline_1"></div>
                 <ul>
                     <li class="accordion_list">
                         <div class="accordion-header">Price</div>
-                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
@@ -119,7 +115,6 @@
                     </li>
                     <li class="accordion_list">
                         <div class="accordion-header">Season</div>
-                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
@@ -136,17 +131,16 @@
                     </li>
                     <li class="accordion_list">
                         <div class="accordion-header">Type</div>
-                        <div class="borderline"></div>
                         <div class="accordion-content">
                             <ul class="accordion_ul">
                                 <li>
                                     <button type="button"><a th:href="@{/article/type_tent/sort}">텐트/타프</a></button>
                                 </li>
                                 <li>
-                                    <button class="button"><a th:href="@{/article/type_table/sort}">테이블</a></button>
+                                    <button type="button"><a th:href="@{/article/type_table/sort}">테이블</a></button>
                                 </li>
                                 <li>
-                                    <button><a th:href="@{/article/type_chair/sort}">의자</a></button>
+                                    <button type="button"><a th:href="@{/article/type_chair/sort}">의자</a></button>
                                 </li>
                                 <li>
                                     <button type="button"><a th:href="@{/article/type_lanturn/sort}">랜턴</a></button>
@@ -223,7 +217,7 @@
     </div>
 </div>
 <!--footer-->
-<footer th:replace="/layout/footer.html"></footer>
+<footer th:replace="layout/footer.html"></footer>
 <script>
       var itemsPerPage = 9;
     var $items = $('.item');

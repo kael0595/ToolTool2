@@ -9,7 +9,7 @@
     color: black;
 }
 footer {
-  background-color: #aba1a1;
+  background-color: #cccc;
   padding: 20px;
   text-align: center;
   margin-top: 100px;
@@ -22,9 +22,8 @@ footer {
 
 .footer-content p {
   margin-bottom: 10px;
-  color: #73703f;
+  color: black;
   font-size: 30px;
-  font-weight: bold;
 }
 
 .footer-content > nav {
@@ -38,8 +37,10 @@ footer {
 .footer-content span {
   display: block;
   font-size: 15px;
-  font-weight: bold;
   text-align: start;
-  color:black;
+  color: #565656;
   margin-bottom: 5px; /* 간격 조정 */
+}
+.footer-content .member > p {
+    color: #565656;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="NoticeDetail.css"/>
+    <link rel="stylesheet" href="/NoticeDetail.css"/>
     <link rel="stylesheet" href="/layout/navbar.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -18,36 +18,21 @@
             <table>
                 <tr>
                     <th>제 목</th>
-                    <td>asdasdaasdasdasdasdasdasdsadsd</td>
+                    <td th:text="${notice.subject}"></td>
                 </tr>
                 <tr>
-                    <th>작 성 자</td>
-                    <td>asdasd</td>
+                    <td>작 성 자</td>
+                    <td th:text="${notice.author}"></td>
                 </tr>
                 <tr>
-                    <th>작 성 일</td>
-                    <td>asdasd</td>
+                    <td>작 성 일</td>
+                    <td th:text="${notice.createDate}"></td>
                 </tr>
             </table>
         </div>
         <div class="underline"></div>
         <div class="notice-content">
-          <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia
-            architecto, ullam tenetur, eveniet labore ea quibusdam, ex quod
-            libero illo tempora voluptate? Tempora eaque vero dolore porro in,
-            quae magni!
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia
-            architecto, ullam tenetur, eveniet labore ea quibusdam, ex quod
-            libero illo tempora voluptate? Tempora eaque vero dolore porro in,
-            quae magni!
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia
-            architecto, ullam tenetur, eveniet labore ea quibusdam, ex quod
-            libero illo tempora voluptate? Tempora eaque vero dolore porro in,
-            quae magni!
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia
-            architecto, ullam tenetur, eveniet labore ea quibusdam, ex quod
-            libero illo tempora voluptate? Tempora eaque vero dolore porro in,
-            quae magni!</span>
+            <span th:text="${notice.content}"></span>
         </div>
         <div class="button">
             <div>

@@ -1,44 +1,7 @@
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
-}
-div,
-nav {
-  box-sizing: border-box;
-}
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
-}
-button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-body,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
 /*banner라인*/
 .banner__bar {
-  width: 1440px;
-  height: 288px;
+  width: 1520px;
+  height: 800px;
   position: relative;
   margin: 0 auto;
   margin-top: 10px;

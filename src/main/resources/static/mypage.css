@@ -1,115 +1,4 @@
 
-@font-face {
-  font-family: "NanumBarunGothic";
-  font-style: normal;
-  font-weight: 700;
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
-  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix")
-      format("embedded-opentype"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff")
-      format("woff"),
-    url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf")
-      format("truetype");
-}
-div,
-nav {
-  box-sizing: border-box;
-}
-span,
-p,
-h1,
-h2,
-h3 {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
-}
-button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-body,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-/*my_page*/
-.detail_top__bar {
-  width: 1440px;
-  height: 100px;
-  margin: 0 auto;
-}
-.detail_top__bar > .detail_top__bar_menu {
-  width: 1320px;
-  height: 100px;
-  margin: 0 auto;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-}
-.detail_top__bar > .detail_top__bar_menu > .logo_box {
-  flex-grow: 1;
-}
-.detail_top__bar > .detail_top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
-  height: 74px;
-}
-.detail_top__bar > .detail_top__bar_menu > .main_menu {
-  display: flex;
-  flex-grow: 4;
-}
-.detail_top__bar > .detail_top__bar_menu > .main_menu > .main_menu_ul {
-  display: flex;
-}
-
-.detail_top__bar
-  > .detail_top__bar_menu
-  > .main_menu
-  > .main_menu_ul
-  > li:hover
-  > a
-  > span {
-  color: #ff6c00;
-}
-.detail_top__bar
-  > .detail_top__bar_menu
-  > .main_menu
-  > .main_menu_ul
-  > li
-  > a
-  > span {
-  font-size: 30px;
-  line-height: 32px;
-  margin: 20px;
-}
-.detail_top__bar > .detail_top__bar_menu > .signLine {
-  flex-grow: 2;
-  height: 74px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-.detail_top__bar > .detail_top__bar_menu > .signLine > div {
-  margin-left: 10px;
-  margin-right: 10px;
-
-}
-.detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > img {
-  width: 46px;
-  height: 50px;
-  margin-bottom : 5px;
-}
-
-.detail_top__bar > .detail_top__bar_menu > .signLine > div > a > button > span {
-display : block;
-font-size : 20px;
-}
 /*second_box*/
 .my_page > .my_page_second_bar {
   width: 1440px;
@@ -144,7 +33,7 @@ font-size : 20px;
   bottom: 0;
   left: 85%;
   transform: translate(-50%, -50%);
-  background-color: #73703f;
+  background-color: #ff6c00 ;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,11 +41,14 @@ font-size : 20px;
 .change-icon {
   width: 50px;
   height: 50px;
+  border: 4px solid #fff;
 }
-.change-icon > .icon-img {
-  width: 30px; /* 변경 아이콘의 크기를 조정 */
-  height: 30px;
+.change-icon > span {
+    display: block;
+    font-size: 20px;
+    width: 20px;
 }
+
 /*profile_nickname*/
 .my_page_second_bar > .profile_nickname {
   margin-left: 50px;
@@ -164,19 +56,22 @@ font-size : 20px;
 }
 .profile_nickname > .nickname {
   display: flex;
+  margin-right: 50px;
 }
 .profile_nickname > .nickname .nick {
   font-size: 50px;
   margin-right: 20px;
+  font-weight: bold;
+  color: #ff6c00;
 }
-.profile_nickname > .level span,
-.profile_nickname > .undetermined span {
-  font-size: 20px;
+.profile_nickname > .nickname span {
+    font-weight: bold;
+    color: black;
 }
 /*profile_mark*/
 .profile_mark {
   display: flex;
-  margin: 100px;
+  margin: 70px;
   height: 100%;
   align-content: center;
 }
@@ -185,9 +80,27 @@ font-size : 20px;
   display: flex;
   align-items: center;
 }
-.profile_mark li {
-  margin: 10px;
+.profile_mark a span{
+  font-size: 15px;
+  color: black;
 }
+.profile_mark .list-1 {
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+.profile_mark span {
+    color: black;
+}
+.profile_mark .count {
+    color: #ff6c00;
+    font-size: 30px;
+    font-weight: bold;
+}
+.profile_mark > div > ul .note-img {
+    font-size: 30px;
+}
+
+
 /*flex_box*/
 .flex_box {
   width: 1440px;
@@ -198,19 +111,22 @@ font-size : 20px;
 /*menu_box*/
 .flex_box > .menu_box .my_page {
   font-size: 50px;
-  color: #73703f;
+  color: black;
   background-color: transparent;
 }
 .flex_box > .menu_box {
   flex-grow: 1;
 }
-
+.flex_box > .menu_box > ul > li > a:hover > span {
+ color: #ff6c00;
+}
 .menu_box li {
   margin-bottom: 30px;
 }
 .menu_box li span {
   font-size: 20px;
   color: black;
+  font-weight: bold;
 }
 /*content_box*/
 .content_box {
@@ -219,28 +135,30 @@ font-size : 20px;
 }
 .content_box > .page .title {
   text-align: start;
-  font-size: 50px;
+  font-size: 30px;
   font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .content_box > .page .underline {
   flex-grow: 4;
-  border: 1px dotted;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
 }
 
 .content_box > .menu_information .form_group {
   margin-bottom: 20px;
   display: flex;
+  letter-spacing :-1px;
 }
 .content_box .underline {
-  border: 1px dotted;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
 }
 label {
-  width: 300px;
+  width: 150px;
   display: flex;
-  justify-content: center;
   align-items: center;
   font-weight: bold;
   margin-right: 20px;
@@ -249,7 +167,7 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-  width: 40%;
+  width: 60%;
   padding: 10px;
   border: none;
 }
@@ -285,7 +203,7 @@ input[type="email"] {
 table {
   width: 1000px;
   border-collapse: collapse;
-  margin: auto;
+  margin-top:60px;
 }
 
 th,
@@ -296,8 +214,10 @@ td {
 }
 
 th {
-  background-color: #73703f;
-  color: #fff;
+  color: black;
+  border: none;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 }
 
 a {
@@ -317,34 +237,6 @@ a:hover {
   font-size: 16px;
   width: 700px;
 }
-
-/*footer*/
-footer {
-  background-color: #555;
-  padding: 20px;
-  text-align: center;
-  margin-top: 100px;
-}
-
-.footer-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.footer-content p {
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.footer-content nav a {
-  margin-right: 10px;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.footer-content nav a:hover {
-  text-decoration: underline;
-}
 .page-list{
 list-style:none;
 text-align:row;
@@ -361,4 +253,7 @@ list-style:none;
 
 .disabled{
 display:inline-block;
+}
+.page-link > a {
+    color: black;
 }
