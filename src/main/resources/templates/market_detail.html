@@ -18,7 +18,32 @@
 <!-- 네비바 시작 -->
 <div th:replace="layout/navbar_no.html"></div>
 <!-- 네비바 끝 -->
+<!--스티키 플로팅 배너 시작-->
+<div class="stickyBar">
 
+    <a th:href="@{/market/type_tent/sort}">
+        <i class="fa-solid fa-campground" style="color: #000;"></i>
+
+    </a> <!--  텐트   -->
+    <hr>
+    <a th:href="@{/market/type_table/sort}">
+        <!--  테이블   -->
+        <i class="fa-solid fa-table" style="color: #000;"></i>
+    </a>
+    <hr>
+    <a href="http://localhost:8080/market/list">
+        <i class="fa-solid fa-chair" style="color: #000;"></i>
+    </a> <!--  의자   -->
+    <hr>
+    <a href="http://localhost:8080/market/list">
+        <i class="fa-solid fa-utensils" style="color: #000;"></i>
+    </a> <!--  조리도구   -->
+    <hr>
+    <a href="http://localhost:8080/market/list">
+        <i class="fa-solid fa-lightbulb" style="color: #000;"></i>
+    </a><!--  랜턴   -->
+</div>
+<!--스티키 플로팅 배너 끝-->
 <!-- 마켓 박스 시작 -->
 <div class="Review_form">
     <div class="Article_content_Box">
