@@ -368,3 +368,24 @@ input{
   margin-top:10px;
 }
 
+.stickyBar>a{
+  display:inline-block;
+  width:60px;
+  height:60px;
+  background: #fff;
+  border-style:none;
+  z-index:999999;
+}
+.stickyBar{
+  display:inline-block;
+  position: sticky;
+  top: 50%;
+  left:95%;
+  border:1px solid #565656;
+}
+
+i{
+  margin-left:20px;
+  margin-top:20px;
+  font-size:20px;
+}

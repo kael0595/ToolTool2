@@ -20,6 +20,33 @@
 <div th:replace="layout/navbar_no.html"></div>
 <!-- 네비바 끝 -->
 
+<div class="stickyBar">
+
+    <a th:href="@{/article/type_tent/sort}">
+        <i class="fa-solid fa-campground" style="color: #000;"></i>
+
+    </a> <!--  텐트   -->
+    <hr>
+    <a th:href="@{/article/type_table/sort}">
+        <!--  테이블   -->
+        <i class="fa-solid fa-table" style="color: #000;"></i>
+    </a>
+    <hr>
+    <a href="http://localhost:8080/article/list">
+        <i class="fa-solid fa-chair" style="color: #000;"></i>
+    </a> <!--  의자   -->
+    <hr>
+    <a href="http://localhost:8080/article/list">
+        <i class="fa-solid fa-utensils" style="color: #000;"></i>
+    </a> <!--  조리도구   -->
+    <hr>
+    <a href="http://localhost:8080/article/list">
+        <i class="fa-solid fa-lightbulb" style="color: #000;"></i>
+    </a><!--  랜턴   -->
+</div>
+
+
+
 <!-- 리뷰 박스 시작 -->
 <div class="Review_form">
     <div class="Article_content_Box">
@@ -192,6 +219,9 @@
     </div>
     <footer th:replace="layout/footer.html"></footer>
 </div>
+
+<script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
+
 <script type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
