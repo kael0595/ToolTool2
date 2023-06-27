@@ -327,4 +327,28 @@ public class MarketService {
         this.marketRepository.save(market);
     }
 
+
+
+    public Page<Market> getUserVoterList(int page, String kw, String user) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(sorts));
+        Specification<Market> spec = searchVoteUser(user);
+        return this.marketRepository.findAll(spec, pageable);
+    }
+
+
+    private Specification<Market> searchVoteUser(String user) {
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Add a condition to check for equality between the username field and the provided user value
+            predicates.add(builder.equal(root.get("voter").get("username"), user));
+
+            // Add any other search conditions if needed
+            // ...
+
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
+    }
 }

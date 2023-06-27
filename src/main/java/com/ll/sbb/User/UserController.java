@@ -143,6 +143,8 @@ public class UserController {
         Page<Article> articlePaging = this.articleService.getUserList(page, kw, siteUser.getUsername());
         Page<Market> marketPaging = this.marketService.getUserList(page, kw, siteUser.getUsername());
 
+        Page<Market> marketVoterPaging = this.marketService.getUserVoterList(page,kw,siteUser.getUsername());
+
         List<Article> articles = this.articleService.getAuthor(siteUser);
         List<Market> markets = this.marketService.getAuthor(siteUser);
 
@@ -154,6 +156,7 @@ public class UserController {
         model.addAttribute("articleCount", articleCount);
         model.addAttribute("articlePaging", articlePaging);
         model.addAttribute("marketPaging", marketPaging);
+        model.addAttribute("marketVoterPaging", marketVoterPaging);
         model.addAttribute("kw", kw);
         model.addAttribute("user", siteUser);
         return "mypage";

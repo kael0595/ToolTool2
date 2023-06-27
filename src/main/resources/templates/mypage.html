@@ -181,7 +181,7 @@
                         <span>내가 쓴 리뷰</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" class="myArticleCount">
                             <span th:text="${articleCount}" class="count">articleCount</span>
                         </a>
                     </li>
@@ -198,7 +198,7 @@
                         <span>내가 쓴 판매글</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" class="myMarketCount">
                             <span th:text="${marketCount}" class="count">marketCount</span>
                         </a>
                     </li>
@@ -377,18 +377,45 @@
 
             <div id="menu4" class="page menu_pick">
                 <div class="title">찜 목록</div>
-                <table>
-                    <tr>
-                        <th class="number">게시글 번호</th>
-                        <th>제목</th>
-                        <th class="date">작성일</th>
-                    </tr>
-                    <tr>
-                        <td class="number">1</td>
-                        <td class="content"><a href="#">여름 휴가 계획</a></td>
-                        <td class="date">2023-06-01</td>
-                    </tr>
-                </table>
+                <div class="review_board_page_3">
+                    <table class="market_board_table">
+                        <tr>
+                            <th class="number">게시글 번호</th>
+                            <th>제목</th>
+                            <th class="date">작성일</th>
+                        </tr>
+                        <tr th:each="market, stat : ${marketVoterPaging}" th:if="${stat.index < 9}">
+                            <td class="number" th:text="${market.id}"></td>
+                            <td class="content"><a th:href="@{|/market/detail/${market.id}|}"
+                                                   th:text="${market.subject}"></a></td>
+                            <td class="date" th:text="${market.createDate}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pagination-2">
+                    <div class="pagination">
+                        <ul class="page-list">
+                            <li th:classappend="${!marketVoterPaging.hasPrevious} ? 'disabled'" class="disabled">
+                                <a class="page-link"
+                                   th:href="${marketVoterPaging.hasPrevious} ? @{|?page=${marketVoterPaging.number+1}|} : @{|?page=0|}">
+                                    <span>이전</span>
+                                </a>
+                            </li>
+                            <li th:each="page: ${#numbers.sequence(0, marketVoterPaging.totalPages)}"
+                                th:if="${page >= marketVoterPaging.number-3 and page <= marketVoterPaging.number+3}"
+                                th:classappend="${page == marketVoterPaging.number+1} ? 'active'"
+                                class="page-item">
+                                <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                            </li>
+                            <li th:classappend="${!marketVoterPaging.hasNext} ? 'disabled'" class="disabled">
+                                <a class="page-link"
+                                   th:href="${marketVoterPaging.hasNext} ? @{|?page=${marketVoterPaging.number+1}|} : @{|?page=${marketVoterPaging.totalPages}|}">
+                                    <span>다음</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -526,6 +553,27 @@
   });
 
 
+
+<!--    const myArticleCount = document.querySelector('.myArticleCount');-->
+<!--const contentBox = document.querySelector('.content_box');-->
+
+<!--// myArticleCount에 클릭 이벤트 리스너를 추가합니다.-->
+<!--myArticleCount.addEventListener('click', function(event) {-->
+<!--  event.preventDefault();-->
+
+<!--  // contentBox 내의 모든 페이지를 숨깁니다.-->
+<!--  const pages = contentBox.querySelectorAll('.page');-->
+<!--  pages.forEach(page => {-->
+<!--    page.style.display = 'none';-->
+<!--  });-->
+
+<!--  // menu2 페이지를 표시합니다.-->
+<!--  const menu2Page = contentBox.querySelector('#menu2');-->
+<!--  menu2Page.style.display = 'block';-->
+<!--});-->
+
+
 </script>
+
 </body>
 </html>
