@@ -80,12 +80,10 @@
         </div>
         <!--search_box-->
         <div class="search_box">
-            <a href="#">
-                <input type="text" placeholder="검색" id="searchBox">
-                <button type="button" class="search_button">
-                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
-                </button>
-            </a>
+            <input type="text" placeholder="검색" id="search_kw" class="searchBox" th:value="${kw}">
+            <button type="button" class="search_button">
+                <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
+            </button>
         </div>
         <!--categori_accordion-->
         <div class="accordion">
@@ -331,10 +329,6 @@
       moveSlide(currentIndex);
     }, 4000);
   });
-
-
-
-
 
 
 

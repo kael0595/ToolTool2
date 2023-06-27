@@ -95,8 +95,6 @@ public class MarketService {
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
         String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
-//      String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
 
@@ -112,18 +110,18 @@ public class MarketService {
             filepaths.add(filePath);
         }
 
-        Market q = new Market();
-        q.setSubject(marketForm.getSubject());
-        q.setContent(marketForm.getContent());
-        q.setCreateDate(LocalDateTime.now());
-        q.setPrice(marketForm.getPrice());
-        q.setBrand(marketForm.getBrand());
-        q.setType(marketForm.getType());
-        q.setSeason(marketForm.getSeason());
-        q.setAuthor(user);
-        q.setFilenames(filenames);
-        q.setFilepaths(filepaths);
-        this.marketRepository.save(q);
+        Market market = new Market();
+        market.setSubject(marketForm.getSubject());
+        market.setContent(marketForm.getContent());
+        market.setCreateDate(LocalDateTime.now());
+        market.setPrice(marketForm.getPrice());
+        market.setBrand(marketForm.getBrand());
+        market.setType(marketForm.getType());
+        market.setSeason(marketForm.getSeason());
+        market.setAuthor(user);
+        market.setFilenames(filenames);
+        market.setFilepaths(filepaths);
+        this.marketRepository.save(market);
     }
 
 

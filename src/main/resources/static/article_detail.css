@@ -5,7 +5,7 @@ nav {
 }
 span,
 p {
-  color: #73703f;
+  color: #000;
 }
 button {
   border: 0;
@@ -32,8 +32,8 @@ div{
 .Review_form{
   display:block;
   margin-top:80px;
-
 }
+
 .grade{
     display: inline-block;
     line-height: 30px;
@@ -53,7 +53,6 @@ div{
     font-size: 22px;
     color: #ff6c00;
     vertical-align: top;
-
 }
 
 
@@ -104,9 +103,11 @@ div{
   height:50px;
   border-radius:50%;
 }
+
 .profile_area{
   float:left;
 }
+
 .userInfo .profile_info .nick{
   display:inline-block;
   position:relative;
@@ -123,7 +124,7 @@ div{
   margin-right:6px;
   font-size:13px;
   vertical-align:top;
-  color:var(--skinText676767);
+  color:#000;
 }
 
 .article_info{
@@ -139,14 +140,11 @@ div{
   line-height: 13px;
   color:var(--skinText979797);
 }
-
-
 .Articletool .button_comment{
   display:inline-block;
   margin-right:16px;
   vertical-align:top;
 }
-
 .Articletool > a{
   color:inherit;
 }
@@ -162,7 +160,6 @@ div{
 .content_form .content_write{
   line-height:40px;
 }
-
 .ArticleContentBox .article_writer {
     position: relative;
     min-height: 36px;
@@ -201,7 +198,6 @@ div{
   position: relative;
   margin-bottom:10px;
 }
-
 .Commen_Writer .comment_inbox_name{
   display:block;
   margin-bottom:10px;
@@ -212,9 +208,11 @@ div{
 .textarea.comment_inbox_text[data-v-afadf0bc] {
     max-height: 500px;
 }
+
 .bottom_write_button{
   position:absolute;
 }
+
 .articlebottonbtn{
   padding-top:10px;
   top:500%;
@@ -249,7 +247,6 @@ div{
   padding:10px 10px;
   border-radius:7px;
   margin-top:10px;
-
 }
 .modifyRemove .remove{
   text-decoration:none;
@@ -266,7 +263,6 @@ div{
   margin-top:10px;
 }
 
-
 .like{
   padding-bottom:20px;
 }
@@ -280,9 +276,7 @@ div{
 
 .answerbox{
   border-bottom: 1px solid #ccc;
-
   margin-bottom:20px;
-
 }
 
 .answerNick {
@@ -293,13 +287,15 @@ div{
 .answerCreateBox{
   margin:20px;
 }
+
 .answerCreateBox > div{
   display:inline-block;
-
 }
+
 .answerCreateBox{
   position:relative;
 }
+
 .answerModifyRemove{
   position:absolute;
   right:0.1%;
@@ -308,6 +304,7 @@ div{
 .answermodify_btn{
  cursor:pointer;
 }
+
 .answerremove_btn{
  cursor:pointer;
 }
@@ -324,7 +321,6 @@ div{
   width:100%;
 }
 
-
 textarea{
     display:inline-block;
     width:100%;
@@ -339,24 +335,21 @@ textarea{
 .formbox .reply_summit{
     display:inline-block;
   margin:20px;
-
 }
 
 input{
   background: #ff6c00;
   color:#fff;
-
 }
+
 .articleNum{
   font-weight:bold;
   font-size:20px;
 }
+
 .alert alert-danger{
     display:block;
 }
-
-
-
 
 .formmodifybox{
   border:2px solid #ccc;
@@ -374,3 +367,4 @@ input{
   border-radius:7px;
   margin-top:10px;
 }
+

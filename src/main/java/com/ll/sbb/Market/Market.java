@@ -15,7 +15,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-
 public class Market {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,12 +57,12 @@ public class Market {
     private int likeCount;
 
     @ElementCollection
-    @CollectionTable(name = "market_files", joinColumns = @JoinColumn(name = "market_id"))
+    @CollectionTable(name = "market_filenames", joinColumns = @JoinColumn(name = "market_id"))
     @Column(name = "filename")
     private List<String> filenames;
 
     @ElementCollection
-    @CollectionTable(name = "market_files", joinColumns = @JoinColumn(name = "market_id"))
+    @CollectionTable(name = "market_filepaths", joinColumns = @JoinColumn(name = "market_id"))
     @Column(name = "filepath")
     private List<String> filepaths;
 

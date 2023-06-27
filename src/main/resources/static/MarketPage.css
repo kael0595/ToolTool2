@@ -45,22 +45,23 @@
 .button.active {
   background-color: #ff6c00;
 }
-
+.sorting-box {
+   width: 1440px;
+   margin: 0 auto;
+ }
 /*sorting*/
 .sorting {
   width: 950px;
   display: flex;
-  margin-left: 700px;
-  margin-right: 50px;
-  margin-top: 80px;
   align-items: center;
+  margin-top: 80px;
+  margin-left: 420px;
 }
 .sorting span {
-  font-family: initial;
   color: black;
 }
 .sorting_menu {
-  margin-left: 515px;
+  margin-left: 600px;
 }
 
 .sorting_menu > ul {
@@ -116,14 +117,23 @@ color:black;
   width: 400px;
   display: flex;
   margin-top: 30px;
-  margin-left: 40px;
+
 }
-.flex_box > .categori_accordion > .search_box > a > input {
+.flex_box > .categori_accordion > .search_box  input {
   font-size: 16px;
   width: 200px;
-  border: 0;
   padding: 10px;
-  border-bottom: 1px solid;
+  outline: none;
+  margin-left: 20px;
+  border-radius: 5px;
+}
+
+.flex_box > .categori_accordion > .search_box  .btn-outline-secondary {
+  width: 40px;
+  height: 100%;
+  border: 0;
+  border-radius: 5px;
+  background-color: #ff6c00;
   outline: none;
 }
 

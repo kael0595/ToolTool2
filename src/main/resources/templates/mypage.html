@@ -10,11 +10,141 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/af580f77b6.js" crossorigin="anonymous"></script>
     <title>My툴</title>
+    <script>
+  $(document).ready(function() {
+    // Handle click event for '.pagination-1' page links
+    $('.pagination-1 a.page-link').on('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
+
+      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
+
+      // Create an AJAX request to fetch updated content
+      $.ajax({
+        url: pageUrl,
+        method: 'GET',
+        success: function(response) {
+          // Extract the updated content from the response
+          var updatedContent = $(response).find('.review_board_table').html();
+
+          // Replace the existing table content
+          $('.review_board_table').html(updatedContent);
+        },
+        error: function() {
+          // Handle error when AJAX request fails
+          console.log('An error occurred while fetching the content.');
+        }
+      });
+    });
+
+    // Handle click event for '.pagination-2' page links
+    $('.pagination-2 a.page-link').on('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
+
+      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
+
+      // Create an AJAX request to fetch updated content
+      $.ajax({
+        url: pageUrl,
+        method: 'GET',
+        success: function(response) {
+          // Extract the updated content from the response
+          var updatedContent = $(response).find('.market_board_table').html();
+
+          // Replace the existing table content
+          $('.market_board_table').html(updatedContent);
+        },
+        error: function() {
+          // Handle error when AJAX request fails
+          console.log('An error occurred while fetching the content.');
+        }
+      });
+    });
+
+    // Handle profile picture change
+    $(".change-icon").click(function() {
+      // Create a "file" type input element
+      var inputFile = $('<input type="file">');
+
+      // Trigger click event on the input element
+      inputFile.trigger("click");
+
+      // When a file is selected
+      inputFile.change(function() {
+        var file = this.files[0];
+
+        if (file) {
+          var reader = new FileReader();
+
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
+
+          // When the file is loaded
+          reader.onload = function(e) {
+            // Update the profile image with the selected file
+            $(".profile_img_1").attr("src", e.target.result);
+          };
+        }
+      });
+    });
+
+    // Handle menu box navigation
+    $(".menu_box a").click(function(e) {
+      e.preventDefault();
+      var pageId = $(this).data("page");
+      $(".page").hide();
+      $("#" + pageId).show();
+    });
+
+    // Handle change password functionality
+    $("#change-password-btn").click(function() {
+      if (!$("#current-password").is(":disabled")) {
+        $("#current-password").prop("disabled", true);
+        $("#save-password-btn").prop("disabled", true);
+      } else {
+        $("#current-password").prop("disabled", false);
+        $(this).prop("disabled", true);
+        $("#save-password-btn").prop("disabled", false);
+      }
+    });
+
+    $("#save-password-btn").click(function() {
+      $("#current-password").attr("disabled", true);
+      $(this).attr("disabled", true);
+      $("#change-password-btn").removeAttr("disabled");
+    });
+
+    // Handle change nickname functionality
+    $("#change-nickname-btn").click(function() {
+      $("#nickname").removeAttr("disabled");
+      $(this).attr("disabled", true);
+      $("#save-nickname-btn").removeAttr("disabled");
+    });
+
+    $("#save-nickname-btn").click(function() {
+      var newNickname = $("#nickname").val();
+
+      $.ajax({
+        url: "/mypage/changeNickname",
+        type: "POST",
+        data: {
+          newnickname: newNickname
+        },
+        success: function(response) {
+          window.location.href = response;
+        },
+        error: function(xhr, status, error) {
+          console.log("닉네임 변경 실패: " + error);
+        }
+      });
+    });
+  });
+
+
+    </script>
 </head>
 <body>
+<div th:replace="layout/navbar.html"></div>
 <div class="my_page">
-    <!--topbar-->
-    <div th:replace="layout/navbar.html"></div>
     <!--secondbar-->
     <div class="my_page_second_bar">
         <div class="profile_img">
@@ -262,8 +392,9 @@
             </div>
         </div>
     </div>
-    <!--footer-->
-    <footer th:replace="layout/footer.html"></footer>
+</div>
+<!--footer-->
+<footer th:replace="layout/footer.html"></footer>
 </div>
 <script>
   $(document).ready(function() {
@@ -393,6 +524,7 @@
       });
     });
   });
+
 
 </script>
 </body>

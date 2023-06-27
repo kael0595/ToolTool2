@@ -36,7 +36,7 @@ public class MarketController {
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Market> paging = this.marketService.getList(page, kw);
         List<Market> markets = this.marketService.getAll();
-        int marketCount = markets.size();
+        int marketCount = paging.getNumberOfElements();
         model.addAttribute("markets", markets);
         model.addAttribute("marketCount", marketCount);
         model.addAttribute("paging", paging);
@@ -184,9 +184,19 @@ public class MarketController {
 
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, Principal principal, @PathVariable("id") Integer id) {
         Market market = this.marketService.getMarket(id);
+        boolean checkedLike = false;
+        if (principal != null) {
+            SiteUser siteUser = this.userService.getUser(principal.getName());
+            for (SiteUser voter : market.getVoter()) {
+                if (voter.getId() == siteUser.getId()) {
+                    checkedLike = true;
+                }
+            }
+        }
         this.marketService.viewCountUp(market);
+        model.addAttribute("checkedLike", checkedLike);
         model.addAttribute("market", market);
         return "market_detail";
     }
@@ -201,8 +211,8 @@ public class MarketController {
     @PreAuthorize("isAuthenticated()")
     public String marketCreate(@Valid MarketForm marketForm,
                                BindingResult bindingResult,
-                               Principal principal
-            , @RequestParam("files") MultipartFile[] files) throws Exception {
+                               Principal principal,
+                               @RequestParam("files") MultipartFile[] files) throws Exception {
         if (bindingResult.hasErrors()) {
             return "market_form";
         }

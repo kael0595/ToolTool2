@@ -34,7 +34,7 @@ public class ArticleController {
                        @RequestParam(value = "kw", defaultValue = "") String kw) {
         Page<Article> paging = this.articleService.getList(page, kw);
         List<Article> articles = this.articleService.getAll();
-        int articleCount = articles.size();
+        int articleCount = paging.getNumberOfElements();
         model.addAttribute("articles", articles);
         model.addAttribute("articleCount", articleCount);
         model.addAttribute("paging", paging);
