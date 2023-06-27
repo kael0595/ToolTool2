@@ -2,7 +2,7 @@
     <li th:fragment="marketitemFragment" th:each="market, stat : ${paging}" th:if="${stat.index < 9}">
         <nav class="item market_board_img">
             <a th:href="@{|/market/detail/${market.id}|}">
-                <img th:src="${market.filepath}" class="review_board_main_img"/>
+<!--                <img th:src="${market.filepath}" class="review_board_main_img"/>-->
             </a>
             <div class="text_box_name text_box_name_1">
                 <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>
