@@ -4,6 +4,7 @@ import com.ll.sbb.MarketAnswer.MarketAnswer;
 
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,11 +60,13 @@ public class Market {
     @ElementCollection
     @CollectionTable(name = "market_filenames", joinColumns = @JoinColumn(name = "market_id"))
     @Column(name = "filename")
+    @NotNull
     private List<String> filenames;
 
     @ElementCollection
     @CollectionTable(name = "market_filepaths", joinColumns = @JoinColumn(name = "market_id"))
     @Column(name = "filepath")
+    @NotNull
     private List<String> filepaths;
 
 

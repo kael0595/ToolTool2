@@ -1,9 +1,11 @@
 <ul id="articleItem">
     <li th:fragment="articleitemFragment" th:each="article, stat : ${paging}" th:if="${stat.index < 9}">
         <nav class="item review_board_img">
-            <a th:href="@{|/article/detail/${article.id}|}">
-                <img th:src="${article.filepath}" class="review_board_main_img"/>
-            </a>
+            <div th:if="${not #lists.isEmpty(article.filepaths)}">
+                <a th:href="@{|/article/detail/${article.id}|}">
+                    <img th:src="${article.filepaths[0]}" class="review_board_main_img"/>
+                </a>
+            </div>
             <div class="text_box_name text_box_name_1">
                 <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
             </div>

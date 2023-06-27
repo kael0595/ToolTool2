@@ -1,9 +1,11 @@
 <ul id="marketItem">
     <li th:fragment="marketitemFragment" th:each="market, stat : ${paging}" th:if="${stat.index < 9}">
         <nav class="item market_board_img">
-            <a th:href="@{|/market/detail/${market.id}|}">
-                <img th:src="${market.filepath}" class="review_board_main_img"/>
-            </a>
+            <div th:if="${not #lists.isEmpty(market.filepaths)}">
+                <a th:href="@{|/market/detail/${market.id}|}">
+                    <img th:src="${market.filepaths[0]}" class="market_board_main_img"/>
+                </a>
+            </div>
             <div class="text_box_name text_box_name_1">
                 <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>
             </div>

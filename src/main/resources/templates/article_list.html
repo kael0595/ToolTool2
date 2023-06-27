@@ -7,8 +7,71 @@
     <link rel="stylesheet" href="/article_list.css"/>
     <link rel="stylesheet" href="/layout/navbar.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
-    <title>ListPage</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <title>ListPage</title>
+    <script>
+      var itemsPerPage = 9;
+      var $items = $(".item");
+      var totalPages = Math.ceil($items.length / itemsPerPage);
+      var currentPage = 1;
+
+      function showPage(page) {
+        var startIndex = (page - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+
+        $items.hide();
+        $items.slice(startIndex, endIndex).show();
+
+        var pageNumbers = "";
+        for (var i = 1; i <= totalPages; i++) {
+          if (i === page) {
+            pageNumbers +=
+              '<a href="#" class="page-number active">' + i + "</a>";
+          } else {
+            pageNumbers += '<a href="#" class="page-number">' + i + "</a>";
+          }
+        }
+        $(".page-numbers").html(pageNumbers);
+      }
+
+      function navigateToPreviousPage() {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      }
+
+      function navigateToNextPage() {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      }
+
+      $(".previous").on("click", function (e) {
+        e.preventDefault();
+        navigateToPreviousPage();
+      });
+
+      $(".next").on("click", function (e) {
+        e.preventDefault();
+        navigateToNextPage();
+      });
+
+      $(document).on("click", ".page-number", function (e) {
+        e.preventDefault();
+        var page = parseInt($(this).text());
+        showPage(page);
+      });
+
+      showPage(currentPage);
+
+
+
+
+
+
+    </script>
 </head>
 <body>
 <div th:replace="layout/navbar.html"></div>
@@ -80,10 +143,12 @@
         </div>
         <!--search_box-->
         <div class="search_box">
-            <input type="text" placeholder="검색" id="search_kw" class="searchBox" th:value="${kw}">
-            <button type="button" class="search_button">
-                <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
-            </button>
+            <div class="input-group">
+                <input type="text" id="search_kw" class="searchBox" th:value="${kw}" placeholder="검색">
+                <button class="search_button" type="button" id="btn_search">
+                    <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
+                </button>
+            </div>
         </div>
         <!--categori_accordion-->
         <div class="accordion">
@@ -216,119 +281,112 @@
         </div>
     </div>
 </div>
+<form th:action="@{/article/list}" method="get" id="searchForm">
+    <input type="hidden" id="kw" name="kw" th:value="${kw}">
+    <input type="hidden" id="page" name="page" th:value="${paging.number}">
+</form>
 <!--footer-->
 <footer th:replace="layout/footer.html"></footer>
 <script>
-  $(document).ready(function() {
-    var itemsPerPage = 9;
-    var $items = $('.item');
-    var totalPages = Math.ceil($items.length / itemsPerPage);
-    var currentPage = 1;
+    $(document).ready(function() {
+  // .pagination-2 내의 페이지 링크 클릭 이벤트 처리
+  $('.sorting_menu a.Sort').on('click', function(e) {
+    e.preventDefault(); // 기본 링크 동작 방지
 
-    function showPage(page) {
-      var startIndex = (page - 1) * itemsPerPage;
-      var endIndex = startIndex + itemsPerPage;
+    var pageUrl = `listCategory${$(this).attr('href')}`; // 클릭된 링크의 URL 가져오기
 
-      $items.hide();
-      $items.slice(startIndex, endIndex).show();
-
-      var pageNumbers = '';
-      for (var i = 1; i <= totalPages; i++) {
-        if (i === page) {
-          pageNumbers += '<a href="#" class="page-number active">' + i + '</a>';
-        } else {
-          pageNumbers += '<a href="#" class="page-number">' + i + '</a>';
-        }
+<!--    location.href = pageUrl;-->
+<!--    console.log(pageUrl)-->
+    // 업데이트된 내용을 가져오기 위해 AJAX 요청 생성
+    $.ajax({
+      url: pageUrl,
+      method: 'GET',
+      //dataType: 'text',
+      success: function(response) {
+       $('#marketItem').replaceWith(response);
+      },
+      error: function() {
+        // AJAX 요청이 실패한 경우 에러 처리
+        console.log('내용을 가져오는 중에 오류가 발생했습니다.');
       }
-      $('.page-numbers').html(pageNumbers);
-    }
-
-    function navigateToPreviousPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-      }
-    }
-
-    function navigateToNextPage() {
-      if (currentPage < totalPages) {
-        currentPage++;
-        showPage(currentPage);
-      }
-    }
-
-    $('.previous').on('click', function(e) {
-      e.preventDefault();
-      navigateToPreviousPage();
     });
-
-    $('.next').on('click', function(e) {
-      e.preventDefault();
-      navigateToNextPage();
-    });
-
-    $(document).on('click', '.page-number', function(e) {
-      e.preventDefault();
-      var page = parseInt($(this).text());
-      showPage(page);
-    });
-
-    showPage(currentPage);
-
-    // .pagination-2 내의 페이지 링크 클릭 이벤트 처리
-    $('.sorting_menu a.Sort').on('click', function(e) {
-      e.preventDefault(); // 기본 링크 동작 방지
-
-      var pageUrl = `listCategory${$(this).attr('href')}`; // 클릭된 링크의 URL 가져오기
-
-      // 업데이트된 내용을 가져오기 위해 AJAX 요청 생성
-      $.ajax({
-        url: pageUrl,
-        method: 'GET',
-        success: function(response) {
-          $('#articleItem').replaceWith(response);
-        },
-        error: function() {
-          // AJAX 요청이 실패한 경우 에러 처리
-          console.log('내용을 가져오는 중에 오류가 발생했습니다.');
-        }
-      });
-    });
-
-    const banner__bar = $(".banner__bar");
-    const banner__list = $(".banner__list");
-    const banners = $(".banner");
-    const buttons = $(".button");
-    const slideWidth = banner__bar.width();
-    let currentIndex = 0;
-    let interval;
-
-    banners.css("width", slideWidth + "px");
-    banner__list.css("width", slideWidth * banners.length + "px");
-
-    function moveSlide(index) {
-      currentIndex = index;
-      banner__list.animate(
-        { marginLeft: "-" + slideWidth * currentIndex + "px" },
-        500
-      );
-      buttons.removeClass("active");
-      buttons.eq(currentIndex).addClass("active");
-    }
-
-    buttons.click(function() {
-      const index = $(this).data("index");
-      moveSlide(index);
-    });
-
-    interval = setInterval(function() {
-      currentIndex++;
-      if (currentIndex >= banners.length) {
-        currentIndex = 0;
-      }
-      moveSlide(currentIndex);
-    }, 4000);
   });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<!--banner script-->
+<script>
+      $(document).ready(function () {
+        const banner__bar = $(".banner__bar");
+        const banner__list = $(".banner__list");
+        const banners = $(".banner");
+        const buttons = $(".button");
+        const slideWidth = banner__bar.width();
+        let currentIndex = 0;
+        let interval;
+
+        banners.css("width", slideWidth + "px");
+        banner__list.css("width", slideWidth * banners.length + "px");
+
+        function moveSlide(index) {
+          currentIndex = index;
+          banner__list.animate(
+            { marginLeft: "-" + slideWidth * currentIndex + "px" },
+            500
+          );
+          buttons.removeClass("active");
+          buttons.eq(currentIndex).addClass("active");
+        }
+
+        buttons.click(function () {
+          const index = $(this).data("index");
+          moveSlide(index);
+        });
+
+        interval = setInterval(function () {
+          currentIndex++;
+          if (currentIndex >= banners.length) {
+            currentIndex = 0;
+          }
+          moveSlide(currentIndex);
+        }, 3000);
+      });
+
+
+
+
+</script>
+<script layout:fragment="script" type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+
+
+
 
 
 

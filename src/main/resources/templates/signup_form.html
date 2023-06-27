@@ -59,7 +59,8 @@
                             <div class="form-group">
                                 <label for="email">이메일 </label>
                                 <input type="email" th:field="*{email}" name="email" id="email" class="email">
-                                <button class="emailCF" type="button" onclick="sendEmailConfirmation()" id="emailCF">인증번호 보내기
+                                <button class="emailCF" type="button" onclick="sendEmailConfirmation()" id="emailCF">
+                                    인증번호 보내기
                                 </button>
                                 <span class="error"></span>
                             </div>
@@ -72,7 +73,8 @@
                                 <label for="mailKey">이메일 인증번호</label>
                                 <input type="text" th:field="*{mailKey}" name="emailToken" id="mailKey"
                                        class="emailToken">
-                                <button class="emailCF" type="emailCF" value="이메일 인증번호 보내기" id="submit">인증번호
+                                <button class="emailCF" type="emailCF" value="이메일 인증번호 보내기" id="emailCF1"
+                                        onclick="EmailConfirm()">인증번호
                                     확인
                                 </button>
                                 <span class="error"></span>
@@ -110,6 +112,25 @@
             }
         });
     }
+
+function EmailConfirm() {
+        // 이메일 주소 가져오기
+        var email = $("#email").val();
+        var mailKey = $("#mailKey").val();
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "http://localhost:8080//mailconfirm", // 이메일 인증번호를 보낼 서버의 URL
+            method: "GET",
+            data: {email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
+            success: function(response) {
+                alert("인증 성공!");
+            },
+            error: function(xhr, status, error) {
+                alert("인증 실패!");
+            }
+        });
+    }
+
 
 
 

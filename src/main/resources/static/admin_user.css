@@ -84,26 +84,36 @@ header > .menu > .admin_menu > ul > li > button:hover {
   color: #fff;
   border-radius: 5px;
 }
-.top-bar > .button > button:hover{
-   background-color: #ff6c00;
+.top-bar > .button > button:hover {
+  background-color: #ff6c00;
 }
 .content-section .checkbox {
-  width: 5%;
+  width: 10%;
 }
 .content-section .number {
-  width: 5%;
-}
-.content-section .title {
-  width: 50%;
-}
-.content-section .name {
   width: 10%;
 }
-.content-section .date {
-  width: 15%;
+.content-section .nickname {
+  width: 20%;
 }
-.content-section .inquiry {
+.content-section .id{
+  width: 20%;
+}
+.content-section .email {
+  width: 30%;
+}
+.content-section .administrator {
   width: 10%;
+}
+table button {
+  background-color: black;
+  padding: 0;
+  padding: 5px;
+  color: #fff;
+  border-radius: 5px;
+}
+table button:hover {
+  background-color: #ff6c00;
 }
 table {
   width: 1440px;

@@ -4,6 +4,8 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
     <link rel="stylesheet" href="/mypage.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
     <link rel="stylesheet" href="/layout/navbar.css"/>
@@ -43,50 +45,93 @@
       var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
 
       // Create an AJAX request to fetch updated content
-      $.ajax({
-        url: pageUrl,
-        method: 'GET',
-        success: function(response) {
-          // Extract the updated content from the response
-          var updatedContent = $(response).find('.market_board_table').html();
+$('.pagination-2 a.page-link').on('click', function(e) {
+  e.preventDefault(); // Prevent default link behavior
 
-          // Replace the existing table content
-          $('.market_board_table').html(updatedContent);
-        },
-        error: function() {
-          // Handle error when AJAX request fails
-          console.log('An error occurred while fetching the content.');
-        }
-      });
-    });
+  var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
 
-    // Handle profile picture change
-    $(".change-icon").click(function() {
-      // Create a "file" type input element
-      var inputFile = $('<input type="file">');
+  // Create an AJAX request to fetch updated content
+  $.ajax({
+    url: pageUrl,
+    method: 'GET',
+    success: function(response) {
+      // Extract the updated content from the response
+      var updatedContent = $(response).find('.market_board_table').html();
 
-      // Trigger click event on the input element
-      inputFile.trigger("click");
+      // Replace the existing table content
+      $('.market_board_table').html(updatedContent);
+    },
+    error: function() {
+      // Handle error when AJAX request fails
+      console.log('An error occurred while fetching the content.');
+    }
+  });
+});
 
-      // When a file is selected
-      inputFile.change(function() {
-        var file = this.files[0];
+// Handle profile picture change
+$(".change-icon").click(function() {
+  // "file" 타입의 인풋 엘리먼트 생성
+  var inputFile = $('<input type="file">');
 
-        if (file) {
-          var reader = new FileReader();
+  // 인풋 엘리먼트에 클릭 이벤트 트리거
+  inputFile.trigger("click");
+});
 
-          // Read the file as a data URL
-          reader.readAsDataURL(file);
+// 파일이 선택되었을 때
+$(document).on('change', 'input[type="file"]', function() {
+  var file = this.files[0];
 
-          // When the file is loaded
-          reader.onload = function(e) {
-            // Update the profile image with the selected file
-            $(".profile_img_1").attr("src", e.target.result);
-          };
-        }
-      });
-    });
+  if (file) {
+    var reader = new FileReader();
 
+    // 파일을 데이터 URL로 읽기
+    reader.readAsDataURL(file);
+
+    // 파일이 로드되었을 때
+    reader.onload = function(e) {
+      // 선택된 파일로 프로필 이미지 업데이트
+      $(".profile_img_1").attr("src", e.target.result);
+
+      // 파일을 업로드하고 프로필 사진을 업데이트하기 위해 changePhoto 함수 호출
+      changePhoto(file);
+    };
+  }
+});
+
+// 파일을 업로드하고 프로필 사진을 업데이트하기 위한 AJAX 요청
+function changePhoto(file) {
+  // 새로운 FormData 객체 생성
+  var formData = new FormData();
+  formData.append('file', file);
+
+  // 메타 태그에서 CSRF 토큰 값 가져오기
+  var csrfToken = $("meta[name='_csrf']").attr("content");
+  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+
+  // 요청 헤더에 CSRF 토큰 추가
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader(csrfHeader, csrfToken);
+    }
+  });
+
+  // 파일을 업로드하기 위한 AJAX 요청
+  $.ajax({
+    url: "/mypage/changePhoto",
+    method: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      alert("프로필 사진 변경 성공!");
+      // 성공 시 추가적인 로직 또는 UI 업데이트
+    },
+    error: function(xhr, status, error) {
+      alert("프로필 사진 변경 실패!");
+      // 실패 시 추가적인 에러 처리 또는 UI 업데이트
+    }
+  });
+}
     // Handle menu box navigation
     $(".menu_box a").click(function(e) {
       e.preventDefault();
@@ -140,6 +185,15 @@
   });
 
 
+
+
+
+
+
+
+
+
+
     </script>
 </head>
 <body>
@@ -148,10 +202,7 @@
     <!--secondbar-->
     <div class="my_page_second_bar">
         <div class="profile_img">
-            <img
-                    src="https://i.postimg.cc/m23RYKm6/product-box1.png"
-                    class="profile_img_1"
-            />
+            <img th:src="${user.filepath}" class="profile_img_1"/>
             <button class="change-icon">
                 <span class="change-img">
                     <i class="fa-solid fa-image" style="color: #fff;"></i>
@@ -524,6 +575,15 @@
       });
     });
   });
+
+
+
+
+
+
+
+
+
 
 
 </script>

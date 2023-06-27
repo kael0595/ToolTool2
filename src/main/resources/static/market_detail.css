@@ -24,7 +24,30 @@ a {
   text-decoration: none;
 }
 /* 네비바 끝 */
+/* 스티키 플로팅배너 시작 */
+.stickyBar>a{
+  display:inline-block;
+  width:60px;
+  height:60px;
+  background: #fff;
+  border-style:none;
 
+}
+.stickyBar{
+  display:inline-block;
+  position: fixed;
+  top: 50%;
+  left:95%;
+  border:1px solid #565656;
+}
+
+i{
+  margin-left:20px;
+  margin-top:20px;
+  font-size:20px;
+}
+
+/* 스티키 플로팅 배너 끝*/
 /* 리뷰 박스 시작 */
 div{
   display:block;

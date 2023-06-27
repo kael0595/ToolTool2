@@ -21,6 +21,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -67,7 +68,6 @@ public class UserController {
             UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
             userService.create(userCreateForm.getUsername(),
                     userCreateForm.getPassword1(), userCreateForm.getEmail(), userCreateForm.getNickname(), userCreateForm.getMailKey(), role);
-            userService.emailConfirm(userCreateForm.getEmail(), userCreateForm.getMailKey());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -143,6 +143,8 @@ public class UserController {
         Page<Article> articlePaging = this.articleService.getUserList(page, kw, siteUser.getUsername());
         Page<Market> marketPaging = this.marketService.getUserList(page, kw, siteUser.getUsername());
 
+        Page<Market> marketVoterPaging = this.marketService.getUserVoterList(page, kw, siteUser.getUsername());
+
         List<Article> articles = this.articleService.getAuthor(siteUser);
         List<Market> markets = this.marketService.getAuthor(siteUser);
 
@@ -154,6 +156,7 @@ public class UserController {
         model.addAttribute("articleCount", articleCount);
         model.addAttribute("articlePaging", articlePaging);
         model.addAttribute("marketPaging", marketPaging);
+        model.addAttribute("marketVoterPaging", marketVoterPaging);
         model.addAttribute("kw", kw);
         model.addAttribute("user", siteUser);
         return "mypage";
@@ -187,6 +190,7 @@ public class UserController {
         return model;
 
     }
+
 
     @GetMapping("/user/find")
     public String find() {
@@ -253,5 +257,15 @@ public class UserController {
         SiteUser user = userService.getUserByUsername(username);
         user.setEmail(newemail);
         return "/mypage";
+    }
+
+    @PostMapping("/mypage/changePhoto")
+    @ResponseBody
+    public String changePhoto(@RequestParam("file") MultipartFile file, UserService userService) throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        SiteUser user = userService.getUserByUsername(username);
+        userService.changePhoto(user, file);
+        return "redirect:/mypage";
     }
 }

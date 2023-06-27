@@ -56,7 +56,6 @@ public class AdminController {
     }
 
     @PostMapping("/addAdminRole")
-    @ResponseBody
     public ResponseEntity<String> addAdminRole(@RequestParam("id") int id) {
         // 관리자 권한을 부여할 유저를 조회합니다.
         SiteUser user = userService.getUserById(id);
@@ -71,7 +70,6 @@ public class AdminController {
     }
 
     @PostMapping("/minusAdminRole")
-    @ResponseBody
     public ResponseEntity<String> minusAdminRole(@RequestParam("id") int id) {
 
         SiteUser user = userService.getUserById(id);
@@ -84,5 +82,34 @@ public class AdminController {
 
         return ResponseEntity.ok("관리자 권한이 회수되었습니다.");
     }
+
+    @GetMapping("/review")
+    private String admin_review(Model model) {
+        List<Article> articleList = this.articleService.getAll();
+        model.addAttribute("articleList", articleList);
+        return "/admin_review";
+    }
+
+    @GetMapping("/market")
+    private String admin_market(Model model) {
+        List<Market> marketList = this.marketService.getAll();
+        model.addAttribute("marketList", marketList);
+        return "/admin_market";
+    }
+
+    @GetMapping("/user")
+    private String admin_user(Model model) {
+        List<SiteUser> userList = this.userService.getAll();
+        model.addAttribute("userList", userList);
+        return "/admin_user";
+    }
+
+    @GetMapping("/admin")
+    private String admin(Model model) {
+        List<SiteUser> adminList = this.userService.getUserByUserRole(UserRole.ADMIN);
+        model.addAttribute("adminList", adminList);
+        return "/admin";
+    }
+
 
 }

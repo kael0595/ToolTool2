@@ -3,6 +3,7 @@ package com.ll.sbb.Article;
 import com.ll.sbb.Answer.Answer;
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;

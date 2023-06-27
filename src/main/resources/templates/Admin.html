@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="stylesheet" href="/AdminPage.css"/>
+    <link rel="stylesheet" href="/Admin.css"/>
+    <link rel="stylesheet" href="/layout/navbar.css"/>
+    <link rel="stylesheet" href="/layout/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>AdminPage</title>
 </head>
+
 <body>
 <header>
     <div>
@@ -37,7 +40,7 @@
             <ul>
                 <li>
                     <button type="button">
-                        <a th:href="@{/}">메인페이지버튼</a>
+                        <a href="">메인페이지버튼</a>
                     </button>
                 </li>
             </ul>
@@ -50,40 +53,31 @@
             </ul>
         </div>
     </div>
-    <section id="notice-section" class="content-section">
+    <section id="admin-section" class="content-section">
         <div class="top-bar">
-            <h1>공지사항 관리</h1>
-            <div class="button">
-                <button type="button">
-                    <a th:href="@{/notice/create}">글쓰기</a>
-                </button>
-                <button type="button">삭제</button>
-            </div>
+            <h1>관리자 관리</h1>
         </div>
         <table>
             <thead>
             <tr>
-                <th class="check_box"></th>
-                <th class="number">글번호</th>
-                <th class="title">제목</th>
-                <th class="date">작성일</th>
-                <th class="inquiry">조회</th>
-                <th class="modify">수정일</th>
+                <th class="number">번호</th>
+                <th class="id">아이디</th>
+                <th class="nickname">닉네임</th>
+                <th class="email">이메일</th>
+                <th class="administrator">관리자권한회수</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="notice : ${noticeList}">
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="1"/>
-                </td>
-                <td class="number" th:text="${notice.id}"></td>
-                <td class="title">
-                    <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.subject}"></a>
-                </td>
-                <td class="date" th:text="${notice.createDate}"></td>
-                <td class="inquiry" th:text="${notice.viewCount}"></td>
-                <td class="modify" th:text="${notice.modifyDate}">
-                    <button type="button"></button>
+            <tr th:each="user : ${userList}" th:if="${user.userRole.value == 'ROLE_ADMIN'}">
+                <td class="number" th:text="${user.id}"></td>
+                <td class="id" th:text="${user.username}"></td>
+                <td class="nickname" th:text="${user.nickname}"></td>
+                <td class="email" th:text="${user.email}"></td>
+                <td class="checkbox administrator">
+                    <form th:action="@{/admin/minusAdminRole}" method="post">
+                        <input type="hidden" name="id" th:value="${user.id}"/>
+                        <button type="submit" class="adminbutton">관리자 회수</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

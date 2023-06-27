@@ -84,27 +84,28 @@ header > .menu > .admin_menu > ul > li > button:hover {
   color: #fff;
   border-radius: 5px;
 }
-.top-bar > .button > button:hover{
-   background-color: #ff6c00;
+.top-bar > .button > button:hover {
+  background-color: #ff6c00;
 }
 .content-section .checkbox {
   width: 5%;
 }
 .content-section .number {
-  width: 5%;
+  width: 10%;
 }
 .content-section .title {
   width: 50%;
 }
-.content-section .name {
+.content-section .nickname {
   width: 10%;
 }
 .content-section .date {
-  width: 15%;
+  width: 20%;
 }
 .content-section .inquiry {
-  width: 10%;
+  width: 5%;
 }
+
 table {
   width: 1440px;
   margin: 0 auto;

@@ -103,4 +103,16 @@ public class MailController {
             throw new DataNotFoundException("error");
         }
     }
+
+    @PostMapping("/mailconfirm")
+    @ResponseBody
+    public void emailConfirm(String email, int mailKey) throws Exception {
+        SiteUser user = userService.getUserByEmail(email);
+
+        if (user != null && user.getMailKey() == mailKey) {
+            userService.updateMailAuth(email, mailKey);
+        } else {
+            throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");
+        }
+    }
 }

@@ -74,7 +74,7 @@
 <div class="rm_content review_content">
     <!--1차이미지-->
     <ul>
-        <li th:each="article, stat : ${articleList}" th:if="${stat.index < 3}">
+        <li th:each="article, stat : ${articlePage}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
                 <a th:href="@{|/article/detail/${article.id}|}" th:if="${not #lists.isEmpty(article.filepaths)}">
                     <img th:src="${article.filepaths[0]}"
@@ -92,6 +92,7 @@
                 </div>
                 <div class="text_box_tag text_box_tag_1">
                     <span>#</span>
+                    <span th:text="${article.type}"></span>
                 </div>
             </nav>
         </li>
@@ -104,7 +105,7 @@
 <div class="rm_content market_content">
     <!--1차이미지-->
     <ul>
-        <li th:each="market, stat : ${marketList}" th:if="${stat.index < 3}">
+        <li th:each="market, stat : ${marketPage}" th:if="${stat.index < 3}">
             <nav class="rm_content_img review_content_img review_content_1">
                 <a th:href="@{|/market/detail/${market.id}|}" th:if="${not #lists.isEmpty(market.filepaths)}">
                     <img th:src="${market.filepaths[0]}"
@@ -122,12 +123,13 @@
                 </div>
                 <div class="text_box_tag text_box_tag_1">
                     <span>#</span>
+                    <span th:text="${market.type}"></span>
                 </div>
             </nav>
         </li>
     </ul>
 </div>
-<!--footer-->
+<!—footer—>
 <footer th:replace="layout/footer.html"></footer>
 </body>
 </html>

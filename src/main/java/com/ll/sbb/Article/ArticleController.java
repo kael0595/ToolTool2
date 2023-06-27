@@ -46,7 +46,7 @@ public class ArticleController {
     public String articleDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         boolean checkedLike = false;
-        this.articleService.viewCountUp(article);
+
         if (principal != null) {
             SiteUser siteUser = this.userService.getUser(principal.getName());
             for (SiteUser voter : article.getVoter()) {
@@ -61,6 +61,7 @@ public class ArticleController {
         model.addAttribute("article", article);
         return "article_detail";
     }
+
 //     가격범위 카데고리 리스트 맵핑
 
     @GetMapping(value = "/under/{id}/sort")
@@ -290,4 +291,5 @@ public class ArticleController {
             return upadateArticle.getLikeCount();
         }
     }
+
 }

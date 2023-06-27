@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -79,15 +83,6 @@ public class UserService {
         }
     }
 
-    public void emailConfirm(String email, int mailKey) throws Exception {
-        SiteUser user = this.getUserByEmail(email);
-
-        if (user != null && user.getMailKey() == mailKey) {
-            updateMailAuth(email, mailKey);
-        } else {
-            throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");
-        }
-    }
 
     public SiteUser getUserByEmailAndUsername(String email, String username) {
         Optional<SiteUser> siteUserOptional = userRepository.findUserByEmailAndUsername(email, username);
@@ -146,5 +141,20 @@ public class UserService {
 
     public List<SiteUser> getUserByUserRole(UserRole admin) {
         return this.userRepository.findUserByUserRole(UserRole.ADMIN);
+    }
+
+    public void changePhoto(SiteUser user, MultipartFile file) throws IOException {
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
+        // uuid는 파일에 붙일 랜덤이름을 생성
+
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
+        String filePath = "/files/" + fileName;
+
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+        user.setFilepath(filePath);
+        this.userRepository.save(user);
     }
 }

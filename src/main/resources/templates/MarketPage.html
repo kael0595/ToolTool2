@@ -67,6 +67,8 @@
 
 
 
+
+
     </script>
     <title>MarketPage</title>
 </head>
@@ -104,7 +106,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="?sort=voterSort">
+                    <a href="?sort=voterSort" class="Sort">
                         <span>찜 순</span>
                     </a>
                 </li>
@@ -138,8 +140,8 @@
         <!--search_box-->
         <div class="search_box">
             <div class="input-group">
-                <input type="text" id="search_kw" class="form-control" th:value="${kw}" placeholder="검색">
-                <button class="btn btn-outline-secondary" type="button" id="btn_search">
+                <input type="text" id="search_kw" class="searchBox" th:value="${kw}" placeholder="검색">
+                <button class="search_button" type="button" id="btn_search">
                     <img src="https://i.postimg.cc/tJ4CnLzY/Vector2.png">
                 </button>
             </div>
@@ -312,6 +314,8 @@
 
 
 
+
+
 </script>
 
 <!--banner script-->
@@ -354,12 +358,6 @@
 
 
 
-
-
-
-
-
-
 </script>
 <script layout:fragment="script" type='text/javascript'>
 const page_elements = document.getElementsByClassName("page-link");
@@ -375,6 +373,8 @@ btn_search.addEventListener('click', function() {
     document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
     document.getElementById('searchForm').submit();
 });
+
+
 
 
 
