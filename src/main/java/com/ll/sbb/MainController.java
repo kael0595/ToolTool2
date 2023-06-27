@@ -29,10 +29,15 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(Model model, HttpSession session) {
+        Page<Article> articlePage = this.articleService.getMainList(0);
+        Page<Market> marketPage = this.marketService.getMainList(0);
+
         List<Article> articleList = this.articleService.getAll();
         List<Market> marketList = this.marketService.getAll();
         model.addAttribute("marketList", marketList);
         model.addAttribute("articleList", articleList);
+        model.addAttribute("articlePage",articlePage);
+        model.addAttribute("marketPage", marketPage);
 
         boolean isAuthenticated = false;
         if (session.getAttribute("loggedIn") != null && (boolean) session.getAttribute("loggedIn")) {

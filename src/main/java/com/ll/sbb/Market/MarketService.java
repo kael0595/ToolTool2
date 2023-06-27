@@ -59,7 +59,12 @@ public class MarketService {
         Specification<Market> spec = search(kw);
         return this.marketRepository.findAll(spec, pageable);
     }
-
+    public Page<Market> getMainList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 3, Sort.by(sorts));
+        return this.marketRepository.findAll(pageable);
+    }
     public Page<Market> getUserList(int page, String kw, String user) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));

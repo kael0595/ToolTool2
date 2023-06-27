@@ -56,6 +56,13 @@ public class ArticleService {
         return this.articleRepository.findAll(spec, pageable);
     }
 
+    public Page<Article> getMainList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 3, Sort.by(sorts));
+        return this.articleRepository.findAll(pageable);
+    }
+
     public Page<Article> getHigtList(int page, String kw, String sortKey) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc(sortKey));
