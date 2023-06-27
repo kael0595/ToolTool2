@@ -186,6 +186,7 @@ public class MarketController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         Market market = this.marketService.getMarket(id);
+        this.marketService.viewCountUp(market);
         model.addAttribute("market", market);
         return "market_detail";
     }

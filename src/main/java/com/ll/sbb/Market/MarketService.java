@@ -318,4 +318,9 @@ public class MarketService {
         Specification<Market> spec = searchType(type);
         return this.marketRepository.findAll(spec, pageable);
     }
+
+    public  void viewCountUp(Market market){
+        market.setViewCount(market.getViewCount()+1);
+        this.marketRepository.save(market);
+    }
 }

@@ -46,7 +46,7 @@ public class ArticleController {
     public String articleDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         boolean checkedLike = false;
-
+        this.articleService.viewCountUp(article);
         if (principal != null) {
             SiteUser siteUser = this.userService.getUser(principal.getName());
             for (SiteUser voter : article.getVoter()) {

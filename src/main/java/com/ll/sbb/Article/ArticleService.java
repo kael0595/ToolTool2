@@ -306,4 +306,10 @@ public class ArticleService {
         article.getVoter().remove(siteUser);
         this.articleRepository.save(article);
     }
+
+    public void viewCountUp(Article article) {
+
+        article.setViewCount(article.getViewCount()+1);
+       this.articleRepository.save(article);
+    }
 }
