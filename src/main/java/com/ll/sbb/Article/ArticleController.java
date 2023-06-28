@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ll.sbb.Article.Article;
+import com.ll.sbb.Article.ArticleService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,7 +48,7 @@ public class ArticleController {
     public String articleDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Article article = this.articleService.getArticle(id);
         boolean checkedLike = false;
-
+        this.articleService.viewCountUp(article);
         if (principal != null) {
             SiteUser siteUser = this.userService.getUser(principal.getName());
             for (SiteUser voter : article.getVoter()) {
@@ -216,6 +218,7 @@ public class ArticleController {
             return "article_form";
         }
         SiteUser siteUser = this.userService.getUser(principal.getName());
+
         this.articleService.create(articleForm, siteUser, files);
         return "redirect:/article/list";
     }

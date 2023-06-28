@@ -107,7 +107,9 @@ public class AdminController {
     @GetMapping("/admin")
     private String admin(Model model) {
         List<SiteUser> adminList = this.userService.getUserByUserRole(UserRole.ADMIN);
+        List<SiteUser> userList = this.userService.getAll();
         model.addAttribute("adminList", adminList);
+        model.addAttribute("userList", userList);
         return "/admin";
     }
 

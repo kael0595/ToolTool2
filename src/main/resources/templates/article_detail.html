@@ -226,14 +226,14 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 
-    /<![CDATA[/
+    /*<![CDATA[*/
     var likeCount = [[${#lists.size(article.voter)}]]
     var articleId = [[${article.id}]]
     var header = $("meta[name='_csrf_header']").attr('content');
     var token = $("meta[name='_csrf']").attr('content');
 
     var checkedLike = [[${checkedLike}]]
-
+    /*]]>*/
    if (checkedLike) {
     $('.fa-thumbs-up').removeClass('fa-regular')
     $('fa-thumbs-up').addClass('fa-solid')

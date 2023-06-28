@@ -187,6 +187,7 @@ public class MarketController {
     public String marketDetail(Principal principal, Model model, @PathVariable("id") Integer id) {
         Market market = this.marketService.getMarket(id);
         boolean checkedLike = false;
+        this.marketService.viewCountUp(market);
 
         if (principal != null) {
             SiteUser siteUser = this.userService.getUser(principal.getName());

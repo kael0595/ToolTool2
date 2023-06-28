@@ -206,7 +206,7 @@ public class MarketSortController {
                 model.addAttribute("paging", paging);
                 model.addAttribute("kw", kw);
             }
-        }else if (sort.equals("voterSort")) {
+        } else if (sort.equals("voterSort")) {
             sortKey = "likeCount";
             if (price == 15) {
                 min = 0;
@@ -492,7 +492,7 @@ public class MarketSortController {
                 model.addAttribute("paging", paging);
                 model.addAttribute("kw", kw);
             }
-        }else if (sort.equals("voterSort")) {
+        } else if (sort.equals("voterSort")) {
             sortKey = "likeCount";
             if (category.equals("season_all")) {
                 Page<Market> paging = this.marketService.getSeasonRowList(page, kw, "사계", sortKey);

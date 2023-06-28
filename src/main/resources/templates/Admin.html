@@ -68,14 +68,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${userList}" th:if="${user.userRole.value == 'ROLE_ADMIN'}">
-                <td class="number" th:text="${user.id}"></td>
-                <td class="id" th:text="${user.username}"></td>
-                <td class="nickname" th:text="${user.nickname}"></td>
-                <td class="email" th:text="${user.email}"></td>
+            <tr th:each="admin : ${adminList}">
+                <td class="number" th:text="${userList.id}"></td>
+                <td class="id" th:text="${userList.username}"></td>
+                <td class="nickname" th:text="${userList.nickname}"></td>
+                <td class="email" th:text="${userList.email}"></td>
                 <td class="checkbox administrator">
                     <form th:action="@{/admin/minusAdminRole}" method="post">
-                        <input type="hidden" name="id" th:value="${user.id}"/>
+                        <input type="hidden" name="id" th:value="${userList.id}"/>
                         <button type="submit" class="adminbutton">관리자 회수</button>
                     </form>
                 </td>

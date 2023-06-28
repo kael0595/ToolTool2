@@ -45,93 +45,50 @@
       var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
 
       // Create an AJAX request to fetch updated content
-$('.pagination-2 a.page-link').on('click', function(e) {
-  e.preventDefault(); // Prevent default link behavior
+      $.ajax({
+        url: pageUrl,
+        method: 'GET',
+        success: function(response) {
+          // Extract the updated content from the response
+          var updatedContent = $(response).find('.market_board_table').html();
 
-  var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
+          // Replace the existing table content
+          $('.market_board_table').html(updatedContent);
+        },
+        error: function() {
+          // Handle error when AJAX request fails
+          console.log('An error occurred while fetching the content.');
+        }
+      });
+    });
 
-  // Create an AJAX request to fetch updated content
-  $.ajax({
-    url: pageUrl,
-    method: 'GET',
-    success: function(response) {
-      // Extract the updated content from the response
-      var updatedContent = $(response).find('.market_board_table').html();
+    // Handle profile picture change
+    $(".change-icon").click(function() {
+      // Create a "file" type input element
+      var inputFile = $('<input type="file">');
 
-      // Replace the existing table content
-      $('.market_board_table').html(updatedContent);
-    },
-    error: function() {
-      // Handle error when AJAX request fails
-      console.log('An error occurred while fetching the content.');
-    }
-  });
-});
+      // Trigger click event on the input element
+      inputFile.trigger("click");
 
-// Handle profile picture change
-$(".change-icon").click(function() {
-  // "file" 타입의 인풋 엘리먼트 생성
-  var inputFile = $('<input type="file">');
+      // When a file is selected
+      inputFile.change(function() {
+        var file = this.files[0];
 
-  // 인풋 엘리먼트에 클릭 이벤트 트리거
-  inputFile.trigger("click");
-});
+        if (file) {
+          var reader = new FileReader();
 
-// 파일이 선택되었을 때
-$(document).on('change', 'input[type="file"]', function() {
-  var file = this.files[0];
+          // Read the file as a data URL
+          reader.readAsDataURL(file);
 
-  if (file) {
-    var reader = new FileReader();
+          // When the file is loaded
+          reader.onload = function(e) {
+            // Update the profile image with the selected file
+            $(".profile_img_1").attr("src", e.target.result);
+          };
+        }
+      });
+    });
 
-    // 파일을 데이터 URL로 읽기
-    reader.readAsDataURL(file);
-
-    // 파일이 로드되었을 때
-    reader.onload = function(e) {
-      // 선택된 파일로 프로필 이미지 업데이트
-      $(".profile_img_1").attr("src", e.target.result);
-
-      // 파일을 업로드하고 프로필 사진을 업데이트하기 위해 changePhoto 함수 호출
-      changePhoto(file);
-    };
-  }
-});
-
-// 파일을 업로드하고 프로필 사진을 업데이트하기 위한 AJAX 요청
-function changePhoto(file) {
-  // 새로운 FormData 객체 생성
-  var formData = new FormData();
-  formData.append('file', file);
-
-  // 메타 태그에서 CSRF 토큰 값 가져오기
-  var csrfToken = $("meta[name='_csrf']").attr("content");
-  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-
-  // 요청 헤더에 CSRF 토큰 추가
-  $.ajaxSetup({
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader(csrfHeader, csrfToken);
-    }
-  });
-
-  // 파일을 업로드하기 위한 AJAX 요청
-  $.ajax({
-    url: "/mypage/changePhoto",
-    method: "POST",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function(response) {
-      alert("프로필 사진 변경 성공!");
-      // 성공 시 추가적인 로직 또는 UI 업데이트
-    },
-    error: function(xhr, status, error) {
-      alert("프로필 사진 변경 실패!");
-      // 실패 시 추가적인 에러 처리 또는 UI 업데이트
-    }
-  });
-}
     // Handle menu box navigation
     $(".menu_box a").click(function(e) {
       e.preventDefault();
@@ -183,14 +140,6 @@ function changePhoto(file) {
       });
     });
   });
-
-
-
-
-
-
-
-
 
 
 
@@ -428,24 +377,26 @@ function changePhoto(file) {
 
             <div id="menu4" class="page menu_pick">
                 <div class="title">찜 목록</div>
-                <table>
-                    <tr>
-                        <th class="number">게시글 번호</th>
-                        <th>제목</th>
-                        <th class="date">작성일</th>
-                    </tr>
-                    <tr>
-                        <td class="number">1</td>
-                        <td class="content"><a href="#">여름 휴가 계획</a></td>
-                        <td class="date">2023-06-01</td>
-                    </tr>
-                </table>
+                <div class="review_board_page_3">
+                    <table class="market_board_table">
+                        <tr>
+                            <th class="number">게시글 번호</th>
+                            <th>제목</th>
+                            <th class="date">작성일</th>
+                        </tr>
+                        <tr th:each="market, stat : ${marketVoterPaging}" th:if="${stat.index < 9}">
+                            <td class="number" th:text="${market.id}"></td>
+                            <td class="content"><a th:href="@{|/market/detail/${market.id}|}"
+                                                   th:text="${market.subject}"></a></td>
+                            <td class="date" th:text="${market.createDate}"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!--footer-->
-<footer th:replace="layout/footer.html"></footer>
+    <!--footer-->
+    <footer th:replace="layout/footer.html"></footer>
 </div>
 <script>
   $(document).ready(function() {
@@ -577,7 +528,60 @@ function changePhoto(file) {
   });
 
 
+$("#save-password-btn").click(function() {
+        var newPassword = $("#current-password").val();
+        var confirmPassword = $("#confirm-password").val();
 
+        // 비밀번호와 비밀번호 확인이 일치하는지 확인
+        if (newPassword === confirmPassword) {
+            // AJAX 요청 보내기
+            $.ajax({
+                url: "/mypage/changePassword",
+                type: "POST",
+                data: {
+                    newpassword: newPassword,
+                    newpasswordcf: confirmPassword
+                },
+                success: function(response) {
+                    // 비밀번호 변경 성공 시 페이지 리로드
+                    window.location.href = response;
+                },
+                error: function(xhr, status, error) {
+                    // 비밀번호 변경 실패 시 메시지 출력
+                    console.log("비밀번호 변경 실패: " + error);
+                }
+            });
+        } else {
+            // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
+            console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+        }
+    });
+});
+
+$("#change-nickname-btn").click(function() {
+        $("#nickname").removeAttr("disabled");
+        $(this).attr("disabled", true);
+        $("#save-nickname-btn").removeAttr("disabled");
+    });
+
+    $("#save-nickname-btn").click(function() {
+        var newNickname = $("#nickname").val();
+
+        $.ajax({
+            url: "/mypage/changeNickname",
+            type: "POST",
+            data: {
+                newnickname: newNickname
+            },
+            success: function(response) {
+                window.location.href = response;
+            },
+            error: function(xhr, status, error) {
+                console.log("닉네임 변경 실패: " + error);
+            }
+        });
+    });
+});
 
 
 
