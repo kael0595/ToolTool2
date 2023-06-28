@@ -81,7 +81,7 @@
                          class="rm_content_main_img review_main_img review_main_img_1"/>
                 </a>
                 <div class="text_box .text_box_1">
-                    <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
+                    <span>댓글수 <span th:if="${#lists.size(article.answerList) >= 0}"
                                     th:text="${#lists.size(article.answerList)}">
                                         </span></span>
                     <span>추천수 <span th:if="${#lists.size(article.voter) >= 0}"
@@ -116,7 +116,7 @@
                     <span>댓글수 <span th:if="${#lists.size(market.marketAnswerList) >= 0}"
                                     th:text="${#lists.size(market.marketAnswerList)}"></span>
                         </span>
-                    <span>관심수 <span>0</span></span>
+                    <span>찜 수 <span>0</span></span>
                 </div>
                 <div class="text_box_name text_box_name_1">
                     <a th:href="@{|/market/detail/${market.id}|}" th:text="${market.subject}"></a>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/NoticeDetail.css"/>
-    <link rel="stylesheet" href="/layout/navbar.css"/>
+    <link rel="stylesheet" href="/layout/navbar_no.css"/>
     <link rel="stylesheet" href="/layout/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>공지사항</title>
 </head>
 <body>
-<div th:replace="layout/navbar.html"></div>
+<div th:replace="layout/navbar_no.html"></div>
 <div class="container">
     <span>공지사항</span>
     <div class="notice">
@@ -20,29 +20,21 @@
                     <th>제 목</th>
                     <td th:text="${notice.subject}"></td>
                 </tr>
+
                 <tr>
-                    <td>작 성 자</td>
-                    <td th:text="${notice.author}"></td>
-                </tr>
-                <tr>
-                    <td>작 성 일</td>
+                    <th>작 성 일</th>
                     <td th:text="${notice.createDate}"></td>
                 </tr>
             </table>
         </div>
-        <div class="underline"></div>
+        <div class="underline-1"></div>
         <div class="notice-content">
             <span th:text="${notice.content}"></span>
         </div>
+        <div class="underline-2"></div>
         <div class="button">
-            <div>
-                <button type="button"><a href="#">이전글</a></button>
-            </div>
-            <div>
-                <button type="button"><a href="#">다음글</a></button>
-            </div>
             <div class="button_3">
-                <button type="button"><a href="#">목록</a></button>
+                <button type="button"><a th:href="@{/notice/list}">목록</a></button>
             </div>
         </div>
     </div>

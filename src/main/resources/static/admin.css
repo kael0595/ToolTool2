@@ -9,10 +9,11 @@ nav {
 }
 span,
 p,
-a {
+a, h1 {
   font-family: "Noto Sans KR", sans-serif;
-  color: #73703f;
+  color: black;
 }
+
 button {
   border: 0;
   background-color: transparent;

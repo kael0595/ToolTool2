@@ -9,9 +9,9 @@ nav {
 }
 span,
 p,
-a {
+a, h1 {
   font-family: "Noto Sans KR", sans-serif;
-  color: #73703f;
+  color: black;
 }
 button {
   border: 0;
@@ -88,22 +88,25 @@ header > .menu > .admin_menu > ul > li > button:hover {
   background-color: #ff6c00;
 }
 .content-section .checkbox {
-  width: 10%;
+  width: 5%;
 }
 .content-section .number {
-  width: 10%;
+  width: 5%;
 }
 .content-section .nickname {
-  width: 20%;
+  width: 15%;
 }
 .content-section .id{
-  width: 20%;
+  width: 15%;
 }
 .content-section .email {
-  width: 25%;
+  width: 20%;
+}
+.content-section .Role {
+  width: 20%;
 }
 .content-section .administrator {
-  width: 15%;
+  width: 20%;
 }
 table button {
   background-color: black;

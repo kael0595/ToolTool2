@@ -173,7 +173,7 @@
                             <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
                         </div>
                         <div class="review_board_text_box">
-                            <span>답글수 <span th:if="${#lists.size(article.answerList) >= 0}"
+                            <span>댓글수 <span th:if="${#lists.size(article.answerList) >= 0}"
                                             th:text="${#lists.size(article.answerList)}">
                                         </span></span>
                             <span>&nbsp;&nbsp;</span>

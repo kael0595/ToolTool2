@@ -7,8 +7,6 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" href="/Admin.css"/>
-    <link rel="stylesheet" href="/layout/navbar.css"/>
-    <link rel="stylesheet" href="/layout/footer.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>AdminPage</title>
 </head>
@@ -40,7 +38,7 @@
             <ul>
                 <li>
                     <button type="button">
-                        <a href="">메인페이지버튼</a>
+                        <a th:href="@{/}">메인페이지버튼</a>
                     </button>
                 </li>
             </ul>
