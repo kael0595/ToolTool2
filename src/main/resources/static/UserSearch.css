@@ -3,16 +3,6 @@ body {
   line-height: 1.6;
 }
 
-ol,
-ul,
-li {
-  list-style: none;
-}
-
-img {
-  vertical-align: top;
-}
-
 input[type="radio"],
 input[type="checkbox"] {
   vertical-align: middle;
@@ -43,11 +33,6 @@ a:focus {
 /* ----------------------------------- */
 /* 공통 */
 /* ----------------------------------- */
-
-body {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #73703f;
-}
 
 .hidden {
   visibility: hidden;
@@ -93,92 +78,6 @@ h1.subtitle {
 /* ----------------------------------- */
 /* 네비바 스타일 */
 /* ----------------------------------- */
-
-div,
-nav {
-  box-sizing: border-box;
-}
-
-span,
-p {
-  font-family: "NanumBarunGothic", sans-serif;
-  color: #6d6c6c;
-}
-
-button {
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-body,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.top__bar > .top__bar_menu {
-  width: 1320px;
-  height: 100px;
-  margin: 0 auto;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.top__bar > .top__bar_menu > .logo_box {
-  flex-grow: 1;
-}
-
-.top__bar > .top__bar_menu > div > ul > li > a > button > img {
-  width: 300px;
-  height: 74px;
-}
-
-.top__bar > .top__bar_menu > .main_menu {
-  display: flex;
-  flex-grow: 4;
-}
-
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul {
-  display: flex;
-}
-
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li:hover > a > span {
-  color: #a5a773;
-}
-
-.top__bar > .top__bar_menu > .main_menu > .main_menu_ul > li > a > span {
-  font-size: 30px;
-  line-height: 32px;
-  margin: 20px;
-}
-
-.top__bar > .top__bar_menu > .signLine {
-  flex-grow: 2;
-  height: 74px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
-
-.top__bar > .top__bar_menu > .signLine > div {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.top__bar > .top__bar_menu > .signLine > div > a > button > img {
-  width: 60px;
-  height: 60px;
-}
-
 /* ----------------------------------- */
 /* 중앙 */
 /* ----------------------------------- */
@@ -199,8 +98,8 @@ form > div {
 .findment {
   font-size: 10px;
   text-align: center;
-  color: #73703f;
   margin-top: 0;
+  color : black;
 }
 .form-control {
   width: 100%;
@@ -208,22 +107,20 @@ form > div {
   margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #73703f;
+  border : 1px solid;
 }
 .btn-primary {
   width: 100%;
   height: 60px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #73703f;
+  background: black;
   color: white;
   border-radius: 10px;
   font-size: 20px;
 }
 .btn-primary:hover {
-  background: white;
-  color: #73703f;
-  border: 1px solid #73703f;
+  background: #ff6c00;
 }
 .alert-danger {
   text-align: center;

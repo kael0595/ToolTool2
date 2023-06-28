@@ -22,7 +22,7 @@
         <div class="admin_menu">
             <ul>
                 <li>
-                    <a th:href="@{/admin/notice}" class="menu-link" data-section="notice-section">공지사항 관리</a>
+                    <a th:href="@{/admin/}" class="menu-link" data-section="notice-section">공지사항 관리</a>
                 </li>
                 <li>
                     <a th:href="@{/admin/review}" class="menu-link" data-section="review-section">리뷰 글 관리</a>
@@ -69,13 +69,13 @@
             </thead>
             <tbody>
             <tr th:each="admin : ${adminList}">
-                <td class="number" th:text="${userList.id}"></td>
-                <td class="id" th:text="${userList.username}"></td>
-                <td class="nickname" th:text="${userList.nickname}"></td>
-                <td class="email" th:text="${userList.email}"></td>
+                <td class="number" th:text="${admin.id}"></td>
+                <td class="id" th:text="${admin.username}"></td>
+                <td class="nickname" th:text="${admin.nickname}"></td>
+                <td class="email" th:text="${admin.email}"></td>
                 <td class="checkbox administrator">
                     <form th:action="@{/admin/minusAdminRole}" method="post">
-                        <input type="hidden" name="id" th:value="${userList.id}"/>
+                        <input type="hidden" name="id" th:value="${admin.id}"/> <!-- 수정된 부분 -->
                         <button type="submit" class="adminbutton">관리자 회수</button>
                     </form>
                 </td>

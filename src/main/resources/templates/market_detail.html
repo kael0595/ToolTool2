@@ -22,25 +22,25 @@
 <div class="stickyBar">
 
     <a th:href="@{/market/type_tent/sort}">
-        <i class="fa-solid fa-campground" style="color: #000;"></i>
+        <i class="fa-solid fa-campground img" style="color: #000;"></i>
 
     </a> <!— 텐트 —>
     <hr>
     <a th:href="@{/market/type_table/sort}">
         <!— 테이블 —>
-        <i class="fa-solid fa-table" style="color: #000;"></i>
+        <i class="fa-solid fa-table img" style="color: #000;"></i>
     </a>
     <hr>
     <a href="http://localhost:8080/market/list">
-        <i class="fa-solid fa-chair" style="color: #000;"></i>
+        <i class="fa-solid fa-chair img" style="color: #000;"></i>
     </a> <!— 의자 —>
     <hr>
     <a href="http://localhost:8080/market/list">
-        <i class="fa-solid fa-utensils" style="color: #000;"></i>
+        <i class="fa-solid fa-utensils img" style="color: #000;"></i>
     </a> <!— 조리도구 —>
     <hr>
     <a href="http://localhost:8080/market/list">
-        <i class="fa-solid fa-lightbulb" style="color: #000;"></i>
+        <i class="fa-solid fa-lightbulb img" style="color: #000;"></i>
     </a><!— 랜턴 —>
 </div>
 <!—스티키 플로팅 배너 끝—>
@@ -167,6 +167,21 @@
                                         </ul>
                                     </div>
                                     <!--  댓글내용 끝  -->
+                                    <div class="formmodifybox">
+                                        <form th:action="@{|/marketAnswer/modify/${MarketAnswer.id}|}"
+                                              th:object="${marketAnswerForm}"
+                                              method="post" class="formboxform">
+
+                                        <textarea name="content" id="content" rows="10"
+                                                  placeholder="수정할 내용을 작성해주세요"></textarea>
+                                            <button class="reply_summit" type="submit" value="답변수정">답변수정</button>
+                                            <button class="reply_summit_exit" type="button" value="취소"
+                                                    onclick="hideFormModifyBox(event, this)">수정취소
+                                            </button>
+
+                                        </form>
+
+                                    </div>
                                     <!-- 댓글 하단바   -->
                                     <div class="answerCreateBox">
                                         <div class="answerCreateDate">
@@ -175,10 +190,18 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a href="#" class="answermodify_btn">
+                                            <a href="#" sec:authorize="isAuthenticated()"
+                                               class="modify btn btn-sm btn-outline-secondary"
+                                               th:if="${MarketAnswer.author != null and #authentication.getPrincipal().getUsername() == MarketAnswer.author.username}"
+                                               th:text="수정" onclick="showFormModifyBox(event, this)">
                                                 <button type="button" class="answermodify_btn">수정</button>
                                             </a>
-                                            <a href="#" class="answerremove_btn">
+                                            <a href="javascript:void(0);"
+                                               th:data-uri="@{|/marketAnswer/delete/${MarketAnswer.id}|}"
+                                               class="delete btn btn-sm btn-outline-secondary"
+                                               sec:authorize="isAuthenticated()"
+                                               th:if="${MarketAnswer.author != null and #authentication.getPrincipal().getUsername() == MarketAnswer.author.username}"
+                                               th:text="삭제">
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
@@ -186,12 +209,7 @@
                                     </div>
                                     <!-- 댓글 하단바 끝   -->
                                 </div>
-                                <div>
-                                    <ul>
-                                        <li th:each="answer : ${market.marketAnswerList}"
-                                            th:text="${answer.content}"></li>
-                                    </ul>
-                                </div>
+
                                 <div class="formbox">
                                     <form th:action="@{|/marketAnswer/create/${market.id}|}"
                                           th:object="${marketAnswerForm}" method="post" class="formboxform">
@@ -276,8 +294,27 @@ Array.from(delete_elements).forEach(function(element) {
 
 
 
+</script>
 
+<script>
+  function showFormModifyBox(event, button) {
+    event.preventDefault(); // 페이지 새로고침 방지
 
+    var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+    $(formModifyBox).css('display', 'block');
+
+    var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+    $(answerCreateBox).css('display', 'none');
+  }
+  function hideFormModifyBox(event, button) {
+  event.preventDefault(); // 이벤트의 기본 동작 방지
+
+  var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+  $(formModifyBox).css('display', 'none');
+
+  var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+  $(answerCreateBox).css('display', 'block');
+}
 
 
 </script>

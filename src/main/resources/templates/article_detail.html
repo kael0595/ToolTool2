@@ -23,25 +23,25 @@
 <div class="stickyBar">
 
     <a th:href="@{/article/type_tent/sort}">
-        <i class="fa-solid fa-campground" style="color: #000;"></i>
+        <i class="fa-solid fa-campground img" style="color: #000;"></i>
 
     </a> <!— 텐트 —>
     <hr>
     <a th:href="@{/article/type_table/sort}">
         <!— 테이블 —>
-        <i class="fa-solid fa-table" style="color: #000;"></i>
+        <i class="fa-solid fa-table img" style="color: #000;"></i>
     </a>
     <hr>
     <a href="http://localhost:8080/article/list">
-        <i class="fa-solid fa-chair" style="color: #000;"></i>
+        <i class="fa-solid fa-chair img" style="color: #000;"></i>
     </a> <!— 의자 —>
     <hr>
     <a href="http://localhost:8080/article/list">
-        <i class="fa-solid fa-utensils" style="color: #000;"></i>
+        <i class="fa-solid fa-utensils img" style="color: #000;"></i>
     </a> <!— 조리도구 —>
     <hr>
     <a href="http://localhost:8080/article/list">
-        <i class="fa-solid fa-lightbulb" style="color: #000;"></i>
+        <i class="fa-solid fa-lightbulb img" style="color: #000;"></i>
     </a><!— 랜턴 —>
 </div>
 <!—스티키 플로팅 배너 끝—>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="article_title">
-                <p th:text="${article.subject}" class="article_title">헬리녹스 의자리뷰</p>
+                <p th:text="${article.subject}" class="article_title"></p>
             </div>
             <hr>
             <div class="userInfoform">
@@ -99,21 +99,21 @@
         <div class="gradeOrhashtag">
             <div class="grade">
                 <span class="user_grade">사용자 총 평점</span>
-                <strong th:text="${article.starScore}" class="user_grade_point">5</strong>
+                <strong th:text="${article.starScore}" class="user_grade_point"></strong>
             </div>
             <br>
             <div class="grade">
                 <span class="user_grade">구입가격</span>
-                <strong th:text="${article.Price}" class="user_grade_point">000,000</strong>
+                <strong th:text="${article.Price}" class="user_grade_point"></strong>
                 <span>원</span>
             </div>
 
             <div class="hashtag">
                 <a class="hashtaglink" href="#">
-                    <button th:text="${article.type}" type="button" class="category1">의자</button>
+                    <button th:text="${article.type}" type="button" class="category1"></button>
                 </a>
                 <a class="hashtaglink" href="#">
-                    <button th:text="${article.season}" type="button" class="category1">사계절</button>
+                    <button th:text="${article.season}" type="button" class="category1"></button>
                 </a>
             </div>
 
@@ -164,6 +164,20 @@
                                         </ul>
                                     </div>
                                     <!--  댓글내용 끝  -->
+                                    <div class="formmodifybox">
+                                        <form th:action="@{|/answer/modify/${answer.id}|}" th:object="${answerForm}"
+                                              method="post" class="formboxform">
+
+                                        <textarea name="content" id="content" rows="10"
+                                                  placeholder="수정할 내용을 작성해주세요"></textarea>
+                                            <button class="reply_summit" type="submit" value="답변수정">답변수정</button>
+                                            <button class="reply_summit_exit" type="button" value="취소"
+                                                    onclick="hideFormModifyBox(event, this)">수정취소
+                                            </button>
+
+                                        </form>
+
+                                    </div>
                                     <!-- 댓글 하단바   -->
                                     <div class="answerCreateBox">
                                         <div class="answerCreateDate">
@@ -172,17 +186,17 @@
                                             <!--  수정/삭제버튼 -->
                                         </div>
                                         <div class="answerModifyRemove">
-                                            <a th:href="@{|/answer/modify/${answer.id}|}"
-                                               sec:authorize="isAuthenticated()"
+                                            <a href="#" sec:authorize="isAuthenticated()"
+                                               class="modify btn btn-sm btn-outline-secondary"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                               class="answermodify_btn">
+                                               th:text="수정" onclick="showFormModifyBox(event, this)">
                                                 <button type="button" class="answermodify_btn">수정</button>
                                             </a>
                                             <a href="javascript:void(0);" th:data-uri="@{|/answer/delete/${answer.id}|}"
                                                class="delete btn btn-sm btn-outline-secondary"
                                                sec:authorize="isAuthenticated()"
                                                th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
-                                            >
+                                               th:text="삭제">
                                                 <button type="button" class="answerremove_btn">삭제</button>
                                             </a>
                                             <!--  수정/삭제버튼 끝 -->
@@ -280,6 +294,35 @@ Array.from(delete_elements).forEach(function(element) {
 
 
 
+
 </script>
+
+<script>
+  function showFormModifyBox(event, button) {
+    event.preventDefault(); // 페이지 새로고침 방지
+
+    var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+    $(formModifyBox).css('display', 'block');
+
+    var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+    $(answerCreateBox).css('display', 'none');
+  }
+  function hideFormModifyBox(event, button) {
+  event.preventDefault(); // 이벤트의 기본 동작 방지
+
+  var formModifyBox = $(button).closest('.answerbox').find('.formmodifybox');
+  $(formModifyBox).css('display', 'none');
+
+  var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
+  $(answerCreateBox).css('display', 'block');
+}
+
+
+
+
+
+
+</script>
+
 </body>
 </html>

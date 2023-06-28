@@ -13,14 +13,15 @@
 <body>
 <!--top-bar라인-->
 <div th:replace="layout/navbar_no.html"></div>
-<!--아래부터 페이지 -->
+<!--아래부터 페이지-->
 <div layout:fragment="content" class="container my-3">
 
     <form th:action="@{/user/login}" class="signupform">
         <div><h1 class="signup">Sign Up</h1>
+            <hr>
             <label><input type="checkbox" name="color" value="all" class="allcheck"> 전체 동의하기</label>
             <br>
-            <p>아래 약관을 모두 동의합니다.</p>
+            <p class="agree">아래 약관을 모두 동의합니다.</p>
             <label><input type="checkbox" name="color" value="1" class="check">[필수] 툴툴 이용약관</label>
             <br>
             <div class="userdata">제 1 조 (목적)
@@ -74,7 +75,7 @@
                 없습니다.
             </div>
             <a th:href="@{/user/signup}">
-                <button type="button" class="btn-primary">NEXT</button>
+                <button type="button" class="btnPrimary">NEXT</button>
             </a>
         </div>
     </form>
@@ -98,10 +99,10 @@
     });
   });
 
+
 </script>
 </body>
 </html>
-
 
 
 

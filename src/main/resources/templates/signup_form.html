@@ -73,17 +73,10 @@
                                 <label for="mailKey">이메일 인증번호</label>
                                 <input type="text" th:field="*{mailKey}" name="emailToken" id="mailKey"
                                        class="emailToken">
-                                <button class="emailCF" type="emailCF" value="이메일 인증번호 보내기" id="emailCF1"
-                                        onclick="EmailConfirm()">인증번호
-                                    확인
-                                </button>
                                 <span class="error"></span>
                             </div>
-
-
                             <div class="CTA">
-                                <input type="submit" value="Signup Now" id="submit">
-                                <a href="#" class="switch">로그인하기</a>
+                                <input type="submit" value="Signup Now" id="submit" onclick="EmailConfirm()">
                             </div>
                         </div>
                     </div>
@@ -98,35 +91,16 @@
     function sendEmailConfirmation() {
         // 이메일 주소 가져오기
         var email = $("#email").val();
-        var mailKey = $("#mailKey").val();
         // AJAX 요청 보내기
         $.ajax({
-            url: "http://localhost:8080/mailCheck", // 이메일 인증번호를 보낼 서버의 URL
+            url: "/mailCheck", // 이메일 인증번호를 보낼 서버의 URL
             method: "GET",
-            data: {email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
+            data: {email: email}, // 이메일 주소를 서버로 전달
             success: function(response) {
                 alert("이메일 인증번호를 전송했습니다.");
             },
             error: function(xhr, status, error) {
                 alert("이메일 인증번호 전송에 실패했습니다. 다시 시도해주세요.");
-            }
-        });
-    }
-
-function EmailConfirm() {
-        // 이메일 주소 가져오기
-        var email = $("#email").val();
-        var mailKey = $("#mailKey").val();
-        // AJAX 요청 보내기
-        $.ajax({
-            url: "http://localhost:8080//mailconfirm", // 이메일 인증번호를 보낼 서버의 URL
-            method: "GET",
-            data: {email: email, mailKey: mailKey}, // 이메일 주소를 서버로 전달
-            success: function(response) {
-                alert("인증 성공!");
-            },
-            error: function(xhr, status, error) {
-                alert("인증 실패!");
             }
         });
     }

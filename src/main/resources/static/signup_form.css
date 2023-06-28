@@ -124,7 +124,6 @@ a {
   font-size: 12px;
   text-transform: uppercase;
   padding: 8px 20px;
-  background: #ff6c00;
   color: #fff;
   border-radius: 30px;
   margin-right: 20px;
@@ -146,9 +145,15 @@ a {
   margin-top:13px;
   margin-bottom:20px;
 }
+.signupForm .CTA{
+  text-align: right;
+}
+.CTA input[type="submit"] {
+    background-color: black;
+}
 
-.signupForm .CTA a.switch {
-  font-size: 13px;
+.CTA input[type="submit"]:hover {
+    background-color: #ff6c00;
 }
 hr{
   border: 2px solid #ff6c00;

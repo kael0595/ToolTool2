@@ -1,29 +1,33 @@
-/*공통*/
-
-
 .signup{
   text-align:center;
 }
 
-.btn-primary{
+.btnPrimary{
   font-size:20px;
-  width:80%;
+  width:100px;
   height:50px;
   margin-top:20px;
   margin-bottom:20px;
-  background: #a5a773;
+  background: #000;
   color:white;
   border-radius:10px;
   border:none;
   position:absolute;
-  left:10%;
-
+  left:85%;
 }
-.btn-primary:hover{
-  background: white;
-  color:#a5a773;
-  border:1px solid #a5a773;
-  cursor:pointer;
+
+.btnPrimary:hover{
+   font-size:20px;
+    width:100px;
+    height:50px;
+    margin-top:20px;
+    margin-bottom:20px;
+    background: #ff6c00;
+    color:white;
+    border-radius:10px;
+    border:none;
+    position:absolute;
+    left:85%;
 }
 
 .signupform{
@@ -33,6 +37,7 @@
   top:20%;
   left:30%;
 }
+
 label{
   display:block;
   padding-left:20px;
@@ -57,4 +62,12 @@ p{
   border:1px solid ;
   overflow-y:hidden;
   overflow-y:scroll;
+}
+
+.signup{
+ color:#000;
+}
+
+.agree{
+  color: #ff6c00;
 }

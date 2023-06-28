@@ -22,7 +22,7 @@
         <div class="admin_menu">
             <ul>
                 <li>
-                    <a th:href="@{/admin/notice}" class="menu-link" data-section="notice-section">공지사항 관리</a>
+                    <a th:href="@{/admin/}" class="menu-link" data-section="notice-section">공지사항 관리</a>
                 </li>
                 <li>
                     <a th:href="@{/admin/review}" class="menu-link" data-section="review-section">리뷰 글 관리</a>
@@ -40,14 +40,14 @@
             <ul>
                 <li>
                     <button type="button">
-                        <a href="">메인페이지버튼</a>
+                        <a th:href="@{/}">메인페이지버튼</a>
                     </button>
                 </li>
             </ul>
             <ul>
                 <li>
                     <button type="button">
-                        <a href="http://localhost:8080/user/logout">로그아웃</a>
+                        <a th:href="@{/user/logout}">로그아웃</a>
                     </button>
                 </li>
             </ul>
@@ -83,7 +83,7 @@
                             th:text="${market.subject}"
                     ></a>
                 </td>
-                <td class="nickname" th:text="${market.author}"></td>
+                <td class="nickname" th:text="${market.author.nickname}"></td>
                 <td class="date" th:text="${market.createDate}"></td>
                 <td class="inquiry" th:text="${market.viewCount}"></td>
             </tr>

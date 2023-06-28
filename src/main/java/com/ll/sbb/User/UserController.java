@@ -49,7 +49,6 @@ public class UserController {
 
     @GetMapping("/user/signup")
     private String signup(UserCreateForm userCreateForm) {
-//        return "mailCheck";
         return "signup_form";
     }
 
@@ -65,9 +64,10 @@ public class UserController {
             return "signup_form";
         }
         try {
-            UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.ADMIN : UserRole.USER;
+            UserRole role = userCreateForm.getUsername().startsWith("admin") ? UserRole.SUPER_ADMIN : UserRole.USER;
             userService.create(userCreateForm.getUsername(),
                     userCreateForm.getPassword1(), userCreateForm.getEmail(), userCreateForm.getNickname(), userCreateForm.getMailKey(), role);
+            userService.emailConfirm(userCreateForm.getEmail(), userCreateForm.getMailKey());
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
@@ -97,37 +97,6 @@ public class UserController {
         } else {
             return "login_form";
         }
-    }
-
-
-    @GetMapping("/login/oauth2/code/kakao")
-    public @ResponseBody String kakaoCallback(String code) {
-
-        //POST방식으로 key=value 데이터 요청(카카오쪽으로)
-        //Retrofit2
-        //OkHttp
-        //RestTemplate
-        RestTemplate rt = new RestTemplate();
-
-        //HttpHeader 오브젝트 생성
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
-        //HttpBody 오브젝트 생성
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("grant-type", "authorization_code");
-        params.add("client_key", "52a81a61b5875bfb11fea3e2e2aa2450");
-        params.add("redirect_url", "http://localhost:8080/login/oauth2/code/kakao");
-        params.add("code", code);
-
-        //HttpHeader와 HttpBody를 하나의 오브젝트에 담기
-        HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
-                new HttpEntity<>(params, headers);
-
-        //Http 요청하기 - POST 방식으로 그리고 response 변수의 응답
-        ResponseEntity<String> response = rt.exchange("https://kauth.kakao.com/oauth/token"
-                , HttpMethod.POST, kakaoTokenRequest, String.class);
-        return "카카오 토큰 요청 완료 : 토큰에 대한 응답 : " + response;
     }
 
     @GetMapping("/user/logout")

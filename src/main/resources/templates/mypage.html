@@ -143,6 +143,7 @@
 
 
 
+
     </script>
 </head>
 <body>
@@ -396,8 +397,8 @@
         </div>
     </div>
     <!--footer-->
-    <footer th:replace="layout/footer.html"></footer>
 </div>
+<footer th:replace="layout/footer.html"></footer>
 <script>
   $(document).ready(function() {
     // Handle click event for '.pagination-1' page links
@@ -583,11 +584,39 @@ $("#change-nickname-btn").click(function() {
     });
 });
 
+</script>
+<script>
+  $(document).ready(function() {
+    // "비밀번호 변경" 버튼 클릭 시
+    $("#save-password-btn").click(function() {
+        var newPassword = $("#current-password").val();
+        var confirmPassword = $("#confirm-password").val();
 
-
-
-
-
+        // 비밀번호와 비밀번호 확인이 일치하는지 확인
+        if (newPassword === confirmPassword) {
+            // AJAX 요청 보내기
+            $.ajax({
+                url: "/mypage/changePassword",
+                type: "POST",
+                data: {
+                    newpassword: newPassword,
+                    newpasswordcf: confirmPassword
+                },
+                success: function(response) {
+                    // 비밀번호 변경 성공 시 페이지 리로드
+                    window.location.href = response;
+                },
+                error: function(xhr, status, error) {
+                    // 비밀번호 변경 실패 시 메시지 출력
+                    console.log("비밀번호 변경 실패: " + error);
+                }
+            });
+        } else {
+            // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
+            console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+        }
+    });
+});
 
 
 </script>

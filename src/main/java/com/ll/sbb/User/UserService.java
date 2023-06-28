@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -85,13 +87,14 @@ public class UserService {
 
 
     public SiteUser getUserByEmailAndUsername(String email, String username) {
-        Optional<SiteUser> siteUserOptional = userRepository.findUserByEmailAndUsername(email, username);
+        Optional<SiteUser> siteUserOptional = userRepository.findByEmailAndUsername(email, username);
         if (siteUserOptional.isPresent()) {
             return siteUserOptional.get();
         } else {
             throw new DataNotFoundException("siteuser not found");
         }
     }
+
 
     public String generateTempPassword() {
         String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -156,5 +159,15 @@ public class UserService {
         file.transferTo(saveFile);
         user.setFilepath(filePath);
         this.userRepository.save(user);
+    }
+
+    public void emailConfirm(String email, int mailKey) throws Exception {
+        SiteUser user = this.getUserByEmail(email);
+
+        if (user != null && user.getMailKey() == mailKey) {
+            updateMailAuth(email, mailKey);
+        } else {
+            throw new Exception("유효하지 않은 이메일 또는 메일 키입니다.");
+        }
     }
 }

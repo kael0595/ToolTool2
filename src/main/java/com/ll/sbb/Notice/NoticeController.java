@@ -44,6 +44,7 @@ public class NoticeController {
     @GetMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
         Notice notice = this.noticeService.getNotice(id);
+        this.noticeService.viewCountUp(notice);
         model.addAttribute("notice", notice);
         return "NoticeDetail";
     }

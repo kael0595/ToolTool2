@@ -26,6 +26,11 @@
  .main_categori > .main_categori_menu > ul > li {
    margin-left: 30px;
  }
+
+ .main_categori > .main_categori_menu > ul > li > a:hover > span {
+     text-decoration: underline;
+ }
+
 .main_categori > .main_categori_menu > ul > li > a {
   display: flex;
   flex-direction: column;
@@ -54,25 +59,21 @@
   font-size: 25px;
   color: black;
 }
-/*review-content*/
 .rm_content {
   width: 1200px;
   margin: 0 auto;
   margin-top: 20px;
 }
 .rm_content > ul {
-  display: flex;
-  justify-content: space-between;
-}
-.rm_content .rm_content_img {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(360px, 950px));
+  gap: 100px; /* 간격 설정 */
 }
 .rm_content > ul > li > .rm_content_img > a > .rm_content_main_img {
   width: 360px;
   height: 330px;
-  margin-left: 10px;
-  margin-right: 20px;
 }
+
 /*text_box*/
 .text_box {
   display: flex;

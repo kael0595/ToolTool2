@@ -45,22 +45,25 @@
   background-color: #ff6c00;
 }
 
+.sorting-box {
+   width: 1440px;
+   margin: 0 auto;
+ }
+
 /*sorting*/
 .sorting {
-  width: 950px;
-  display: flex;
-  align-items: center;
-  margin-top: 80px;
-  margin-left: 700px;
-  margin-right: 50px;
-}
-.sorting span {
-  font-family: initial;
-  color: black;
-}
-.sorting_menu {
-  margin-left: 455px;
-}
+   width: 950px;
+   display: flex;
+   align-items: center;
+   margin-top: 80px;
+   margin-left: 420px;
+ }
+ .sorting span {
+   color: black;
+ }
+ .sorting_menu {
+   margin-left: 520px;
+ }
 .sorting_menu > ul {
   display: flex;
 }
@@ -172,16 +175,13 @@ color:black;
 }
 .review_board_page > .review_board_page_1{
   display: flex;
-  margin-top: 20px;
 }
-.review_board_page > .review_board_page_1 > ul{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content : space-around;
+.review_board_page > .review_board_page_1 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(230px, 950px));
+  gap: 50px; /* 간격 설정 */
 }
-.review_board_page > .review_board_page_1 .review_board_img {
-  position: relative;
-}
+
 .review_board_page > .review_board_page_1 .review_board_main_img {
   width: 250px;
   height: 220px;

@@ -3,16 +3,6 @@ body {
     line-height: 1.6;
 }
 
-ol,
-ul,
-li {
-    list-style: none;
-}
-
-img {
-    vertical-align: top;
-}
-
 input[type=radio],
 input[type=checkbox] {
     vertical-align: middle;
@@ -46,11 +36,6 @@ a:focus {
 /* 공통 */
 /* ----------------------------------- */
 
-body {
-    font-family: "NanumBarunGothic", sans-serif;
-    color: #000;
-}
-
 .hidden {
     visibility: hidden;
     overflow: hidden;
@@ -67,6 +52,7 @@ h1.subtitle {
     font-size: 28px;
     font-weight: 500;
     text-align: left;
+    color : black;
 }
 
 
@@ -96,36 +82,6 @@ h1.subtitle {
 /* ----------------------------------- */
 /* 네비바 스타일 */
 /* ----------------------------------- */
-
-div,
-nav {
-    box-sizing: border-box;
-}
-
-span,
-p {
-    font-family: "NanumBarunGothic", sans-serif;
-    color: #6d6c6c;
-}
-
-button {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-body,
-ul,
-li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
 
 
 /* ----------------------------------- */

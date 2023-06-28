@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<SiteUser, Integer> {
     @Query("UPDATE SiteUser u SET u.password = :password WHERE u.id = :id")
     void updateUserPassword(@Param("id") int id, @Param("password") String password);
 
-    Optional<SiteUser> findUserByEmailAndUsername(String email, String username);
+    Optional<SiteUser> findByEmailAndUsername(String email, String username);
 
     long countByEmailAndMailAuth(String email, boolean mailAuth);
 

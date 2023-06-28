@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,6 +57,7 @@ public class AdminController {
     }
 
     @PostMapping("/addAdminRole")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<String> addAdminRole(@RequestParam("id") int id) {
         // 관리자 권한을 부여할 유저를 조회합니다.
         SiteUser user = userService.getUserById(id);
@@ -70,6 +72,7 @@ public class AdminController {
     }
 
     @PostMapping("/minusAdminRole")
+    @PreAuthorize("hasAnyRole('SUPER_ADMIN')")
     public ResponseEntity<String> minusAdminRole(@RequestParam("id") int id) {
 
         SiteUser user = userService.getUserById(id);

@@ -65,4 +65,9 @@ public class NoticeService {
     public void delete(Notice notice) {
         this.noticeRepository.delete(notice);
     }
+
+    public void viewCountUp(Notice notice) {
+        notice.setViewCount(notice.getViewCount() + 1);
+        this.noticeRepository.save(notice);
+    }
 }

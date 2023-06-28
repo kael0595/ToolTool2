@@ -22,7 +22,7 @@
         <div class="admin_menu">
             <ul>
                 <li>
-                    <a th:href="@{/admin/notice}" class="menu-link" data-section="notice-section">공지사항 관리</a>
+                    <a th:href="@{/admin/}" class="menu-link" data-section="notice-section">공지사항 관리</a>
                 </li>
                 <li>
                     <a th:href="@{/admin/review}" class="menu-link" data-section="review-section">리뷰 글 관리</a>
@@ -80,7 +80,7 @@
                 <td class="title">
                     <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
                 </td>
-                <td class="nickname" th:text="${article.author}"></td>
+                <td class="nickname" th:text="${article.author.nickname}"></td>
                 <td class="date" th:text="${article.createDate}"></td>
                 <td class="inquiry" th:text="${article.viewCount}"></td>
             </tr>

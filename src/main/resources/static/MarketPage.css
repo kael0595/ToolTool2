@@ -1,4 +1,3 @@
-
 /*banner라인*/
 .banner__bar {
   width: 1280px;
@@ -175,15 +174,11 @@ color:black;
 }
 .market_board_page > .market_board_page_1 {
   display: flex;
-  margin-top: 20px;
 }
 .market_board_page > .market_board_page_1 > ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-.market_board_page > .market_board_page_1 .market_board_img {
-  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 950px));
+  gap: 50px; /* 간격 설정 */
 }
 .market_board_page > .market_board_page_1 .market_board_main_img {
   width: 250px;
