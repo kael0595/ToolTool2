@@ -76,19 +76,19 @@ header > .menu > .admin_menu > ul > li > button:hover {
   text-align: left;
 }
 .content-section .number {
+  width: 5%;
+}
+.content-section .title {
+  width: 60%;
+}
+.content-section .name {
+  width: 20%;
+}
+.content-section .inquiry {
+  width: 5%;
+}
+.content-section .button_menu {
   width: 10%;
-}
-.content-section .nickname {
-  width: 20%;
-}
-.content-section .id{
-  width: 20%;
-}
-.content-section .email {
-  width: 25%;
-}
-.content-section .administrator {
-  width: 15%;
 }
 table button {
   background-color: black;

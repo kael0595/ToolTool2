@@ -58,20 +58,16 @@
         <table>
             <thead>
             <tr>
-                <th class="check_box"></th>
                 <th class="number">글번호</th>
                 <th class="title">제목</th>
                 <th class="nickname">닉네임</th>
                 <th class="date">날짜</th>
                 <th class="inquiry">조회</th>
+                <th class="button_menu">삭제</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="article : ${articleList}">
-                <td class="checkbox">
-                    <a href="javascript:void(0);" th:data-uri="@{|/admin/review/delete/${article.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
-                </td>
                 <td class="number" th:text="${article.id}"></td>
                 <td class="title">
                     <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.subject}"></a>
@@ -79,6 +75,10 @@
                 <td class="nickname" th:text="${article.author.nickname}"></td>
                 <td class="date" th:text="${article.createDate}"></td>
                 <td class="inquiry" th:text="${article.viewCount}"></td>
+                <td class="button_menu">
+                    <a href="javascript:void(0);" th:data-uri="@{|/admin/review/delete/${article.id}|}"
+                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -94,6 +94,7 @@ Array.from(delete_elements).forEach(function(element) {
         };
     });
 });
+
 
 
 

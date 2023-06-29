@@ -58,19 +58,16 @@
         <table>
             <thead>
             <tr>
-                <th class="check_box"></th>
                 <th class="number">글번호</th>
                 <th class="title">제목</th>
                 <th class="nickname">닉네임</th>
                 <th class="date">날짜</th>
                 <th class="inquiry">조회</th>
+                <th class="button_menu">삭제</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="market : ${marketList}">
-                <td class="checkbox">
-                    <a href="javascript:void(0);" th:data-uri="@{|/admin/market/delete/${market.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
                 <td class="number" th:text="${market.id}"></td>
                 <td class="title">
                     <a
@@ -81,6 +78,9 @@
                 <td class="nickname" th:text="${market.author.nickname}"></td>
                 <td class="date" th:text="${market.createDate}"></td>
                 <td class="inquiry" th:text="${market.viewCount}"></td>
+                <td class="button_menu">
+                    <a href="javascript:void(0);" th:data-uri="@{|/admin/market/delete/${market.id}|}"
+                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
             </tr>
             </tbody>
         </table>
@@ -96,6 +96,7 @@ Array.from(delete_elements).forEach(function(element) {
         };
     });
 });
+
 
 
 </script>

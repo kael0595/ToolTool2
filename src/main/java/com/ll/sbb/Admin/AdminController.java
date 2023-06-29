@@ -66,31 +66,31 @@ public class AdminController {
     }
 
     @PostMapping("/addAdminRole")
-    public ResponseEntity<String> addAdminRole(@RequestParam("id") int id) {
+    public String addAdminRole(@RequestParam("id") int id) {
         // 관리자 권한을 부여할 유저를 조회합니다.
         SiteUser user = userService.getUserById(id);
         if (user == null) {
-            return ResponseEntity.badRequest().body("해당 유저를 찾을 수 없습니다.");
+            return "redirect:/admin/user";
         }
 
         user.setUserRole(UserRole.ADMIN);
         userService.saveUser(user);
 
-        return ResponseEntity.ok("관리자 권한이 부여되었습니다.");
+        return "redirect:/admin/user";
     }
 
     @PostMapping("/minusAdminRole")
-    public ResponseEntity<String> minusAdminRole(@RequestParam("id") int id) {
+    public String minusAdminRole(@RequestParam("id") int id) {
 
         SiteUser user = userService.getUserById(id);
         if (user == null) {
-            return ResponseEntity.badRequest().body("해당 유저를 찾을 수 없습니다.");
+            return "redirect:/admin/user";
         }
 
         user.setUserRole(UserRole.USER);
         userService.saveUser(user);
 
-        return ResponseEntity.ok("관리자 권한이 회수되었습니다.");
+        return "redirect:/admin/user";
     }
 
     @GetMapping("/review")
