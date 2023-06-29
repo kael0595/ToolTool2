@@ -87,20 +87,20 @@ header > .menu > .admin_menu > ul > li > button:hover {
 .top-bar > .button > button:hover{
    background-color: #ff6c00;
 }
-.content-section .checkbox {
-  width: 5%;
-}
 .content-section .number {
   width: 5%;
 }
 .content-section .title {
-  width: 70%;
+  width: 60%;
 }
 .content-section .name {
-  width: 15%;
+  width: 20%;
 }
 .content-section .inquiry {
   width: 5%;
+}
+.content-section .button_menu {
+  width: 10%;
 }
 table {
   width: 1440px;
