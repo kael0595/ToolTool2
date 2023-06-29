@@ -230,7 +230,7 @@ public class UserController {
 
     @PostMapping("/mypage/changePhoto")
     @ResponseBody
-    public String changePhoto(@RequestParam("file") MultipartFile file, UserService userService) throws Exception {
+    public String changePhoto(@RequestParam("file") MultipartFile file) throws Exception {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         SiteUser user = userService.getUserByUsername(username);

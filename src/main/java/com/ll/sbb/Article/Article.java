@@ -31,7 +31,7 @@ public class Article {
 
     private int price;
 
-    @OneToMany
+    @ManyToMany
     private Set<SiteUser> voter;
 
     private int starScore;

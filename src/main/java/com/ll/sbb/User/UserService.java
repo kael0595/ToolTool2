@@ -22,7 +22,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -126,7 +125,7 @@ public class UserService {
     }
 
     public SiteUser getUserByUsername(String username) {
-        Optional<SiteUser> optionalUser = userRepository.findByUsername(username);
+        Optional<SiteUser> optionalUser = this.userRepository.findByUsername(username);
         return optionalUser.orElseThrow(() -> new DataNotFoundException("User not found"));
     }
 
@@ -158,6 +157,7 @@ public class UserService {
         File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
         user.setFilepath(filePath);
+        user.setFilename(fileName);
         this.userRepository.save(user);
     }
 

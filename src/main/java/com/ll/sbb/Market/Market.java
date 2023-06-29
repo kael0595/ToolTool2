@@ -40,8 +40,8 @@ public class Market {
     @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
     private List<MarketAnswer> marketAnswerList;
 
-    @OneToMany
-    private Set<SiteUser> wishList;
+//    @ManyToMany
+//    private Set<SiteUser> wishList;
 
     private String type;
 
@@ -52,7 +52,7 @@ public class Market {
 
     private String brand;
 
-    @OneToMany
+    @ManyToMany
     private Set<SiteUser> voter;
 
     private int likeCount;

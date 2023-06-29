@@ -15,12 +15,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
@@ -54,6 +56,13 @@ public class AdminController {
         model.addAttribute("adminList", adminList);
 
         return "AdminPage";
+    }
+
+    @GetMapping("/notice/delete/{id}")
+    public String noticeDelete(@PathVariable("id") Integer id) {
+        Notice notice = this.noticeService.getNotice(id);
+        this.noticeService.delete(notice);
+        return "redirect:/admin/";
     }
 
     @PostMapping("/addAdminRole")
@@ -91,11 +100,25 @@ public class AdminController {
         return "/admin_review";
     }
 
+    @GetMapping("/review/delete/{id}")
+    public String reviewDelete(@PathVariable("id") Integer id) {
+        Article article = this.articleService.getArticle(id);
+        this.articleService.delete(article);
+        return "redirect:/admin/review";
+    }
+
     @GetMapping("/market")
     private String admin_market(Model model) {
         List<Market> marketList = this.marketService.getAll();
         model.addAttribute("marketList", marketList);
         return "/admin_market";
+    }
+
+    @GetMapping("/market/delete/{id}")
+    public String marketDelete(@PathVariable("id") Integer id) {
+        Market market = this.marketService.getMarket(id);
+        this.marketService.delete(market);
+        return "redirect:/admin/market";
     }
 
     @GetMapping("/user")

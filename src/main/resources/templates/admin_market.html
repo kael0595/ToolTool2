@@ -54,9 +54,6 @@
     <section id="market-section" class="content-section">
         <div class="top-bar">
             <h1>마켓 글 관리</h1>
-            <div class="button">
-                <button type="button">삭제</button>
-            </div>
         </div>
         <table>
             <thead>
@@ -72,8 +69,8 @@
             <tbody>
             <tr th:each="market : ${marketList}">
                 <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="1"/>
-                </td>
+                    <a href="javascript:void(0);" th:data-uri="@{|/admin/market/delete/${market.id}|}"
+                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
                 <td class="number" th:text="${market.id}"></td>
                 <td class="title">
                     <a
@@ -90,5 +87,16 @@
     </section>
 </header>
 </body>
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
 
+
+</script>
 </html>

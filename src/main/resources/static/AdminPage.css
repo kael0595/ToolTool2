@@ -94,16 +94,13 @@ header > .menu > .admin_menu > ul > li > button:hover {
   width: 5%;
 }
 .content-section .title {
-  width: 50%;
+  width: 70%;
 }
 .content-section .name {
-  width: 10%;
-}
-.content-section .date {
   width: 15%;
 }
 .content-section .inquiry {
-  width: 10%;
+  width: 5%;
 }
 table {
   width: 1440px;

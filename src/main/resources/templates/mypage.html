@@ -62,34 +62,6 @@
       });
     });
 
-    // Handle profile picture change
-    $(".change-icon").click(function() {
-      // Create a "file" type input element
-      var inputFile = $('<input type="file">');
-
-      // Trigger click event on the input element
-      inputFile.trigger("click");
-
-      // When a file is selected
-      inputFile.change(function() {
-        var file = this.files[0];
-
-        if (file) {
-          var reader = new FileReader();
-
-          // Read the file as a data URL
-          reader.readAsDataURL(file);
-
-          // When the file is loaded
-          reader.onload = function(e) {
-            // Update the profile image with the selected file
-            $(".profile_img_1").attr("src", e.target.result);
-          };
-        }
-      });
-    });
-
-
    $(".change-icon").click(function() {
   // Create a "file" type input element
   var inputFile = $('<input type="file">');
@@ -455,207 +427,189 @@
 </div>
 <footer th:replace="layout/footer.html"></footer>
 <script>
-  $(document).ready(function() {
-    // Handle click event for '.pagination-1' page links
-    $('.pagination-1 a.page-link').on('click', function(e) {
-      e.preventDefault(); // Prevent default link behavior
+$(document).ready(function () {
+  // Handle click event for '.pagination-1' page links
+  $(".pagination-1 a.page-link").on("click", function (e) {
+    e.preventDefault(); // Prevent default link behavior
 
-      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
+    var pageUrl = $(this).attr("href"); // Get the URL of the clicked link
 
-      // Create an AJAX request to fetch updated content
-      $.ajax({
-        url: pageUrl,
-        method: 'GET',
-        success: function(response) {
-          // Extract the updated content from the response
-          var updatedContent = $(response).find('.review_board_table').html();
+    // Create an AJAX request to fetch updated content
+    $.ajax({
+      url: pageUrl,
+      method: "GET",
+      success: function (response) {
+        // Extract the updated content from the response
+        var updatedContent = $(response).find(".review_board_table").html();
 
-          // Replace the existing table content
-          $('.review_board_table').html(updatedContent);
-        },
-        error: function() {
-          // Handle error when AJAX request fails
-          console.log('An error occurred while fetching the content.');
-        }
-      });
-    });
-
-    // Handle click event for '.pagination-2' page links
-    $('.pagination-2 a.page-link').on('click', function(e) {
-      e.preventDefault(); // Prevent default link behavior
-
-      var pageUrl = $(this).attr('href'); // Get the URL of the clicked link
-
-      // Create an AJAX request to fetch updated content
-      $.ajax({
-        url: pageUrl,
-        method: 'GET',
-        success: function(response) {
-          // Extract the updated content from the response
-          var updatedContent = $(response).find('.market_board_table').html();
-
-          // Replace the existing table content
-          $('.market_board_table').html(updatedContent);
-        },
-        error: function() {
-          // Handle error when AJAX request fails
-          console.log('An error occurred while fetching the content.');
-        }
-      });
-    });
-
-    // Handle menu box navigation
-    $(".menu_box a").click(function(e) {
-      e.preventDefault();
-      var pageId = $(this).data("page");
-      $(".page").hide();
-      $("#" + pageId).show();
-    });
-
-    // Handle change password functionality
-    $("#change-password-btn").click(function() {
-      if (!$("#current-password").is(":disabled")) {
-        $("#current-password").prop("disabled", true);
-        $("#save-password-btn").prop("disabled", true);
-      } else {
-        $("#current-password").prop("disabled", false);
-        $(this).prop("disabled", true);
-        $("#save-password-btn").prop("disabled", false);
+        // Replace the existing table content
+        $(".review_board_table").html(updatedContent);
+      },
+      error: function () {
+        // Handle error when AJAX request fails
+        console.log("An error occurred while fetching the content.");
       }
-    });
-
-    $("#save-password-btn").click(function() {
-      $("#current-password").attr("disabled", true);
-      $(this).attr("disabled", true);
-      $("#change-password-btn").removeAttr("disabled");
-    });
-
-    // Handle change nickname functionality
-    $("#change-nickname-btn").click(function() {
-      $("#nickname").removeAttr("disabled");
-      $(this).attr("disabled", true);
-      $("#save-nickname-btn").removeAttr("disabled");
-    });
-
-    $("#save-nickname-btn").click(function() {
-      var newNickname = $("#nickname").val();
-
-      $.ajax({
-        url: "/mypage/changeNickname",
-        type: "POST",
-        data: {
-          newnickname: newNickname
-        },
-        success: function(response) {
-          window.location.href = response;
-        },
-        error: function(xhr, status, error) {
-          console.log("닉네임 변경 실패: " + error);
-        }
-      });
     });
   });
 
+  // Handle click event for '.pagination-2' page links
+  $(".pagination-2 a.page-link").on("click", function (e) {
+    e.preventDefault(); // Prevent default link behavior
 
-$("#save-password-btn").click(function() {
-        var newPassword = $("#current-password").val();
-        var confirmPassword = $("#confirm-password").val();
+    var pageUrl = $(this).attr("href"); // Get the URL of the clicked link
 
-        // 비밀번호와 비밀번호 확인이 일치하는지 확인
-        if (newPassword === confirmPassword) {
-            // AJAX 요청 보내기
-            $.ajax({
-                url: "/mypage/changePassword",
-                type: "POST",
-                data: {
-                    newpassword: newPassword,
-                    newpasswordcf: confirmPassword
-                },
-                success: function(response) {
-                    // 비밀번호 변경 성공 시 페이지 리로드
-                    window.location.href = response;
-                },
-                error: function(xhr, status, error) {
-                    // 비밀번호 변경 실패 시 메시지 출력
-                    console.log("비밀번호 변경 실패: " + error);
-                }
-            });
-        } else {
-            // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
-            console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+    // Create an AJAX request to fetch updated content
+    $.ajax({
+      url: pageUrl,
+      method: "GET",
+      success: function (response) {
+        // Extract the updated content from the response
+        var updatedContent = $(response).find(".market_board_table").html();
+
+        // Replace the existing table content
+        $(".market_board_table").html(updatedContent);
+      },
+      error: function () {
+        // Handle error when AJAX request fails
+        console.log("An error occurred while fetching the content.");
+      }
+    });
+  });
+
+  // Handle menu box navigation
+  $(".menu_box a").click(function (e) {
+    e.preventDefault();
+    var pageId = $(this).data("page");
+    $(".page").hide();
+    $("#" + pageId).show();
+  });
+
+  // Handle change password functionality
+  $("#change-password-btn").click(function () {
+    if (!$("#current-password").is(":disabled")) {
+      $("#current-password").prop("disabled", true);
+      $("#save-password-btn").prop("disabled", true);
+    } else {
+      $("#current-password").prop("disabled", false);
+      $(this).prop("disabled", true);
+      $("#save-password-btn").prop("disabled", false);
+    }
+  });
+
+  $("#save-password-btn").click(function () {
+    $("#current-password").attr("disabled", true);
+    $(this).attr("disabled", true);
+    $("#change-password-btn").removeAttr("disabled");
+  });
+
+  // Handle change nickname functionality
+  $("#change-nickname-btn").click(function () {
+    $("#nickname").removeAttr("disabled");
+    $(this).attr("disabled", true);
+    $("#save-nickname-btn").removeAttr("disabled");
+  });
+
+  $("#save-nickname-btn").click(function () {
+    var newNickname = $("#nickname").val();
+
+    $.ajax({
+      url: "/mypage/changeNickname",
+      type: "POST",
+      data: {
+        newnickname: newNickname
+      },
+      success: function (response) {
+        window.location.href = response;
+      },
+      error: function (xhr, status, error) {
+        console.log("닉네임 변경 실패: " + error);
+      }
+    });
+  });
+
+  $("#save-password-btn").click(function () {
+    var newPassword = $("#current-password").val();
+    var confirmPassword = $("#confirm-password").val();
+
+    // 비밀번호와 비밀번호 확인이 일치하는지 확인
+    if (newPassword === confirmPassword) {
+      // AJAX 요청 보내기
+      $.ajax({
+        url: "/mypage/changePassword",
+        type: "POST",
+        data: {
+          newpassword: newPassword,
+          newpasswordcf: confirmPassword
+        },
+        success: function (response) {
+          // 비밀번호 변경 성공 시 페이지 리로드
+          window.location.href = response;
+        },
+        error: function (xhr, status, error) {
+          // 비밀번호 변경 실패 시 메시지 출력
+          console.log("비밀번호 변경 실패: " + error);
         }
+      });
+    } else {
+      // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
+      console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+    }
+  });
+
+  $("#change-nickname-btn").click(function () {
+    $("#nickname").removeAttr("disabled");
+    $(this).attr("disabled", true);
+    $("#save-nickname-btn").removeAttr("disabled");
+  });
+
+  $("#save-nickname-btn").click(function () {
+    var newNickname = $("#nickname").val();
+
+    $.ajax({
+      url: "/mypage/changeNickname",
+      type: "POST",
+      data: {
+        newnickname: newNickname
+      },
+      success: function (response) {
+        window.location.href = response;
+      },
+      error: function (xhr, status, error) {
+        console.log("닉네임 변경 실패: " + error);
+      }
     });
-});
+  });
 
-$("#change-nickname-btn").click(function() {
-        $("#nickname").removeAttr("disabled");
-        $(this).attr("disabled", true);
-        $("#save-nickname-btn").removeAttr("disabled");
-    });
+  // "비밀번호 변경" 버튼 클릭 시
+  $("#save-password-btn").click(function () {
+    var newPassword = $("#current-password").val();
+    var confirmPassword = $("#confirm-password").val();
 
-    $("#save-nickname-btn").click(function() {
-        var newNickname = $("#nickname").val();
-
-        $.ajax({
-            url: "/mypage/changeNickname",
-            type: "POST",
-            data: {
-                newnickname: newNickname
-            },
-            success: function(response) {
-                window.location.href = response;
-            },
-            error: function(xhr, status, error) {
-                console.log("닉네임 변경 실패: " + error);
-            }
-        });
-    });
-});
-
-
-
-
-
-
-</script>
-<script>
-  $(document).ready(function() {
-    // "비밀번호 변경" 버튼 클릭 시
-    $("#save-password-btn").click(function() {
-        var newPassword = $("#current-password").val();
-        var confirmPassword = $("#confirm-password").val();
-
-        // 비밀번호와 비밀번호 확인이 일치하는지 확인
-        if (newPassword === confirmPassword) {
-            // AJAX 요청 보내기
-            $.ajax({
-                url: "/mypage/changePassword",
-                type: "POST",
-                data: {
-                    newpassword: newPassword,
-                    newpasswordcf: confirmPassword
-                },
-                success: function(response) {
-                    // 비밀번호 변경 성공 시 페이지 리로드
-                    window.location.href = response;
-                },
-                error: function(xhr, status, error) {
-                    // 비밀번호 변경 실패 시 메시지 출력
-                    console.log("비밀번호 변경 실패: " + error);
-                }
-            });
-        } else {
-            // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
-            console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+    // 비밀번호와 비밀번호 확인이 일치하는지 확인
+    if (newPassword === confirmPassword) {
+      // AJAX 요청 보내기
+      $.ajax({
+        url: "/mypage/changePassword",
+        type: "POST",
+        data: {
+          newpassword: newPassword,
+          newpasswordcf: confirmPassword
+        },
+        success: function (response) {
+          // 비밀번호 변경 성공 시 페이지 리로드
+          window.location.href = response;
+        },
+        error: function (xhr, status, error) {
+          // 비밀번호 변경 실패 시 메시지 출력
+          console.log("비밀번호 변경 실패: " + error);
         }
-    });
+      });
+    } else {
+      // 비밀번호와 비밀번호 확인이 일치하지 않을 때 처리
+      console.log("변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+    }
+  });
 });
-
-
-
-
-
-
 
 </script>
 </body>
