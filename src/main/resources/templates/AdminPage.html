@@ -62,27 +62,28 @@
         <table>
             <thead>
             <tr>
-                <th class="check_box"></th>
                 <th class="number">글번호</th>
                 <th class="title">제목</th>
                 <th class="date">작성일</th>
                 <th class="inquiry">조회</th>
+                <th class="button_menu">삭제</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="notice : ${noticeList}">
-                <td class="checkbox">
-                    <a href="javascript:void(0);" th:data-uri="@{|/admin/notice/delete/${notice.id}|}"
-                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
-                </td>
                 <td class="number" th:text="${notice.id}"></td>
                 <td class="title">
                     <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.subject}"></a>
                 <td class="date" th:text="${notice.createDate}"></td>
                 <td class="inquiry" th:text="${notice.viewCount}"></td>
+                <td class="button_menu">
+                    <a href="javascript:void(0);" th:data-uri="@{|/admin/notice/delete/${notice.id}|}"
+                       class="delete btn btn-sm btn-outline-secondary" th:text="삭제"></a></td>
+                </td>
             </tr>
             </tbody>
         </table>
+
     </section>
 </header>
 </body>

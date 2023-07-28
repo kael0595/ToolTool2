@@ -378,3 +378,8 @@ input{
   border-radius:7px;
   margin-top:10px;
 }
+
+.subhr{
+    width:100%;
+    color:red;
+}
