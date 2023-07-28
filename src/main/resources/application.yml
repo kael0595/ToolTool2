@@ -54,3 +54,5 @@ custom:
   site:
     name: ToolTool
     baseUrl: "http://tooltool.devp.kr:8010"
+server:
+  port: 8010
