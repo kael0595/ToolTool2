@@ -3,7 +3,7 @@ spring:
     active: dev, base-addi
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    url: mariadb://172.17.0.1:3306/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    url: mariadb://172.17.0.1:3306/ToolTool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
     username: root
     password:
   thymeleaf:
