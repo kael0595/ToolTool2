@@ -58,7 +58,7 @@
         <table>
             <thead>
             <tr>
-                <th class="check_box"></th>
+
                 <th class="number">번호</th>
                 <th class="id">아이디</th>
                 <th class="nickname">닉네임</th>
@@ -69,9 +69,7 @@
             </thead>
             <tbody>
             <tr th:each="user : ${userList}">
-                <td class="checkbox">
-                    <input type="checkbox" name="delete-checkbox" value="1"/>
-                </td>
+
                 <td class="number" th:text="${user.id}"></td>
                 <td class="id" th:text="${user.username}"></td>
                 <td class="nickname" th:text="${user.nickname}"></td>
