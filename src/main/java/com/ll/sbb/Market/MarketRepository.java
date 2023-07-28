@@ -1,7 +1,5 @@
 package com.ll.sbb.Market;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Market.Market;
 import com.ll.sbb.User.SiteUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

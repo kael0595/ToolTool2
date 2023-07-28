@@ -1,11 +1,10 @@
 package com.ll.sbb.Answer;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Article.ArticleService;
+import com.ll.sbb.Review.Article;
+import com.ll.sbb.Review.ArticleService;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

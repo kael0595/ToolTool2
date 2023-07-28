@@ -1,4 +1,4 @@
-package com.ll.sbb.Article;
+package com.ll.sbb.Review;
 
 import com.ll.sbb.User.SiteUser;
 import org.springframework.data.domain.Page;

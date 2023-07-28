@@ -1,7 +1,7 @@
 package com.ll.sbb.User;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Article.ArticleService;
+import com.ll.sbb.Review.Article;
+import com.ll.sbb.Review.ArticleService;
 import com.ll.sbb.Email.MailController;
 import com.ll.sbb.Market.Market;
 import com.ll.sbb.Market.MarketService;
@@ -10,23 +10,17 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
-import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

@@ -1,11 +1,8 @@
-package com.ll.sbb.Article;
+package com.ll.sbb.Review;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Article.ArticleService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ll.sbb.Answer.AnswerForm;
 import com.ll.sbb.User.SiteUser;
 import com.ll.sbb.User.UserService;
 
@@ -196,8 +192,6 @@ public class ArticleController {
             model.addAttribute("paging", paging);
             model.addAttribute("kw", kw);
         }
-
-
         return "article_list";
     }
 
@@ -262,7 +256,7 @@ public class ArticleController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
         }
         this.articleService.delete(article);
-        return "redirect:/";
+        return "redirect:/article/list";
     }
 
     @PostMapping("/vote/{id}")

@@ -1,8 +1,6 @@
-package com.ll.sbb.Article;
+package com.ll.sbb.Review;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -696,8 +694,6 @@ public class ArticleSortController {
                 model.addAttribute("kw", kw);
             }
         }
-
-
         return "article_item";
     }
 }

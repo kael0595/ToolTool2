@@ -1,4 +1,4 @@
-package com.ll.sbb.Article;
+package com.ll.sbb.Review;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

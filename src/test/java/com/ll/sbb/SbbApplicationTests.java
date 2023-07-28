@@ -1,6 +1,6 @@
 package com.ll.sbb;
 
-import com.ll.sbb.Article.ArticleService;
+import com.ll.sbb.Review.ArticleService;
 import com.ll.sbb.Market.MarketService;
 import com.ll.sbb.Notice.NoticeService;
 import org.junit.jupiter.api.Test;

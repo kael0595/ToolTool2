@@ -1,7 +1,5 @@
 package com.ll.sbb.Market;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Article.ArticleForm;
 import com.ll.sbb.DataNotFoundException;
 import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
@@ -14,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.yaml.snakeyaml.error.Mark;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.springframework.core.annotation.MergedAnnotations.search;
 
 @RequiredArgsConstructor
 @Service

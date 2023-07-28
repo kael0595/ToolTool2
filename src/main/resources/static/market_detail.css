@@ -97,11 +97,16 @@ div{
 .userInfo .userPhoto{
   float:left;
   margin-right:10px;
-  background: #ff6c00;
   width:50px;
   height:50px;
   border-radius:50%;
 }
+
+.profile_img_1 {
+width : 50px;
+height : 50px;
+}
+
 .profile_area{
   float:left;
 }
@@ -109,7 +114,7 @@ div{
   display:inline-block;
   position:relative;
   vertical-align:top;
-}
+
 
 .gradeOrhashtag{
   margin:5px;

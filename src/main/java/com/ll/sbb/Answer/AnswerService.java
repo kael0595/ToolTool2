@@ -1,6 +1,6 @@
 package com.ll.sbb.Answer;
 
-import com.ll.sbb.Article.Article;
+import com.ll.sbb.Review.Article;
 import com.ll.sbb.User.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

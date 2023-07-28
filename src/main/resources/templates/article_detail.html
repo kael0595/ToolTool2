@@ -75,7 +75,9 @@
             <hr>
             <div class="userInfoform">
                 <div class="userInfo">
-                    <div class="userPhoto"></div>
+                    <div class="userPhoto">
+                        <img th:src="${article.author.filepath}" class="profile_img_1"/>
+                    </div>
                     <div class="profile_area">
                         <div class="profile_info">
                             <span th:if="${article.author != null}" th:text="${article.author.nickname}"
@@ -295,6 +297,7 @@ Array.from(delete_elements).forEach(function(element) {
 
 
 
+
 </script>
 
 <script>
@@ -316,6 +319,7 @@ Array.from(delete_elements).forEach(function(element) {
   var answerCreateBox = $(button).closest('.answerbox').find('.answerCreateBox');
   $(answerCreateBox).css('display', 'block');
 }
+
 
 
 

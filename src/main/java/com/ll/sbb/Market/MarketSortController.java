@@ -1,7 +1,5 @@
 package com.ll.sbb.Market;
 
-import com.ll.sbb.Article.Article;
-import com.ll.sbb.Article.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
