@@ -5,6 +5,7 @@ import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ import java.util.UUID;
 public class MarketService {
 
     private final MarketRepository marketRepository;
+
+    @Value("${file.upload.path}")
+    private String uploadPath;
 
 
     private Specification<Market> search(String kw) {
@@ -97,7 +101,7 @@ public class MarketService {
     }
 
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = "/home/file/photoBook/";
+        String projectPath = uploadPath;
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
