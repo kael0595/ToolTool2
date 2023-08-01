@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +97,7 @@ public class MarketService {
     }
 
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+        String projectPath = "/home/file/photoBook/";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
@@ -103,13 +105,13 @@ public class MarketService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            String filePath = "/files/" + fileName;
 
-            File saveFile = new File(projectPath, fileName);
-            file.transferTo(saveFile);
+            String savePath = Paths.get(projectPath, fileName).toString();
+            Files.createDirectories(Paths.get(savePath).getParent());
+            file.transferTo(Paths.get(savePath));
 
             filenames.add(fileName);
-            filepaths.add(filePath);
+            filepaths.add(savePath);
         }
 
         Market market = new Market();
