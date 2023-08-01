@@ -1,3 +1,5 @@
+server:
+  port: 8010
 spring:
   profiles:
     active: dev, base-addi
@@ -16,6 +18,9 @@ spring:
         show_sql: 'true'
     hibernate:
       ddl-auto: update
+  file:
+    upload:
+      path: /user/file/photoBook/
   security:
     oauth2:
       client:

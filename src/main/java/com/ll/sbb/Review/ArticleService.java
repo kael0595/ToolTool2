@@ -2,6 +2,8 @@ package com.ll.sbb.Review;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +31,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+
+    @Value("${file.upload.path}")
+    private String uploadPath;
 
     private Specification<Article> search(String kw) {
         return new Specification<>() {
@@ -234,7 +240,7 @@ public class ArticleService {
     }
 
     public void create(ArticleForm articleForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+        String projectPath = uploadPath;
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
@@ -242,13 +248,13 @@ public class ArticleService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            String filePath = "/files/" + fileName;
 
-            File saveFile = new File(projectPath, fileName);
-            file.transferTo(saveFile);
+            String savePath = Paths.get(projectPath, fileName).toString();
+            Files.createDirectories(Paths.get(savePath).getParent());
+            file.transferTo(Paths.get(savePath));
 
             filenames.add(fileName);
-            filepaths.add(filePath);
+            filepaths.add(savePath);
         }
 
         Article article = new Article();
