@@ -5,7 +5,6 @@ import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +26,6 @@ import java.util.UUID;
 public class MarketService {
 
     private final MarketRepository marketRepository;
-
-    @Value("${file.upload.path}")
-    private String uploadPath;
 
 
     private Specification<Market> search(String kw) {
@@ -101,7 +95,7 @@ public class MarketService {
     }
 
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = uploadPath;
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
@@ -109,13 +103,13 @@ public class MarketService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
+            String filePath = "/files/" + fileName;
 
-            String savePath = Paths.get(projectPath, fileName).toString();
-            Files.createDirectories(Paths.get(savePath).getParent());
-            file.transferTo(Paths.get(savePath));
+            File saveFile = new File(projectPath, fileName);
+            file.transferTo(saveFile);
 
             filenames.add(fileName);
-            filepaths.add(savePath);
+            filepaths.add(filePath);
         }
 
         Market market = new Market();
