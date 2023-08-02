@@ -1,5 +1,7 @@
 server:
   port: 8010
+file:
+  path: /user.dir/src/main/resources/static/files
 spring:
   profiles:
     active: dev, base-addi, prod
