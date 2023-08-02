@@ -6,8 +6,8 @@ spring:
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
     url: mariadb://172.17.0.1:3306/ToolTool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
-    username: sbblocal
-    password: 1234
+    username: root
+    password:
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
