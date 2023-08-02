@@ -99,7 +99,7 @@ public class MarketService {
 
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "_" + file.getOriginalFilename();
+            String fileName = uuid + "_" + file.getName();
             String filePath = "/files/" + fileName;
 
             File saveFile = new File(projectPath, fileName);
