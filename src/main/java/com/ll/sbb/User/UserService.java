@@ -3,6 +3,7 @@ package com.ll.sbb.User;
 import com.ll.sbb.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${file.upload.path}")
+    private String projectPath;
 
     @Transactional
     public SiteUser create(String username, String password, String email, String nickname, int mailKey, UserRole role) {
@@ -146,7 +150,7 @@ public class UserService {
     }
 
     public void changePhoto(SiteUser user, MultipartFile file) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
         UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
         // uuid는 파일에 붙일 랜덤이름을 생성
 

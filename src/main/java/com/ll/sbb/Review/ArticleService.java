@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+
+    @Value("${file.upload.path}")
+    private String projectPath;
 
     private Specification<Article> search(String kw) {
         return new Specification<>() {
@@ -234,7 +238,7 @@ public class ArticleService {
     }
 
     public void create(ArticleForm articleForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
