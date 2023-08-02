@@ -2,7 +2,7 @@ server:
   port: 8010
 spring:
   profiles:
-    active: dev, base-addi
+    active: dev, base-addi, prod
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
     url: mariadb://172.17.0.1:3306/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
