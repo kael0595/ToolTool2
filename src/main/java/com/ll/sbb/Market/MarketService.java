@@ -5,6 +5,7 @@ import com.ll.sbb.MarketAnswer.MarketAnswer;
 import com.ll.sbb.User.SiteUser;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,9 @@ import java.util.*;
 public class MarketService {
 
     private final MarketRepository marketRepository;
+
+    @Value("${file.path}")
+    private String filePath;
 
     private Specification<Market> search(String kw) {
         return new Specification<>() {
@@ -92,17 +96,18 @@ public class MarketService {
     }
 
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
 
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "_" + file.getName();
+            String fileName = uuid + "_" + file.getOriginalFilename();
             String filePath = "/files/" + fileName;
 
-            File saveFile = new File(projectPath, fileName);
+            File saveFile = new File(filePath, fileName);
+
             file.transferTo(saveFile);
 
             filenames.add(fileName);

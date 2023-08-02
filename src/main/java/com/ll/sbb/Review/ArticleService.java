@@ -30,6 +30,9 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
+    @Value("${file.path}")
+    private String filePath;
+
     private Specification<Article> search(String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
@@ -235,7 +238,7 @@ public class ArticleService {
     }
 
     public void create(ArticleForm articleForm, SiteUser user, MultipartFile[] files) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();
@@ -245,7 +248,7 @@ public class ArticleService {
             String fileName = uuid + "_" + file.getName();
             String filePath = "/files/" + fileName;
 
-            File saveFile = new File(projectPath, fileName);
+            File saveFile = new File(filePath, fileName);
             file.transferTo(saveFile);
 
             filenames.add(fileName);

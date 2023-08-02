@@ -27,6 +27,9 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    @Value("${file.path}")
+    private String filePath;
+
     @Transactional
     public SiteUser create(String username, String password, String email, String nickname, int mailKey, UserRole role) {
         SiteUser user = new SiteUser();
@@ -147,7 +150,7 @@ public class UserService {
     }
 
     public void changePhoto(SiteUser user, MultipartFile file) throws IOException {
-        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
         UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
         // uuid는 파일에 붙일 랜덤이름을 생성
 
@@ -155,7 +158,7 @@ public class UserService {
         // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
         String filePath = "/files/" + fileName;
 
-        File saveFile = new File(projectPath, fileName);
+        File saveFile = new File(filePath, fileName);
         file.transferTo(saveFile);
         user.setFilepath(filePath);
         user.setFilename(fileName);
