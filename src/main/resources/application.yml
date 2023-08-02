@@ -18,9 +18,6 @@ spring:
         show_sql: 'true'
     hibernate:
       ddl-auto: update
-  file:
-    upload:
-      path: /user/file/photoBook/
   security:
     oauth2:
       client:

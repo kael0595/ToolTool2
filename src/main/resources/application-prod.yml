@@ -14,6 +14,3 @@ spring:
         show_sql: false
         format_sql: false
         use_sql_comments: false
-  custom:
-    path:
-      upload-images: '/path/to/uploads'

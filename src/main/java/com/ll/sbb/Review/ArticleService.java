@@ -30,9 +30,6 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    @Value("${custom.path.upload-images}")
-    private String projectPath;
-
     private Specification<Article> search(String kw) {
         return new Specification<>() {
             private static final long serialVersionUID = 1L;
@@ -238,7 +235,7 @@ public class ArticleService {
     }
 
     public void create(ArticleForm articleForm, SiteUser user, MultipartFile[] files) throws IOException {
-//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();

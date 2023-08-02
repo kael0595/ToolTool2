@@ -27,9 +27,6 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${custom.path.upload-images}")
-    private String projectPath;
-
     @Transactional
     public SiteUser create(String username, String password, String email, String nickname, int mailKey, UserRole role) {
         SiteUser user = new SiteUser();
@@ -150,7 +147,7 @@ public class UserService {
     }
 
     public void changePhoto(SiteUser user, MultipartFile file) throws IOException {
-//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
+        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
         UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
         // uuid는 파일에 붙일 랜덤이름을 생성
 
