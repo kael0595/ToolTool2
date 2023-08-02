@@ -14,3 +14,6 @@ spring:
         show_sql: false
         format_sql: false
         use_sql_comments: false
+  file:
+      upload:
+        path: /home/file/photoBook/
