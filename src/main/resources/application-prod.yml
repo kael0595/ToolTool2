@@ -16,4 +16,4 @@ spring:
         use_sql_comments: false
   custom:
     path:
-      upload-images: '/var/lib/jenkins/area_deploy/jiniworld/upload-images/'
+      upload-images: '/path/to/uploads'
