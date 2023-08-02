@@ -30,7 +30,7 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    @Value("${file.upload.path}")
+    @Value("${custom.path.upload-images}")
     private String projectPath;
 
     private Specification<Article> search(String kw) {

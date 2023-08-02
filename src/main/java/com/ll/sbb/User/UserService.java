@@ -27,7 +27,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${file.upload.path}")
+    @Value("${custom.path.upload-images}")
     private String projectPath;
 
     @Transactional
