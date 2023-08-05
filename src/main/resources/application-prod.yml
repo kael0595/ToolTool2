@@ -2,10 +2,6 @@ server:
   port: 8010
 file:
   path: /var/jenkins_home/workspace/ToolTool/src/main/resources/static/files
-servlet:
-  multipart:
-    max-file-size: 10MB
-    max-request-size: 50MB
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -20,3 +16,7 @@ spring:
         show_sql: false
         format_sql: false
         use_sql_comments: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
