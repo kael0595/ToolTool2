@@ -246,13 +246,13 @@ public class ArticleService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getName();
-            String filePath = "/files/" + fileName;
+            String filePaths = "/files/" + fileName;
 
             File saveFile = new File(filePath, fileName);
             file.transferTo(saveFile);
 
             filenames.add(fileName);
-            filepaths.add(filePath);
+            filepaths.add(filePaths);
         }
 
         Article article = new Article();
