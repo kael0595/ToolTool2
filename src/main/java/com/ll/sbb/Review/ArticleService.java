@@ -97,11 +97,7 @@ public class ArticleService {
         return (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // Add a condition to check for equality between the username field and the provided user value
             predicates.add(builder.equal(root.get("author").get("username"), user));
-
-            // Add any other search conditions if needed
-            // ...
 
             return builder.and(predicates.toArray(new Predicate[0]));
         };
@@ -136,16 +132,12 @@ public class ArticleService {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // Season 컬럼을 기준으로 검색 조건 생성
             if (sea != null) {
                 Path<String> seasonPath = root.get("season");
                 Predicate seasonPredicate = criteriaBuilder.equal(seasonPath, sea);
                 predicates.add(seasonPredicate);
             }
 
-            // 다른 조건들을 추가하고 싶다면 여기에 추가
-
-            // 검색 조건들을 조합하여 최종 검색 조건 생성
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -178,16 +170,12 @@ public class ArticleService {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // Season 컬럼을 기준으로 검색 조건 생성
             if (sea != null) {
                 Path<String> typePath = root.get("type");
                 Predicate typePredicate = criteriaBuilder.equal(typePath, sea);
                 predicates.add(typePredicate);
             }
 
-            // 다른 조건들을 추가하고 싶다면 여기에 추가
-
-            // 검색 조건들을 조합하여 최종 검색 조건 생성
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
@@ -245,7 +233,7 @@ public class ArticleService {
 
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
-            String fileName = uuid + "_" + file.getName();
+            String fileName = uuid + "_" + file.getOriginalFilename();
             String filePaths = "/files/" + fileName;
 
             File saveFile = new File(filePath, fileName);
