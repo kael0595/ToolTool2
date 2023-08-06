@@ -8,6 +8,9 @@ spring:
     url: jdbc:mariadb://172.17.0.1:3306/tooltool?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: sbblocal
     password: 1234
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
   jpa:
     hibernate:
       ddl-auto: update
