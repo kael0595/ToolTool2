@@ -21,8 +21,8 @@ spring:
         use_sql_comments: false
   servlet:
     multipart:
-      max-file-size: 10MB
-      max-request-size: 50MB
+      max-file-size: 100MB
+      max-request-size: 500MB
   mail:
     smtp:
       host: smtp.gmail.com
