@@ -3,8 +3,8 @@ server:
 file:
   path: /user.dir/src/main/resources/static/files
 spring:
-  profiles:
-    active: dev, prod
+#  profiles:
+#    active: dev, prod
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3307/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
