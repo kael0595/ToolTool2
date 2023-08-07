@@ -155,11 +155,11 @@ public class UserService {
 
         String fileName = uuid + "_" + file.getOriginalFilename();
         // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
-        String filePath = "/files/" + fileName;
+        String filePathes = "/files/" + fileName;
 
         File saveFile = new File(filePath, fileName);
         file.transferTo(saveFile);
-        user.setFilepath(filePath);
+        user.setFilepath(filePathes);
         user.setFilename(fileName);
         this.userRepository.save(user);
     }

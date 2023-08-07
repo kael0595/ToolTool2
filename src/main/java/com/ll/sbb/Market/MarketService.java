@@ -104,14 +104,14 @@ public class MarketService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            String filePaths = "/files/" + fileName;
+            String filePathes = "/files/" + fileName;
 
             File saveFile = new File(filePath, fileName);
 
             file.transferTo(saveFile);
 
             filenames.add(fileName);
-            filepaths.add(filePaths);
+            filepaths.add(filePathes);
         }
 
         Market market = new Market();
