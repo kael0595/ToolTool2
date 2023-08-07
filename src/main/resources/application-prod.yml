@@ -1,7 +1,8 @@
 server:
   port: 8010
 file:
-  path: /var/jenkins_home/workspace/ToolTool/src/main/resources/static/files
+#  path: /var/jenkins_home/workspace/ToolTool/src/main/resources/static/files
+  path: /user.dir/src/main/resources/static/files
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
