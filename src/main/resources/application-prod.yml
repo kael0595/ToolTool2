@@ -1,7 +1,7 @@
 server:
   port: 8010
-file:
-  path: /var/jenkins_home/workspace/ToolTool/src/main/resources/static/files
+custom:
+  genFileDirPath: /temp/genFile
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
