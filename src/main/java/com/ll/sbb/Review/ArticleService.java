@@ -234,7 +234,7 @@ public class ArticleService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            String filePathes = "/files/" + fileName;
+            String filePathes = File.separator + "files" + File.separator + fileName;
 
             File saveFile = new File(filePath, fileName);
             file.transferTo(saveFile);

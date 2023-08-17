@@ -26,10 +26,7 @@
                     <p>캠핑 장비 리뷰 커뮤니티 서비스</p>
                 </div>
             </div>
-
-
             <!-- Signup Form -->
-
             <div class="signupFormPeice">
                 <form class="signupForm" th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
                     <div th:replace="~{form_errors :: formErrorsFragment}"></div>
@@ -104,10 +101,5 @@
             }
         });
     }
-
-
-
-
-
 </script>
 </html>
