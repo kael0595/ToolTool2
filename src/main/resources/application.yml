@@ -1,15 +1,14 @@
 server:
   port: 7070
-file:
-  path: /user.dir/src/main/resources/static/files
 spring:
   profiles:
-    active: dev, prod
+    active:
+    include: secret
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3307/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    url: jdbc:mariadb://127.0.0.1:3306/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
     username: root
-    password:
+    password: gkdlfn12
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
@@ -20,33 +19,6 @@ spring:
         show_sql: 'true'
     hibernate:
       ddl-auto: update
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
-            client-id: 52a81a61b5875bfb11fea3e2e2aa2450
-            client-secret: 7Pk4wjUAAf4vd9eCJJp6sP3aMNqm9UNz
-            redirect-uri: http://localhost:8010/login/oauth2/code/kakao
-            authorization-grant-type: authorization_code
-            client-authentication-method: POST
-            client-name: Kakao
-            scope: profile_nickname, profile_image, account_email
-        provider:
-          kakao:
-            authorization-uri: https://kauth.kakao.com/oauth/authorize
-            token-uri: https://kauth.kakao.com/oauth/token
-            user-info-uri: https://kapi.kakao.com/v2/user/me
-            user-name-attribute: id
-  mail:
-    smtp:
-      host: smtp.gmail.com
-      port: 587
-      username: changgyu549@gmail.com
-      password: pzgbscuypjrnondt
-      auth: true
-      starttls:
-        enable: true
     subject:
       member:
         registration: Thank you for joining our site!
@@ -55,6 +27,10 @@ spring:
       max-file-size: 100MB
       max-request-size: 500MB
 custom:
+  genFileDirPath: /Users/parkchang-gyu/Desktop/img_upload
+  resourcePath: file:///Users/parkchang-gyu/Desktop/img_upload/
+  requestPath: /img_upload/**
+  originPath: /img_upload/
   site:
     name: ToolTool
     baseUrl: "http://tooltool.devp.kr:8010"

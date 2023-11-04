@@ -26,8 +26,10 @@ public class MarketService {
 
     private final MarketRepository marketRepository;
 
-    @Value("${file.path}")
-    private String filePath;
+    @Value("${custom.genFileDirPath}")
+    private String genFileDirPath;
+    @Value("${custom.originPath}")
+    private String originPath;
 
     private Specification<Market> search(String kw) {
         return new Specification<>() {
@@ -104,10 +106,9 @@ public class MarketService {
         for (MultipartFile file : files) {
             UUID uuid = UUID.randomUUID();
             String fileName = uuid + "_" + file.getOriginalFilename();
-            String filePathes = "/files/" + fileName;
+            String filePathes = originPath + fileName;
 
-            File saveFile = new File(filePath, fileName);
-
+            File saveFile = new File(genFileDirPath, fileName);
             file.transferTo(saveFile);
 
             filenames.add(fileName);

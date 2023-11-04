@@ -27,8 +27,10 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    @Value("${file.path}")
-    private String filePath;
+    @Value("${custom.genFileDirPath}")
+    private String genFileDirPath;
+    @Value("${custom.originPath}")
+    private String originPath;
 
     @Transactional
     public SiteUser create(String username, String password, String email, String nickname, int mailKey, UserRole role) {
@@ -113,7 +115,7 @@ public class UserService {
 
     public boolean userEmailCheck(String userEmail, String userName) {
 
-        SiteUser user = userRepository.findUserById(userEmail);
+        SiteUser user = userRepository.findUserByEmail(userEmail);
         if (user != null && user.getUsername().equals(userName)) {
             return true;
         } else {
@@ -123,7 +125,7 @@ public class UserService {
 
     public void updatePassword(String str, String userEmail) {
         String pw = passwordEncoder.encode(str);
-        int id = userRepository.findUserById(userEmail).getId();
+        int id = userRepository.findUserByEmail(userEmail).getId();
         userRepository.updateUserPassword(id, pw);
     }
 
@@ -148,20 +150,23 @@ public class UserService {
         return this.userRepository.findUserByUserRole(UserRole.ADMIN);
     }
 
-    public void changePhoto(SiteUser user, MultipartFile file) throws IOException {
-//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
-        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
+    public SiteUser changePhoto(SiteUser user, MultipartFile file) throws IOException {
+//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";        UUID uuid = UUID.randomUUID(); // 랜덤으로 이름을 만들어줄 수 있음
         // uuid는 파일에 붙일 랜덤이름을 생성
+        String projectPath = genFileDirPath;
+
+        UUID uuid = UUID.randomUUID();
 
         String fileName = uuid + "_" + file.getOriginalFilename();
         // 랜덤이름(uuid)을 앞에다 붙이고 그 다음에 언더바(_) 하고 파일이름을 뒤에 붙여서 저장될 파일 이름을 생성해줌
-        String filePathes = "/files/" + fileName;
+        String filePathes = originPath + fileName;
 
-        File saveFile = new File(filePath, fileName);
+        File saveFile = new File(projectPath, fileName);
         file.transferTo(saveFile);
         user.setFilepath(filePathes);
         user.setFilename(fileName);
         this.userRepository.save(user);
+        return user;
     }
 
     public void emailConfirm(String email, int mailKey) throws Exception {
