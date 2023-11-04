@@ -2,7 +2,7 @@ server:
   port: 7070
 spring:
   profiles:
-    active:
+    active: dev, prod
     include: secret
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
