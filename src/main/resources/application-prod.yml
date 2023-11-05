@@ -1,10 +1,10 @@
 server:
   port: 8010
 custom:
-  genFileDirPath: /tooltool_gen
-  resourcePath: file:///tooltool_gen/
-  requestPath: /tooltool_gen/**
-  originPath: /tooltool_gen/
+  genFileDirPath: /tooltool_1_gen
+  resourcePath: file:///tooltool_1_gen/
+  requestPath: /tooltool_1_gen/**
+  originPath: /tooltool_1_gen/
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
