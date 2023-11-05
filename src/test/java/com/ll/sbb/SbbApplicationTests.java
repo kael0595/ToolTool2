@@ -11,12 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SbbApplicationTests {
 
     @Autowired
-    private ArticleService articleService;
-
-    @Autowired
-    private MarketService marketService;
-
-    @Autowired
     private NoticeService noticeService;
 
     @Test
