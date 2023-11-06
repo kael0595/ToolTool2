@@ -41,6 +41,7 @@ public class UserService {
         user.setMailKey(mailKey);
         user.setPassword(passwordEncoder.encode(password));
         user.setCreateDate(LocalDate.now());
+        user.setUserRole(UserRole.USER);
         this.userRepository.save(user);
         return user;
     }
