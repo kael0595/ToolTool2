@@ -98,7 +98,6 @@ public class MarketService {
     }
 
     public void create(MarketForm marketForm, SiteUser user, MultipartFile[] files) throws IOException {
-//        String projectPath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "static" + File.separator + "files";
 
         List<String> filenames = new ArrayList<>();
         List<String> filepaths = new ArrayList<>();

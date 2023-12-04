@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'org.springframework:spring-context-support:6.0.10'
     implementation 'javax.activation:activation:1.1.1'
+    implementation 'commons-fileupload:commons-fileupload:1.5'
+
 
 
 }
