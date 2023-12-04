@@ -55,10 +55,10 @@ public class Article {
 
     private int likeCount;
 
-    @Column(length = 255)
+    @Column
     private List<String> filenames;
 
-    @Column(length = 255)
+    @Column
     private List<String> filepaths;
 
 }
