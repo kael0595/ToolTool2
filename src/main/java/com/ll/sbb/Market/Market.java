@@ -57,16 +57,10 @@ public class Market {
 
     private int likeCount;
 
-    @ElementCollection
-    @CollectionTable(name = "market_filenames", joinColumns = @JoinColumn(name = "market_id"))
-    @Column(name = "filename")
-    @NotNull
+    @Column(length = 255)
     private List<String> filenames;
 
-    @ElementCollection
-    @CollectionTable(name = "market_filepaths", joinColumns = @JoinColumn(name = "market_id"))
-    @Column(name = "filepath")
-    @NotNull
+    @Column(length = 255)
     private List<String> filepaths;
 
 

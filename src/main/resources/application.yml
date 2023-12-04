@@ -2,11 +2,11 @@ server:
   port: 7070
 spring:
   profiles:
-    active: dev, prod
+    active:
     include: secret
   datasource:
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3306/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
+    url: jdbc:mariadb://localhost:3306/tooltool?useUnicode=true&characterEncoding=utf8&serverTimeZone=Asia/Seoul
     username: root
     password: gkdlfn12
   thymeleaf:
