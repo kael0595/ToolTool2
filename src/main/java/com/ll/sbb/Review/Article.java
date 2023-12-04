@@ -55,10 +55,15 @@ public class Article {
 
     private int likeCount;
 
-    @Column
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "article_filenames", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "filename")
     private List<String> filenames;
 
-    @Column
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "article_filepaths", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "filepath")
     private List<String> filepaths;
+
 
 }

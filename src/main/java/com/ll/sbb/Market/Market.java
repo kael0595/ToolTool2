@@ -57,10 +57,14 @@ public class Market {
 
     private int likeCount;
 
-    @Column
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "market_filenames", joinColumns = @JoinColumn(name = "market_id"))
+    @Column(name = "filename")
     private List<String> filenames;
 
-    @Column
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "market_filepaths", joinColumns = @JoinColumn(name = "market_id"))
+    @Column(name = "filepath")
     private List<String> filepaths;
 
 

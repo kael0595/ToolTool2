@@ -1,6 +1,8 @@
 server:
   port: 7070
 spring:
+  resources:
+    static-locations=classpath:/static/,file:/Users/parkchang-gyu/Desktop/img_upload/:
   profiles:
     active:
     include: secret
@@ -26,6 +28,7 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 500MB
+
 custom:
   genFileDirPath: /Users/parkchang-gyu/Desktop/img_upload
   resourcePath: file:///Users/parkchang-gyu/Desktop/img_upload/
