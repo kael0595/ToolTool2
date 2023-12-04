@@ -29,7 +29,7 @@ public class AdminController {
 
     private final NoticeService noticeService;
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String adminroot(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
 
         List<Notice> noticeList = this.noticeService.getAll();
